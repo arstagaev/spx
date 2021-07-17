@@ -5,15 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import com.revolve44.solarpanelx.R
-import com.revolve44.solarpanelx.global_utils.base.recyclerview.BaseAdapter
-import com.revolve44.solarpanelx.global_utils.base.recyclerview.BaseViewHolder
-import com.revolve44.solarpanelx.global_utils.base.recyclerview.ItemElementsDelegate
+import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapter
+import com.revolve44.solarpanelx.domain.base.recyclerview.BaseViewHolder
+import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
-import timber.log.Timber
-
 
 
 class MapAdapter: BaseAdapter<ToolsRecyclerviewModel>(){

@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.global_utils.base.materialdialog
+package com.revolve44.solarpanelx.domain.base.materialdialog
 
 import android.app.Dialog
 import android.os.Bundle

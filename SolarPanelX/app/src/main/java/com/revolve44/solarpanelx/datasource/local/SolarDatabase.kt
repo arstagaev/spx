@@ -6,9 +6,9 @@
 //import androidx.room.RoomDatabase
 //import androidx.room.migration.Migration
 //import androidx.sqlite.db.SupportSQLiteDatabase
-//import com.revolve44.solarpanelx.models.for_storage.ForecastCell
-//import com.revolve44.solarpanelx.models.for_storage.HistoryOfForecast
-//import com.revolve44.solarpanelx.models.for_storage.SolarStation
+//import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
+//import com.revolve44.solarpanelx.datasource.model.db.HistoryOfForecast
+//import com.revolve44.solarpanelx.datasource.model.db.SolarStation
 //
 //
 //@Database(

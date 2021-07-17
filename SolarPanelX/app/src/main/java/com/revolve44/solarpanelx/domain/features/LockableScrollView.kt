@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.global_utils.special
+package com.revolve44.solarpanelx.domain.features
 
 import android.annotation.SuppressLint
 import android.content.Context

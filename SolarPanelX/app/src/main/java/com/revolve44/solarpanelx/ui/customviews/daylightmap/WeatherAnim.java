@@ -55,7 +55,7 @@ public class WeatherAnim extends View {
 
     //set sizes
     DisplayMetrics displaymetrics = new DisplayMetrics();
-//    int width =  displaymetrics.widthPixels;
+    //    int width =  displaymetrics.widthPixels;
 //    int height = displaymetrics.heightPixels;
     Bitmap bm;
 
@@ -65,16 +65,16 @@ public class WeatherAnim extends View {
 
 
 
-   public static void geometryL(){
-       Ax =            0F;
-       Bx = ((WIDTH)   /5F)*1F; // ><
-       Cx = ((WIDTH*2F)/5F)*1F;
-       Dx = ((WIDTH*3F)/5F)*1F;
-       Fx = ((WIDTH*4F)/5F)*1F; // ><
-       Ex = WIDTH;
+    public static void geometryL(){
+        Ax =            0F;
+        Bx = ((WIDTH)   /5F)*1F; // ><
+        Cx = ((WIDTH*2F)/5F)*1F;
+        Dx = ((WIDTH*3F)/5F)*1F;
+        Fx = ((WIDTH*4F)/5F)*1F; // ><
+        Ex = WIDTH;
 
-       //quickSetup();
-   }
+        //quickSetup();
+    }
 
 
     public WeatherAnim(Context context) {
@@ -131,10 +131,10 @@ public class WeatherAnim extends View {
 //        Fx = (WIDTH*4F)/5F; // ><
 //        Ex = WIDTH;
 //
-         //if (Constants.switcherMap){
-         //    quickSetup();
-         //    Constants.switcherMap = false;
-         //}
+        if (Constants.switcherMap){
+            quickSetup();
+            Constants.switcherMap = false;
+        }
 
 
         //Log.d("width: "," is "+WIDTH+" ][ "+HEIGHT);

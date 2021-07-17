@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.revolve44.solarpanelx.R
-import com.revolve44.solarpanelx.global_utils.base.recyclerview.BaseAdapterCallback
+import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapterCallback
 import com.revolve44.solarpanelx.ui.adapters.MapAdapter
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
 import timber.log.Timber

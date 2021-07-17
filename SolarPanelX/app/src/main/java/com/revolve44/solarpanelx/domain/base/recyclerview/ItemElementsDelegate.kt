@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.global_utils.base.recyclerview
+package com.revolve44.solarpanelx.domain.base.recyclerview
 
 import android.view.View
 import com.revolve44.solarpanelx.ui.models.StoriesLikeCardsInformation

@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.global_utils
+package com.revolve44.solarpanelx.domain
 
 sealed class Resource<T>(
     val data: T? = null,

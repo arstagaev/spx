@@ -3,16 +3,22 @@ package com.revolve44.solarpanelx.ui
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragment
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragmentDirections
 import com.revolve44.solarpanelx.ui.fragments.ToolsManagerFragment
-import com.revolve44.solarpanelx.ui.fragments.ToolsManagerFragmentDirections
+import com.revolve44.solarpanelx.ui.viewmodels.MainViewModel
+import com.revolve44.solarpanelx.ui.viewmodels.MassiveViewModelProviderFactory
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,12 +29,28 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavView : BottomNavigationView
     var navController: NavController? = null
 
+    //var viewModelMain : MainViewModel? = null
+    //private val viewModelMain : MainViewModel by viewModels()
+    //val viewModelMain: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+        val spxRepository = SpxRepository(application)
+
+        //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
+        //viewModelMain = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+
         bottomNavView = findViewById(R.id.bottom_nav)
+
         navController = Navigation.findNavController(this, R.id.main_screen_container_fragment);
+
+        bottomNavView.setupWithNavController(navController!!)
+        setCurrentFragment()
+        manageBottomNavBar()
         //val navHostFragment =
         //    supportFragmentManager.findFragmentById(R.id.main_screen_container_fragment) as NavHostFragment
         //navController = navHostFragment.navController
@@ -48,8 +70,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         //.initBottomNav()
-        setCurrentFragment()
-        manageBottomNavBar()
+
     }
 
     private fun manageBottomNavBar() {

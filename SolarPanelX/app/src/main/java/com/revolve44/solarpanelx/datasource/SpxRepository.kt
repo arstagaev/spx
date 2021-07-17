@@ -1,4 +1,6 @@
 package com.revolve44.solarpanelx.datasource
 
-class SpxRepository {
+import android.app.Application
+
+class SpxRepository( app : Application) {
 }
