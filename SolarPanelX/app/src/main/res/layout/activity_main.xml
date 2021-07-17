@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.MainActivity">
+
+    <fragment
+        android:id="@+id/main_screen_container_fragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_main_screen"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </fragment>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+        app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+<!--    <androidx.constraintlayout.helper.widget.Flow-->
+<!--        android:id="@+id/bottom_nav"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:background="#FFFFFF"-->
+<!--        app:constraint_referenced_ids="row_home_mainscreen,row_manager_of_tools"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--    </androidx.constraintlayout.helper.widget.Flow>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/row_home_mainscreen"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:src="@drawable/ic_solar_panel">-->
+<!--    </ImageView>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/row_manager_of_tools"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:src="@drawable/ic_baseline_three_lines">-->
+<!--    </ImageView>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

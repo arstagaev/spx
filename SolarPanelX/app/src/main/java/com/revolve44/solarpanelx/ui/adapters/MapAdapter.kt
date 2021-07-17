@@ -1,0 +1,54 @@
+package com.revolve44.solarpanelx.ui.adapters
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.global_utils.base.recyclerview.BaseAdapter
+import com.revolve44.solarpanelx.global_utils.base.recyclerview.BaseViewHolder
+import com.revolve44.solarpanelx.global_utils.base.recyclerview.ItemElementsDelegate
+import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
+import timber.log.Timber
+
+
+
+class MapAdapter: BaseAdapter<ToolsRecyclerviewModel>(){
+
+    var pairDelegate: ItemElementsDelegate<ToolsRecyclerviewModel>? = null
+
+    fun attachDelegate(callback: ItemElementsDelegate<ToolsRecyclerviewModel>) {
+        this.pairDelegate = callback
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ToolsRecyclerviewModel> {
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_tools_screen,parent,false))
+
+    }
+
+    inner class ViewHolder(itemView: View) : BaseViewHolder<ToolsRecyclerviewModel>(itemView = itemView){
+        private val txtName : TextView = itemView.findViewById(R.id.name_in_row_recycler_tools)
+        //private val macAdrress : TextView = itemView.findViewById(R.id.mac_address)
+        //private val rssiLevel : TextView = itemView.findViewById(R.id.signal_strength)
+        //private val bondStatus : TextView = itemView.findViewById(R.id.bond_status)
+
+        private val cardLayout : CardView = itemView.findViewById(R.id.card_row_recycler_tools)
+
+
+        override fun bind(model: ToolsRecyclerviewModel) {
+            txtName.text = model.name
+            //macAdrress.text = model.device.address
+            //rssiLevel.text = model.rssi.toString()+" dBm"
+            //bondStatus.text = bondStateConverter(model.device.bondState)
+            cardLayout.setOnClickListener {
+
+                pairDelegate?.onElementClick(model,itemView,this.adapterPosition)
+
+            }
+        }
+    }
+}
