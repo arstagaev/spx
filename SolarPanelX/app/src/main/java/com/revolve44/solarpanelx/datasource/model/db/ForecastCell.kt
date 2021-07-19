@@ -13,4 +13,4 @@ data class ForecastCell(
     val day: Int,
     val HumanTime: String,
     val forecast: Int
-    )
+)

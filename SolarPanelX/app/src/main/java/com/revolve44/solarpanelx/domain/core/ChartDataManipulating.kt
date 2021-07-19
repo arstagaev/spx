@@ -29,9 +29,9 @@ fun chartDataHandler(arrayList: ArrayList<Float>, rangeX0 : Int, rangeX1 : Int):
  * <-output:
  * right sorted part of array forecasts[] for define chart
  */
-fun chartDatasort( timestamps: ArrayList<Long>, forecasts: ArrayList<Float>,jumpAboveArray : Int): ArrayList<Float> {
+fun chartDatasort( timestamps: ArrayList<Long>, forecasts: ArrayList<Float>,jumpAboveArray : Int): FirstChartDataTransitor{
     //var repeater = 0
-    var arrayListOUTPUT: ArrayList<Float> = ArrayList()
+    var arrayListOUTPUT: ArrayList<Int> = ArrayList()
     //xxx
     //var jumpAboveArray = 0
 
@@ -42,7 +42,7 @@ fun chartDatasort( timestamps: ArrayList<Long>, forecasts: ArrayList<Float>,jump
 
         Timber.i("qqq "+ unxtoDate(timestamps.get(i)))
         //for (z in countdown..timestamps.)
-        arrayListOUTPUT.add(forecasts.get(i))
+        arrayListOUTPUT.add(forecasts.get(i).toInt())
 
     }
     // for description of charts
@@ -55,8 +55,12 @@ fun chartDatasort( timestamps: ArrayList<Long>, forecasts: ArrayList<Float>,jump
     }else if (jumpAboveArray==3){
         PreferenceMaestro.fiveChartMonthandDay = unxtoDayandMonth(timestamps.get(countdown+1))
     }
+    var arrayDate = arrayListOf<String>()
+    for (i in 0 until arrayListOUTPUT.size){
+        arrayDate.add("${i}")
+    }
 
-    return arrayListOUTPUT
+    return FirstChartDataTransitor(arrayDate,arrayListOUTPUT)
 }
 
 fun chartDatasortforFirstChart( timestamps: ArrayList<Long>, forecasts: ArrayList<Float>) : FirstChartDataTransitor {

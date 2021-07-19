@@ -3,6 +3,7 @@ package com.revolve44.solarpanelx.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.revolve44.solarpanelx.R
@@ -12,7 +13,7 @@ import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
 
 
-class MapAdapter: BaseAdapter<ToolsRecyclerviewModel>(){
+class ToolsMainscreenAdapter: BaseAdapter<ToolsRecyclerviewModel>(){
 
     var pairDelegate: ItemElementsDelegate<ToolsRecyclerviewModel>? = null
 
@@ -28,7 +29,7 @@ class MapAdapter: BaseAdapter<ToolsRecyclerviewModel>(){
 
     inner class ViewHolder(itemView: View) : BaseViewHolder<ToolsRecyclerviewModel>(itemView = itemView){
         private val txtName : TextView = itemView.findViewById(R.id.name_in_row_recycler_tools)
-        //private val macAdrress : TextView = itemView.findViewById(R.id.mac_address)
+        private val iconTool : ImageView = itemView.findViewById(R.id.icon_of_tools)
         //private val rssiLevel : TextView = itemView.findViewById(R.id.signal_strength)
         //private val bondStatus : TextView = itemView.findViewById(R.id.bond_status)
 
@@ -37,6 +38,8 @@ class MapAdapter: BaseAdapter<ToolsRecyclerviewModel>(){
 
         override fun bind(model: ToolsRecyclerviewModel) {
             txtName.text = model.name
+            iconTool.setImageResource(model.iconOfTool)
+
             //macAdrress.text = model.device.address
             //rssiLevel.text = model.rssi.toString()+" dBm"
             //bondStatus.text = bondStateConverter(model.device.bondState)

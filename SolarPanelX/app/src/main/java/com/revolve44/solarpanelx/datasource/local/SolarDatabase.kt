@@ -1,33 +1,29 @@
-//package com.revolve44.solarpanelx.datasource.local
-//
-//import android.content.Context
-//import androidx.room.Database
-//import androidx.room.Room
-//import androidx.room.RoomDatabase
-//import androidx.room.migration.Migration
-//import androidx.sqlite.db.SupportSQLiteDatabase
-//import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
-//import com.revolve44.solarpanelx.datasource.model.db.HistoryOfForecast
-//import com.revolve44.solarpanelx.datasource.model.db.SolarStation
-//
-//
-//@Database(
-//    entities = [
-//        SolarStation::class,
-//        ForecastCell::class,
-//        HistoryOfForecast::class
-//    ],
-//    version = 2
-//)
-//abstract class SolarDatabase : RoomDatabase() {
-//    abstract val solarDao: SolarDao
-//
-//
-//
-//
-//
-//    companion object{
-//
+package com.revolve44.solarpanelx.datasource.local
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
+import com.revolve44.solarpanelx.datasource.model.db.HistoryOfForecast
+import com.revolve44.solarpanelx.datasource.model.db.SolarStation
+
+
+@Database(
+    entities = [
+        SolarStation::class,
+        ForecastCell::class,
+        HistoryOfForecast::class
+    ],
+    version = 1
+)
+abstract class SolarDatabase : RoomDatabase() {
+    abstract val solarDao: SolarDao
+
+    companion object{
+
 //        private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
 //            override fun migrate(database: SupportSQLiteDatabase) {
 //                // Room uses an own database hash to uniquely identify the database
@@ -38,19 +34,20 @@
 //                // Since we didn't alter the table, there's nothing else to do here.
 //            }
 //        }
-//
-//        @Volatile
-//        private var INSTANCE : SolarDatabase? = null
-//
-//        fun getInstance(context: Context): SolarDatabase {
-//            synchronized(this){
-//                return INSTANCE ?: Room.databaseBuilder(
-//                    context.applicationContext,
-//                    SolarDatabase::class.java,
-//                    "spx_db" // massive_db has been here
-//                ).addMigrations(MIGRATION_1_2)
-//                    .build().also { INSTANCE = it }
-//            }
-//        }
-//    }
-//}
+
+        @Volatile
+        private var INSTANCE : SolarDatabase? = null
+
+        fun getInstance(context: Context): SolarDatabase {
+            synchronized(this){
+                return INSTANCE ?: Room.databaseBuilder(
+                    context.applicationContext,
+                    SolarDatabase::class.java,
+                    "spx_modern_db" // massive_db has been here
+                )
+                    //.addMigrations(MIGRATION_1_2)
+                    .build().also { INSTANCE = it }
+            }
+        }
+    }
+}

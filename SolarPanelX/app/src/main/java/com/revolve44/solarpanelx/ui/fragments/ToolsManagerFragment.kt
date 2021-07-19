@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapterCallback
-import com.revolve44.solarpanelx.ui.adapters.MapAdapter
+import com.revolve44.solarpanelx.ui.adapters.ToolsMainscreenAdapter
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
 import timber.log.Timber
 
@@ -15,7 +15,7 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
     private lateinit var recyclerViewTools: RecyclerView
 
-    private val mAdapter =  MapAdapter()
+    private val mAdapter =  ToolsMainscreenAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,14 +27,14 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
     private fun initRecyclerViewWithMapAndNums() {
         var forRecyclerviewAdapter = arrayListOf(
-            ToolsRecyclerviewModel("HI","Status",1,123),
-            ToolsRecyclerviewModel("HI3","Status3",12,1234),
-            ToolsRecyclerviewModel("HI","Status",1,123),
-            ToolsRecyclerviewModel("HI3","Status3",12,1234),
-            ToolsRecyclerviewModel("HI","Status",1,123),
-            ToolsRecyclerviewModel("HI3","Status3",12,1234),
-            ToolsRecyclerviewModel("HI","Status",1,123),
-            ToolsRecyclerviewModel("HI3","Status3",12,1234)
+            ToolsRecyclerviewModel("My PV Station","",0,R.drawable.ic_solar_panel),
+            //ToolsRecyclerviewModel("PV Statistics","Status3",12,1234),
+            //ToolsRecyclerviewModel("HI","Status",1,123),
+            //ToolsRecyclerviewModel("HI3","Status3",12,1234),
+            //ToolsRecyclerviewModel("HI","Status",1,123),
+            //ToolsRecyclerviewModel("HI3","Status3",12,1234),
+            //ToolsRecyclerviewModel("HI","Status",1,123),
+            //ToolsRecyclerviewModel("HI3","Status3",12,1234)
         )
 
         mAdapter.attachCallback(object : BaseAdapterCallback<ToolsRecyclerviewModel> {

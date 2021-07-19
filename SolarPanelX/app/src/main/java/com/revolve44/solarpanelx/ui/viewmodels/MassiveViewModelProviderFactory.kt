@@ -10,6 +10,6 @@ class MassiveViewModelProviderFactory(
     val repository: SpxRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainViewModel() as T
+        return MainViewModel(app,repository) as T
     }
 }

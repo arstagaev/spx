@@ -8,6 +8,12 @@ class Constants {
 
     companion object{
 
+        const val BASE_URL = "https://api.openweathermap.org/"
+        const val API_KEY = "ac79fea59e9d15377b787a610a29b784"
+
+        const val DUAL_INDICATOR_SIZEOFFACTORS = 32
+        const val SOLAR_PANEL_AREA_FOR_1W =0.00648F
+
         @kotlin.jvm.JvmField
         var switcherMap: Boolean = true
 

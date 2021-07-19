@@ -31,12 +31,20 @@ object PreferenceMaestro {
         editor.apply()
     }
 
-    var timeOfLastDataUpdate: String?
+    var timeOfLastDataUpdate: String
         
-        get() = preferences.getString("lastupd", "offline")
+        get() = preferences.getString("lastupd", "no data").toString()
         
         set(value) = preferences.edit {
             it.putString("lastupd", value)
+        }
+
+    var timeOfLastDataUpdateLong: Long
+
+        get() = preferences.getLong("lastupd_L", 1234)
+
+        set(value) = preferences.edit {
+            it.putLong("lastupd_L", value)
         }
 
 
@@ -116,21 +124,20 @@ object PreferenceMaestro {
             it.putFloat("avr", value)
         }
 
-    var lastUpdateDate: String
-        
-        get() = preferences.getString("lstupd", "1").toString()
-        
-        set(value) = preferences.edit {
-            it.putString("lstupd", value)
-//>>>>>>> experimental
-        }
+//    var lastUpdateDate: String
+//
+//        get() = preferences.getString("lstupd", "1").toString()
+//
+//        set(value) = preferences.edit {
+//            it.putString("lstupd", value)
+//        }
 
-    var temp: Float
+    var temp: Int
         
-        get() = preferences.getFloat("temp", 1f)
+        get() = (preferences.getInt("temp", 1)).toInt()
         
         set(value) = preferences.edit {
-            it.putFloat("temp", value)
+            it.putInt("temp", value)
         }
 
     var chosenStationNOMINALPOWER: Int
@@ -277,6 +284,13 @@ object PreferenceMaestro {
         get() = preferences.getBoolean("isNightNode", true)
         set(value) = preferences.edit {
             it.putBoolean("isNightNode", value)
+        }
+
+    // metric = 0 , imperial = 1
+    var measurementSys : Int
+        get() = preferences.getInt("measurementsys", 0)
+        set(value) = preferences.edit {
+            it.putInt("measurementsys", value)
         }
 
     ////////////////////////////////////////////////////////////////////////

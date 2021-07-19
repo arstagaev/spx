@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.domain.features
+package com.revolve44.solarpanelx.domain.westcoast_customs
 
 
 import android.content.Context

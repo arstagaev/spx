@@ -12,7 +12,7 @@ data class SolarStation (
     var id : Int,
     val nominalPower : Int,
     val name : String,
-
-//    val lat : Float,
-//    val lon : Float
+    val lat : Float,
+    val lon : Float,
+    var notification : Boolean
 )

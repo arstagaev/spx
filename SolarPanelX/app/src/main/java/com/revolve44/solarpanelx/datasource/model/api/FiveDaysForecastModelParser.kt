@@ -3,7 +3,7 @@ package com.revolve44.solarpanelx.datasource.model.api
 
 import com.google.gson.annotations.SerializedName
 
-data class FiveDaysForecastModel(
+data class FiveDaysForecastModelParser(
     @SerializedName("cod")
     val cod: String,
     @SerializedName("message")

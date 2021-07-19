@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.domain.features
+package com.revolve44.solarpanelx.domain.westcoast_customs
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,6 +9,7 @@ import android.widget.ScrollView
 /**
 https://stackoverflow.com/questions/65543781/how-to-disable-work-of-scrollview-on-inner-seekbar/65544704#65544704
  */
+// about name of folder - i am just kidding:)
 
 class LockableScrollView : ScrollView {
     // true if we can scroll (not locked)

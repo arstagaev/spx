@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     //var viewModelMain : MainViewModel? = null
     //private val viewModelMain : MainViewModel by viewModels()
-    //val viewModelMain: MainViewModel by viewModels()
+    var viewModelMain: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +39,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val spxRepository = SpxRepository(application)
+        var spxRepository = SpxRepository(application)
 
-        //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
-        //viewModelMain = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+        val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
+        viewModelMain = ViewModelProvider(this@MainActivity,viewModelFactory).get(MainViewModel::class.java)
 
         bottomNavView = findViewById(R.id.bottom_nav)
 
