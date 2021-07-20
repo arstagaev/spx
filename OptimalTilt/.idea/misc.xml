@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.2630208333333333" />
+        <entry key="app/src/main/res/drawable/ic_arrowcompass.xml" value="0.2245" />
+        <entry key="app/src/main/res/drawable/rect2.xml" value="0.2245" />
+        <entry key="app/src/main/res/drawable/rectangle.xml" value="0.2245" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10364583333333334" />
+        <entry key="app/src/main/res/layout/fragment_azimith_direct_rotate_solar_panel.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_calc_helper.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_calibrate_orientation_sensor.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/fragment_location_of_phone_on_s_p_surface.xml" value="0.253125" />
+        <entry key="app/src/main/res/layout/fragment_start_calc_tilt.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/fragment_tilt_of_solar_panel.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
+  </component>
+</project>

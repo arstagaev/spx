@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="150dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:text="Optimal tilt"
+        android:textColor="#959595"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="150dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:text="Actual tilt"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/optimal_tilt_view"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="45"
+        android:textColor="#959595"
+        android:textSize="35sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/actual_tilt_view"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="45"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintStart_toEndOf="@+id/optimal_tilt_view"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="20dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="124dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pitch_tilt_solar_panel">
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/pitch_tilt_solar_panel"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="88dp"
+        android:src="@drawable/sp4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/optimal_tilt_view" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="56dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+        <TextView
+            android:id="@+id/suggest_tilt_viewer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#007300"
+            android:gravity="center"
+            android:text="Good"
+            android:textColor="@color/white">
+
+        </TextView>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:elevation="22dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <TextView
+            android:id="@+id/btn_close_calc_tilt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9FAF9"
+            android:gravity="center"
+            android:text="Close"
+            android:textColor="@color/black">
+
+        </TextView>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
