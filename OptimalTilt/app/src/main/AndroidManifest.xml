@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OptimalTilt">
         <activity
-            android:name=".MainActivity"
+            android:name=".OptimalTiltHelperActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

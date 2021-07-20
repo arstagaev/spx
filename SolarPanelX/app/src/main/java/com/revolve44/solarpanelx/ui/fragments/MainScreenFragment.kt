@@ -7,9 +7,11 @@ import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
 import android.widget.ViewSwitcher
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -26,10 +28,7 @@ import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
 import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
-import com.revolve44.solarpanelx.domain.core.MyXAxisValuesFormatter
-import com.revolve44.solarpanelx.domain.core.chartDatasort
-import com.revolve44.solarpanelx.domain.core.chartDatasortforFirstChart
-import com.revolve44.solarpanelx.domain.core.displayWattsKiloWattsInSexually
+import com.revolve44.solarpanelx.domain.core.*
 import com.revolve44.solarpanelx.ui.MainActivity
 import timber.log.Timber
 
@@ -57,6 +56,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var timeOfSunShine : TextView
     private lateinit var sunsetTime :     TextView
 
+    private lateinit var frcnowCardview : LinearLayout
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,12 +71,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         forecastNowRelativ = view.findViewById(R.id.forecast_now_relatively)
         sunriseTime = view.findViewById(R.id.sunshineIndicatorBlockSUNRISE)
         timeOfSunShine = view.findViewById(R.id.sunshineIndicatorBlockDURATION)
-        sunriseTime = view.findViewById(R.id.sunshineIndicatorBlockSUNSET)
+        sunsetTime = view.findViewById(R.id.sunshineIndicatorBlockSUNSET)
+
+        frcnowCardview = view.findViewById(R.id.linearlayout_frcst_now)
 
         lastUpdate = view.findViewById(R.id.last_upd_date)
         //textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
         swipeRefreshTools(view)
-
 
         val slideInLeftAnimation: Animation = AnimationUtils.loadAnimation(
             requireActivity(),
@@ -130,6 +132,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         //WeatherAnim.geometryL()
         //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
         //mainViewmodel = ViewModelProvider(this).get(MainViewModel::class.java)
+        refreshSunshineIndicatorBlock()
 
         //wait when viewmodel not null from activity
         (activity as MainActivity).let { it ->
@@ -151,7 +154,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 it.viewModelMain!!.getAllForecastForChart().observe(viewLifecycleOwner) {
                     if(it.isNotEmpty()){
                         forecastNowAbsol.text = "${displayWattsKiloWattsInSexually(it[0].forecast)}"
-                        forecastNowRelativ.text = "${(it[0].forecast.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat())*100}%"
+                        forecastNowRelativ.text = "${roundTo1decimials((it[0].forecast.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat())*100)}%"
                         firstStepToCharts(it)
                         lastUpdate.text = "${PreferenceMaestro.timeOfLastDataUpdate}"
                     }
@@ -163,8 +166,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     when(it){
                         is Resource.Success -> {
                             refreshSunshineIndicatorBlock()
+
                         }
                         is Resource.Loading -> {
+                            gradientAnimation(frcnowCardview,Color.GREEN,Color.MAGENTA,Color.RED,Color.BLUE,Color.WHITE,5000)
 
                         }
                         is Resource.Error -> {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.steps.CalibrateOrientationSensorFragment">
+    tools:context="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.CalibrateOrientationSensorFragment">
 
     <TextView
         android:id="@+id/we_suggest_orientation_for_define_location"
@@ -62,7 +62,7 @@
         android:layout_width="313dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:src="@drawable/calibrphone2"
+        android:src="@drawable/sm_calibrphone2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/we_suggest_orientation_for_define_location">

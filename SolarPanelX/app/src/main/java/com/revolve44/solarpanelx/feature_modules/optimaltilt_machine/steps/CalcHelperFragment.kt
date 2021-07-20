@@ -1,4 +1,4 @@
-package com.example.optimaltilt.fragment.steps
+package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,8 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.Button
 import android.widget.ImageView
-import com.example.optimaltilt.OptimalTiltHelperActivity
-import com.example.optimaltilt.R
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.R
 
 
 class CalcHelperFragment : Fragment(R.layout.sm_fragment_calc_helper) {

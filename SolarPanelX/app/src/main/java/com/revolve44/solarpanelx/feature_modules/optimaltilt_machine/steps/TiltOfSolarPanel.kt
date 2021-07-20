@@ -1,4 +1,4 @@
-package com.example.optimaltilt.fragment.steps
+package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,10 +9,10 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import com.example.optimaltilt.OptimalTiltHelperActivity
-import com.example.optimaltilt.R
-import com.example.optimaltilt.tools.TiltSuggestor
-import com.example.optimaltilt.viewmodels.OrientationSolarPanelViewModel
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.TiltSuggestor
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
+import com.revolve44.solarpanelx.R
 import kotlin.math.abs
 
 
@@ -52,7 +52,7 @@ class TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel) {
             rotateSolarPanel(it)
             txtActualTiltView!!.setText("${90F+it}°")
 
-            var SUGGESTED_TILT = TiltSuggestor().defineOptimalTilt(53.3,TiltSuggestor.Season.SUMMER)
+            var SUGGESTED_TILT = TiltSuggestor().defineOptimalTilt(53.3, TiltSuggestor.Season.SUMMER)
             var PREDICTION_GOOD_OR_NOT =""
             var COLOR_PREDICTION_TILT = 0
 

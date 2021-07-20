@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_tilt_machine"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.OptimalTiltMainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/sm_fragment_start_calc_tilt" >
+        <action
+            android:id="@+id/action_mainFragment_to_secondFragment"
+            app:destination="@id/azimuth_direction_rotate" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/azimuth_direction_rotate"
+        android:name="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.AzimithDirectRotateSolarPanelFragment"
+        android:label="fragment_azimuth_direction"
+        tools:layout="@layout/sm_fragment_azimith_direct_rotate_solar_panel">
+
+        <action
+            android:id="@+id/action_azimuth_direction_rotate_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.TiltOfSolarPanel"
+        android:label="fragment_three"
+        tools:layout="@layout/sm_fragment_tilt_of_solar_panel" >
+    </fragment>
+
+
+</navigation>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
 
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_width="20dp"
         android:layout_height="110dp"
         android:layout_marginTop="124dp"
-        android:src="@drawable/rectangle"
+        android:src="@drawable/sm_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

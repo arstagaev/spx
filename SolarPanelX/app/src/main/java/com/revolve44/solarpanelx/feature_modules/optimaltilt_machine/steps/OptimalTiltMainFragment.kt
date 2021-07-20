@@ -1,4 +1,4 @@
-package com.example.optimaltilt.fragment
+package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,17 +6,14 @@ import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.optimaltilt.MainActivity
-import com.example.optimaltilt.R
-import com.example.optimaltilt.ZoomOutPageTransformer
-import com.example.optimaltilt.fragment.steps.*
-import com.example.optimaltilt.viewmodels.OrientationSolarPanelViewModel
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.ZoomOutPageTransformer
+import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 
-class MainFragment : Fragment(R.layout.fragment_start_calc_tilt) {
+class OptimalTiltMainFragment : Fragment(R.layout.sm_fragment_start_calc_tilt) {
 
 
     private lateinit var viewPager: ViewPager2
@@ -29,7 +26,7 @@ class MainFragment : Fragment(R.layout.fragment_start_calc_tilt) {
         // Instantiate a ViewPager2 and a PagerAdapter.
         viewPager = view.findViewById(R.id.pager_calc_tilt)
         //buttonToNext = view.findViewById(R.id.next_from_three_fragment)
-        viewModelOrientation = (activity as MainActivity).viewModel
+        viewModelOrientation = (activity as OptimalTiltHelperActivity).viewModel
         viewModelOrientation.currentItemInViewPager2.value = viewPager.currentItem
 
         viewModelOrientation.currentItemInViewPager2.observe(viewLifecycleOwner, Observer {

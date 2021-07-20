@@ -1,9 +1,8 @@
-package com.example.optimaltilt.viewmodels
+package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
 class OrientationSolarPanelViewModel(app : Application) : AndroidViewModel(app) {
 

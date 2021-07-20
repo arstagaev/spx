@@ -64,6 +64,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
 
     private fun ensureNeedUpdateOrNot() : Boolean {
         Timber.i("~~~~~~~~ init VW  current:${(getCurrentTimestampSec()-3600*3)}  last:${PreferenceMaestro.timeOfLastDataUpdateLong}")
+        Timber.i("ensure to upd ${getCurrentTimestampSec()-3600*3} ? ${PreferenceMaestro.timeOfLastDataUpdateLong}")
         return PreferenceMaestro.timeOfLastDataUpdateLong == 1234L || (getCurrentTimestampSec()-3600*3)>PreferenceMaestro.timeOfLastDataUpdateLong
     }
 

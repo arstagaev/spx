@@ -7,19 +7,16 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.optimaltilt.tools.Compass
 import com.example.optimaltilt.tools.SOTWFormatter
-import com.example.optimaltilt.tools.Utils.Companion.PITCH
 import com.example.optimaltilt.viewmodels.MassiveViewModelProviderFactory
 import com.example.optimaltilt.viewmodels.OrientationSolarPanelViewModel
 
-class MainActivity : AppCompatActivity(), SensorEventListener {
+class OptimalTiltHelperActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
@@ -37,23 +34,22 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var sotwFormatter: SOTWFormatter? = null
     private var compass: Compass? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.sm_activity_orientation_helper)
         initNavigation()
 
         val viewModelProviderFactory = MassiveViewModelProviderFactory(application)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(OrientationSolarPanelViewModel::class.java)
-        sotwFormatter = SOTWFormatter(this@MainActivity)
+        sotwFormatter = SOTWFormatter(this@OptimalTiltHelperActivity)
         try {
+
             mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
             mRotationSensor = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
             msensor = mSensorManager!!.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
             mSensorManager!!.registerListener(this, mRotationSensor, SENSOR_DELAY)
             mSensorManager!!.registerListener(this, msensor, SENSOR_DELAY)
             setupCompass()
-
 
         } catch (e: Exception) {
             Toast.makeText(this, "Hardware compatibility issue", Toast.LENGTH_LONG).show()
@@ -69,7 +65,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         return Compass.CompassListener { azimuth -> // UI updates only in UI thread
             // https://stackoverflow.com/q/11140285/444966
 
-            viewModel.directionOfSolarPanel.value = azimuth
+            viewModel.azimuthDirectionOfSolarPanel.value = azimuth
 
             //this.runOnUiThread(java.lang.Runnable {
             //    adjustArrow(azimuth)

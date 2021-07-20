@@ -1,4 +1,4 @@
-package com.example.optimaltilt.fragment.steps
+package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,13 +10,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.optimaltilt.OptimalTiltHelperActivity
-import com.example.optimaltilt.R
-import com.example.optimaltilt.model.HowWellDirectedSolarPanel
-import com.example.optimaltilt.tools.AzimuthToNorthSouthFormatterAndSuggestor
-import com.example.optimaltilt.tools.Compass
-import com.example.optimaltilt.tools.SOTWFormatter
-import com.example.optimaltilt.viewmodels.OrientationSolarPanelViewModel
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.model.HowWellDirectedSolarPanel
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.AzimuthToNorthSouthFormatterAndSuggestor
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
+import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.Compass
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.SOTWFormatter
+
 
 class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azimith_direct_rotate_solar_panel) {
     private val TAG = "CompassActivity"
@@ -66,7 +67,10 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
 
         suggest_azimuth = view.findViewById(R.id.suggest_azimuth)
 
-        sotwFormatter = SOTWFormatter(requireActivity())
+        sotwFormatter =
+            SOTWFormatter(
+                requireActivity()
+            )
 
         btnCompassMode.setOnClickListener {
             orientationViewModel.currentItemInViewPager2.value = 4

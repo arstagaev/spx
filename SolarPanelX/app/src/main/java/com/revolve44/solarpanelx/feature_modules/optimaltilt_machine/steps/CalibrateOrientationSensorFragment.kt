@@ -1,4 +1,4 @@
-package com.example.optimaltilt.fragment.steps
+package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
-import com.example.optimaltilt.OptimalTiltHelperActivity
-import com.example.optimaltilt.R
-import com.example.optimaltilt.viewmodels.OrientationSolarPanelViewModel
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
+import com.revolve44.solarpanelx.R
 
 
 class CalibrateOrientationSensorFragment : Fragment() {

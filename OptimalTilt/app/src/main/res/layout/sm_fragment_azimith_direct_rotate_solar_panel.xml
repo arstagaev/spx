@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".OptimalTiltHelperActivity">
 
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:layout_marginStart="20dp"
-        android:src="@drawable/compassdial2"
+        android:src="@drawable/sm_compassdial2"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/textView5"
@@ -39,7 +39,7 @@
         android:layout_width="20dp"
         android:layout_height="25dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_arrowcompass"
+        android:src="@drawable/sm_ic_arrowcompass"
         app:layout_constraintBottom_toBottomOf="@+id/main_image_dial"
         app:layout_constraintEnd_toEndOf="@+id/main_image_dial"
         app:layout_constraintStart_toStartOf="@+id/main_image_dial"
@@ -51,7 +51,7 @@
         android:layout_width="279dp"
         android:layout_height="75dp"
         android:layout_marginTop="12dp"
-        android:src="@drawable/rect2"
+        android:src="@drawable/sm_rect2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/optimal_azimuth_suggested">
@@ -109,7 +109,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="24dp"
         android:scaleType="fitXY"
-        android:src="@drawable/fff3"
+        android:src="@drawable/sm_fff3"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

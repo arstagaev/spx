@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.steps.CalibrateOrientationSensorFragment">
+
+    <TextView
+        android:id="@+id/we_suggest_orientation_for_define_location"
+        android:layout_width="351dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Optimal orientation for: 17.05 99.58"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+    </TextView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/calibr_orient_sensor_confirm_btn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:elevation="20dp"
+        android:visibility="invisible"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calibrate_orient">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9FAF9"
+            android:gravity="center"
+            android:text="OK>"
+            android:textColor="@color/black">
+
+        </TextView>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="397dp"
+        android:layout_height="114dp"
+        android:gravity="center"
+        android:text="Calibrate \nof Orientation Sensor"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/calibrate_orient"
+        android:layout_width="313dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sm_calibrphone2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/we_suggest_orientation_for_define_location">
+
+    </ImageView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
