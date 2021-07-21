@@ -7,15 +7,17 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.ui.AppBarConfiguration
+import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.TiltCalcMachine
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
 
-class OptimalTiltHelperActivity : AppCompatActivity(), SensorEventListener, Compass.CompassListener {
+class OptimalTiltHelperActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
@@ -62,47 +64,54 @@ class OptimalTiltHelperActivity : AppCompatActivity(), SensorEventListener, Comp
         //azi!!.text = "az= $azimuth"
     }
 
-//    private fun getCompassListener(): Compass.CompassListener {
-//        return Compass.CompassListener { azimuth -> // UI updates only in UI thread
-//            // https://stackoverflow.com/q/11140285/444966
-//
-//
-//
-//            //this.runOnUiThread(java.lang.Runnable {
-//            //    adjustArrow(azimuth)
-//            //    adjustSotwLabel(azimuth)
-//            //})
-//
-//        }
-//    }
+    private fun getCompassListener(): Compass.CompassListener {
+        return object : Compass.CompassListener {
+            override fun onNewAzimuth(azimuth: Float) {
+                viewModel.azimuthDirectionOfSolarPanel.value = azimuth
+            }
+            // UI updates only in UI thread
+            // https://stackoverflow.com/q/11140285/444966
 
-//    override fun onStart() {
-//        super.onStart()
-//        Log.d("ddd", "start compass")
-//        compass!!.start()
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        compass!!.stop()
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        compass!!.start()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        Log.d("ddd", "stop compass")
-//        compass!!.stop()
-//    }
+
+
+            //this.runOnUiThread(java.lang.Runnable {
+            //    adjustArrow(azimuth)
+            //    adjustSotwLabel(azimuth)
+            //})
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("ddd", "start compass")
+        compass!!.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        compass!!.stop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        compass!!.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("ddd", "stop compass")
+        compass!!.stop()
+    }
 
 
     private fun setupCompass() {
-        //compass = Compass(this)
-        //val cl:   Compass.CompassListener = getCompassListener()
-        //compass!!.setListener(cl)
+
+        compass = Compass(this)
+        //compass!!.start()
+
+        val cl:   Compass.CompassListener = getCompassListener()
+        compass!!.setListener(cl)
     }
 
     private fun initNavigation(){
@@ -149,8 +158,10 @@ class OptimalTiltHelperActivity : AppCompatActivity(), SensorEventListener, Comp
         //(findViewById<View>(R.id.yaw) as TextView).text = "Yaw: $yaw"
     }
 
-    override fun onNewAzimuth(azimuth: Float) {
-        viewModel.azimuthDirectionOfSolarPanel.value = azimuth
+    fun helper_azimuth1(view: View) {
+        Snackbar.make(findViewById(android.R.id.content), "This is a compass. The arrow always points north ", Snackbar.LENGTH_LONG).show()
+
+
     }
 
 

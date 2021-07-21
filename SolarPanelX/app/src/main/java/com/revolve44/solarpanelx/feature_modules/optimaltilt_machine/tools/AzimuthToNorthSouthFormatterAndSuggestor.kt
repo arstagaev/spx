@@ -55,8 +55,8 @@ class AzimuthToNorthSouthFormatterAndSuggestor {
                     in 330F..360F -> return HowWellDirectedSolarPanel("Excellent",Color.GREEN)
                     in 0F..30F ->    return HowWellDirectedSolarPanel("Excellent",Color.GREEN)
 
-                    in 270F..330F -> return HowWellDirectedSolarPanel("Not very good",Color.YELLOW)
-                    in 30F..90F ->  return HowWellDirectedSolarPanel("Not very good",Color.YELLOW)
+                    in 270F..330F -> return HowWellDirectedSolarPanel("Good",Color.YELLOW)
+                    in 30F..90F ->  return HowWellDirectedSolarPanel("Good",Color.YELLOW)
 
                     in 90F..270F -> return HowWellDirectedSolarPanel("Bad",Color.RED)
 

@@ -11,7 +11,7 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTilt
 import com.revolve44.solarpanelx.R
 
 
-class CalcHelperFragment : Fragment(R.layout.sm_fragment_calc_helper) {
+class Second_CalcHelperFragment : Fragment(R.layout.sm_fragment_calc_helper) {
 
     private lateinit var imagePhoneSideView : ImageView
     private lateinit var imagePhoneFrontView : ImageView

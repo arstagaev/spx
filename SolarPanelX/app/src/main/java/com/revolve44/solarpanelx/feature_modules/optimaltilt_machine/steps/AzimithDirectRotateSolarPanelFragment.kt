@@ -15,12 +15,17 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.model.HowWe
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.AzimuthToNorthSouthFormatterAndSuggestor
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.domain.core.roundTo1decimials
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.Compass
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.SOTWFormatter
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.TiltSuggester
+import kotlin.math.abs
 
 
 class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azimith_direct_rotate_solar_panel) {
     private val TAG = "CompassActivity"
+
+    // need to add place ypur phone horizontally!
 
     private var compass: Compass? = null
     private var sotwFormatter: SOTWFormatter? = null
@@ -42,6 +47,7 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
     private var arrowView           : ImageView? = null
     private var solarpanelDirection : ImageView? = null
     private var compassClockFace    : ImageView? = null
+    private var helper : ImageView? = null
 
     private lateinit var optimal_azimuth_suggested : TextView
     private lateinit var suggest_azimuth : TextView
@@ -58,6 +64,7 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
         azi =       view.findViewById<TextView>(R.id.azimuths_view)
         //sotwLabel = view.findViewById(R.id.actual_direction_view)
         compassClockFace = view.findViewById(R.id.main_image_dial)
+        helper = view.findViewById(R.id.tilt_machine_helper)
 
         //btnDirectionMode   = view.findViewById(R.id.solar_panel_direction_azimuth_btn)
         btnCompassMode     = view.findViewById(R.id.compass_btn)
@@ -78,6 +85,7 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
         }
 
 
+
         LATITUDE = -39F
         orientationViewModel = (activity as OptimalTiltHelperActivity).viewModel
 
@@ -86,10 +94,10 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
             adjustArrow(it)
             rotateSolarPanel(it)
 
-            actualDirectionView.setText(sotwFormatter?.format(-it))
+            actualDirectionView.setText(TiltSuggester().azimuthToDirections(abs(it-180f)))
 
 
-            azi?.setText("azimuth= $it")
+            azi?.setText("azimuth= ${roundTo1decimials(it)}")
 
             defineWhichCloseToOptimal = AzimuthToNorthSouthFormatterAndSuggestor().defineWhichCloseToOptimal(LATITUDE,it)
 

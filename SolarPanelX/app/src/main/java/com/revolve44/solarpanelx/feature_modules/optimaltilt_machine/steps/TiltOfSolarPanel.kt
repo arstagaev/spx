@@ -10,9 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
-import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.TiltSuggestor
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.TiltSuggester
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.domain.core.roundTo1decimials
 import kotlin.math.abs
 
 
@@ -50,9 +51,9 @@ class TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel) {
 
         orientationSolarPanelViewModel.pitch.observe(viewLifecycleOwner, Observer {
             rotateSolarPanel(it)
-            txtActualTiltView!!.setText("${90F+it}°")
+            txtActualTiltView!!.setText("${roundTo1decimials(90F+it)}°")
 
-            var SUGGESTED_TILT = TiltSuggestor().defineOptimalTilt(53.3, TiltSuggestor.Season.SUMMER)
+            var SUGGESTED_TILT = TiltSuggester().defineOptimalTilt(53.3, TiltSuggester.Season.SUMMER)
             var PREDICTION_GOOD_OR_NOT =""
             var COLOR_PREDICTION_TILT = 0
 

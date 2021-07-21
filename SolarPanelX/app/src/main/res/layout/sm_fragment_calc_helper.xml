@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.fragment.steps.CalcHelperFragment">
+    tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
 
     <TextView
         android:id="@+id/textView6"
@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="116dp"
         android:gravity="center"
+        android:textColor="@color/black"
         android:text="at find optimal azimuth"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,7 @@
         android:layout_height="84dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
+        android:textColor="@color/black"
         android:text="Orientation of Phone:"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +44,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="118dp"
         android:gravity="center"
+        android:textColor="@color/black"
         android:text="at find optimal tilt"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/helper_phone_tilt"
@@ -82,17 +85,17 @@
         android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_marginTop="48dp"
+        android:backgroundTint="#FFFFFF"
         android:elevation="145dp"
         android:text="Next"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helper_phone_tilt"
-        app:layout_constraintVertical_bias="0.053">
+        app:layout_constraintVertical_bias="0.62">
 
     </Button>
 

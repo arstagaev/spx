@@ -58,12 +58,12 @@ class OptimalTiltMainFragment : Fragment(R.layout.sm_fragment_start_calc_tilt) {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> CalibrateOrientationSensorFragment()
-                1 -> CalcHelperFragment()
+                0 -> First_CalibrateOrientationSensorFragment()
+                1 -> Second_CalcHelperFragment()
                 2 -> LocationOfPhoneOnSPSurfaceFragment()
                 3 -> AzimithDirectRotateSolarPanelFragment()
                 4 -> TiltOfSolarPanel()
-                else -> CalcHelperFragment()
+                else -> Second_CalcHelperFragment()
             }
         }
     }

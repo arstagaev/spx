@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.CalibrateOrientationSensorFragment">
+    tools:context="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.First_CalibrateOrientationSensorFragment">
 
     <TextView
         android:id="@+id/we_suggest_orientation_for_define_location"
@@ -12,6 +12,7 @@
         android:layout_height="72dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
+        android:textColor="@color/black"
         android:text="Optimal orientation for: 17.05 99.58"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +50,7 @@
         android:layout_width="397dp"
         android:layout_height="114dp"
         android:gravity="center"
+        android:textColor="@color/black"
         android:text="Calibrate \nof Orientation Sensor"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"

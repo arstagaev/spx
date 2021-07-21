@@ -37,6 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity" />
+        <activity android:name=".ui.lightsensor.LightSensorActivity" />
     </application>
 
 </manifest>

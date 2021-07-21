@@ -37,9 +37,9 @@
 
     <TextView
         android:id="@+id/optimal_tilt_view"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="76dp"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="45"
@@ -52,15 +52,15 @@
 
     <TextView
         android:id="@+id/actual_tilt_view"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="45"
         android:textColor="@color/black"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toEndOf="@+id/optimal_tilt_view"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 

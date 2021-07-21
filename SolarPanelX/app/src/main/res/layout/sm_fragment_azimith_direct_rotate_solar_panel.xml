@@ -7,6 +7,19 @@
     android:background="@color/white"
     tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
 
+    <ImageView
+        android:id="@+id/tilt_machine_helper"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_help"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ImageView>
 
     <TextView
         android:id="@+id/actual_direction_view"
@@ -52,6 +65,7 @@
         android:layout_width="279dp"
         android:layout_height="75dp"
         android:layout_marginTop="12dp"
+        android:onClick="helper_azimuth1"
         android:src="@drawable/sm_rect2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

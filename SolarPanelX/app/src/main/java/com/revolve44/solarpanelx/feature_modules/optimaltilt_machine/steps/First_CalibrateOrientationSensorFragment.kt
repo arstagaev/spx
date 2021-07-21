@@ -7,33 +7,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 
 
-class CalibrateOrientationSensorFragment : Fragment() {
+class First_CalibrateOrientationSensorFragment : Fragment(R.layout.sm_fragment_calibrate_orientation_sensor) {
 
     private lateinit var viewMOdelOrientationSensorFragment : OrientationSolarPanelViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.sm_fragment_calibrate_orientation_sensor, container, false)
-
-    }
+    private lateinit var we_suggest_orientation_for_define_location : TextView
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showGif(view)
         var cardViewBtnConfirmEndOfCalibration = (view.findViewById<CardView>(R.id.calibr_orient_sensor_confirm_btn) as CardView)
+        we_suggest_orientation_for_define_location = view.findViewById<TextView>(R.id.we_suggest_orientation_for_define_location)
 
         viewMOdelOrientationSensorFragment = (activity as OptimalTiltHelperActivity).viewModel
+
 
         var timer = object : CountDownTimer(3000,1000){
             override fun onTick(millisUntilFinished: Long) {
@@ -47,6 +43,12 @@ class CalibrateOrientationSensorFragment : Fragment() {
         cardViewBtnConfirmEndOfCalibration.setOnClickListener {
             viewMOdelOrientationSensorFragment.currentItemInViewPager2.value = 1
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        we_suggest_orientation_for_define_location.text = "Optimal Tilt for city: ${PreferenceMaestro.chosenStationCITY}"
+        
     }
 
     fun showGif(view: View) {
