@@ -15,6 +15,7 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.model.HowWe
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.AzimuthToNorthSouthFormatterAndSuggestor
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.roundTo1decimials
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.Compass
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.SOTWFormatter
@@ -86,7 +87,8 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
 
 
 
-        LATITUDE = -39F
+        LATITUDE = PreferenceMaestro.lat
+
         orientationViewModel = (activity as OptimalTiltHelperActivity).viewModel
 
         orientationViewModel.azimuthDirectionOfSolarPanel.observe(viewLifecycleOwner, Observer {

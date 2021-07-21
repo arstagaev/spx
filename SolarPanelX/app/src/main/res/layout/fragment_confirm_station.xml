@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000B1E">
+
+    <com.revolve44.solarpanelx.domain.westcoast_customs.LockableScrollView
+        android:id="@+id/scrollViewFromFragmentConfirmStation"
+        android:layout_width="match_parent"
+        android:layout_height="1500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="900dp"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black_spoke"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <EditText
+                    android:id="@+id/nominalPowerOfStation"
+                    android:layout_width="280dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="52dp"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/hint_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.122"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </EditText>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="296dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+
+                    android:layout_marginTop="6dp"
+                    android:text="@string/screenaddstation_confirm_nominalpower_description"
+                    android:textColor="@color/hint_white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nominalPowerOfStation">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/screenaddstation_confirm_title_power"
+                    android:textColor="@color/day_sun_zenith"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/currencySpinner"
+                    android:layout_width="123dp"
+                    android:layout_height="42dp"
+                    android:theme="@style/spinnerTheme"
+                    tools:layout_editor_absoluteX="200dp"
+                    tools:layout_editor_absoluteY="141dp" />
+
+                <EditText
+                    android:id="@+id/pricePerkWh"
+                    android:layout_width="133dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="124dp"
+                    android:layout_height="23dp"
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/screenaddstation_confirm_priceper1kwh_description"
+                    android:textColor="@color/hint_white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pricePerkWh">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="160dp"
+                    android:layout_height="20dp"
+
+                    android:layout_marginStart="60dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/screenaddstation_confirm_currency_description"
+                    android:textColor="@color/hint_white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/pricePerkWh">
+
+                </TextView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/black_spoke"
+                android:overScrollMode="always"
+                android:paddingVertical="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/fragment_confirm_advanced_optional"
+                    android:textColor="@color/day_sun_zenith"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/expander_confirmst"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_expand"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/confirm_fragment_cost_of_pv_station"
+                    android:textColor="@color/hint_white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/investments_to_pv_station">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/currencyOfPVStation"
+                    android:layout_width="42dp"
+                    android:layout_height="38dp"
+
+                    android:layout_marginStart="248dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="left|center"
+                    android:text="$"
+                    android:textColor="@color/hint_white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9"
+                    tools:ignore="RtlHardcoded">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/investments_to_pv_station"
+                    android:layout_width="227dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:ems="10"
+                    android:hint="0"
+
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+                    <io.feeeei.circleseekbar.CircleSeekBar
+                        android:id="@+id/circleseekbar_efficiency"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foregroundGravity="center"
+                        app:wheel_reached_color="#05C324"
+                        app:wheel_unreached_color="#8BA0AA"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/efficiency_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignLeft="@+id/circleseekbar_efficiency"
+                        android:layout_alignRight="@+id/circleseekbar_efficiency"
+                        android:layout_alignBottom="@+id/circleseekbar_efficiency"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="100"
+                        android:textColor="@color/white"
+                        android:textSize="35sp">
+
+                    </TextView>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="208dp"
+                    android:layout_marginLeft="208dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+                    <io.feeeei.circleseekbar.CircleSeekBar
+                        android:id="@+id/circleseekbar_installation_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foregroundGravity="center"
+                        app:wheel_reached_color="#05C324"
+                        app:wheel_unreached_color="#8BA0AA"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/install_date_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignLeft="@+id/circleseekbar_installation_date"
+                        android:layout_alignRight="@+id/circleseekbar_installation_date"
+                        android:layout_alignBottom="@+id/circleseekbar_installation_date"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="100"
+                        android:textColor="@color/white"
+                        android:textSize="35sp">
+
+                    </TextView>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:gravity="center"
+                    android:text="@string/screenaddstation_confirm_efficiency_description"
+                    android:textColor="@color/hint_white"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
+                    app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:gravity="center"
+                    android:text="@string/screenaddstation_confirm_install_date_description"
+                    android:textColor="@color/hint_white"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/relativeLayout2"
+                    app:layout_constraintStart_toStartOf="@+id/relativeLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+                </TextView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/black_spoke">
+
+                <Button
+                    android:id="@+id/confirm_changes"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/black"
+                    android:text="@string/screenaddstation_confirm_button"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </com.revolve44.solarpanelx.domain.westcoast_customs.LockableScrollView>
+
+
+
+
+
+
+</ScrollView>

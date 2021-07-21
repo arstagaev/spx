@@ -1,8 +1,5 @@
-package com.revolve44.solarpanelx.ui.lightsensor
+package com.revolve44.solarpanelx.feature_modules.lightsensor
 
-import android.app.Application
-
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 

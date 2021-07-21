@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">Solar Panel X</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="mainscreen_dualindicatot_forecastoutput">forecast output, kWh</string>
     <string name="mainscreen_indicator_you_will_save">you will save,</string>
     <string name="mainscreen_LastUpdatedIndicator">"Updated: "</string>
-    <string name="mainscreen_cityindicator" translatable="false">"City: "</string>
+    <string name="mainscreen_cityindicator">"City: "</string>
     <string name="mainscreen_indicator_outputkWh">forecast output, kWh</string>
     <string name="mainscreen_indicator_outputWh">forecast output, Wh</string>
-    <string name="mainscreen_toolbartitle_perhour">Forecast per Hour:</string>
-    <string name="mainscreen_toolbartitle_perweek">per Week:</string>
-    <string name="mainscreen_toolbartitle_permonth">per Month:</string>
+    <string name="mainscreen_toolbartitle_perhour">Forecast for an hour</string>
+    <string name="mainscreen_toolbartitle_perweek">for the Week:</string>
+    <string name="mainscreen_toolbartitle_permonth">for the Month</string>
     <string name="mainscreen_chart_title_forecast20hr">"Forecast for ~20 hours: "</string>
     <string name="mainscreen_chart_title_forecasttomorrow">"for tomorrow "</string>
     <string name="mainscreen_chart_title_forecastaftertomorrow">"for after tomorrow "</string>
@@ -22,11 +21,10 @@
     <string name="mainscreen_chart_title1">for 24 hr</string>
     <string name="mainscreen_chart_title2">for tomorrow</string>
     <string name="mainscreen_chart_title3">for after tomorrow</string>
-    <string name="mainscreen_now_you_may_use_title">Now you may use</string>
+    <string name="mainscreen_now_you_may_use_title">Now you may use:</string>
     <string name="navigation_drawer_menu_dashboard">Dashboard</string>
     <string name="navigation_drawer_menu_settings">Settings</string>
     <string name="navigation_drawer_menu_calibration">Calibration</string>
-    <string name="navigation_drawer_menu_promo_to_solarapp">Our App for Solar Panels</string>
     <string name="screenaddstation_map_title">Please set location  of your Solar Panels</string>
     <string name="screenaddstation_map_button">Next></string>
     <string name="screenaddstation_confirm_title_power">Main</string>
@@ -49,8 +47,8 @@
         \n
         \n Future features:
         \n > Coming soon we will add Explorer mode with angle and light sensors. It may help you to choose the more sunny place for solar panels "</string>
-    <string name="screenaddstation_viewpager_1title" translatable="false">Map</string>
-    <string name="screenaddstation_viewpager_2title" translatable="false">Characterisctics</string>
+    <string name="screenaddstation_viewpager_1title">Map</string>
+    <string name="screenaddstation_viewpager_2title">Characterisctics</string>
     <string name="screenaddstation_alert">Please, fill correct all forms</string>
     <string name="navigation_drawer_current_station">"Current PV station: "</string>
     <string name="calibrationscreen_description">Calibrate forecasting power output of your current Solar Panel, if needed</string>
@@ -79,6 +77,8 @@
     <string name="changes_saved">changes saved</string>
     <string name="coming_soon_will_added">will be added in following updates ;-)</string>
     <string name="tools">Tools</string>
+    <string name="other_chapter">Other</string>
+    <string name="creator_name">Creator</string>
     <string name="light_sensor_beta">Light Sensor (Beta)</string>
     <string name="light_sensor__error_title">Your Phone does not have a Light Sensor</string>
     <string name="light_sensor__error_message">Check the app on another phone</string>
@@ -92,5 +92,12 @@
     <string name="light_sensor_sign_nominal_power">Nominal  Power:</string>
     <string name="light_sensor_sign_calibrate_mode">Calibrate Mode:</string>
     <string name="get_pro_version_nmore_detailed_forecast_for_5_days">GET PRO VERSION:  more detailed forecast for 5 days</string>
-
+    <string name="confirm_fragment_cost_of_pv_station">Cost of PV Station</string>
+    <string name="fragment_confirm_advanced_optional">Advanced (optional)</string>
+    <string name="item_for_map_and_forecast_mood_solar_panel_work_at">solar panel work at</string>
+    <string name="item_cardview_map_forecast_day_mood">day mood</string>
+    <string name="addstation_activity_map">Map</string>
+    <string name="addstation_activity_characteristics">Characterisctics</string>
+    <string name="settingsscreen_menu_solarpanels_change_language">Language</string>
+    <string name="dialog_choose_language">Choose language</string>
 </resources>

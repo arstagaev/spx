@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.ui.lightsensor
+package com.revolve44.solarpanelx.feature_modules.lightsensor
 
 
 import android.graphics.Color

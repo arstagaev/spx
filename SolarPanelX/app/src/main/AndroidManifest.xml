@@ -37,7 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity" />
-        <activity android:name=".ui.lightsensor.LightSensorActivity" />
+        <activity android:name="com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity" />
+        <activity android:name=".ui.AddSolarStationActivity" />
     </application>
 
 </manifest>

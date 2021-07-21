@@ -27,8 +27,31 @@
         <action
             android:id="@+id/action_toolsManagerFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_toolsManagerFragment_to_settings_mainscreen"
+            app:destination="@id/settings_mainscreen" />
+        <action
+            android:id="@+id/action_toolsManagerFragment_to_forecast_calibrating_main"
+            app:destination="@id/forecast_calibrating_main" />
     </fragment>
 
+    <fragment
+        android:id="@+id/settings_mainscreen"
+        android:name="com.revolve44.solarpanelx.ui.fragments.features.SettingsFragment"
+        android:label="MainSettings"
+        tools:layout="@layout/settings_list_item" >
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/forecast_calibrating_main"
+        android:name="com.revolve44.solarpanelx.ui.fragments.features.CalibrationFragment"
+        android:label="MainSettings"
+        tools:layout="@layout/fragment_calibration" >
+
+
+    </fragment>
 
 
 </navigation>

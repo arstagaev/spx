@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/calibrated_outputPower"
+        android:layout_width="370dp"
+        android:layout_height="186dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="1000 W"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="362dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/calibrationscreen_description"
+        android:textColor="#6A6A6A"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calibrated_outputPower">
+
+    </TextView>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="265dp"
+        android:layout_height="265dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+        <io.feeeei.circleseekbar.CircleSeekBar
+            android:id="@+id/circleseekbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center"
+            app:wheel_reached_color="#B0C305"
+            app:wheel_unreached_color="#8BA0AA" />
+
+        <TextView
+            android:id="@+id/calibrate_coeff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/circleseekbar"
+            android:layout_alignRight="@+id/circleseekbar"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="100"
+            android:textColor="@color/white"
+            android:textSize="35sp">
+
+        </TextView>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/changes_saved_indicator_fragment_calibr"
+        android:layout_width="199dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="17dp"
+        android:gravity="top|center"
+        android:text="@string/changes_saved"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relative_layout"
+        app:layout_constraintVertical_bias="0.111">
+
+    </TextView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
