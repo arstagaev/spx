@@ -10,7 +10,7 @@
     <item
         android:height="300dp"
         android:width="300dp"
-        android:drawable="@drawable/logom"
+        android:drawable="@drawable/sunx"
         android:gravity="center">
 
     </item>
