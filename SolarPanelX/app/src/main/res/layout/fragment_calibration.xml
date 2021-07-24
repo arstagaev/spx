@@ -35,7 +35,8 @@
         android:textColor="#6A6A6A"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="24dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
     </TextView>
 
@@ -48,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:wheel_reached_color="#B0C305"
+        app:wheel_reached_color="#FFE600"
         app:wheel_unreached_color="#8BA0AA" />
 
     <TextView
@@ -76,9 +77,10 @@
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/circleseekbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calibrated_outputPower"
-        app:layout_constraintVertical_bias="0.391"
-        tools:layout_editor_absoluteX="106dp">
+        app:layout_constraintVertical_bias="0.391">
 
     </TextView>
 

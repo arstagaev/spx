@@ -6,11 +6,12 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.widget.ImageView
+import androidx.annotation.Nullable
 
 
 // for blinked of Text Color
 @SuppressLint("ObjectAnimatorBinding")
-fun blinkATextView(uiElement: Any, color1: Int, color2: Int, color3: Int, duration: Int){
+fun blinkATextView(uiElement: Any, color1: Int, color2: Int,color3: Int, duration: Int){
     val skyAnim: ValueAnimator = ObjectAnimator.ofInt(uiElement, "textColor",
         (color1),
         (color2),

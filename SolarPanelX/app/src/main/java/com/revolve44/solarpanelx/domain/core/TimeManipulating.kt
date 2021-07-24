@@ -11,8 +11,12 @@ fun generateTimestampLastUpdate() : String{
     return SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(Date())
 }
 
+fun generateCurrentHour() : String{
+    return SimpleDateFormat("HH").format(Date())
+}
+
 fun getCurrentTimestampSec(): Long {
 
-    return (System.currentTimeMillis())/1000
+    return ( (System.currentTimeMillis())/1000 )
 
 }

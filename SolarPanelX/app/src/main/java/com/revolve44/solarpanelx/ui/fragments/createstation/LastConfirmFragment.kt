@@ -2,22 +2,28 @@ package com.revolve44.solarpanelx.ui.fragments.createstation
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
+import com.revolve44.solarpanelx.domain.core.blinkATextView
 import com.revolve44.solarpanelx.domain.core.getInvestmentsToPVStation
 import com.revolve44.solarpanelx.domain.westcoast_customs.LockableScrollView
 import com.revolve44.solarpanelx.ui.AddSolarStationActivity
 import com.revolve44.solarpanelx.ui.MainActivity
 import io.feeeei.circleseekbar.CircleSeekBar
+import net.cachapa.expandablelayout.ExpandableLayout
 import timber.log.Timber
 import java.util.*
 
@@ -53,6 +59,10 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
     private lateinit var relativeLayout : RelativeLayout
     private lateinit var relativeLayout2 : RelativeLayout
 
+    private lateinit var advanced_expander : CardView
+    private lateinit var expandable_layout : ExpandableLayout
+    private lateinit var describe_about_nominal_power : TextView
+
 
 
 
@@ -80,15 +90,17 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
 
         investmentsToPVStation = view.findViewById(R.id.investments_to_pv_station)
         currencyInvestments = view.findViewById(R.id.currencyOfPVStation)
-
-        expander_confirmst = view.findViewById(R.id.expander_confirmst)
-
-        relativeLayout = view.findViewById(R.id.relativeLayout)
-        relativeLayout2 = view.findViewById(R.id.relativeLayout2)
-
-        expander_confirmst.setOnClickListener {
-
-        }
+        advanced_expander = view.findViewById<CardView>(R.id.advanced_expander)
+        expandable_layout = view.findViewById<ExpandableLayout>(R.id.expandable_layout)
+        describe_about_nominal_power = view.findViewById(R.id.describe_about_nominal_power)
+//        expander_confirmst = view.findViewById(R.id.expander_confirmst)
+//
+//        relativeLayout = view.findViewById(R.id.relativeLayout)
+//       // relativeLayout2 = view.findViewById(R.id.relativeLayout2)
+//
+//        expander_confirmst.setOnClickListener {
+//
+//        }
 
         circleseekbar_efficiency.maxProcess = 30
         circleseekbar_installation_date.maxProcess = 25
@@ -97,6 +109,7 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
 
         activateCircleSeekBar()
         activateSpinnerofCurrency(view)
+
 
         confirmButton.setOnClickListener {
 
@@ -132,6 +145,14 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
 
 
         }
+        var isExpandAdvance = false
+        advanced_expander.setOnClickListener {
+            when(isExpandAdvance){
+                true -> expandable_layout.setExpanded(true,true)
+                false -> expandable_layout.setExpanded(false,true)
+            }
+            isExpandAdvance = !isExpandAdvance
+        }
 
     }
 
@@ -139,6 +160,11 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
         super.onResume()
 
         loadCharacteristicsFromPreferences()
+
+        blinkATextView(describe_about_nominal_power, ContextCompat.getColor(requireActivity(),
+            R.color.hint_white2
+        ), Color.WHITE,ContextCompat.getColor(requireActivity(), R.color.hint_white2),1000)
+
     }
 
     private fun activateSpinnerofCurrency(view: View) {

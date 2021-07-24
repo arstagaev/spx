@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapter
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseViewHolder
@@ -13,7 +14,7 @@ import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
 
 
-class ToolsMainscreenAdapter: BaseAdapter<ToolsRecyclerviewModel>(){
+class ToolsMainscreenAdapter: BaseAdapter<ToolsRecyclerviewModel>() {
 
     var pairDelegate: ItemElementsDelegate<ToolsRecyclerviewModel>? = null
 
@@ -38,7 +39,16 @@ class ToolsMainscreenAdapter: BaseAdapter<ToolsRecyclerviewModel>(){
 
         override fun bind(model: ToolsRecyclerviewModel) {
             txtName.text = model.name
-            iconTool.setImageResource(model.iconOfTool)
+
+            try{
+                iconTool.setImageDrawable(model.iconOfTool)
+            }catch (e : Exception){
+                //iconTool.setImageResource(model.iconOfTool)
+                throw e
+            }finally {
+
+            }
+
 
             //macAdrress.text = model.device.address
             //rssiLevel.text = model.rssi.toString()+" dBm"

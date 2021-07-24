@@ -217,16 +217,16 @@ object PreferenceMaestro {
             it.putString("sunset", value)
         }
 
-    var sunriseHour: Int
-        get() = preferences.getInt("sunrise_hr", 0)
+    var sunriseHour: Float
+        get() = preferences.getFloat("sunrise_hr", 0f)
         set(value) = preferences.edit {
-            it.putInt("sunrise_hr", value)
+            it.putFloat("sunrise_hr", value)
         }
 
-    var sunsetHour: Int
-        get() = preferences.getInt("sunset_hr", 0)
+    var sunsetHour: Float
+        get() = preferences.getFloat("sunset_hr", 0f)
         set(value) = preferences.edit {
-            it.putInt("sunset_hr", value)
+            it.putFloat("sunset_hr", value)
         }
 
     var currentGMTinDefineLocation: Int
@@ -238,9 +238,9 @@ object PreferenceMaestro {
 
 
     var isFirstStart: Boolean
-        get() = preferences.getBoolean("firstStart_solar_panel_x", true)
+        get() = preferences.getBoolean("firstStart_spx", true)
         set(value) = preferences.edit {
-            it.putBoolean("firstStart_solar_panel_x", value)
+            it.putBoolean("firstStart_spx", value)
         }
 
     var forceHelperMainScreen: Boolean
@@ -294,10 +294,10 @@ object PreferenceMaestro {
         }
 
     ////////////////////////////////////////////////////////////////////////
-    var timezoneL: Long
-        get() = preferences.getLong("timezoneL", 0L)
+    var timezoneL: Float
+        get() = preferences.getFloat("timezoneF", 0F)
         set(value) = preferences.edit {
-            it.putLong("timezoneL", value)
+            it.putFloat("timezoneF", value)
         }
 
     var sunriseL: Long

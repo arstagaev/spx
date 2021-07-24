@@ -17,9 +17,9 @@ class SPXApp : Application() {
             Timber.tag("spx")
         }
         //!!!
-        PreferenceMaestro.chosenStationNOMINALPOWER = 100000
-        PreferenceMaestro.lat = 55.7558F
-        PreferenceMaestro.lon = 37.6173F
+//        PreferenceMaestro.chosenStationNOMINALPOWER = 100000
+//        PreferenceMaestro.lat = 55.7558F
+//        PreferenceMaestro.lon = 37.6173F
 
     }
 }

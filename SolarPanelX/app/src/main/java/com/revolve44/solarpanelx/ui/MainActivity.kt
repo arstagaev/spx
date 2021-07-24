@@ -1,11 +1,10 @@
 package com.revolve44.solarpanelx.ui
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -14,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.SpxRepository
+import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragment
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragmentDirections
 import com.revolve44.solarpanelx.ui.fragments.ToolsManagerFragment
@@ -35,8 +35,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        // if not installed pv station => go to addStationActivity
+        firstLaunch()
 
+        setContentView(R.layout.activity_main)
 
 
         var spxRepository = SpxRepository(application)
@@ -44,6 +46,13 @@ class MainActivity : AppCompatActivity() {
         val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
         viewModelMain = ViewModelProvider(this@MainActivity,viewModelFactory).get(MainViewModel::class.java)
 
+        val intent = intent
+        if (intent.getBooleanExtra("changingdata",false)){
+
+            PreferenceMaestro.timeOfLastDataUpdateLong = 0
+            viewModelMain?.manualRequest()
+
+        }
         bottomNavView = findViewById(R.id.bottom_nav)
 
         navController = Navigation.findNavController(this, R.id.main_screen_container_fragment);
@@ -51,6 +60,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.setupWithNavController(navController!!)
         setCurrentFragment()
         manageBottomNavBar()
+
+
         //val navHostFragment =
         //    supportFragmentManager.findFragmentById(R.id.main_screen_container_fragment) as NavHostFragment
         //navController = navHostFragment.navController
@@ -67,8 +78,18 @@ class MainActivity : AppCompatActivity() {
         //navController = findNavController(R.id.main_screen_container_fragment)
     }
 
+    private fun firstLaunch() {
+        if (PreferenceMaestro.isFirstStart) {
+
+            val intent = Intent(this, AddSolarStationActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
+
         //.initBottomNav()
 
     }

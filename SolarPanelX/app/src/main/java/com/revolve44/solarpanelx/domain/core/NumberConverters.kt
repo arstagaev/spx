@@ -8,6 +8,8 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.abs
+import kotlin.math.log10
 
 var timestampList : ArrayList<Long> = ArrayList()
 var cloudinessList : ArrayList<Double> = ArrayList()
@@ -169,6 +171,10 @@ fun displayWattsKiloWattsInSexually(forecastPerPeriod : Int): String {
     }else{
         return "${forecastPerPeriod}W"
     }
+}
+fun Long.length() = when(this) {
+    0L -> 1
+    else -> log10(abs(toDouble())).toInt() + 1
 }
 
 

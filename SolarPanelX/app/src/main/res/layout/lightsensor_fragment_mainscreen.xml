@@ -189,7 +189,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/describe_about_nominal_power"
         android:layout_width="48dp"
         android:layout_height="54dp"
         android:layout_marginStart="2dp"

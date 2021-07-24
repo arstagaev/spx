@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,14 +41,14 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
     private fun initRecyclerViewWithMapAndNums() {
         var forRecyclerviewAdapter = arrayListOf(
-            ToolsRecyclerviewModel("My PV Station","",0,R.drawable.ic_solar_panel),
-            //ToolsRecyclerviewModel("PV Statistics","Status3",12,R.drawable.),
-            ToolsRecyclerviewModel("Optimal Tilt","Status",1,R.drawable.ic_sunrise_m),
-            ToolsRecyclerviewModel("Light Sensor","Status",1,R.drawable.ic_sunshine_sun),
-            ToolsRecyclerviewModel("Calibrating","Status3",12,R.drawable.ic_accur),
-            //ToolsRecyclerviewModel("HI3","Status3",12,1234),
-            //ToolsRecyclerviewModel("HI","Status",1,123),
-            //ToolsRecyclerviewModel("HI3","Status3",12,1234)
+            ToolsRecyclerviewModel("My PV Station","",0,ContextCompat.getDrawable(requireActivity(), R.drawable.sp)),
+
+            ToolsRecyclerviewModel("Optimal Tilt","Status",1,
+                ContextCompat.getDrawable(requireActivity(), R.drawable.optimal_tilt)),
+            ToolsRecyclerviewModel("Light Sensor","Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
+            ToolsRecyclerviewModel("Calibrating","Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.calibr_aim)),
+            //ToolsRecyclerviewModel("Reminders about bad weather","Status3",12,1234),
+
         )
 
         mAdapter.attachCallback(object : BaseAdapterCallback<ToolsRecyclerviewModel> {
@@ -74,26 +75,43 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         mAdapter.attachDelegate(object : ItemElementsDelegate<ToolsRecyclerviewModel> {
             override fun onElementClick(model: ToolsRecyclerviewModel, view: View, clickedPosition: Int) {
                 Timber.i("clickeddd is $clickedPosition")
-
-
-                when(clickedPosition){
-                    0 -> {
+                when(model.name){
+                    "My PV Station" -> {
                         val intent = Intent(requireActivity(),AddSolarStationActivity::class.java)
                         startActivity(intent)
                     }
-                    1 -> {
+                    "Optimal Tilt" -> {
                         val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
                         startActivity(intent)
                     }
-                    2 -> {
+                    "Light Sensor" -> {
                         val intent = Intent(requireActivity(),LightSensorActivity::class.java)
                         startActivity(intent)
                     }
-                    3 -> {
+                    "Calibrating" -> {
                         findNavController().navigate(R.id.action_toolsManagerFragment_to_forecast_calibrating_main)
                     }
 
                 }
+
+//                when(clickedPosition){
+//                    0 -> {
+//                        val intent = Intent(requireActivity(),AddSolarStationActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//                    1 -> {
+//                        val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//                    2 -> {
+//                        val intent = Intent(requireActivity(),LightSensorActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//                    3 -> {
+//                        findNavController().navigate(R.id.action_toolsManagerFragment_to_forecast_calibrating_main)
+//                    }
+//
+//                }
 
             }
             override fun onItemClick(item: StoriesLikeCardsInformation) {

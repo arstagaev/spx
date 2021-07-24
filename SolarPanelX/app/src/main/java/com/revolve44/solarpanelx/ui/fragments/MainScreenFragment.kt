@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
 import android.widget.ViewSwitcher
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -142,23 +141,23 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             //it.viewModelMain = ViewModelProvider(it).get(MainViewModel::class.java)
             if (it.viewModelMain != null){
 
-                //it.viewModelMain!!.allDataForCharts.observe(viewLifecycleOwner) {
-                //    fillAllCharts(it)
-                //    lastUpdate.text = "${PreferenceMaestro.timeOfLastDataUpdate}"
-//
-                //}
-//                it.viewModelMain!!.allDataForCharts.observe(viewLifecycleOwner){
-//
-//                }
-
                 it.viewModelMain!!.getAllForecastForChart().observe(viewLifecycleOwner) {
                     if(it.isNotEmpty()){
-                        forecastNowAbsol.text = "${displayWattsKiloWattsInSexually(it[0].forecast)}"
-                        forecastNowRelativ.text = "${roundTo1decimials((it[0].forecast.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat())*100)}%"
+
+
+
+
                         firstStepToCharts(it)
+
                         lastUpdate.text = "${PreferenceMaestro.timeOfLastDataUpdate}"
                     }
 
+                }
+
+                it.viewModelMain!!.forecastNow.observe(viewLifecycleOwner) {
+                    forecastNowRelativ.text = "${roundTo1decimials((it / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat())*100)}%"
+
+                    forecastNowAbsol.text = "${displayWattsKiloWattsInSexually(it)}"
                 }
 
                 it.viewModelMain!!.fiveDaysRequestRes.observe(viewLifecycleOwner) {
@@ -182,6 +181,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         }
     }
 
+    // its average num from two first elements of main array
+    private fun saveForecastNow(forecastFor20hr: ArrayList<Int>) {
+        (activity as MainActivity).let { it ->
+            it.viewModelMain!!.forecastNow.value = setForecastForNow(forecastFor20hr)
+        }
+    }
+
     fun firstStepToCharts(data : List<ForecastCell>){
         var forecastArray :ArrayList<Float> = ArrayList()
         var forecastDateArray :ArrayList<Long> = ArrayList()
@@ -196,11 +202,17 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         }
 
-        allDataForChartsX.add(0, chartDatasortforFirstChart(forecastDateArray, forecastArray))
+        var firstChart = chartDatasortforFirstChart(forecastDateArray, forecastArray)
+
+
+
+        allDataForChartsX.add(0, firstChart)
         allDataForChartsX.add(1, chartDatasort(forecastDateArray, forecastArray, 0))
         allDataForChartsX.add(2, chartDatasort(forecastDateArray, forecastArray, 1))
 
         fillAllCharts(allDataForChartsX)
+
+        saveForecastNow(firstChart.forecasts)
 
     }
 
@@ -253,6 +265,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         //val lineChart2 = view.findViewById<LineChart>(R.id.lineChart2)
         //val lineChart3 = view.findViewById<LineChart>(R.id.lineChart3)
+
 
         var description: Description = lineChart1.description
         val legend = lineChart1.legend

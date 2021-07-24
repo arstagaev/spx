@@ -21,8 +21,8 @@ fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Lon
     var snrs = unxtoHr(sunrise)
     var snst = unxtoHr(sunset)
 
-    PreferenceMaestro.sunriseHour = snrs
-    PreferenceMaestro.sunsetHour = snst
+//    PreferenceMaestro.sunriseHour = snrs.toFloat()
+//    PreferenceMaestro.sunsetHour = snst.toFloat()
 
     PreferenceMaestro.sunrise = unxtoHoursAndMinutes(sunrise)
     PreferenceMaestro.sunset = unxtoHoursAndMinutes(sunset)
@@ -76,6 +76,48 @@ fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Lon
 
 
     }else { return 0 }
+}
+
+fun setForecastForNow(forecastFor20hr: ArrayList<Int>) : Int {
+
+
+    var firstIndex = 0
+    var secondIndex = 0
+    var alreadyFindIndexes = false
+
+    for (i in 0 until forecastFor20hr.size){
+        if(i == 0 && forecastFor20hr.get(i) != 0 && !alreadyFindIndexes){
+            firstIndex = i
+            secondIndex = i+1
+            alreadyFindIndexes = true
+        }
+
+        if(i != 0 && forecastFor20hr.get(i) != 0 && !alreadyFindIndexes){
+            secondIndex = i
+            firstIndex = i-1
+            alreadyFindIndexes = true
+            //break
+        }
+    }
+
+    if (firstIndex < 0 ){
+        firstIndex = 0
+    }
+
+    when (defineTimeOfDay()){
+        TypeOfSky.NIGHT        -> { return 0}
+        TypeOfSky.EARLY_MORNING-> { return  (forecastFor20hr.get(firstIndex)+forecastFor20hr.get(secondIndex))/3   }
+        TypeOfSky.MORNING      -> { return  (forecastFor20hr.get(firstIndex)+forecastFor20hr.get(secondIndex))/2   }
+        TypeOfSky.DAY          -> { return  forecastFor20hr.get(0)                                                 }
+        TypeOfSky.EVENING      -> { return  (forecastFor20hr.get(firstIndex)+forecastFor20hr.get(secondIndex))/2   }
+        TypeOfSky.LATE_EVENING -> { return  (forecastFor20hr.get(firstIndex)+forecastFor20hr.get(secondIndex))/3   }
+    }
+
+    if (forecastFor20hr.get(0) == 0){
+
+    }else {
+        return  forecastFor20hr.get(0)
+    }
 }
 
 /**
@@ -220,31 +262,40 @@ fun nowIsDayOrNot(forecastPerPeriod: Float) : Float{
 fun defineTimeOfDay() : TypeOfSky {
     var typeOfSky: TypeOfSky = TypeOfSky.DAY
 
-    var timezone = PreferenceMaestro.timezoneL
-    var sunrise = PreferenceMaestro.sunriseL
-    var sunset = PreferenceMaestro.sunsetL
-    var currentTime = System.currentTimeMillis()/1000
+    //var timezone = 0f
 
-    Timber.i("time of day current =${currentTime} sunrise=$sunrise and $sunset")
+    var sunrise : Float = 0f
+    var sunset  : Float = 0f
 
-    if (currentTime <= sunrise-3600){
-        typeOfSky = TypeOfSky.NIGHT
+    //timezone = PreferenceMaestro.timezoneL
 
-    }else if (currentTime <= sunrise){
-        typeOfSky = TypeOfSky.MORNING
+    sunrise = PreferenceMaestro.sunriseHour//+timezone
+    sunset  =  PreferenceMaestro.sunsetHour//+timezone
 
-    }else if (currentTime > sunrise && currentTime < sunset-3600){
-        typeOfSky = TypeOfSky.DAY
 
-    }else if (currentTime >= sunset-3600 && currentTime < sunset ){
-        typeOfSky = TypeOfSky.EVENING
+    //var currentTime = generateCurrentHour().toFloat()
+    var a = getCurrentTimestampSec()
+    var currentTime = unxtoHrAndMinutesByDecimial(a,true)
+    var duration = (sunset - sunrise) / 5
 
-    }else if (currentTime >= sunset){
-        typeOfSky = TypeOfSky.NIGHT
-
+    when(currentTime){
+        in 0f                 .. sunrise            -> { typeOfSky = TypeOfSky.NIGHT        }
+        in sunrise            .. sunrise+duration*1 -> { typeOfSky = TypeOfSky.EARLY_MORNING}
+        in sunrise+duration   .. sunrise+duration*2 -> { typeOfSky = TypeOfSky.MORNING      }
+        in sunrise+duration*2 .. sunrise+duration*3 -> { typeOfSky = TypeOfSky.DAY          }
+        in sunrise+duration*3 .. sunrise+duration*4 -> { typeOfSky = TypeOfSky.EVENING      }
+        in sunrise+duration*4 .. sunset             -> { typeOfSky = TypeOfSky.LATE_EVENING }
+        in sunset             .. 24f                -> { typeOfSky = TypeOfSky.NIGHT        }
     }
 
-    print(" [ ${typeOfSky.name} ] ")
+    Timber.i("time of day current =${currentTime} sunrise=$sunrise and $sunset , timezone ${PreferenceMaestro.chosenTimeZone} | cur timestamp ${getCurrentTimestampSec()} type:${typeOfSky}")
+
+    /**                                       12             18
+     *   |__________|_____________|___________|______________|___________|_____________|_______|
+     *   |Night      Early Morning   Morning       Day          Evening   Late Evening   Night
+     *
+     */
+    //Timber.i(" ~~~[ ${typeOfSky.name} ] ")
 
 
     return typeOfSky

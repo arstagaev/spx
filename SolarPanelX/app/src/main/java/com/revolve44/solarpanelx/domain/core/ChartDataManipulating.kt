@@ -5,6 +5,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
 import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -106,6 +107,37 @@ fun unxtoHr(timestamp : Long): Int {
     val sdf = java.text.SimpleDateFormat("HH", Locale.getDefault())
     sdf.timeZone = TimeZone.getTimeZone(PreferenceMaestro.chosenTimeZone)
     return sdf.format(java.util.Date(timestamp * 1000)).toInt()
+}
+
+fun unxtoHrAndMinutesByDecimial(timestampInput : Long, autoSetTimezone : Boolean): Float {
+    //SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+//    val sdf = java.text.SimpleDateFormat("HH")
+//    return (sdf.format(java.util.Date(timestamp * 1000))).toInt()
+    var timestamp = timestampInput
+
+    when(timestamp.length() ){
+        10 -> timestamp *= 1000
+        11 -> timestamp *= 100
+        12 -> timestamp *= 10
+    }
+
+    // time api android => work only with millisecond
+    val hourRaw = java.text.SimpleDateFormat("HH", Locale.getDefault())
+    val minRaw = java.text.SimpleDateFormat("mm", Locale.getDefault())
+
+
+    //if (autoSetTimezone){
+    //hourRaw.timeZone = TimeZone.getTimeZone("GMT+3:00")
+    //minRaw.timeZone = TimeZone.getTimeZone ("GMT+3:00")
+
+    hourRaw.timeZone = TimeZone.getTimeZone(PreferenceMaestro.chosenTimeZone)
+    minRaw.timeZone =  TimeZone.getTimeZone(PreferenceMaestro.chosenTimeZone)
+   // }
+    //Timber.i("time of day pizdec ${hourRaw.toPattern()} ${minRaw.toPattern()} ")
+    var minOutput  =  (minRaw.format(java.util.Date(timestamp))).toFloat() / 60
+    var hourOutput =  hourRaw.format(java.util.Date(timestamp)).toFloat()
+
+    return hourOutput+minOutput
 }
 
 /** Unix timestamp to date STRING format */

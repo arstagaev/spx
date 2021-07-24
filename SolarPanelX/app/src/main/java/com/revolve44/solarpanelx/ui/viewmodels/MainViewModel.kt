@@ -72,8 +72,8 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
     fun manualRequest(){
         //cm = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         // check Internet connection
-        activeNetwork= cm.activeNetworkInfo
-        isConnected = activeNetwork?.isConnectedOrConnecting == true
+        //activeNetwork= cm.activeNetworkInfo
+        //isConnected = activeNetwork?.isConnectedOrConnecting == true
 
         startRequestFor5days()
     }
@@ -130,9 +130,12 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
                     sunset = resultResponse.city.sunset.toLong()
                     timeZone = resultResponse.city.timezone.toLong()
 
+                    //
+
+
                     PreferenceMaestro.sunriseL = sunrise
                     PreferenceMaestro.sunsetL = sunset
-                    PreferenceMaestro.timezoneL = timeZone
+                    //PreferenceMaestro.timezoneL = unxtoHrAndMinutesByDecimial(timeZone,false)
 
                     // for mainscreen temp show
                     if (PreferenceMaestro.measurementSys == MeasurementSystem.METRIC.code){
@@ -149,6 +152,11 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
                     Timber.i("gmt -> " + getTimeZoneGMTstyle(timeZone) + "timezone ->" + timeZone)
                     PreferenceMaestro.chosenTimeZone = getTimeZoneGMTstyle(timeZone)
                     PreferenceMaestro.currentGMTinDefineLocation = unxtoHr(timeZone)
+                    /**
+                     * Save sunrise and sunset define by timezone
+                     */
+                    PreferenceMaestro.sunriseHour = unxtoHrAndMinutesByDecimial(sunrise,true)
+                    PreferenceMaestro.sunsetHour =   unxtoHrAndMinutesByDecimial(sunset,true)
 
                     //currentHourInForecastLocation = getCurrentTimeInDefineLocation(timeZone)
                     Timber.i("iii ${listx.joinToString()}")

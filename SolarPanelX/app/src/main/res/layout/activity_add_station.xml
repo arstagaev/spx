@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#000000"
-            app:tabIndicatorColor="#EF0000"
-            app:tabTextColor="#2DF800"
+            app:tabIndicatorColor="#EFCF00"
+            app:tabTextColor="#00BEF8"
             tools:layout_editor_absoluteX="0dp" />
     </LinearLayout>
     <LinearLayout
