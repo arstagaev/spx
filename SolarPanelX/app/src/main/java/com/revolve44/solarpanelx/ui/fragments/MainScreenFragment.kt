@@ -28,12 +28,13 @@ import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
 import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
+import com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
 import com.revolve44.solarpanelx.ui.MainActivity
 import timber.log.Timber
 
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
-    private val values = arrayListOf<String>("0h", "3h", "6h", "9h", "12h", "15h", "18h", "21h")
+    private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
     //private val mainViewmodelF : MainViewModel by activityViewModels()
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
@@ -57,6 +58,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
     private lateinit var frcnowCardview : LinearLayout
 
+    private lateinit var first_chart_description  : VerticalTextView
+    private lateinit var second_chart_description : VerticalTextView
+    private lateinit var third_chart_description  : VerticalTextView
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -75,6 +80,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         frcnowCardview = view.findViewById(R.id.linearlayout_frcst_now)
 
         lastUpdate = view.findViewById(R.id.last_upd_date)
+
+        first_chart_description  = view.findViewById(R.id.first_chart_description)
+        second_chart_description = view.findViewById(R.id.to_tomorrow_chart_forecast)
+        third_chart_description  = view.findViewById(R.id.to_after_tomorrow_chart_forecast)
         //textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
         swipeRefreshTools(view)
 
@@ -154,10 +163,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
                 }
 
-                it.viewModelMain!!.forecastNow.observe(viewLifecycleOwner) {
-                    forecastNowRelativ.text = "${roundTo1decimials((it / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat())*100)}%"
-
-                    forecastNowAbsol.text = "${displayWattsKiloWattsInSexually(it)}"
+                it.viewModelMain!!.forecastNow.observe(viewLifecycleOwner) { fNow ->
+                    forecastNowRelativ.text = "${roundTo1decimials((fNow / PreferenceMaestro.chosenStationNOMINALPOWER )*100f)}%"
+                    Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff} ")
+                    forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
                 }
 
                 it.viewModelMain!!.fiveDaysRequestRes.observe(viewLifecycleOwner) {
@@ -189,6 +198,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     }
 
     fun firstStepToCharts(data : List<ForecastCell>){
+        var forecastForNow:ArrayList<Int> = ArrayList()
+
         var forecastArray :ArrayList<Float> = ArrayList()
         var forecastDateArray :ArrayList<Long> = ArrayList()
 
@@ -196,8 +207,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         for (i in 0 until data.size) {
 
-            // need for charts
-            forecastArray.add(data.get(i).forecast.toFloat() * (PreferenceMaestro.calibrationCoeff / 100f))
+            if (forecastForNow.size <= 8) {
+                forecastForNow.add(data.get(i).forecast.toInt())
+            }
+            // prepare forecasts for charts + calibrate included numbers
+            forecastArray.add(toRealFit(data.get(i).forecast.toFloat() * PreferenceMaestro.calibrationCoeff))
             forecastDateArray.add(data.get(i).unixTime)
 
         }
@@ -212,7 +226,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         fillAllCharts(allDataForChartsX)
 
-        saveForecastNow(firstChart.forecasts)
+        saveForecastNow(forecastForNow)
 
     }
 
@@ -229,7 +243,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         when(res){
 
             is Resource.Success<*>, is Resource.Init<*> ->{
-                dataForMainLabelOnMainscreen = arrayOf("⚡Forecast now:", "city: ${PreferenceMaestro.chosenStationCITY}", "temp: ${PreferenceMaestro.temp}")
+                dataForMainLabelOnMainscreen = arrayOf(getString(R.string.mainscreen_fr_forecastnow),"\uD83C\uDFD9"+ getString(
+                                    R.string.mainscreen_fr_city)+" ${PreferenceMaestro.chosenStationCITY}","\uD83C\uDF21"+ getString(
+                                                        R.string.mainscreen_fr_temp)+"${PreferenceMaestro.temp}")
                 mSwipeRefreshLayout.isRefreshing = false
 
                 var timer = object : CountDownTimer(6000,2000){
@@ -248,12 +264,12 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
             }
             is Resource.Loading<*> -> {
-                textSwitcher_main_screen.setText("Loading...");
+                textSwitcher_main_screen.setText(getString(R.string.mainscreen_fr_loading));
                 stringIndex = 0
                 mSwipeRefreshLayout.isRefreshing = true
             }
             is Resource.Error<*> -> {
-                textSwitcher_main_screen.setText("error, no internet");
+                textSwitcher_main_screen.setText(getString(R.string.mainscreen_fr_errornointernet));
                 stringIndex = 0
                 mSwipeRefreshLayout.isRefreshing = false
             }
@@ -364,10 +380,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         /** Refresh all chart, i use this when i again setup new dataset*/
         lineChart.notifyDataSetChanged()
         lineChart.invalidate()
-        //topChartDescription.text = getString(R.string.mainscreen_chart_title_forecast20hr)+" (Σ= ${scaleOfkWh(
-        //    sumOfCharts(arrayData),
-        //    true
-        //)})"
+        first_chart_description.text = getString(R.string.mainscreen_chart_title_forecast20hr)+""
+//        first_chart_description.text = getString(R.string.mainscreen_chart_title_forecast20hr)+" (Σ= ${scaleOfkWh(
+//            sumOfCharts(arrayData),
+//            true
+//        )})"
 
     }
 
@@ -454,11 +471,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         /** Refresh all chart, i use this when i again setup a new dataset*/
         lineChart.notifyDataSetChanged()
         lineChart.invalidate()
-
-        //leftChartDescription.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +"\n(Σ= ${scaleOfkWh(
-        //    sumOfCharts(arrayData),
-        //    true
-        //)}): ${PreferenceMaestro.leftChartMonthandDay}"
+        second_chart_description.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +": ${PreferenceMaestro.leftChartMonthandDay}"
+//        second_chart_description.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +"\n(Σ= ${scaleOfkWh(
+//            sumOfCharts(arrayData),
+//            true
+//        )}): ${PreferenceMaestro.leftChartMonthandDay}"
 
 
     }
@@ -546,13 +563,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         /** Refresh all chart, i use this when i again setup a new dataset*/
         lineChart.notifyDataSetChanged()
         lineChart.invalidate()
+        third_chart_description.text = getString(R.string.mainscreen_chart_title_forecast_aftertomorrow) +
+                ": ${PreferenceMaestro.rightChartMonthandDay}"
 
-        //leftChartDescription.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +"\n(Σ= ${scaleOfkWh(
-        //    sumOfCharts(arrayData),
-        //    true
-        //)}): ${PreferenceMaestro.leftChartMonthandDay}"
-
-
+//        third_chart_description.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +
+//        "\n(Σ= ${scaleOfkWh(sumOfCharts(arrayData), true)}): ${PreferenceMaestro.leftChartMonthandDay}"
     }
 
     override fun onRefresh() {

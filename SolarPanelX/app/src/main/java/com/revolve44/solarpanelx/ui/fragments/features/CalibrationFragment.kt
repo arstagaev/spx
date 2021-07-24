@@ -17,6 +17,7 @@ import com.revolve44.solarpanelx.ui.MainActivity
 import com.revolve44.solarpanelx.ui.viewmodels.MainViewModel
 import io.feeeei.circleseekbar.CircleSeekBar
 import timber.log.Timber
+import kotlin.math.roundToInt
 
 
 class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
@@ -48,27 +49,18 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
         changesSaved = view.findViewById(R.id.changes_saved_indicator_fragment_calibr)
 
 
-        //remind saved position of circle seek bar
-        circleSeekBar.maxProcess = 200
-        circleSeekBar.curProcess = (PreferenceMaestro.calibrationCoeff)
-        PreferenceMaestro.calibrationCoeff = circleSeekBar.curProcess
 
-        //remind data of indicators
-        if (viewmodel.forecastNow.value != null){
-            calibratedOutputPower.text = "${roundTo2decimials(viewmodel.forecastNow.value!!*PreferenceMaestro.calibrationCoeff/100f)}Wh"
-
-        }
-        calibrate_indicator.text = "${PreferenceMaestro.calibrationCoeff}%"
 
 
 
         // for moving circle seekbar
-        circleSeekBar.setOnSeekBarChangeListener { seekbar, curValue ->
-            Timber.i("New Calibration value = $curValue")
+        circleSeekBar.setOnSeekBarChangeListener { seekbar, IntegerPercentForCalibration ->
+            Timber.i("New Calibration value = $IntegerPercentForCalibration")
 
-            calibrate_indicator.text = "$curValue %"
-            coeff = (curValue/100f).toFloat()
+            calibrate_indicator.text = "$IntegerPercentForCalibration %"
 
+            coeff = (IntegerPercentForCalibration/100f).toFloat()
+            PreferenceMaestro.calibrationCoeff = coeff
             //Timber.i("calibr")
             //calibratedOutputPower.text = (scaleOfkWh((viewmodel.forecastPower.value)!! * coeff).roundTo(2))).toString()+"W"
             if (viewmodel.forecastNow.value!=null){
@@ -79,11 +71,27 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
                 Timber.e("ERROR in calibrating fragment")
             }
 
-            PreferenceMaestro.calibrationCoeff = curValue
+             //= IntegerPercentForCalibration
 
             notifyAboutSavedChanges()
+            Timber.i("fnow calibr vm: ${viewmodel.forecastNow.value!!} ${PreferenceMaestro.calibrationCoeff} ")
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //remind saved position of circle seek bar
+        circleSeekBar.maxProcess = 200
+        circleSeekBar.curProcess = ((PreferenceMaestro.calibrationCoeff)*100).roundToInt()
+        //PreferenceMaestro.calibrationCoeff = circleSeekBar.curProcess
+
+        //remind data of indicators
+        if (viewmodel.forecastNow.value != null){
+            calibratedOutputPower.text = "${roundTo2decimials(viewmodel.forecastNow.value!!*PreferenceMaestro.calibrationCoeff)}Wh"
+
+        }
+        calibrate_indicator.text = "${PreferenceMaestro.calibrationCoeff}%"
     }
 
 //    fun selfCalibrating() : Int {

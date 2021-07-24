@@ -163,7 +163,8 @@ fun convKelvinToFahrenheit(tempK : Float): Int {
     return (((9F*(tempK-273.15F))/5F)+32F).toInt()
 }
 
-fun displayWattsKiloWattsInSexually(forecastPerPeriod : Int): String {
+fun displayWattsKiloWattsInSexually(forecastPerPeriodF : Float): String {
+    val forecastPerPeriod = forecastPerPeriodF.toInt()
     //display  forecast indicator
     if (forecastPerPeriod>999){
         return "${roundTo1decimials(forecastPerPeriod.toFloat() / 1000f).toInt()}kW"

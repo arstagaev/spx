@@ -28,7 +28,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
-        android:text="🛠️Tools"
+        android:text="@string/mainscreen_tools"
         android:textColor="@color/black"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"

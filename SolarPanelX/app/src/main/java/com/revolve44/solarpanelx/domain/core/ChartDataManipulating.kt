@@ -1,5 +1,6 @@
 package com.revolve44.solarpanelx.domain.core
 
+import android.util.Log
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
@@ -156,7 +157,7 @@ fun unxtoDate(timestamp: Long): String {
 fun unxtoDayandMonth(timestamp: Long): String {
 //    val sdf = java.text.SimpleDateFormat("dd MMM ")
 //    return (sdf.format(java.util.Date(timestamp * 1000)))
-    val sdf = java.text.SimpleDateFormat("MM-dd", Locale.getDefault())
+    val sdf = java.text.SimpleDateFormat("MMM-dd", Locale.getDefault())
     sdf.timeZone = TimeZone.getTimeZone(PreferenceMaestro.chosenTimeZone)
     return sdf.format(java.util.Date(timestamp * 1000))
 }
@@ -191,5 +192,37 @@ class MyXAxisValuesFormatter : IAxisValueFormatter {
 fun unxtoDateDEBUG(timestamp: Long): String {
     val sdf = java.text.SimpleDateFormat("dd-MMM-yyyy / HH:mm:ss")
     return (sdf.format(java.util.Date(timestamp * 1000)))
+}
+
+fun sumOfCharts(inputArray: ArrayList<Int>) : Int{
+    try {
+        //var preInputArray = inputArray
+
+//        for (i in inputArray.indices){
+//            if (inputArray.get(i) == 0.0F){
+//                inputArray.removeAt(i)
+//            }
+//        }
+        var PreoutputArray = arrayListOf<Int>()
+
+        for (i in 0 .. inputArray.size-2){
+            var a = arrayListOf<Int>()
+
+            a.add(inputArray.get(i))
+            a.add(inputArray.get(i+1))
+
+            PreoutputArray.add(a.average().toInt())
+
+            a.clear()
+
+        }
+
+        Log.i("ccc","ly "+PreoutputArray.toString()+" // "+inputArray.toString())
+
+        return PreoutputArray.sum()*2+inputArray.sum().toInt()
+    }catch (e : Exception){
+        Timber.e("Inside chart error: "+e.message)
+        return -1
+    }
 }
 

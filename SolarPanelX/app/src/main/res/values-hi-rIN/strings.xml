@@ -95,4 +95,16 @@
     <string name="dialog_choose_language">भाषा चुनें</string>
     <string name="creator_name">प्रजापति</string>
     <string name="other_chapter">अन्य</string>
+    <string name="mainscreen_fr_forecastnow">⚡अभी पूर्वानुमान:</string>
+    <string name="mainscreen_fr_city">शहर:</string>
+    <string name="mainscreen_fr_temp">गति:</string>
+    <string name="mainscreen_fr_loading">लोड हो रहा है...</string>
+    <string name="mainscreen_fr_errornointernet">त्रुटि, लेकिन इंटरनेट</string>
+    <string name="mainscreen_chart_title_forecast_aftertomorrow">परसो</string>
+    <string name="My_PV_Station">मेरा पीवी स्टेशन</string>
+    <string name="Optimal_Tilt">इष्टतम झुकाव</string>
+    <string name="Light_Sensor">प्रकाश संवेदक</string>
+    <string name="Calibrating">औजार</string>
+    <string name="Bad_Weather_Alerts">खराब मौसम अलर्ट</string>
+    <string name="mainscreen_tools">🛠उपकरण</string>
 </resources>

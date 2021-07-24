@@ -100,4 +100,16 @@
     <string name="addstation_activity_characteristics">Characterisctics</string>
     <string name="settingsscreen_menu_solarpanels_change_language">Language</string>
     <string name="dialog_choose_language">Choose language</string>
+    <string name="mainscreen_fr_forecastnow">⚡Forecast now:</string>
+    <string name="mainscreen_fr_city">City:</string>
+    <string name="mainscreen_fr_temp">Temp: "</string>
+    <string name="mainscreen_fr_loading">Loading...</string>
+    <string name="mainscreen_fr_errornointernet">error, no internet</string>
+    <string name="mainscreen_chart_title_forecast_aftertomorrow">after tomorrow</string>
+    <string name="My_PV_Station">My PV Station</string>
+    <string name="Optimal_Tilt">Optimal Tilt</string>
+    <string name="Light_Sensor">Light Sensor</string>
+    <string name="Calibrating">Calibrating</string>
+    <string name="Bad_Weather_Alerts">Bad Weather Alerts</string>
+    <string name="mainscreen_tools">🛠️Tools</string>
 </resources>

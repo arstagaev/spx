@@ -7,6 +7,21 @@
     android:background="@color/white"
     tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="#F80000"
+        android:text="⬇Bottom of your Solar Panel⬇️"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
+
     <ImageView
         android:id="@+id/tilt_machine_helper"
         android:layout_width="40dp"
@@ -141,6 +156,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/solar_panel_direction">
+
         <TextView
             android:id="@+id/suggest_azimuth"
             android:layout_width="match_parent"
@@ -158,14 +174,12 @@
         android:id="@+id/compass_btn"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
         android:elevation="20dp"
         app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3"
-        app:layout_constraintVertical_bias="0.283">
+        app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
         <TextView
             android:layout_width="match_parent"

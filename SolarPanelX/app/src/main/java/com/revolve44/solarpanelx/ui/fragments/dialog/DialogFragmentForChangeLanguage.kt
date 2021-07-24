@@ -27,8 +27,8 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment() {
         array.add("English              ")
         array.add("Hindi (हिन्दी)          ")
         //array.add(getString(R.string.settingsscreen_menu_proversion))
-        array.add("German (Deutsch)     ")
-        array.add("Russian (Русский)    ")
+        //array.add("German (Deutsch)     ")
+        //array.add("Russian (Русский)    ")
         // access the listView from xml file
         mListView = view.findViewById<ListView>(R.id.dialog_change_language_list_view)
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);

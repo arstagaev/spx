@@ -63,10 +63,10 @@ object PreferenceMaestro {
 
 
 
-    var calibrationCoeff: Int // 100 is 1.0 coeff
-        get() = preferences.getInt("calibration", 100)
+    var calibrationCoeff: Float // 100 is 1.0 coeff
+        get() = preferences.getFloat("calibrationF", 1.0f)
         set(value) = preferences.edit {
-            it.putInt("calibration", value)
+            it.putFloat("calibrationF", value)
         }
 
     var lat: Float

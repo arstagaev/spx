@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
+import com.revolve44.solarpanelx.domain.core.setLocale
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragment
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragmentDirections
 import com.revolve44.solarpanelx.ui.fragments.ToolsManagerFragment
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // if not installed pv station => go to addStationActivity
         firstLaunch()
+        setLocale(this,PreferenceMaestro.languageOfApp)
 
         setContentView(R.layout.activity_main)
 

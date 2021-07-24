@@ -214,7 +214,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
             for (i in 0 until data.value!!.size) {
 
                 // need for charts
-                forecastArray.add(data.value!!.get(i).forecast.toFloat() * (PreferenceMaestro.calibrationCoeff / 100f))
+                forecastArray.add(data.value!!.get(i).forecast.toFloat() * (PreferenceMaestro.calibrationCoeff))
                 forecastDateArray.add(data.value!!.get(i).unixTime)
 
             }

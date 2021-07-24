@@ -167,7 +167,8 @@
             </androidx.cardview.widget.CardView>
 
             <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
-                android:layout_width="90dp"
+                android:id="@+id/first_chart_description"
+                android:layout_width="130dp"
                 android:layout_height="22dp"
                 android:gravity="center|bottom"
                 android:text="at 24 hr"
@@ -181,7 +182,7 @@
 
             <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
                 android:id="@+id/to_tomorrow_chart_forecast"
-                android:layout_width="79dp"
+                android:layout_width="130dp"
                 android:layout_height="22dp"
                 android:gravity="center|bottom"
                 android:text="tomorrow"
@@ -217,7 +218,7 @@
 
             <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
                 android:id="@+id/to_after_tomorrow_chart_forecast"
-                android:layout_width="90dp"
+                android:layout_width="130dp"
                 android:layout_height="22dp"
                 android:gravity="center|bottom"
                 android:text="after tomorrow"

@@ -121,6 +121,17 @@ fun setForecastForNow(forecastFor20hr: ArrayList<Int>) : Int {
 }
 
 /**
+ * to real fit of solar panel
+ */
+fun toRealFit(fnum : Float) : Float{
+    if (fnum <= PreferenceMaestro.chosenStationNOMINALPOWER){
+        return fnum
+    }else{
+        return PreferenceMaestro.chosenStationNOMINALPOWER.toFloat()
+    }
+}
+
+/**
  * For Statistics Screen
  */
 fun getYearlyGeneration() : Int{

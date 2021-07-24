@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapterCallback
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
@@ -41,13 +42,11 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
     private fun initRecyclerViewWithMapAndNums() {
         var forRecyclerviewAdapter = arrayListOf(
-            ToolsRecyclerviewModel("My PV Station","",0,ContextCompat.getDrawable(requireActivity(), R.drawable.sp)),
-
-            ToolsRecyclerviewModel("Optimal Tilt","Status",1,
-                ContextCompat.getDrawable(requireActivity(), R.drawable.optimal_tilt)),
-            ToolsRecyclerviewModel("Light Sensor","Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
-            ToolsRecyclerviewModel("Calibrating","Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.calibr_aim)),
-            //ToolsRecyclerviewModel("Reminders about bad weather","Status3",12,1234),
+            ToolsRecyclerviewModel(0,getString(R.string.My_PV_Station),"",0,ContextCompat.getDrawable(requireActivity(), R.drawable.sp)),
+            ToolsRecyclerviewModel(1,getString(R.string.Optimal_Tilt),"Status",1, ContextCompat.getDrawable(requireActivity(), R.drawable.optimal_tilt)),
+            //ToolsRecyclerviewModel(2,getString(R.string.Light_Sensor),"Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
+            ToolsRecyclerviewModel(3,getString(R.string.Calibrating),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.calibr_aim)),
+            ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
 
         )
 
@@ -57,13 +56,13 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                // if (model.idOfCard == 0){
                //     DialogFragmentMap().show(childFragmentManager,"open_map_more_detail")
                // }
-                when(model.name.toString()){
-                    "My PV Station" -> {}
-                    "Optimal Tilt" -> {
-                        val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
-                        startActivity(intent)
-                    }
-                }
+//                when(model.name.toString()){
+//                    "My PV Station" -> {}
+//                    "Optimal Tilt" -> {
+//                        val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//                }
 
             }
 
@@ -75,21 +74,24 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         mAdapter.attachDelegate(object : ItemElementsDelegate<ToolsRecyclerviewModel> {
             override fun onElementClick(model: ToolsRecyclerviewModel, view: View, clickedPosition: Int) {
                 Timber.i("clickeddd is $clickedPosition")
-                when(model.name){
-                    "My PV Station" -> {
+                when(model.id){
+                    0 -> {
                         val intent = Intent(requireActivity(),AddSolarStationActivity::class.java)
                         startActivity(intent)
                     }
-                    "Optimal Tilt" -> {
+                    1 -> {
                         val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
                         startActivity(intent)
                     }
-                    "Light Sensor" -> {
-                        val intent = Intent(requireActivity(),LightSensorActivity::class.java)
-                        startActivity(intent)
-                    }
-                    "Calibrating" -> {
+                    //2-> {
+                    //    val intent = Intent(requireActivity(),LightSensorActivity::class.java)
+                    //    startActivity(intent)
+                    //}
+                    3 -> {
                         findNavController().navigate(R.id.action_toolsManagerFragment_to_forecast_calibrating_main)
+                    }
+                    4 -> {
+                        Snackbar.make(requireActivity().findViewById(android.R.id.content), "Coming Soon! [Late September 21`]", Snackbar.LENGTH_SHORT).show()
                     }
 
                 }
