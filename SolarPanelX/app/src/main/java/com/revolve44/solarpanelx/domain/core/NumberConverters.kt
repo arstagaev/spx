@@ -104,7 +104,7 @@ fun roundTo2decimials(num : Float) : Float{
 }
 
 fun roundTo1decimials(num : Float) : Float{
-    val df = DecimalFormat("#.#")
+    val df = DecimalFormat("###.#")
     df.roundingMode = RoundingMode.CEILING
 
     return (df.format(num)).replace(",",".").toFloat()

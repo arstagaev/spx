@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import android.widget.TextView
 import android.widget.ViewSwitcher
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
@@ -62,6 +64,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var second_chart_description : VerticalTextView
     private lateinit var third_chart_description  : VerticalTextView
 
+    private lateinit var cardview_forecastnow_mainscreen : CardView
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -85,6 +89,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         second_chart_description = view.findViewById(R.id.to_tomorrow_chart_forecast)
         third_chart_description  = view.findViewById(R.id.to_after_tomorrow_chart_forecast)
         //textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
+        cardview_forecastnow_mainscreen = view.findViewById(R.id.cardview_forecastnow_mainscreen)
         swipeRefreshTools(view)
 
         val slideInLeftAnimation: Animation = AnimationUtils.loadAnimation(
@@ -126,11 +131,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             setManuallyMainLabelOnMainScreen()
         }
 
-        //setMainLabelMainScreen(isLoading = true)
-
-
-
-
+        cardview_forecastnow_mainscreen.setOnClickListener {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),"1️⃣Forecast power now  2️⃣ % of max generation",Snackbar.LENGTH_LONG).show()
+        }
 
     }
 
@@ -164,8 +167,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 }
 
                 it.viewModelMain!!.forecastNow.observe(viewLifecycleOwner) { fNow ->
-                    forecastNowRelativ.text = "${roundTo1decimials((fNow / PreferenceMaestro.chosenStationNOMINALPOWER )*100f)}%"
-                    Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff} ")
+                    forecastNowRelativ.text = "${roundTo1decimials((fNow.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() )*100f)}%"
+                    Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff}  ${PreferenceMaestro.chosenStationNOMINALPOWER}")
                     forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
                 }
 

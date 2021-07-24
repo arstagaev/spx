@@ -1,7 +1,9 @@
 package com.revolve44.solarpanelx
 
+import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.defineTimeOfDay
 import com.revolve44.solarpanelx.domain.core.getCurrentTimestampSec
+import com.revolve44.solarpanelx.domain.core.roundTo1decimials
 import com.revolve44.solarpanelx.domain.core.unxtoHrAndMinutesByDecimial
 import com.revolve44.solarpanelx.domain.enums.TypeOfSky
 import org.junit.Test
@@ -22,5 +24,11 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect2() {
         assertEquals(1627116894L,  getCurrentTimestampSec())
+    }
+
+    @Test
+    fun addition_isCorrect3() {
+        assertEquals(26.0f, ((260f / 1000f )*100f))
+        //assertEquals(26.0, roundTo1decimials((260 / 1000 )*100f))
     }
 }
