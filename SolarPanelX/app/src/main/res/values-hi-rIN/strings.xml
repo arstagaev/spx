@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Solar Panel X</string>
-    <string name="mainscreen_dualindicatot_forecastoutput">पूर्वानुमान उत्पादन, kWh</string>
-    <string name="mainscreen_indicator_you_will_save">तुम बचाओगे,</string>
-    <string name="mainscreen_LastUpdatedIndicator">अपडेट किया गया:</string>
-    <string name="mainscreen_indicator_outputkWh">पूर्वानुमान उत्पादन, kWh</string>
-    <string name="mainscreen_indicator_outputWh">पूर्वानुमान उत्पादन, Wh</string>
-    <string name="mainscreen_toolbartitle_perhour">प्रति घंटे का पूर्वानुमान:</string>
-    <string name="mainscreen_toolbartitle_perweek">एक सप्ताह के लिए</string>
-    <string name="mainscreen_toolbartitle_permonth">एक महीने के लिए</string>
     <string name="mainscreen_chart_title_forecast20hr">~ 20 घंटे के लिए पूर्वानुमान:</string>
     <string name="mainscreen_chart_title_forecasttomorrow">कल के लिए</string>
-    <string name="mainscreen_chart_title_forecastaftertomorrow">कल के बाद के लिए</string>
-    <string name="mainscreen_helper">सहायक</string>
-    <string name="mainscreen_helper_below_message">1. पूर्वानुमान अवधि को बदलने के लिए - सबसे ऊपरी संकेतक पर क्लिक करें (उदाहरण के लिए: पूर्वानुमान उत्पादन पर क्लिक करें या आप $ बचाएंगे) 2. ध्यान दें! इकाइयों को भ्रमित मत करो! चार्ट वाट्स / केडब्ल्यू दिखाते हैं और सभी चार्ट के बाद अधिकतम गति का संकेत दिया जाता है</string>
-    <string name="mainscreen_chart_title1">24 घंटे के लिए</string>
-    <string name="mainscreen_promo_proversion">प्रो संस्करण में उपलब्ध 5 दिनों के लिए और अधिक विस्तार का पूर्वानुमान</string>
-    <string name="mainscreen_chart_title2">कल के लिए</string>
-    <string name="mainscreen_chart_title3">कल के बाद के लिए</string>
-    <string name="mainscreen_now_you_may_use_title">अब आप उपयोग कर सकते हैं</string>
-    <string name="navigation_drawer_menu_dashboard">डैशबोर्ड</string>
-    <string name="navigation_drawer_menu_settings">समायोजन</string>
-    <string name="navigation_drawer_menu_calibration">कैलिब्रेशन</string>
     <string name="screenaddstation_map_title">कृपया अपने सौर पैनलों का स्थान निर्धारित करें</string>
     <string name="screenaddstation_map_button">अगला></string>
-    <string name="screenaddstation_confirm_title_power">मुख्य</string>
-    <string name="screenaddstation_confirm_title_dimension">उन्नत (वैकल्पिक)</string>
     <string name="screenaddstation_confirm_nominalpower_description">आपके पीवी स्टेशन की अधिकतम शक्ति [वाट्स में]</string>
     <string name="screenaddstation_confirm_priceper1kwh_description">1 kWh प्रति मूल्य</string>
     <string name="screenaddstation_confirm_currency_description">अपने देश में मुद्रा</string>
     <string name="screenaddstation_confirm_efficiency_description" translatable="false">आपके सौर पैनलों की औसत दक्षता [%]</string>
     <string name="screenaddstation_confirm_install_date_description">पीवी प्रणाली की स्थापना तिथि [वर्ष]</string>
     <string name="screenaddstation_confirm_button">परिवर्तन की पुष्टि करें</string>
-    <string name="settingsscreen_menu_solarpanels_characteristics">सौर पैनल के लक्षण</string>
     <string name="settingsscreen_menu_checkupdates">अपडेट जांचें</string>
     <string name="settingsscreen_menu_aboutus">App के बारे में</string>
     <string name="settingsscreen_menu_aboutus_message">\n विशेषताएं:
@@ -42,34 +20,9 @@
         \n
         \n िशेषताएं:
         \n > जल्द ही हम कोण और प्रकाश सेंसर के साथ "एक्सप्लोरर मोड" जोड़ेंगे। यह आपको सौर पैनलों के लिए अधिक धूप वाली जगह चुनने में मदद कर सकता है</string>
-    <string name="screenaddstation_alert">कृपया, सभी फॉर्म भरें</string>
-    <string name="navigation_drawer_current_station">वर्तमान पीवी स्टेशन:</string>
     <string name="calibrationscreen_description">यदि आवश्यक हो, तो अपने वर्तमान विंड टर्बाइन के पूर्वानुमानित बिजली उत्पादन को कैलिब्रेट करें</string>
-    <string name="navigation_drawer_calibration">कैलिब्रेशन</string>
-    <string name="navigation_drawer_settings">समायोजन</string>
-    <string name="mainscreen_sunshine_duration_title">धूप की अवधि:</string>
-    <string name="mainscreen_powerindicator_tip">
-        वर्तमान बिजली उत्पादन स्तर:
-         \n
-         \n नाममात्र शक्ति (रंग लाल) का  1-30%
-         \n नाममात्र शक्ति (रंग नारंगी) का  31-60%
-         \n  नाममात्र शक्ति (रंग हरा) का 61-100%
-    </string>
-    <string name="my_pv_station">मेरा पीवी स्टेशन</string>
-    <string name="yearly_ngeneration">वार्षिक \nपीढ़ी:</string>
-    <string name="solar_radiation">सौर विकिरण</string>
-    <string name="solar_panel_area">सौर पैनल क्षेत्र</string>
-    <string name="you_will_save_per_year">आप प्रति वर्ष बचाएंगे</string>
-    <string name="payback_period">ऋण वापसी की अवधि</string>
     <string name="nominal_power_cantbe_null">नाममात्र की शक्ति 0 नहीं हो सकती</string>
-    <string name="paybackperiod_sign_helper">क्योंकि आपके पीवी स्टेशन की लागत है</string>
-    <string name="ifpayback_period_60yrs">पेबैक अवधि = 60+ वर्ष, क्योंकि आपका सौर पैनल कम शक्ति वाला है</string>
-    <string name="statistics_screen_label_itsforecast">इसके लिए पूर्वानुमान है</string>
-    <string name="statistics_screen_title">सांख्यिकी</string>
     <string name="changes_saved">बदलाव सुरक्षित किया गया</string>
-    <string name="coming_soon_will_added">निम्नलिखित अपडेट में जोड़ा जाएगा ;-)</string>
-    <string name="tools">उपकरण</string>
-    <string name="light_sensor_beta">प्रकाश संवेदक (Beta)</string>
     <string name="light_sensor__error_title">आपके फोन में लाइट सेंसर नहीं है</string>
     <string name="light_sensor__error_message">दूसरे फोन पर ऐप को चेक करें</string>
     <string name="light_sensor_sign_raw_value">कच्चे सेंसर मूल्य</string>
@@ -81,20 +34,12 @@
     <string name="light_sensor_sign_raw_value_footer">कच्चे सेंसर मूल्य</string>
     <string name="light_sensor_sign_nominal_power">नाममात्र शक्ति:</string>
     <string name="light_sensor_sign_calibrate_mode">कैलिब्रेट मोड:</string>
-    <string name="get_pro_version_nmore_detailed_forecast_for_5_days">प्रो संस्करण प्राप्त करें: 5 दिनों के लिए और अधिक विस्तृत पूर्वानुमान</string>
     <string name="confirm_fragment_cost_of_pv_station">पीवी स्टेशन की लागत</string>
     <string name="fragment_confirm_advanced_optional">उन्नत (वैकल्पिक)</string>
-    <string name="screenaddstation_viewpager_2title">विशेषताएँ</string>
-    <string name="screenaddstation_viewpager_1title">नक्शा</string>
-    <string name="item_for_map_and_forecast_mood_solar_panel_work_at">सौर पैनल काम</string>
-    <string name="item_cardview_map_forecast_day_mood">दिन का मिजाज</string>
-    <string name="mainscreen_cityindicator" translatable="false">Faridabad:</string>
     <string name="addstation_activity_map">नक्शा</string>
     <string name="addstation_activity_characteristics">विशेषताएँ</string>
     <string name="settingsscreen_menu_solarpanels_change_language">भाषा: हिन्दी</string>
     <string name="dialog_choose_language">भाषा चुनें</string>
-    <string name="creator_name">प्रजापति</string>
-    <string name="other_chapter">अन्य</string>
     <string name="mainscreen_fr_forecastnow">⚡अभी पूर्वानुमान:</string>
     <string name="mainscreen_fr_city">शहर:</string>
     <string name="mainscreen_fr_temp">गति:</string>
@@ -103,8 +48,8 @@
     <string name="mainscreen_chart_title_forecast_aftertomorrow">परसो</string>
     <string name="My_PV_Station">मेरा पीवी स्टेशन</string>
     <string name="Optimal_Tilt">इष्टतम झुकाव</string>
-    <string name="Light_Sensor">प्रकाश संवेदक</string>
     <string name="Calibrating">औजार</string>
     <string name="Bad_Weather_Alerts">खराब मौसम अलर्ट</string>
     <string name="mainscreen_tools">🛠उपकरण</string>
+    <string name="maintools_screen_title_ight_sensor">प्रकाश संवेदक beta</string>
 </resources>

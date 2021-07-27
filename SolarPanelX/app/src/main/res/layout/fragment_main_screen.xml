@@ -5,7 +5,6 @@
     android:id="@+id/swipe_refresh_mainscreen"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
     tools:context=".ui.fragments.MainScreenFragment">
 
     <ScrollView
@@ -13,8 +12,10 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_screen_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/black_night">
 
             <TextSwitcher
                 android:id="@+id/textSwitcher_main_screen"
@@ -24,7 +25,6 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/montserrat"
                 android:text="⚡Forecast now"
-                android:textColor="@color/black"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -243,6 +243,13 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:background="@color/chart_stroke">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="1">-->
+<!--                        -->
+<!--                    </LinearLayout>-->
+
                     <TextView
                         android:id="@+id/sunshineIndicatorBlockSUNRISE"
                         android:layout_width="match_parent"
@@ -295,7 +302,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|top"
-                    android:textColor="@color/black"
                     android:text="last update: 12:49, 12 sep 2021 ">
                 </TextView>
             </LinearLayout>

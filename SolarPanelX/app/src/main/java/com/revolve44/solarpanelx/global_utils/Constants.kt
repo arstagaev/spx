@@ -1,6 +1,7 @@
 package com.revolve44.solarpanelx.global_utils
 
 import android.graphics.Bitmap
+import com.revolve44.solarpanelx.domain.enums.TypeOfSky
 import com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherAnim
 
 
@@ -13,6 +14,8 @@ class Constants {
 
         const val DUAL_INDICATOR_SIZEOFFACTORS = 32
         const val SOLAR_PANEL_AREA_FOR_1W =0.00648F
+
+        var CURRENT_TIME_OF_DAY = DayPeriod(TypeOfSky.DAY,false)
 
         @kotlin.jvm.JvmField
         var switcherMap: Boolean = true

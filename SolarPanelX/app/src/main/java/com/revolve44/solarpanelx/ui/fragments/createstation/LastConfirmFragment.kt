@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MotionEvent
@@ -92,7 +91,7 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
         currencyInvestments = view.findViewById(R.id.currencyOfPVStation)
         advanced_expander = view.findViewById<CardView>(R.id.advanced_expander)
         expandable_layout = view.findViewById<ExpandableLayout>(R.id.expandable_layout)
-        describe_about_nominal_power = view.findViewById(R.id.describe_about_nominal_power)
+        describe_about_nominal_power = view.findViewById(R.id.lux_describe_about_nominal_power)
 //        expander_confirmst = view.findViewById(R.id.expander_confirmst)
 //
 //        relativeLayout = view.findViewById(R.id.relativeLayout)
@@ -125,6 +124,10 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
                             getString(R.string.nominal_power_cantbe_null),
                             Snackbar.LENGTH_LONG
                         ).show()
+                        blinkATextView(describe_about_nominal_power, ContextCompat.getColor(requireActivity(),
+                            R.color.hint_white2
+                        ), Color.WHITE,ContextCompat.getColor(requireActivity(), R.color.hint_white2),1000)
+
                     }
                 }else{
                     Snackbar.make(
@@ -132,6 +135,10 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
                         getString(R.string.nominal_power_cantbe_null),
                         Snackbar.LENGTH_LONG
                     ).show()
+                    blinkATextView(describe_about_nominal_power, ContextCompat.getColor(requireActivity(),
+                        R.color.hint_white2
+                    ), Color.WHITE,ContextCompat.getColor(requireActivity(), R.color.hint_white2),1000)
+
                 }
             }catch (e: Exception){
                 Snackbar.make(
@@ -139,11 +146,11 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
                     getString(R.string.nominal_power_cantbe_null)+" error:"+e.message,
                     Snackbar.LENGTH_LONG
                 ).show()
+                blinkATextView(describe_about_nominal_power, ContextCompat.getColor(requireActivity(),
+                    R.color.hint_white2
+                ), Color.WHITE,ContextCompat.getColor(requireActivity(), R.color.hint_white2),1000)
+
             }
-
-
-
-
         }
         var isExpandAdvance = false
         advanced_expander.setOnClickListener {

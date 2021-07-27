@@ -46,7 +46,7 @@
                 </EditText>
 
                 <TextView
-                    android:id="@+id/describe_about_nominal_power"
+                    android:id="@+id/lux_describe_about_nominal_power"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -131,7 +131,7 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/watts_indicator_sign"
                         android:layout_width="160dp"
                         android:layout_height="20dp"
 
@@ -219,7 +219,7 @@
                         android:foregroundGravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/efficiency_indicator"
-                        app:layout_constraintTop_toBottomOf="@+id/textView5"
+                        app:layout_constraintTop_toBottomOf="@+id/watts_indicator_sign"
                         app:wheel_reached_color="#05C324"
                         app:wheel_unreached_color="#8BA0AA" />
 

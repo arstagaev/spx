@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.BuildConfig
 import com.revolve44.solarpanelx.R
@@ -89,7 +90,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 0 -> goToUrl("https://play.google.com/store/apps/details?id=com.revolve44.solarpanelx")
 
                 1-> DialogFragmentForChangeLanguage().show(childFragmentManager,"dialog_change_lang")
-                2 -> Snackbar.make(requireActivity().findViewById(android.R.id.content), "SPX v.${BuildConfig.VERSION_NAME} App for solar panels #1", Snackbar.LENGTH_SHORT).show()
+                2 ->{
+                     Snackbar.make(requireActivity().findViewById(android.R.id.content), "SPX v.${BuildConfig.VERSION_NAME} App for solar panels #1", Snackbar.LENGTH_SHORT).show()
+                     findNavController().navigate(R.id.action_settings_mainscreen_to_about_fragment)
+                }
             }
         }
     }

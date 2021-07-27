@@ -1,5 +1,6 @@
 package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine
 
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.TiltCalcMachine
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.ui.MainActivity
 
 class OptimalTiltHelperActivity : AppCompatActivity(), SensorEventListener {
 
@@ -162,6 +164,12 @@ class OptimalTiltHelperActivity : AppCompatActivity(), SensorEventListener {
         Snackbar.make(findViewById(android.R.id.content), "This is a compass. The arrow always points north ", Snackbar.LENGTH_LONG).show()
 
 
+    }
+
+    fun closeOptimalTiltActivity(){
+        val intent = Intent(this@OptimalTiltHelperActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 

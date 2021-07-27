@@ -29,7 +29,7 @@ fun chartDataHandler(arrayList: ArrayList<Float>, rangeX0 : Int, rangeX1 : Int):
  * timestamps[],  forecasts[], num (num is number of chart which we fill our array on output)
  *
  * <-output:
- * right sorted part of array forecasts[] for define chart
+ * right sorted part of array forecasts[] for define special chart
  */
 fun chartDatasort( timestamps: ArrayList<Long>, forecasts: ArrayList<Float>,jumpAboveArray : Int): FirstChartDataTransitor{
     //var repeater = 0
@@ -40,9 +40,6 @@ fun chartDatasort( timestamps: ArrayList<Long>, forecasts: ArrayList<Float>,jump
     var countdown = (8-(unxtoHr(timestamps.get(0))/3)) + 8*jumpAboveArray
 
     for (i in countdown..countdown+7){
-
-
-        Timber.i("qqq "+ unxtoDate(timestamps.get(i)))
         //for (z in countdown..timestamps.)
         arrayListOUTPUT.add(forecasts.get(i).toInt())
 
@@ -76,13 +73,13 @@ fun chartDatasortforFirstChart( timestamps: ArrayList<Long>, forecasts: ArrayLis
 
     for (i in 0..7){
 
-        Timber.i("qqq "+ unxtoDate(timestamps.get(i)))
-
         var hour = unxtoHr(timestamps.get(i)).toInt()
 
         Timber.i("unx1 ${hour}")
         if (hour == 0 ){
+            Timber.i("qqq "+ unxtoDate(timestamps.get(i)))
             dateOUTPUT.add(unxtoDate(timestamps.get(i)))
+
         }else{
             dateOUTPUT.add("$hour"+"hr")
         }

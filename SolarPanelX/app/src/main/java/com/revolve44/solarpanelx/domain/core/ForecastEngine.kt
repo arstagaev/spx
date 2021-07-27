@@ -4,7 +4,9 @@ import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import timber.log.Timber
 import kotlin.collections.ArrayList
 import com.revolve44.solarpanelx.domain.enums.TypeOfSky
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.global_utils.Constants.Companion.SOLAR_PANEL_AREA_FOR_1W
+import com.revolve44.solarpanelx.global_utils.DayPeriod
 import java.util.*
 
 //////////////////////////////////////
@@ -103,9 +105,11 @@ fun setForecastForNow(forecastFor20hr: ArrayList<Int>) : Int {
     if (firstIndex < 0 ){
         firstIndex = 0
     }
+    var timeOfDay =  defineTimeOfDay()
+    CURRENT_TIME_OF_DAY = DayPeriod(timeOfDay,isWeGetNewTypeOfDay(timeOfDay))
 
-    when (defineTimeOfDay()){
-        TypeOfSky.NIGHT        -> { return 0}
+    when (CURRENT_TIME_OF_DAY.typeOfSky){
+        TypeOfSky.NIGHT        -> { return  0}
         TypeOfSky.EARLY_MORNING-> { return  (forecastFor20hr.get(firstIndex)+forecastFor20hr.get(secondIndex))/3   }
         TypeOfSky.MORNING      -> { return  (forecastFor20hr.get(firstIndex)+forecastFor20hr.get(secondIndex))/2   }
         TypeOfSky.DAY          -> { return  forecastFor20hr.get(0)                                                 }
@@ -118,6 +122,10 @@ fun setForecastForNow(forecastFor20hr: ArrayList<Int>) : Int {
     }else {
         return  forecastFor20hr.get(0)
     }
+}
+
+fun isWeGetNewTypeOfDay(timeOfDay: TypeOfSky): Boolean {
+    return CURRENT_TIME_OF_DAY.typeOfSky != timeOfDay
 }
 
 /**

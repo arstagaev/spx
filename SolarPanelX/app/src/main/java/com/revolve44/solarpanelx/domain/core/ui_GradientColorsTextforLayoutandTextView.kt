@@ -38,6 +38,17 @@ fun gradientAnimation(uiElement: Any, color1: Int, color2: Int,color3: Int,color
 }
 
 @SuppressLint("ObjectAnimatorBinding")
+fun gradientAnimationLayout(uiElement: Any, color1: Int, color2: Int, duration: Int){
+
+    val colorAnimation1: ValueAnimator = ObjectAnimator.ofInt(uiElement, "backgroundColor",
+        color1, color2)
+
+    colorAnimation1.duration = duration.toLong()
+    colorAnimation1.setEvaluator(ArgbEvaluator())
+    colorAnimation1.start()
+}
+
+@SuppressLint("ObjectAnimatorBinding")
 fun gradientAnimation2(uiElement: ImageView, color1: Int, color2: Int, duration: Int){
 
     val colorAnimation2: ValueAnimator = ValueAnimator.ofObject(ArgbEvaluator(),

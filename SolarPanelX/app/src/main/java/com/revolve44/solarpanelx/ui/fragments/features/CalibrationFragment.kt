@@ -60,11 +60,18 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
             calibrate_indicator.text = "$IntegerPercentForCalibration %"
 
             coeff = (IntegerPercentForCalibration/100f).toFloat()
-            PreferenceMaestro.calibrationCoeff = coeff
+            if(coeff != null){
+                PreferenceMaestro.calibrationCoeff = coeff
+            }else{
+                PreferenceMaestro.calibrationCoeff = 1.0F
+            }
+
             //Timber.i("calibr")
             //calibratedOutputPower.text = (scaleOfkWh((viewmodel.forecastPower.value)!! * coeff).roundTo(2))).toString()+"W"
             if (viewmodel.forecastNow.value!=null){
-                calibratedOutputPower.text = scaleOfkWh(((viewmodel.forecastNow.value!!) * coeff).toInt(),true)
+
+                calibratedOutputPower.text = scaleOfkWh(((viewmodel.forecastNow.value)!! * coeff).toInt(),true)
+                Timber.i("fnow calibr vm: ${viewmodel.forecastNow.value} ${PreferenceMaestro.calibrationCoeff} ")
 
             }else{
                 calibratedOutputPower.text = "please refresh data"
@@ -74,7 +81,6 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
              //= IntegerPercentForCalibration
 
             notifyAboutSavedChanges()
-            Timber.i("fnow calibr vm: ${viewmodel.forecastNow.value!!} ${PreferenceMaestro.calibrationCoeff} ")
         }
 
     }
@@ -91,7 +97,7 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
             calibratedOutputPower.text = "${roundTo2decimials(viewmodel.forecastNow.value!!*PreferenceMaestro.calibrationCoeff)}Wh"
 
         }
-        calibrate_indicator.text = "${PreferenceMaestro.calibrationCoeff}%"
+        calibrate_indicator.text = "${PreferenceMaestro.calibrationCoeff * 100.0f}%"
     }
 
 //    fun selfCalibrating() : Int {

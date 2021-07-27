@@ -157,8 +157,6 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
         an2.repeatCount = 0
         an2.fillAfter = true
 
-
-
         solarpanelDirection!!.startAnimation(an2)
     }
 }

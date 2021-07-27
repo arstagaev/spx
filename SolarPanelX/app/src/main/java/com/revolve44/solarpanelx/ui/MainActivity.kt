@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
         viewModelMain = ViewModelProvider(this@MainActivity,viewModelFactory).get(MainViewModel::class.java)
 
+        // get from addstation request to update forecast (below)
         val intent = intent
         if (intent.getBooleanExtra("changingdata",false)){
 
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             viewModelMain?.manualRequest()
 
         }
+
         bottomNavView = findViewById(R.id.bottom_nav)
 
         navController = Navigation.findNavController(this, R.id.main_screen_container_fragment);
@@ -63,21 +65,6 @@ class MainActivity : AppCompatActivity() {
         setCurrentFragment()
         manageBottomNavBar()
 
-
-        //val navHostFragment =
-        //    supportFragmentManager.findFragmentById(R.id.main_screen_container_fragment) as NavHostFragment
-        //navController = navHostFragment.navController
-        //navController.navigate(R.id.action_mainFragment_to_toolsManagerFragment)
-
-
-        //iconMainScreenBottomNavigation = findViewById(R.id.row_home_mainscreen)
-        //iconToolsBottomNavigation      = findViewById(R.id.row_manager_of_tools)
-
-
-                //val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_screen_container_fragment) as NavHostFragment
-        //val navController = navHostFragment.navController
-
-        //navController = findNavController(R.id.main_screen_container_fragment)
     }
 
     private fun firstLaunch() {

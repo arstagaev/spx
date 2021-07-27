@@ -2,6 +2,7 @@ package com.revolve44.solarpanelx.feature_modules.lightsensor
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.revolve44.solarpanelx.BuildConfig
 import com.revolve44.solarpanelx.R
+import com.revolve44.solarpanelx.ui.MainActivity
 import java.lang.Exception
 
 
@@ -158,5 +160,12 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener  {
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause()
         sensorManager.unregisterListener(this)
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val intent = Intent(this@LightSensorActivity,MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

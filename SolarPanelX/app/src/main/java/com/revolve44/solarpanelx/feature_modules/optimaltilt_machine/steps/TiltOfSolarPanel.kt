@@ -1,5 +1,6 @@
 package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.TiltS
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.core.roundTo1decimials
+import com.revolve44.solarpanelx.ui.MainActivity
 import kotlin.math.abs
 
 
@@ -84,7 +86,7 @@ class TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel) {
         })
 
         btn_close_calc_tilt.setOnClickListener {
-            orientationSolarPanelViewModel.currentItemInViewPager2.value = 2
+            (activity as OptimalTiltHelperActivity).closeOptimalTiltActivity()
         }
     }
 

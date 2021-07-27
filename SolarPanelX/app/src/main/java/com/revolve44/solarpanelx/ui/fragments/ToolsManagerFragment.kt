@@ -44,9 +44,11 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         var forRecyclerviewAdapter = arrayListOf(
             ToolsRecyclerviewModel(0,getString(R.string.My_PV_Station),"",0,ContextCompat.getDrawable(requireActivity(), R.drawable.sp)),
             ToolsRecyclerviewModel(1,getString(R.string.Optimal_Tilt),"Status",1, ContextCompat.getDrawable(requireActivity(), R.drawable.optimal_tilt)),
-            //ToolsRecyclerviewModel(2,getString(R.string.Light_Sensor),"Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
             ToolsRecyclerviewModel(3,getString(R.string.Calibrating),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.calibr_aim)),
-            ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
+            ToolsRecyclerviewModel(2,getString(R.string.maintools_screen_title_ight_sensor),"Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
+
+            // ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
+            ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic))
 
         )
 
@@ -83,10 +85,10 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                         val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
                         startActivity(intent)
                     }
-                    //2-> {
-                    //    val intent = Intent(requireActivity(),LightSensorActivity::class.java)
-                    //    startActivity(intent)
-                    //}
+                    2-> {
+                        val intent = Intent(requireActivity(),LightSensorActivity::class.java)
+                        startActivity(intent)
+                    }
                     3 -> {
                         findNavController().navigate(R.id.action_toolsManagerFragment_to_forecast_calibrating_main)
                     }

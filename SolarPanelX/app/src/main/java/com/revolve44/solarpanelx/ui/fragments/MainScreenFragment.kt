@@ -12,7 +12,9 @@ import android.widget.TextSwitcher
 import android.widget.TextView
 import android.widget.ViewSwitcher
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.charts.LineChart
@@ -30,7 +32,9 @@ import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
 import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
+import com.revolve44.solarpanelx.domain.enums.TypeOfSky
 import com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.ui.MainActivity
 import timber.log.Timber
 
@@ -48,7 +52,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var lineChart3 : LineChart
     private lateinit var textSwitcher_main_screen : TextSwitcher
     private lateinit var lastUpdate : TextView
-    private var textView: TextView? = null
+    private var mainLabelOfMainScreenInsideTxtSwitcher: TextView? = null
     private var dataForMainLabelOnMainscreen = arrayOf("⚡Forecast now:", "city: London", "temp: +23 C")
     private var stringIndex = 0
     private lateinit var forecastNowAbsol   : TextView
@@ -64,7 +68,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var second_chart_description : VerticalTextView
     private lateinit var third_chart_description  : VerticalTextView
 
+    private lateinit var sunshine_duration_sigh : CardView
+
     private lateinit var cardview_forecastnow_mainscreen : CardView
+    private lateinit var main_screen_background : ConstraintLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -83,6 +90,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         frcnowCardview = view.findViewById(R.id.linearlayout_frcst_now)
 
+        sunshine_duration_sigh = view.findViewById(R.id.sunshine_duration_sigh)
+
         lastUpdate = view.findViewById(R.id.last_upd_date)
 
         first_chart_description  = view.findViewById(R.id.first_chart_description)
@@ -90,6 +99,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         third_chart_description  = view.findViewById(R.id.to_after_tomorrow_chart_forecast)
         //textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
         cardview_forecastnow_mainscreen = view.findViewById(R.id.cardview_forecastnow_mainscreen)
+        main_screen_background = view.findViewById(R.id.main_screen_background)
+
         swipeRefreshTools(view)
 
         val slideInLeftAnimation: Animation = AnimationUtils.loadAnimation(
@@ -106,25 +117,21 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         textSwitcher_main_screen.outAnimation = slideOutRightAnimation
 
         textSwitcher_main_screen.setFactory(ViewSwitcher.ViewFactory {
-            textView = TextView(requireActivity())
-            textView!!.setTextColor(Color.BLACK)
-            textView!!.setTextSize(35f)
+            mainLabelOfMainScreenInsideTxtSwitcher = TextView(requireActivity())
+            when(CURRENT_TIME_OF_DAY.typeOfSky){
+                TypeOfSky.NIGHT -> {
+                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(Color.WHITE)
+                }
+                else -> mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(Color.BLACK)
+            }
+            //mainLabelOfMainScreenInsideTxtSwitcher!!.setTextColor(Color.BLACK)
+            val typeface = ResourcesCompat.getFont(requireActivity(), R.font.montserrat)
+            mainLabelOfMainScreenInsideTxtSwitcher?.setTypeface(typeface)
+            mainLabelOfMainScreenInsideTxtSwitcher?.setTextSize(35f)
            //textView!!.setGravity(Gravity.START)
-            textView!!.setGravity(Gravity.CENTER_VERTICAL)
-            return@ViewFactory textView
+            mainLabelOfMainScreenInsideTxtSwitcher?.setGravity(Gravity.CENTER_VERTICAL)
+            return@ViewFactory mainLabelOfMainScreenInsideTxtSwitcher
         })
-
-        val timer =  object : CountDownTimer(4500,1500) {
-            override fun onTick(millisUntilFinished: Long) {
-//                 rtr.setText("~ "+(0..100).random())
-               // setMainLabelMainScreen(isLoading = false)
-            }
-
-            override fun onFinish() {
-
-            }
-
-        }
 
 
         textSwitcher_main_screen.setOnClickListener {
@@ -133,6 +140,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         cardview_forecastnow_mainscreen.setOnClickListener {
             Snackbar.make(requireActivity().findViewById(android.R.id.content),"1️⃣Forecast power now  2️⃣ % of max generation",Snackbar.LENGTH_LONG).show()
+        }
+
+        sunshine_duration_sigh.setOnClickListener {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),"\uD83C\uDF05Sunrise ~ \uD83C\uDF1E Sunshine time ~ \uD83C\uDF07Sunset",Snackbar.LENGTH_LONG).show()
         }
 
     }
@@ -156,9 +167,6 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 it.viewModelMain!!.getAllForecastForChart().observe(viewLifecycleOwner) {
                     if(it.isNotEmpty()){
 
-
-
-
                         firstStepToCharts(it)
 
                         lastUpdate.text = "${PreferenceMaestro.timeOfLastDataUpdate}"
@@ -170,6 +178,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     forecastNowRelativ.text = "${roundTo1decimials((fNow.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() )*100f)}%"
                     Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff}  ${PreferenceMaestro.chosenStationNOMINALPOWER}")
                     forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
+
+                    changeSkyInMainScreen()
                 }
 
                 it.viewModelMain!!.fiveDaysRequestRes.observe(viewLifecycleOwner) {
@@ -188,7 +198,71 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                         }
                     }
                 }
+            }
+        }
+    }
 
+    private fun changeSkyInMainScreen() {
+
+        if (CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen){
+
+            when(CURRENT_TIME_OF_DAY.typeOfSky){
+                TypeOfSky.NIGHT ->{
+                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+
+                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+
+                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    gradientAnimationLayout(main_screen_background,ContextCompat.getColor(requireActivity(), R.color.white),ContextCompat.getColor(requireActivity(), R.color.black_night),2000)
+                }
+                else -> {
+                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+
+                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+
+                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    gradientAnimationLayout(main_screen_background,ContextCompat.getColor(requireActivity(), R.color.black_night),ContextCompat.getColor(requireActivity(), R.color.white),2000)
+
+                }
+            }
+        }else{
+
+            when(CURRENT_TIME_OF_DAY.typeOfSky){
+
+                TypeOfSky.NIGHT ->{
+                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+
+                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+
+                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+
+                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
+                }
+                else -> {
+                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+
+                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+
+                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
+
+                }
             }
         }
     }
@@ -284,8 +358,6 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         //val lineChart2 = view.findViewById<LineChart>(R.id.lineChart2)
         //val lineChart3 = view.findViewById<LineChart>(R.id.lineChart3)
-
-
         var description: Description = lineChart1.description
         val legend = lineChart1.legend
         val legend2 = lineChart2.legend
@@ -440,9 +512,6 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         val data = LineData(dataSet)
 
         lineChart.data = data
-
-
-
         //   X
         val xAxis = lineChart.xAxis
         try {
@@ -593,9 +662,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
     }
     private fun refreshSunshineIndicatorBlock(){
-        sunriseTime.text = PreferenceMaestro.sunrise
+        sunriseTime.text = "\uD83C\uDF05\n${PreferenceMaestro.sunrise}"
         timeOfSunShine.text = "${PreferenceMaestro.solarDayDuration}hr"
-        sunsetTime.text = PreferenceMaestro.sunset
+        sunsetTime.text = "\uD83C\uDF07\n${PreferenceMaestro.sunset}"
     }
 
 
