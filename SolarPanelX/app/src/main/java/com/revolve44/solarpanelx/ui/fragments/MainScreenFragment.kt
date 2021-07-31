@@ -7,10 +7,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.LinearLayout
-import android.widget.TextSwitcher
-import android.widget.TextView
-import android.widget.ViewSwitcher
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -26,6 +23,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
@@ -73,6 +71,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var cardview_forecastnow_mainscreen : CardView
     private lateinit var main_screen_background : ConstraintLayout
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -101,6 +100,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         cardview_forecastnow_mainscreen = view.findViewById(R.id.cardview_forecastnow_mainscreen)
         main_screen_background = view.findViewById(R.id.main_screen_background)
 
+
+
         swipeRefreshTools(view)
 
         val slideInLeftAnimation: Animation = AnimationUtils.loadAnimation(
@@ -116,22 +117,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         textSwitcher_main_screen.inAnimation = slideInLeftAnimation
         textSwitcher_main_screen.outAnimation = slideOutRightAnimation
 
-        textSwitcher_main_screen.setFactory(ViewSwitcher.ViewFactory {
-            mainLabelOfMainScreenInsideTxtSwitcher = TextView(requireActivity())
-            when(CURRENT_TIME_OF_DAY.typeOfSky){
-                TypeOfSky.NIGHT -> {
-                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(Color.WHITE)
-                }
-                else -> mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(Color.BLACK)
-            }
-            //mainLabelOfMainScreenInsideTxtSwitcher!!.setTextColor(Color.BLACK)
-            val typeface = ResourcesCompat.getFont(requireActivity(), R.font.montserrat)
-            mainLabelOfMainScreenInsideTxtSwitcher?.setTypeface(typeface)
-            mainLabelOfMainScreenInsideTxtSwitcher?.setTextSize(35f)
-           //textView!!.setGravity(Gravity.START)
-            mainLabelOfMainScreenInsideTxtSwitcher?.setGravity(Gravity.CENTER_VERTICAL)
-            return@ViewFactory mainLabelOfMainScreenInsideTxtSwitcher
-        })
+        initFactoryOfMainLabel()
 
 
         textSwitcher_main_screen.setOnClickListener {
@@ -139,17 +125,35 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         }
 
         cardview_forecastnow_mainscreen.setOnClickListener {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),"1️⃣Forecast power now  2️⃣ % of max generation",Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),getString(R.string.main_screen_tip_label_forecast),Snackbar.LENGTH_LONG).show()
         }
 
         sunshine_duration_sigh.setOnClickListener {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),"\uD83C\uDF05Sunrise ~ \uD83C\uDF1E Sunshine time ~ \uD83C\uDF07Sunset",Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),"\uD83C\uDF05"+getString(
+                            R.string.sunrise)+" ~ \uD83C\uDF1E "+getString(R.string.sunshine_time) +"~ \uD83C\uDF07"+getString(
+                                            R.string.sunset),Snackbar.LENGTH_LONG).show()
         }
 
     }
 
     override fun onResume() {
         super.onResume()
+
+        // Creates a button that mimics a crash when clicked
+        // Creates a button that mimics a crash when clicked
+//        val crashButton = Button(requireActivity())
+//        crashButton.setText("Crash!")
+//        crashButton.setOnClickListener(View.OnClickListener {
+//            throw RuntimeException("Test Crash") // Force a crash
+//        })
+//
+//        requireActivity().addContentView(
+//            crashButton, ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT
+//            )
+//        )
+
         //WeatherAnim.quickSetup()
         //WeatherAnim.geometryL()
         //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
@@ -165,11 +169,12 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             if (it.viewModelMain != null){
 
                 it.viewModelMain!!.getAllForecastForChart().observe(viewLifecycleOwner) {
-                    if(it.isNotEmpty()){
+                    if(it.isNotEmpty() && it.size == 40){
+                        Timber.i("ccc input size:${it.size}")
 
                         firstStepToCharts(it)
 
-                        lastUpdate.text = "${PreferenceMaestro.timeOfLastDataUpdate}"
+                        lastUpdate.text = getString(R.string.main_screen_last_upd)+ PreferenceMaestro.timeOfLastDataUpdate
                     }
 
                 }
@@ -180,6 +185,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
 
                     changeSkyInMainScreen()
+                    //initFactoryOfMainLabel()
                 }
 
                 it.viewModelMain!!.fiveDaysRequestRes.observe(viewLifecycleOwner) {
@@ -200,6 +206,31 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 }
             }
         }
+    }
+
+    private fun initFactoryOfMainLabel(){
+        textSwitcher_main_screen.setFactory(ViewSwitcher.ViewFactory {
+            mainLabelOfMainScreenInsideTxtSwitcher = TextView(requireActivity())
+            when(CURRENT_TIME_OF_DAY.typeOfSky){
+                TypeOfSky.NIGHT -> {
+                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(Color.WHITE)
+                }
+                else -> mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(Color.BLACK)
+            }
+            //mainLabelOfMainScreenInsideTxtSwitcher!!.setTextColor(Color.BLACK)
+            try{
+                val typeface = ResourcesCompat.getFont(requireActivity(), R.font.montserrat)
+                mainLabelOfMainScreenInsideTxtSwitcher?.setTypeface(typeface)
+            }catch (e: Exception){
+                Timber.e("ERROR: ${e.message}")
+            }
+
+
+            mainLabelOfMainScreenInsideTxtSwitcher?.setTextSize(35f)
+            //textView!!.setGravity(Gravity.START)
+            mainLabelOfMainScreenInsideTxtSwitcher?.setGravity(Gravity.CENTER_VERTICAL)
+            return@ViewFactory mainLabelOfMainScreenInsideTxtSwitcher
+        })
     }
 
     private fun changeSkyInMainScreen() {
@@ -322,7 +353,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             is Resource.Success<*>, is Resource.Init<*> ->{
                 dataForMainLabelOnMainscreen = arrayOf(getString(R.string.mainscreen_fr_forecastnow),"\uD83C\uDFD9"+ getString(
                                     R.string.mainscreen_fr_city)+" ${PreferenceMaestro.chosenStationCITY}","\uD83C\uDF21"+ getString(
-                                                        R.string.mainscreen_fr_temp)+"${PreferenceMaestro.temp}")
+                                                        R.string.mainscreen_fr_temp)+"${PreferenceMaestro.temp}°C")
                 mSwipeRefreshLayout.isRefreshing = false
 
                 var timer = object : CountDownTimer(6000,2000){

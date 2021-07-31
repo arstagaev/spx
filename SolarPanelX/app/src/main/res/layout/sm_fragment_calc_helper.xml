@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
 
     <TextView
@@ -11,10 +12,10 @@
         android:layout_width="155dp"
         android:layout_height="82dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="84dp"
         android:gravity="center"
+        android:text="@string/at_find_optimal_azimuth"
         android:textColor="@color/black"
-        android:text="at find optimal azimuth"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8">
@@ -24,11 +25,11 @@
     <TextView
         android:id="@+id/textView8"
         android:layout_width="382dp"
-        android:layout_height="84dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:text="Orientation of Phone:"
+        android:text="@string/orientation_of_phone"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
@@ -44,13 +45,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="118dp"
         android:gravity="center"
+        android:text="@string/at_find_optimal_tilt"
         android:textColor="@color/black"
-        android:text="at find optimal tilt"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/helper_phone_tilt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.344">
 
     </TextView>
 
@@ -58,7 +59,7 @@
         android:id="@+id/helper_phone_azimuth"
         android:layout_width="167dp"
         android:layout_height="165dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="48dp"
         android:src="@drawable/sm_ic_ph_frontview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.356"
@@ -87,7 +88,7 @@
         android:layout_marginTop="48dp"
         android:backgroundTint="#FFFFFF"
         android:elevation="145dp"
-        android:text="Next"
+        android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

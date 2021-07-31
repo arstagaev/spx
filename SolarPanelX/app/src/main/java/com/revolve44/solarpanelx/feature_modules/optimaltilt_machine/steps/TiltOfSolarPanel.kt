@@ -63,15 +63,15 @@ class TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel) {
 
             when(abs(SUGGESTED_TILT-(90F+it))){
                 in 0.0..5.0 ->    {
-                    PREDICTION_GOOD_OR_NOT = "Excellent"
+                    PREDICTION_GOOD_OR_NOT = "\uD83E\uDD29\uD83D\uDC4D"
                     COLOR_PREDICTION_TILT =Color.GREEN
                 }
                 in 5.0..25.0 ->   {
-                    PREDICTION_GOOD_OR_NOT = "Good"
+                    PREDICTION_GOOD_OR_NOT = "\uD83D\uDE10"
                     COLOR_PREDICTION_TILT =Color.YELLOW
                 }
                 in 25.0..360.0 -> {
-                    PREDICTION_GOOD_OR_NOT = "Bad"
+                    PREDICTION_GOOD_OR_NOT = "\uD83D\uDC4E☹️"
                     COLOR_PREDICTION_TILT =Color.RED
                 }
             }

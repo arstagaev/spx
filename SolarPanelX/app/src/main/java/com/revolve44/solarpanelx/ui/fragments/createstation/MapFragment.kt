@@ -20,12 +20,13 @@ import java.lang.Exception
 class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback,
     GoogleMap.OnMarkerDragListener {
     private var mMap: GoogleMap? = null
-    var marker: Marker? = null
-    var latitude = 0.0
-    var longitude = 0.0
-    var check = false
-    var MYLOCATION = LatLng(latitude, longitude)
-    lateinit var to_characteristics : Button
+    private var marker: Marker? = null
+    private var latitude = 0.0
+    private var longitude = 0.0
+    private var check = false
+    private var MYLOCATION = LatLng(latitude, longitude)
+    private lateinit var to_characteristics : Button
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,6 +34,8 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback,
         val mapFragment = (childFragmentManager // *** change to childFM
             .findFragmentById(R.id.map) as SupportMapFragment?)!!
         mapFragment.getMapAsync(this)
+
+
 
         to_characteristics = view.findViewById(R.id.to_characteristics)
 

@@ -10,11 +10,26 @@
     <TextView
         android:id="@+id/we_suggest_orientation_for_define_location"
         android:layout_width="351dp"
-        android:layout_height="72dp"
+        android:layout_height="42dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
+        android:text="New York"
         android:textColor="@color/black"
-        android:text="Optimal orientation for: 17.05 99.58"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/we_suggest_orientation_for_define_location2">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/we_suggest_orientation_for_define_location2"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/optimal_orientation_for_city"
+        android:textColor="@color/hint_white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,8 +66,8 @@
         android:layout_width="397dp"
         android:layout_height="114dp"
         android:gravity="center"
-        android:textColor="@color/black"
         android:text=""
+        android:textColor="@color/black"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

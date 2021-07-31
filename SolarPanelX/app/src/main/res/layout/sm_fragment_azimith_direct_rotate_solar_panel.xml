@@ -10,11 +10,11 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/white"
         android:background="#F80000"
-        android:text="⬇Bottom of your Solar Panel⬇️"
+        android:text="@string/bottom_of_your_solar_panel"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
         android:layout_height="52dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Actual direction"
+        android:text="@string/actual_direction"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +125,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Optimal direction"
+        android:text="@string/optimal_direction"
         android:textColor="#959595"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -163,7 +163,8 @@
             android:layout_height="match_parent"
             android:background="#1E9C2E"
             android:gravity="center"
-            android:text="Good"
+            android:textSize="30sp"
+            android:text="🤩👍"
             android:textColor="@color/white">
 
         </TextView>
@@ -186,7 +187,7 @@
             android:layout_height="match_parent"
             android:background="#F9FAF9"
             android:gravity="center"
-            android:text="Calibrate Tilt>"
+            android:text="@string/calibrate_tilt"
             android:textColor="@color/black">
 
         </TextView>

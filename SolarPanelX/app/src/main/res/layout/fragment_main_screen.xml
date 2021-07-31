@@ -45,9 +45,9 @@
 
                 <LinearLayout
                     android:id="@+id/linearlayout_frcst_now"
-                    android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
 
                     <TextView
                         android:id="@+id/forecast_now_absolute"
@@ -130,13 +130,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_item_with_map">
 
+
             </androidx.constraintlayout.helper.widget.Flow>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_chart1"
                 android:layout_width="340dp"
                 android:layout_height="164dp"
-                app:cardCornerRadius="20dp">
+                android:layout_marginEnd="2dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/flow"
+                app:layout_constraintStart_toEndOf="@+id/first_chart_description"
+                app:layout_constraintTop_toTopOf="@+id/flow">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart1"
@@ -146,13 +151,17 @@
                     app:layout_constraintVertical_chainStyle="spread"
                     tools:ignore="NotSibling" />
 
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_chart2"
                 android:layout_width="340dp"
                 android:layout_height="164dp"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/flow"
+                app:layout_constraintStart_toStartOf="@+id/flow"
+                app:layout_constraintTop_toBottomOf="@+id/cardview_chart1">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart2"
@@ -160,7 +169,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:layout_constraintVertical_chainStyle="spread"
-                    tools:ignore="NotSibling" >
+                    tools:ignore="NotSibling">
 
                 </com.github.mikephil.charting.charts.LineChart>
 
@@ -170,13 +179,16 @@
                 android:id="@+id/first_chart_description"
                 android:layout_width="130dp"
                 android:layout_height="22dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="2dp"
                 android:gravity="center|bottom"
                 android:text="at 24 hr"
                 android:textColor="@color/black"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="@+id/cardview_chart1"
-                app:layout_constraintEnd_toStartOf="@+id/cardview_chart1"
-                app:layout_constraintTop_toTopOf="@+id/cardview_chart1">
+                app:layout_constraintEnd_toStartOf="@+id/flow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/flow">
 
             </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
 
@@ -199,8 +211,11 @@
                 android:id="@+id/cardview_chart3"
                 android:layout_width="340dp"
                 android:layout_height="164dp"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/sunshine_duration_sigh"
+                app:layout_constraintEnd_toEndOf="@+id/flow"
+                app:layout_constraintStart_toStartOf="@+id/flow"
+                app:layout_constraintTop_toBottomOf="@+id/cardView_chart2">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart3"
@@ -208,10 +223,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:layout_constraintVertical_chainStyle="spread"
-                    tools:ignore="NotSibling" >
+                    tools:ignore="NotSibling">
 
                 </com.github.mikephil.charting.charts.LineChart>
-
 
 
             </androidx.cardview.widget.CardView>
@@ -234,59 +248,64 @@
                 android:id="@+id/sunshine_duration_sigh"
                 android:layout_width="340dp"
                 android:layout_height="90dp"
-                app:cardCornerRadius="20dp"
                 android:elevation="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/service_sign_from_mainscreen"
+                app:layout_constraintEnd_toEndOf="@+id/flow"
+                app:layout_constraintStart_toStartOf="@+id/flow">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:background="@color/chart_stroke">
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1">-->
-<!--                        -->
-<!--                    </LinearLayout>-->
+                    android:background="@color/chart_stroke"
+                    android:orientation="horizontal">
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_weight="1">-->
+                    <!--                        -->
+                    <!--                    </LinearLayout>-->
 
                     <TextView
                         android:id="@+id/sunshineIndicatorBlockSUNRISE"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
                         android:text="-:--"
                         android:textColor="@color/black"
-                        android:gravity="center"
                         android:textFontWeight="1"
-                        android:fontFamily="@font/montserrat">
+                        android:textSize="20sp">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/sunshineIndicatorBlockDURATION"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="30sp"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
                         android:text="-hr"
                         android:textColor="@color/black"
-                        android:gravity="center"
                         android:textFontWeight="1"
-                        android:fontFamily="@font/montserrat">
+                        android:textSize="30sp">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/sunshineIndicatorBlockSUNSET"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
                         android:text="-:--"
                         android:textColor="@color/black"
-                        android:gravity="center"
                         android:textFontWeight="1"
-                        android:fontFamily="@font/montserrat">
+                        android:textSize="20sp">
 
                     </TextView>
                 </LinearLayout>
@@ -296,7 +315,11 @@
                 android:id="@+id/service_sign_from_mainscreen"
                 android:layout_width="340dp"
                 android:layout_height="40dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/flow"
+                app:layout_constraintStart_toStartOf="@+id/flow">
+
                 <TextView
                     android:id="@+id/last_upd_date"
                     android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapter
@@ -34,7 +35,7 @@ class ToolsMainscreenAdapter: BaseAdapter<ToolsRecyclerviewModel>() {
         //private val rssiLevel : TextView = itemView.findViewById(R.id.signal_strength)
         //private val bondStatus : TextView = itemView.findViewById(R.id.bond_status)
 
-        private val cardLayout : CardView = itemView.findViewById(R.id.card_row_recycler_tools)
+        private val cardLayout : ConstraintLayout = itemView.findViewById(R.id.card_row_recycler_tools)
 
 
         override fun bind(model: ToolsRecyclerviewModel) {

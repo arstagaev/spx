@@ -3,6 +3,8 @@ package com.revolve44.solarpanelx.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,6 +20,7 @@ import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.setLocale
 import com.revolve44.solarpanelx.ui.fragments.createstation.LastConfirmFragment
 import com.revolve44.solarpanelx.ui.fragments.createstation.MapFragment
+import com.revolve44.solarpanelx.ui.fragments.dialog.DialogFragmentForChangeLanguage
 import kotlinx.android.synthetic.main.activity_add_station.*
 import timber.log.Timber
 
@@ -25,6 +28,18 @@ class AddSolarStationActivity : AppCompatActivity() {
 
     private lateinit var viewPager2 : ViewPager2
     private var mainActivity : MainActivity = MainActivity()
+    private lateinit var map_screen_set_new_language : ImageView
+
+    private fun firstLaunch() {
+        if (PreferenceMaestro.isFirstStart) {
+            try {
+                DialogFragmentForChangeLanguage().show(supportFragmentManager,"dialog_change_lang")
+            }catch (e: Exception){
+                Toast.makeText(applicationContext,"no support change language",Toast.LENGTH_SHORT).show()
+                Timber.e("ERROR ADDSTACT ${e.message}")
+            }
+        }
+    }
 
 
 
@@ -32,21 +47,13 @@ class AddSolarStationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_station)
         Timber.i("AddSolarStationActivity started")
-
+        firstLaunch()
         setLocale(this, PreferenceMaestro.languageOfApp)
 
 
-//        val repo = SolarRepository(application)
-//
-//        val viewModelAddSolarStation: ViewModelAddSolarStation =
-//                ViewModelProvider(this).get(ViewModelAddSolarStation::class.java)
-
-
-
-//        toCharacteristics = findViewById(R.id.to_characteristics)
         viewPager2 = findViewById(R.id.viewPager2)
+        map_screen_set_new_language = findViewById<ImageView>(R.id.map_screen_set_new_language)
 
-        //viewModelAddSolarStation.addSolarStation(SolarStation(12,144,"HORRAYY!!"))
 
 
 
@@ -62,6 +69,16 @@ class AddSolarStationActivity : AppCompatActivity() {
             tab.setText(titles.get(position))
         }.attach()
         //to_characteristics.setOnClickListener { }
+
+        map_screen_set_new_language.setOnClickListener {
+            try {
+                DialogFragmentForChangeLanguage().show(supportFragmentManager,"dialog_change_lang")
+            }catch (e: Exception){
+                Toast.makeText(applicationContext,"no support change language",Toast.LENGTH_SHORT).show()
+                Timber.e("ERROR ADDSTACT ${e.message}")
+            }
+
+        }
 
     }
 

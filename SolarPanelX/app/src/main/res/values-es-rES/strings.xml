@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Solar Panel X</string>
+    <string name="mainscreen_chart_title_forecast20hr">Pronóstico para ~ 20 horas:</string>
+    <string name="mainscreen_chart_title_forecasttomorrow">para mañana</string>
+    <string name="screenaddstation_map_title">Establezca la ubicación de sus paneles solares</string>
+    <string name="next">siguiente></string>
+    <string name="screenaddstation_confirm_nominalpower_description">Potencia máxima (nominal) de su estación fotovoltaica [en vatios]</string>
+    <string name="screenaddstation_confirm_priceper1kwh_description">Precio por 1 kWh</string>
+    <string name="screenaddstation_confirm_currency_description">Moneda de tu país</string>
+    <string name="screenaddstation_confirm_efficiency_description" translatable="false">Eficiencia promedio de sus paneles solares [%]</string>
+    <string name="screenaddstation_confirm_install_date_description">Fecha de instalación del sistema fotovoltaico [años]</string>
+    <string name="screenaddstation_confirm_button">Confirmar cambios</string>
+    <string name="settingsscreen_menu_checkupdates">Check Updates</string>
+    <string name="settingsscreen_menu_aboutus">Acerca de la aplicación</string>
+    <string name="settingsscreen_menu_aboutus_message">Características:> pronóstico de la generación de paneles solares por hora, semana, mes> gráficos detallados de pronóstico> la capacidad de calibrar el pronóstico Características futuras:> Próximamente agregaremos el modo Explorador con sensores de ángulo y luz. Puede ayudarlo a elegir el lugar más soleado para los paneles solares.</string>
+    <string name="calibrationscreen_description">Calibre la salida de potencia de pronóstico de su panel solar actual, si es necesario</string>
+    <string name="nominal_power_cantbe_null">La potencia nominal no puede ser un 0</string>
+    <string name="changes_saved">Cambios guardados</string>
+    <string name="light_sensor__error_title">Tu teléfono no tiene sensor de luz</string>
+    <string name="light_sensor__error_message">Verifique la aplicación en otro teléfono</string>
+    <string name="light_sensor_sign_raw_value">valor bruto del sensor</string>
+    <string name="light_sensor_sign_exchange_rate">1% de toda la potencia de salida =</string>
+    <string name="light_sensor_sign_converted">convertido</string>
+    <string name="light_sensor_sign_one_percent_of_powerout">1% de potencia de salida =</string>
+    <string name="light_sensor_sign_now_solpan">Ahora el panel solar</string>
+    <string name="light_sensor_sign_work_at_percent">está trabajando en</string>
+    <string name="light_sensor_sign_raw_value_footer">valor bruto del sensor</string>
+    <string name="light_sensor_sign_nominal_power">Potencia nominal:</string>
+    <string name="light_sensor_sign_calibrate_mode">Modo calibrar</string>
+    <string name="confirm_fragment_cost_of_pv_station">Costo de la estación fotovoltaica</string>
+    <string name="fragment_confirm_advanced_optional">Avanzado (opcional)</string>
+    <string name="addstation_activity_map">Mapa</string>
+    <string name="addstation_activity_characteristics">Caracteristicas</string>
+    <string name="settingsscreen_menu_solarpanels_change_language">Idioma</string>
+    <string name="dialog_choose_language">Elige lengua</string>
+    <string name="mainscreen_fr_forecastnow">⚡Pronóstico ahora:</string>
+    <string name="mainscreen_fr_city">Ciudad:</string>
+    <string name="mainscreen_fr_temp">Temperatura:</string>
+    <string name="mainscreen_fr_loading">Cargando...</string>
+    <string name="mainscreen_fr_errornointernet">error, no hay internet</string>
+    <string name="mainscreen_chart_title_forecast_aftertomorrow">pasado mañana</string>
+    <string name="My_PV_Station">Mi estación fotovoltaica</string>
+    <string name="Optimal_Tilt">Inclinación óptima</string>
+    <string name="Calibrating">Calibrando</string>
+    <string name="Bad_Weather_Alerts">Alertas de mal tiempo</string>
+    <string name="mainscreen_tools">🛠Instrumentos</string>
+    <string name="maintools_screen_title_ight_sensor">Sensor de luz beta</string>
+    <string name="main_screen_tip_label_forecast">1️⃣Potencia de pronóstico ahora 2️⃣% de generación máxima</string>
+    <string name="sunrise">amanecer</string>
+    <string name="sunset">atardecer</string>
+    <string name="sunshine_time">duración del sol</string>
+    <string name="main_screen_last_upd">última actualización</string>
+    <string name="optimal_orientation_for_city">Orientación óptima para la ciudad:</string>
+    <string name="optimal_direction">Dirección óptima</string>
+    <string name="actual_direction">Dirección real</string>
+    <string name="calibrate_tilt">Calibrar inclinación</string>
+    <string name="bottom_of_your_solar_panel">⬇Parte inferior de su panel solar⬇️</string>
+    <string name="at_find_optimal_azimuth">en encontrar el azimut óptimo</string>
+    <string name="orientation_of_phone">Orientación del teléfono:</string>
+    <string name="at_find_optimal_tilt">en encontrar la inclinación óptima</string>
+    <string name="calibrating_tilt">Calibración de inclinación:</string>
+    <string name="calibrating_direction_azimuth">Calibración de dirección/acimut:</string>
+    <string name="optimal_tilt">Inclinación óptima</string>
+    <string name="actual_tilt">Inclinación real</string>
+    <string name="close">Cerrar</string>
+    <string name="azimuth">azimut =</string>
+</resources>

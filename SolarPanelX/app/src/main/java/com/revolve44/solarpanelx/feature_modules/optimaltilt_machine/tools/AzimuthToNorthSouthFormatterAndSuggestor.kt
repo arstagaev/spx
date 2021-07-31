@@ -52,13 +52,13 @@ class AzimuthToNorthSouthFormatterAndSuggestor {
         when(lat){
             in 0F..90.0F       ->  {
                 when(actualDirection){
-                    in 330F..360F -> return HowWellDirectedSolarPanel("Excellent",Color.GREEN)
-                    in 0F..30F ->    return HowWellDirectedSolarPanel("Excellent",Color.GREEN)
+                    in 330F..360F -> return HowWellDirectedSolarPanel("👍🤩",Color.GREEN)
+                    in 0F..30F ->    return HowWellDirectedSolarPanel("👍🤩",Color.GREEN)
 
-                    in 270F..330F -> return HowWellDirectedSolarPanel("Good",Color.YELLOW)
-                    in 30F..90F ->  return HowWellDirectedSolarPanel("Good",Color.YELLOW)
+                    in 270F..330F -> return HowWellDirectedSolarPanel("😐",Color.YELLOW)
+                    in 30F..90F ->  return HowWellDirectedSolarPanel ("😐",Color.YELLOW)
 
-                    in 90F..270F -> return HowWellDirectedSolarPanel("Bad",Color.RED)
+                    in 90F..270F -> return HowWellDirectedSolarPanel("☹️",Color.RED)
 
                     else -> {
                         return HowWellDirectedSolarPanel("Error code: 01",Color.MAGENTA)
@@ -69,13 +69,13 @@ class AzimuthToNorthSouthFormatterAndSuggestor {
             in -90.0F..0F -> {
 
                 when(actualDirection){
-                    in 270F..360F -> return HowWellDirectedSolarPanel("Bad",Color.RED)
-                    in 0F..90F -> return HowWellDirectedSolarPanel("Bad",Color.RED)
+                    in 270F..360F -> return HowWellDirectedSolarPanel("☹️👎",Color.RED)
+                    in 0F..90F -> return HowWellDirectedSolarPanel   ("☹️👎",Color.RED)
 
-                    in 225F..270F -> return HowWellDirectedSolarPanel("Not very good",Color.YELLOW)
-                    in 90F..135F ->  return HowWellDirectedSolarPanel("Not very good",Color.YELLOW)
+                    in 225F..270F -> return HowWellDirectedSolarPanel("😐",Color.YELLOW)
+                    in 90F..135F ->  return HowWellDirectedSolarPanel("😐",Color.YELLOW)
 
-                    in 135F..225F -> return HowWellDirectedSolarPanel("Excellent",Color.GREEN)
+                    in 135F..225F -> return HowWellDirectedSolarPanel("\uD83E\uDD29\uD83D\uDC4D",Color.GREEN)
 
                     else -> {
                         return HowWellDirectedSolarPanel("Predictor is Broken:(",Color.MAGENTA)

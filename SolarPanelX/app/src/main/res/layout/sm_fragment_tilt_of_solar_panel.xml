@@ -14,7 +14,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         android:gravity="center"
-        android:text="Optimal tilt"
+        android:text="@string/optimal_tilt"
         android:textColor="#959595"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:gravity="center"
-        android:text="Actual tilt"
+        android:text="@string/actual_tilt"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,8 @@
             android:layout_height="match_parent"
             android:background="#007300"
             android:gravity="center"
-            android:text="Good"
+            android:textSize="30sp"
+            android:text="🤩👍"
             android:textColor="@color/white">
 
         </TextView>
@@ -131,7 +132,7 @@
             android:layout_height="match_parent"
             android:background="#F9FAF9"
             android:gravity="center"
-            android:text="Close"
+            android:text="@string/close"
             android:textColor="@color/black">
 
         </TextView>

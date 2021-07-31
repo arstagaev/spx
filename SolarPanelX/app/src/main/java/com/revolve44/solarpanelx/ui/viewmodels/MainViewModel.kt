@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.lifecycle.*
+import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.model.api.FiveDaysForecastModelParser
@@ -92,7 +93,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
                 Timber.d("start API request")
                 val response =  repoSpx.get5daysRequest()
                 fiveDaysRequestRes.postValue(handle5daysResponse(response))
-                PreferenceMaestro.timeOfLastDataUpdate = "last updated: ${generateTimestampLastUpdate()}"
+                PreferenceMaestro.timeOfLastDataUpdate =  generateTimestampLastUpdate()
                 PreferenceMaestro.timeOfLastDataUpdateLong = getCurrentTimestampSec()
                 //be.postValue(handleBetaResponse(response))
 

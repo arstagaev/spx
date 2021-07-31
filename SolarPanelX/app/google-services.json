@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "443526642785",
+    "project_id": "solarpanelx-bbdfc",
+    "storage_bucket": "solarpanelx-bbdfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443526642785:android:0fe2fb445c59bee254be20",
+        "android_client_info": {
+          "package_name": "com.revolve44.solarpanelx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443526642785-fs11ej7fl5oi6h7r7u19gni5c1ka7o0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.revolve44.solarpanelx",
+            "certificate_hash": "e46d3b4bb3d34270f791b4c7219e6654a1edc809"
+          }
+        },
+        {
+          "client_id": "443526642785-d925aj4gujg366ccm850i4ghouvc894c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFW-gxgAzZQh1_g2UOGyU6zbqLQvdYBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443526642785-d925aj4gujg366ccm850i4ghouvc894c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

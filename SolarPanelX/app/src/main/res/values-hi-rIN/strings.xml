@@ -4,7 +4,7 @@
     <string name="mainscreen_chart_title_forecast20hr">~ 20 घंटे के लिए पूर्वानुमान:</string>
     <string name="mainscreen_chart_title_forecasttomorrow">कल के लिए</string>
     <string name="screenaddstation_map_title">कृपया अपने सौर पैनलों का स्थान निर्धारित करें</string>
-    <string name="screenaddstation_map_button">अगला></string>
+    <string name="next">अगला></string>
     <string name="screenaddstation_confirm_nominalpower_description">आपके पीवी स्टेशन की अधिकतम शक्ति [वाट्स में]</string>
     <string name="screenaddstation_confirm_priceper1kwh_description">1 kWh प्रति मूल्य</string>
     <string name="screenaddstation_confirm_currency_description">अपने देश में मुद्रा</string>
@@ -52,4 +52,23 @@
     <string name="Bad_Weather_Alerts">खराब मौसम अलर्ट</string>
     <string name="mainscreen_tools">🛠उपकरण</string>
     <string name="maintools_screen_title_ight_sensor">प्रकाश संवेदक beta</string>
+    <string name="main_screen_last_upd">आखरी अपडेट:</string>
+    <string name="main_screen_tip_label_forecast">1️⃣पूर्वानुमान शक्ति अब अधिकतम उत्पादन का 2️⃣%</string>
+    <string name="sunrise">सूर्योदय</string>
+    <string name="sunshine_time">धूप का समय</string>
+    <string name="sunset">सूर्य का अस्त होना</string>
+    <string name="optimal_orientation_for_city">शहर के लिए इष्टतम अभिविन्यास:</string>
+    <string name="optimal_direction">इष्टतम दिशा</string>
+    <string name="actual_direction">वास्तविक दिशा</string>
+    <string name="calibrate_tilt">कैलिब्रेट टिल्ट</string>
+    <string name="bottom_of_your_solar_panel">⬇️आपके सौर पैनल के नीचे⬇️</string>
+    <string name="at_find_optimal_azimuth">इष्टतम अज़ीमुथ खोजने पर</string>
+    <string name="orientation_of_phone">फोन की ओरिएंटेशन:</string>
+    <string name="at_find_optimal_tilt">इष्टतम झुकाव खोजने पर</string>
+    <string name="calibrating_tilt">कैलिब्रेटिंग झुकाव:</string>
+    <string name="calibrating_direction_azimuth">कैलिब्रेटिंग दिशा / अज़ीमुथ:</string>
+    <string name="optimal_tilt">इष्टतम झुकाव</string>
+    <string name="actual_tilt">वास्तविक झुकाव</string>
+    <string name="close">बंद करे</string>
+    <string name="azimuth">अज़ीमुथ =</string>
 </resources>

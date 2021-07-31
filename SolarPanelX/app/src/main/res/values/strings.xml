@@ -3,7 +3,7 @@
     <string name="mainscreen_chart_title_forecast20hr">"Forecast for ~20 hours: "</string>
     <string name="mainscreen_chart_title_forecasttomorrow">"for tomorrow "</string>
     <string name="screenaddstation_map_title">Please set location  of your Solar Panels</string>
-    <string name="screenaddstation_map_button">Next></string>
+    <string name="next">next></string>
     <string name="screenaddstation_confirm_nominalpower_description">Maximum (Nominal) power of your PV station [in Watts]</string>
     <string name="screenaddstation_confirm_priceper1kwh_description">Price per 1 kWh</string>
     <string name="screenaddstation_confirm_currency_description">Currency in your country</string>
@@ -12,13 +12,7 @@
     <string name="screenaddstation_confirm_button">Confirm Changes</string>
     <string name="settingsscreen_menu_checkupdates">Check Updates</string>
     <string name="settingsscreen_menu_aboutus">About App</string>
-    <string name="settingsscreen_menu_aboutus_message">"Features:
-        \n > forecasting of solar panels generation on Hour, Week, Month
-        \n > detailed charts of forecast
-        \n > the ability to calibrate the forecast
-        \n
-        \n Future features:
-        \n > Coming soon we will add Explorer mode with angle and light sensors. It may help you to choose the more sunny place for solar panels "</string>
+    <string name="settingsscreen_menu_aboutus_message">"Features:           > forecasting of solar panels generation on Hour, Week, Month           > detailed charts of forecast           > the ability to calibrate the forecast                     Future features:           > Coming soon we will add Explorer mode with angle and light sensors. It may help you to choose the more sunny place for solar panels "</string>
     <string name="calibrationscreen_description">Calibrate forecasting power output of your current Solar Panel, if needed</string>
     <string name="nominal_power_cantbe_null">Nominal Power can\'t be a 0</string>
     <string name="changes_saved">changes saved</string>
@@ -36,7 +30,7 @@
     <string name="confirm_fragment_cost_of_pv_station">Cost of PV Station</string>
     <string name="fragment_confirm_advanced_optional">Advanced (optional)</string>
     <string name="addstation_activity_map">Map</string>
-    <string name="addstation_activity_characteristics">Characterisctics</string>
+    <string name="addstation_activity_characteristics">Characteristics</string>
     <string name="settingsscreen_menu_solarpanels_change_language">Language</string>
     <string name="dialog_choose_language">Choose language</string>
     <string name="mainscreen_fr_forecastnow">⚡Forecast now:</string>
@@ -51,6 +45,24 @@
     <string name="Bad_Weather_Alerts">Bad Weather Alerts</string>
     <string name="mainscreen_tools">🛠️Tools</string>
     <string name="maintools_screen_title_ight_sensor">Light Sensor beta</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_screen_tip_label_forecast">1️⃣Forecast power now  2️⃣ % of max generation</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunshine_time">Sunshine time</string>
+    <string name="sunset">Sunset</string>
+    <string name="main_screen_last_upd">last updated: </string>
+    <string name="optimal_orientation_for_city">Optimal orientation for city:</string>
+    <string name="optimal_direction">Optimal direction</string>
+    <string name="actual_direction">Actual direction</string>
+    <string name="calibrate_tilt">Calibrate Tilt</string>
+    <string name="bottom_of_your_solar_panel">⬇Bottom of your Solar Panel⬇️</string>
+    <string name="at_find_optimal_azimuth">at find optimal azimuth</string>
+    <string name="orientation_of_phone">Orientation of Phone:</string>
+    <string name="at_find_optimal_tilt">at find optimal tilt</string>
+    <string name="calibrating_tilt">Calibrating tilt:</string>
+    <string name="calibrating_direction_azimuth">Calibrating direction/azimuth:</string>
+    <string name="optimal_tilt">Optimal tilt</string>
+    <string name="actual_tilt">Actual tilt</string>
+    <string name="close">Close</string>
+    <string name="azimuth">azimuth=</string>
+
 </resources>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
@@ -18,6 +19,8 @@ import kotlin.collections.ArrayList
 class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment() {
     private lateinit var mListView: ListView
 
+    private lateinit var okay_confirm_language : Button
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -25,12 +28,15 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment() {
         //arrayOf("PV Stations Characteristics", "Check Updates","Pro Version","About Us")
         //array.add("Future Updates")
         array.add("English              ")
-        array.add("Hindi (हिन्दी)          ")
+        array.add("Hindi  (हिन्दी)          ")
         //array.add(getString(R.string.settingsscreen_menu_proversion))
-        //array.add("German (Deutsch)     ")
-        //array.add("Russian (Русский)    ")
+        array.add("German (Deutsch)     ")
+        array.add("French (Français)    ")
+        array.add("Spanish (Español)    ")
         // access the listView from xml file
         mListView = view.findViewById<ListView>(R.id.dialog_change_language_list_view)
+        okay_confirm_language = view.findViewById(R.id.okay_confirm_language)
+
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         val arrayAdapter = ArrayAdapter(
             requireActivity(),
@@ -41,9 +47,11 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment() {
         mListView.adapter = arrayAdapter
         when(PreferenceMaestro.languageOfApp){
             LanguagesOfApp.ENGLISH.id -> mListView.setItemChecked(0,true)
-            LanguagesOfApp.HINDI.id ->   mListView.setItemChecked(1,true)
-            LanguagesOfApp.GERMAN.id ->  mListView.setItemChecked(2,true)
-            LanguagesOfApp.RUSSIAN.id -> mListView.setItemChecked(3,true)
+            LanguagesOfApp.HINDI.id   -> mListView.setItemChecked(1,true)
+            LanguagesOfApp.GERMAN.id  -> mListView.setItemChecked(2,true)
+            LanguagesOfApp.FRANCE.id  -> mListView.setItemChecked(3,true)
+            LanguagesOfApp.SPANISH.id -> mListView.setItemChecked(4,true)
+            //LanguagesOfApp.RUSSIAN.id -> mListView.setItemChecked(3,true)
         }
 
         mListView.setOnItemClickListener { parent, view, position, id ->
@@ -64,16 +72,23 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment() {
                     PreferenceMaestro.languageOfApp = LanguagesOfApp.GERMAN.id
                 }
                 3 -> {
-                    setLocale(requireActivity(),LanguagesOfApp.RUSSIAN.id)
-                    PreferenceMaestro.languageOfApp = LanguagesOfApp.RUSSIAN.id
+                    setLocale(requireActivity(),LanguagesOfApp.FRANCE.id)
+                    PreferenceMaestro.languageOfApp = LanguagesOfApp.FRANCE.id
+                }
+                4 -> {
+                    setLocale(requireActivity(),LanguagesOfApp.SPANISH.id)
+                    PreferenceMaestro.languageOfApp = LanguagesOfApp.SPANISH.id
                 }
 
             }
+            // refresh app for change language
             requireActivity().finish();
             requireActivity().startActivity(requireActivity().getIntent());
 
         }
-
+        okay_confirm_language.setOnClickListener {
+            dismiss()
+        }
 
 
     }

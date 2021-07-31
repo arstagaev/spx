@@ -10,7 +10,7 @@
         android:layout_width="276dp"
         android:layout_height="38dp"
         android:gravity="center"
-        android:text="Calibrating direction/azimuth:"
+        android:text="@string/calibrating_direction_azimuth"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,11 +23,13 @@
         android:id="@+id/textView10"
         android:layout_width="276dp"
         android:layout_height="38dp"
+        android:layout_marginBottom="4dp"
         android:gravity="center"
-        android:text="Calibrating tilt:"
+        android:text="@string/calibrating_tilt"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent">
 
     </TextView>
@@ -36,18 +38,19 @@
         android:id="@+id/imageView3"
         android:layout_width="289dp"
         android:layout_height="281dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/sm_right_orient_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
     </ImageView>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="295dp"
         android:layout_height="263dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="4dp"
         android:src="@drawable/sm_right_orient_vertical"
         app:layout_constraintBottom_toTopOf="@+id/GoToOrientFrag"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +65,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FFFFFF"
         android:elevation="20dp"
-        android:text="Next"
+        android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

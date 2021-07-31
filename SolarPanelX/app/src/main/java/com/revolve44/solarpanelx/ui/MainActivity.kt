@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
@@ -33,12 +34,16 @@ class MainActivity : AppCompatActivity() {
     //var viewModelMain : MainViewModel? = null
     //private val viewModelMain : MainViewModel by viewModels()
     var viewModelMain: MainViewModel? = null
+    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // if not installed pv station => go to addStationActivity
-        firstLaunch()
         setLocale(this,PreferenceMaestro.languageOfApp)
+        firstLaunch()
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         setContentView(R.layout.activity_main)
 

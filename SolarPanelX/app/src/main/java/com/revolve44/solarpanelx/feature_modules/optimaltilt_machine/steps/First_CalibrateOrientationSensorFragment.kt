@@ -47,7 +47,7 @@ class First_CalibrateOrientationSensorFragment : Fragment(R.layout.sm_fragment_c
 
     override fun onResume() {
         super.onResume()
-        we_suggest_orientation_for_define_location.text = "Optimal Tilt for city: \n${PreferenceMaestro.chosenStationCITY}"
+        we_suggest_orientation_for_define_location.text = "${PreferenceMaestro.chosenStationCITY}"
         
     }
 

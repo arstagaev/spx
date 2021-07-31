@@ -99,7 +99,7 @@ class AzimithDirectRotateSolarPanelFragment : Fragment(R.layout.sm_fragment_azim
             actualDirectionView.setText(TiltSuggester().azimuthToDirections(abs(it-180f)))
 
 
-            azi?.setText("azimuth= ${roundTo1decimials(it)}")
+            azi?.setText(getString(R.string.azimuth)+"\n${roundTo1decimials(it)}")
 
             defineWhichCloseToOptimal = AzimuthToNorthSouthFormatterAndSuggestor().defineWhichCloseToOptimal(LATITUDE,it)
 
