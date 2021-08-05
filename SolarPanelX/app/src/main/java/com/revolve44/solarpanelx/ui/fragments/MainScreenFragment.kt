@@ -34,11 +34,15 @@ import com.revolve44.solarpanelx.domain.enums.TypeOfSky
 import com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
 import com.revolve44.solarpanelx.global_utils.Constants.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.ui.MainActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
-    private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
+    //private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
+    private val values = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     //private val mainViewmodelF : MainViewModel by activityViewModels()
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
@@ -139,73 +143,61 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     override fun onResume() {
         super.onResume()
 
-        // Creates a button that mimics a crash when clicked
-        // Creates a button that mimics a crash when clicked
-//        val crashButton = Button(requireActivity())
-//        crashButton.setText("Crash!")
-//        crashButton.setOnClickListener(View.OnClickListener {
-//            throw RuntimeException("Test Crash") // Force a crash
-//        })
-//
-//        requireActivity().addContentView(
-//            crashButton, ViewGroup.LayoutParams(
-//                ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT
-//            )
-//        )
-
         //WeatherAnim.quickSetup()
         //WeatherAnim.geometryL()
         //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
         //mainViewmodel = ViewModelProvider(this).get(MainViewModel::class.java)
-        refreshSunshineIndicatorBlock()
+        GlobalScope.launch(Dispatchers.Main) {
+            refreshSunshineIndicatorBlock()
 
-        //wait when viewmodel not null from activity
-        (activity as MainActivity).let { it ->
-            //val spxRepository = SpxRepository()
-            //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
+            //wait when viewmodel not null from activity
+            (activity as MainActivity).let { it ->
+                //val spxRepository = SpxRepository()
+                //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
 
-            //it.viewModelMain = ViewModelProvider(it).get(MainViewModel::class.java)
-            if (it.viewModelMain != null){
+                //it.viewModelMain = ViewModelProvider(it).get(MainViewModel::class.java)
+                if (it.viewModelMain != null){
 
-                it.viewModelMain!!.getAllForecastForChart().observe(viewLifecycleOwner) {
-                    if(it.isNotEmpty() && it.size == 40){
-                        Timber.i("ccc input size:${it.size}")
+                    it.viewModelMain!!.getAllForecastForChart().observe(viewLifecycleOwner) {
+                        if(it.isNotEmpty() && it.size == 40){
+                            Timber.i("ccc input size:${it.size}")
 
-                        firstStepToCharts(it)
+                            firstStepToCharts(it)
 
-                        lastUpdate.text = getString(R.string.main_screen_last_upd)+ PreferenceMaestro.timeOfLastDataUpdate
+                            lastUpdate.text = getString(R.string.main_screen_last_upd)+ " "+PreferenceMaestro.timeOfLastDataUpdate
+                        }
+
                     }
 
-                }
+                    it.viewModelMain!!.forecastNow.observe(viewLifecycleOwner) { fNow ->
+                        forecastNowRelativ.text = "${roundTo1decimials((fNow.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() )*100f)}%"
+                        Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff}  ${PreferenceMaestro.chosenStationNOMINALPOWER}")
+                        forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
 
-                it.viewModelMain!!.forecastNow.observe(viewLifecycleOwner) { fNow ->
-                    forecastNowRelativ.text = "${roundTo1decimials((fNow.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() )*100f)}%"
-                    Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff}  ${PreferenceMaestro.chosenStationNOMINALPOWER}")
-                    forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
+                        changeSkyInMainScreen()
+                        //initFactoryOfMainLabel()
+                    }
 
-                    changeSkyInMainScreen()
-                    //initFactoryOfMainLabel()
-                }
+                    it.viewModelMain!!.fiveDaysRequestRes.observe(viewLifecycleOwner) {
+                        setMainLabelMainScreen(it)
+                        when(it){
+                            is Resource.Success -> {
+                                refreshSunshineIndicatorBlock()
 
-                it.viewModelMain!!.fiveDaysRequestRes.observe(viewLifecycleOwner) {
-                    setMainLabelMainScreen(it)
-                    when(it){
-                        is Resource.Success -> {
-                            refreshSunshineIndicatorBlock()
+                            }
+                            is Resource.Loading -> {
+                                gradientAnimation(frcnowCardview,Color.GREEN,Color.MAGENTA,Color.RED,Color.BLUE,Color.WHITE,5000)
 
-                        }
-                        is Resource.Loading -> {
-                            gradientAnimation(frcnowCardview,Color.GREEN,Color.MAGENTA,Color.RED,Color.BLUE,Color.WHITE,5000)
+                            }
+                            is Resource.Error -> {
 
-                        }
-                        is Resource.Error -> {
-
+                            }
                         }
                     }
                 }
             }
         }
+
     }
 
     private fun initFactoryOfMainLabel(){
@@ -678,7 +670,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         (activity as MainActivity).let {
             it.viewModelMain!!.manualRequest()
         }
+
     }
+
     private fun swipeRefreshTools(view: View) {
 
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_mainscreen)

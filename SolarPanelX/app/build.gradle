@@ -18,8 +18,8 @@ android {
         applicationId "com.revolve44.solarpanelx"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 22
-        versionName "0.9.21"
+        versionCode 23
+        versionName "0.9.23"
 
         multiDexEnabled true //(# methods: 68662 > 65536)
 
@@ -100,7 +100,7 @@ dependencies {
 
     //UI tricks
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'com.robinhood.ticker:ticker:2.0.2'
+    //implementation 'com.robinhood.ticker:ticker:2.0.2'
     implementation 'com.github.feeeei:CircleSeekbar:v1.1.2'
 
     /* ViewPager2 */
@@ -117,6 +117,9 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // attention i am not sure
+    compile 'cat.ereza:customactivityoncrash:2.3.0'
 
 
 }

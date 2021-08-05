@@ -42,10 +42,10 @@
     <string name="My_PV_Station">Ma station photovoltaïque</string>
     <string name="Optimal_Tilt">Inclinaison optimale</string>
     <string name="Calibrating">Étalonnage</string>
-    <string name="Bad_Weather_Alerts">Alertes de mauvais temps</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">Alertes de mauvais temps</string>
     <string name="mainscreen_tools">🛠️Outils</string>
     <string name="maintools_screen_title_ight_sensor">Capteur de lumière bêta</string>
-    <string name="main_screen_last_upd">dernière mise à jour:</string>
+    <string name="main_screen_last_upd"> dernière mise à jour: </string>
     <string name="main_screen_tip_label_forecast">1️⃣Puissance prévisionnelle maintenant 2️⃣ % de la génération max.</string>
     <string name="sunrise">lever du soleil</string>
     <string name="sunshine_time">L\'heure du soleil</string>
@@ -65,4 +65,8 @@
     <string name="close">Fermer</string>
     <string name="azimuth">azimut=</string>
     <string name="screenaddstation_confirm_efficiency_description">Rendement moyen de vos panneaux solaires [%]</string>
+    <string name="new_feature_coming_soon">À venir! [Fin 21 septembre`]</string>
+    <string name="new_feature_coming_soon2">À venir! [Fin 21 octobre`]</string>
+    <string name="maintools_screen_title_nn">réseau neuronal</string>
+    <string name="compass_doesn_t_work_on_your_phone">La boussole ne fonctionne pas sur votre téléphone😕</string>
 </resources>

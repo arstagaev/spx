@@ -64,12 +64,19 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavView = findViewById(R.id.bottom_nav)
 
-        navController = Navigation.findNavController(this, R.id.main_screen_container_fragment);
-
-        bottomNavView.setupWithNavController(navController!!)
-        setCurrentFragment()
+        initNavigation()
         manageBottomNavBar()
 
+    }
+
+    private fun initNavigation() {
+        navController = Navigation.findNavController(this, R.id.main_screen_container_fragment)
+        val navGraph = navController!!.navInflater.inflate(R.navigation.nav_main_screen)
+        //navController!!.setGraph(R.navigation.)
+        navGraph.startDestination = R.id.mainFragmentOfApp;
+        navController!!.graph = navGraph;
+
+        bottomNavView.setupWithNavController(navController!!)
     }
 
     private fun firstLaunch() {
@@ -94,12 +101,12 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.MainScreenForecast -> {
-                    navController?.navigate(R.id.mainFragment)
+                    navController?.navigate(R.id.mainFragmentOfApp)
                     //findNavController(R.id.main_screen_container_fragment).navigate(MainScreenFragmentDirections.actionMainFragmentToToolsManagerFragment())
 
                 }
                 R.id.ToolsScreen -> {
-                    navController?.navigate(R.id.toolsManagerFragment)
+                    navController?.navigate(R.id.tlMng)
                     //findNavController(R.id.main_screen_container_fragment).navigate(ToolsManagerFragmentDirections.actionToolsManagerFragmentToMainFragment())
 
                 }
@@ -109,11 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setCurrentFragment() {
-        //supportFragmentManager.beginTransaction().apply {
-        //    replace(R.id.con)
-        //}
-    }
+
 
     private var isOpeniconMainScreenBottomNavigation = true
     private fun initBottomNav() {
@@ -141,4 +144,16 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+   // I know is stupid but i soon fix this;)
+//    override fun onBackPressed() {
+//        //Timber.i("cccurent frag ${navController?.currentDestination?.label}")
+//        if (navController?.currentDestination?.label == "Home"){
+//            super.onBackPressed()
+//        }else if (navController?.currentDestination?.label == "tlMng"){
+//            navController?.navigate(R.id.mainFragmentOfApp)
+//        }else{
+//            navController?.navigate(R.id.tlMng)
+//        }
+//    }
 }

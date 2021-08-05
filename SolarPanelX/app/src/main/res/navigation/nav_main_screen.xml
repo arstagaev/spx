@@ -4,29 +4,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main_screen"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/mainFragmentOfApp">
 
     <!--In the label field of fragment you can give the name that you want to show in the toolbar-->
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/mainFragmentOfApp"
         android:name="com.revolve44.solarpanelx.ui.fragments.MainScreenFragment"
         android:label="Home"
         tools:layout="@layout/fragment_main_screen" >
 
         <action
             android:id="@+id/action_mainFragment_to_toolsManagerFragment"
-            app:destination="@id/toolsManagerFragment" />
+            app:destination="@id/tlMng" />
     </fragment>
 
     <fragment
-        android:id="@+id/toolsManagerFragment"
+        android:id="@+id/tlMng"
         android:name="com.revolve44.solarpanelx.ui.fragments.ToolsManagerFragment"
-        android:label="ToolsMainFragment"
+        android:label="tlMng"
         tools:layout="@layout/fragment_tools_manager" >
 
         <action
             android:id="@+id/action_toolsManagerFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragmentOfApp" />
         <action
             android:id="@+id/action_toolsManagerFragment_to_settings_mainscreen"
             app:destination="@id/settings_mainscreen" />

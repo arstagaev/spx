@@ -49,10 +49,10 @@
     <string name="My_PV_Station">मेरा पीवी स्टेशन</string>
     <string name="Optimal_Tilt">इष्टतम झुकाव</string>
     <string name="Calibrating">औजार</string>
-    <string name="Bad_Weather_Alerts">खराब मौसम अलर्ट</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">खराब मौसम अलर्ट</string>
     <string name="mainscreen_tools">🛠उपकरण</string>
     <string name="maintools_screen_title_ight_sensor">प्रकाश संवेदक beta</string>
-    <string name="main_screen_last_upd">आखरी अपडेट:</string>
+    <string name="main_screen_last_upd">आखरी अपडेट: </string>
     <string name="main_screen_tip_label_forecast">1️⃣पूर्वानुमान शक्ति अब अधिकतम उत्पादन का 2️⃣%</string>
     <string name="sunrise">सूर्योदय</string>
     <string name="sunshine_time">धूप का समय</string>
@@ -71,4 +71,8 @@
     <string name="actual_tilt">वास्तविक झुकाव</string>
     <string name="close">बंद करे</string>
     <string name="azimuth">अज़ीमुथ =</string>
+    <string name="new_feature_coming_soon">जल्द आ रहा है! [21 सितंबर के अंत`]</string>
+    <string name="new_feature_coming_soon2">जल्द आ रहा है! [21 अक्टूबर के अंत`]</string>
+    <string name="maintools_screen_title_nn">तंत्रिका नेटवर्क</string>
+    <string name="compass_doesn_t_work_on_your_phone">कम्पास आपके फ़ोन पर काम नहीं करता😕</string>
 </resources>

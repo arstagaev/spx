@@ -7,7 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.Button
 import android.widget.ImageView
-import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
 import com.revolve44.solarpanelx.R
 
 
@@ -27,7 +27,7 @@ class Second_CalcHelperFragment : Fragment(R.layout.sm_fragment_calc_helper) {
 
         btnNextAfterOrientation.setOnClickListener {
 
-            (activity as OptimalTiltHelperActivity).viewModel.currentItemInViewPager2.value = 2
+            (activity as OptimalOrientationHelperActivity).viewModel.currentItemInViewPager2.value = 2
         }
 
     }

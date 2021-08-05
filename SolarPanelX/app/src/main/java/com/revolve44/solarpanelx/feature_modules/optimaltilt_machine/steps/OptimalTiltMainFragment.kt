@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.ZoomOutPageTransformer
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
@@ -26,7 +26,7 @@ class OptimalTiltMainFragment : Fragment(R.layout.sm_fragment_start_calc_tilt) {
         // Instantiate a ViewPager2 and a PagerAdapter.
         viewPager = view.findViewById(R.id.pager_calc_tilt)
         //buttonToNext = view.findViewById(R.id.next_from_three_fragment)
-        viewModelOrientation = (activity as OptimalTiltHelperActivity).viewModel
+        viewModelOrientation = (activity as OptimalOrientationHelperActivity).viewModel
         viewModelOrientation.currentItemInViewPager2.value = viewPager.currentItem
 
         viewModelOrientation.currentItemInViewPager2.observe(viewLifecycleOwner, Observer {
@@ -60,9 +60,9 @@ class OptimalTiltMainFragment : Fragment(R.layout.sm_fragment_start_calc_tilt) {
             return when (position) {
                 0 -> First_CalibrateOrientationSensorFragment()
                 1 -> Second_CalcHelperFragment()
-                2 -> LocationOfPhoneOnSPSurfaceFragment()
-                3 -> AzimithDirectRotateSolarPanelFragment()
-                4 -> TiltOfSolarPanel()
+                2 -> Third_LocationOfPhoneOnSPSurfaceFragment()
+                3 -> Fourth_AzimithDirectRotateSolarPanelFragment()
+                4 -> Fifth_TiltOfSolarPanel()
                 else -> Second_CalcHelperFragment()
             }
         }

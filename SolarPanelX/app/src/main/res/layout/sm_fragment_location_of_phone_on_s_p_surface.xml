@@ -4,64 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.LocationOfPhoneOnSPSurfaceFragment">
+    android:background="@color/white"
+    tools:context="com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.steps.Third_LocationOfPhoneOnSPSurfaceFragment">
 
-    <TextView
-        android:layout_width="276dp"
+
+    <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
+        android:id="@+id/verticalTextView"
+        android:layout_width="wrap_content"
         android:layout_height="38dp"
+        android:layout_marginStart="2dp"
         android:gravity="center"
         android:text="@string/calibrating_direction_azimuth"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="@+id/first_sol_pan_help_img"
+        app:layout_constraintStart_toEndOf="@+id/first_sol_pan_help_img"
+        app:layout_constraintTop_toTopOf="@+id/first_sol_pan_help_img"
+        app:layout_constraintVertical_bias="0.561">
 
-    </TextView>
+    </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
 
-    <TextView
+    <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
         android:id="@+id/textView10"
-        android:layout_width="276dp"
+        android:layout_width="wrap_content"
         android:layout_height="38dp"
-        android:layout_marginBottom="4dp"
         android:gravity="center"
         android:text="@string/calibrating_tilt"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="@+id/flow5"
+        app:layout_constraintStart_toEndOf="@+id/second_sol_pan_help_img"
+        app:layout_constraintTop_toTopOf="@+id/second_sol_pan_help_img">
+    </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
 
-    </TextView>
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="first_sol_pan_help_img, second_sol_pan_help_img"
+        app:flow_horizontalGap="20dp"
+        app:flow_verticalGap="10dp"
+        app:flow_verticalStyle="spread"
+        app:layout_constraintBottom_toTopOf="@+id/GoToOrientFrag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.519">
+
+    </androidx.constraintlayout.helper.widget.Flow>
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="289dp"
-        android:layout_height="281dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/sm_right_orient_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/first_sol_pan_help_img"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:src="@drawable/sm_right_orient_horizontal">
 
     </ImageView>
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="295dp"
-        android:layout_height="263dp"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/sm_right_orient_vertical"
-        app:layout_constraintBottom_toTopOf="@+id/GoToOrientFrag"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/second_sol_pan_help_img"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:src="@drawable/sm_right_orient_vertical">
 
     </ImageView>
 
     <Button
         android:id="@+id/GoToOrientFrag"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:layout_width="134dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FFFFFF"
         android:elevation="20dp"
@@ -70,6 +81,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent" />
 
 

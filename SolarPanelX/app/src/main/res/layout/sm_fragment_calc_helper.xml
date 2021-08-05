@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
+    tools:context=".feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity">
 
     <TextView
         android:id="@+id/textView6"
@@ -14,6 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="84dp"
         android:gravity="center"
+        android:fontFamily="@font/montserrat"
         android:text="@string/at_find_optimal_azimuth"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -28,9 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
+        android:fontFamily="@font/montserrat"
         android:textColor="@color/black"
         android:text="@string/orientation_of_phone"
-        android:textSize="35sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +50,7 @@
         android:text="@string/at_find_optimal_tilt"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintBottom_toBottomOf="@+id/helper_phone_tilt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
@@ -96,7 +99,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helper_phone_tilt"
-        app:layout_constraintVertical_bias="0.62">
+        app:layout_constraintVertical_bias="0.42">
 
     </Button>
 

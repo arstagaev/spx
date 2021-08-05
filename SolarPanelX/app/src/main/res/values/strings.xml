@@ -42,7 +42,7 @@
     <string name="My_PV_Station">My PV Station</string>
     <string name="Optimal_Tilt">Optimal Tilt</string>
     <string name="Calibrating">Calibrating</string>
-    <string name="Bad_Weather_Alerts">Bad Weather Alerts</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">Bad Weather Alerts</string>
     <string name="mainscreen_tools">🛠️Tools</string>
     <string name="maintools_screen_title_ight_sensor">Light Sensor beta</string>
     <string name="main_screen_tip_label_forecast">1️⃣Forecast power now  2️⃣ % of max generation</string>
@@ -64,5 +64,11 @@
     <string name="actual_tilt">Actual tilt</string>
     <string name="close">Close</string>
     <string name="azimuth">azimuth=</string>
+    <string name="new_feature_coming_soon">Coming Soon! [Late September 21`]</string>
+    <string name="new_feature_coming_soon2">Coming Soon! [Late October 21`]</string>
+    <string name="maintools_screen_title_nn">Neural Network</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="compass_doesn_t_work_on_your_phone">Compass doesn\'t work on your phone😕</string>
 
 </resources>

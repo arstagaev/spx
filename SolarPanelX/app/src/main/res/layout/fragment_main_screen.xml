@@ -56,7 +56,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/montserrat"
                         android:gravity="center"
-                        android:text="1230 W"
+                        android:text="---- W"
                         android:textColor="@color/black_spoke"
                         android:textSize="35sp"
                         android:textStyle="bold">
@@ -70,7 +70,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/montserrat"
                         android:gravity="center"
-                        android:text="58%"
+                        android:text="--%"
                         android:textColor="@color/purple_700"
                         android:textSize="35sp"
                         android:textStyle="bold">
@@ -91,23 +91,21 @@
                 app:layout_constraintStart_toStartOf="@+id/cardview_forecastnow_mainscreen"
                 app:layout_constraintTop_toBottomOf="@+id/cardview_forecastnow_mainscreen">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+
+
+                <com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherAnim
+                    android:id="@+id/daylightmap"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
 
-                    <com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherAnim
-                        android:id="@+id/daylightmap"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.291"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.291"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                </com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherAnim>
 
-                    </com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherAnim>
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.cardview.widget.CardView>
@@ -115,19 +113,20 @@
 
             <androidx.constraintlayout.helper.widget.Flow
                 android:id="@+id/flow"
-                android:layout_width="340dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginHorizontal="20dp"
                 android:orientation="vertical"
                 app:barrierMargin="20dp"
-                app:constraint_referenced_ids="cardview_chart1,cardView_chart2,cardview_chart3,sunshine_duration_sigh,service_sign_from_mainscreen"
+                app:constraint_referenced_ids="cardview_chart1,cardView_chart2,cardview_chart3"
                 app:flow_verticalGap="10dp"
                 app:flow_verticalStyle="spread"
+
                 app:flow_wrapMode="chain"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/card_item_with_map"
+                app:layout_constraintStart_toStartOf="@+id/card_item_with_map"
                 app:layout_constraintTop_toBottomOf="@+id/card_item_with_map">
 
 
@@ -135,12 +134,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_chart1"
-                android:layout_width="340dp"
-                android:layout_height="164dp"
-                android:layout_marginEnd="2dp"
+                android:layout_width="0dp"
+                android:layout_height="166dp"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
-                app:layout_constraintStart_toEndOf="@+id/first_chart_description"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/flow"
                 app:layout_constraintTop_toTopOf="@+id/flow">
 
                 <com.github.mikephil.charting.charts.LineChart
@@ -156,7 +155,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_chart2"
-                android:layout_width="340dp"
+                android:layout_width="0dp"
                 android:layout_height="164dp"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
@@ -176,23 +175,6 @@
             </androidx.cardview.widget.CardView>
 
             <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
-                android:id="@+id/first_chart_description"
-                android:layout_width="130dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="2dp"
-                android:gravity="center|bottom"
-                android:text="at 24 hr"
-                android:textColor="@color/black"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/cardview_chart1"
-                app:layout_constraintEnd_toStartOf="@+id/flow"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/flow">
-
-            </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
-
-            <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
                 android:id="@+id/to_tomorrow_chart_forecast"
                 android:layout_width="130dp"
                 android:layout_height="22dp"
@@ -209,10 +191,9 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_chart3"
-                android:layout_width="340dp"
+                android:layout_width="0dp"
                 android:layout_height="164dp"
                 app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/sunshine_duration_sigh"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
                 app:layout_constraintStart_toStartOf="@+id/flow"
                 app:layout_constraintTop_toBottomOf="@+id/cardView_chart2">
@@ -244,29 +225,37 @@
 
             </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
 
+            <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
+                android:id="@+id/first_chart_description"
+                android:layout_width="160dp"
+                android:layout_height="22dp"
+                android:gravity="center|bottom"
+                android:text="at 20 hr"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardview_chart1"
+                app:layout_constraintEnd_toStartOf="@+id/cardview_chart1"
+                app:layout_constraintTop_toTopOf="@+id/flow"
+                app:layout_constraintVertical_bias="0.0">
+
+            </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/sunshine_duration_sigh"
-                android:layout_width="340dp"
+                android:layout_width="0dp"
                 android:layout_height="90dp"
                 android:elevation="10dp"
                 android:orientation="horizontal"
+                android:layout_marginTop="10dp"
                 app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/service_sign_from_mainscreen"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
-                app:layout_constraintStart_toStartOf="@+id/flow">
+                app:layout_constraintStart_toStartOf="@+id/flow"
+                app:layout_constraintTop_toBottomOf="@+id/cardview_chart3">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/chart_stroke"
                     android:orientation="horizontal">
-                    <!--                    <LinearLayout-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:layout_weight="1">-->
-                    <!--                        -->
-                    <!--                    </LinearLayout>-->
-
                     <TextView
                         android:id="@+id/sunshineIndicatorBlockSUNRISE"
                         android:layout_width="match_parent"
@@ -313,21 +302,22 @@
 
             <LinearLayout
                 android:id="@+id/service_sign_from_mainscreen"
-                android:layout_width="340dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
-                app:layout_constraintStart_toStartOf="@+id/flow">
+                app:layout_constraintStart_toStartOf="@+id/flow"
+                app:layout_constraintTop_toBottomOf="@+id/sunshine_duration_sigh">
 
                 <TextView
                     android:id="@+id/last_upd_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|top"
-                    android:text="last update: 12:49, 12 sep 2021 ">
+                    android:text="last update: 12:49, 04 feb 1997">
                 </TextView>
             </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

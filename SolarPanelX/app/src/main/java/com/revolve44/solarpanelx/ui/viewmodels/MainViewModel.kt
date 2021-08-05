@@ -35,13 +35,17 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
 
     private var allForecastforChart : LiveData<List<ForecastCell>> = repoSpx.getAllForecastCells()
 
-
-
-
-    // Check Internet Connection
     var cm = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    var activeNetwork: NetworkInfo? = cm.activeNetworkInfo
-    var isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+    var isConnected: Boolean = false
+
+    private fun checkConnection(){
+
+        var activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        isConnected = activeNetwork?.isConnectedOrConnecting == true
+    }
+    // Check Internet Connection
+
+
 
 
     init {
@@ -75,7 +79,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
         // check Internet connection
         //activeNetwork= cm.activeNetworkInfo
         //isConnected = activeNetwork?.isConnectedOrConnecting == true
-
+        checkConnection()
         startRequestFor5days()
     }
 

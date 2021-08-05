@@ -14,11 +14,14 @@ import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapterCallback
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity
-import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalTiltHelperActivity
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
 import com.revolve44.solarpanelx.ui.AddSolarStationActivity
 import com.revolve44.solarpanelx.ui.adapters.ToolsMainscreenAdapter
 import com.revolve44.solarpanelx.ui.models.StoriesLikeCardsInformation
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
@@ -36,7 +39,10 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         settingsMain.setOnClickListener {
               findNavController().navigate(R.id.action_toolsManagerFragment_to_settings_mainscreen)
         }
-        initRecyclerViewWithMapAndNums()
+        GlobalScope.launch(Dispatchers.Main) {
+            initRecyclerViewWithMapAndNums()
+        }
+
 
     }
 
@@ -48,8 +54,8 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
             ToolsRecyclerviewModel(2,getString(R.string.maintools_screen_title_ight_sensor),"Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
 
             // ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
-            ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
-            ToolsRecyclerviewModel(5,"Neural Network","Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.nn2))
+            ToolsRecyclerviewModel(4,getString(R.string.maintools_screen_title_Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
+            ToolsRecyclerviewModel(5,getString(R.string.maintools_screen_title_nn),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.nn2))
 
         )
 
@@ -83,7 +89,7 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                         startActivity(intent)
                     }
                     1 -> {
-                        val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
+                        val intent = Intent(requireActivity(),OptimalOrientationHelperActivity::class.java)
                         startActivity(intent)
                     }
                     2-> {
@@ -94,10 +100,10 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                         findNavController().navigate(R.id.action_toolsManagerFragment_to_forecast_calibrating_main)
                     }
                     4 -> {
-                        Snackbar.make(requireActivity().findViewById(android.R.id.content), "Coming Soon! [Late September 21`]", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon), Snackbar.LENGTH_SHORT).show()
                     }
                     5 -> {
-                        Snackbar.make(requireActivity().findViewById(android.R.id.content), "Coming Soon! [Late October 21`]", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon2), Snackbar.LENGTH_SHORT).show()
                     }
 
                 }

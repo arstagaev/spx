@@ -8,7 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
@@ -18,6 +21,9 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.revolve44.solarpanelx.R;
 import com.revolve44.solarpanelx.global_utils.Constants;
@@ -104,9 +110,28 @@ public class WeatherAnim extends View {
 
         path4 = new Path();
 
-        bm= BitmapFactory.decodeResource(context.getResources(), R.drawable.bright_map);
+       // bm= BitmapFactory.decodeResource(context.getResources(), R.drawable.bright_map);
+        Drawable d = null;
+        try {
+            d = AppCompatResources.getDrawable(context,R.drawable.bright_map);
 
+        }catch (Exception e){
+            try {
+                d = ContextCompat.getDrawable(context,R.drawable.bright_map);
+            }catch (Exception e2){
+                try {
+                    d = context.getResources().getDrawable(R.drawable.bright_map);
+                }catch (Exception e3){}
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    d = context.getResources().getDrawable(R.drawable.bright_map);
+//                }
+            }
 
+        }
+
+        try {
+            bm = drawableToBitmap(d);
+        }catch (Exception e){}
 
     }
 
@@ -135,6 +160,7 @@ public class WeatherAnim extends View {
             quickSetup();
             Constants.switcherMap = false;
         }
+        rectagleF = new RectF(0F,0F,WIDTH,HEIGHT);
 
 
         //Log.d("width: "," is "+WIDTH+" ][ "+HEIGHT);
@@ -153,9 +179,10 @@ public class WeatherAnim extends View {
     Bitmap mDrawBitmap;
     Canvas mBitmapCanvas;
     Paint drawPaint = new Paint();
+    RectF rectagleF;
 
-    @SuppressLint("DrawAllocation")
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //System.out.println("xxx OnDraw width is "+WIDTH);
@@ -167,8 +194,10 @@ public class WeatherAnim extends View {
         }
 
 
+        try {
+            mBitmapCanvas.drawBitmap(bm,null,rectagleF,paint3);
 
-        mBitmapCanvas.drawBitmap(bm,null,new RectF(0F,0F,WIDTH,HEIGHT),paint3);
+        }catch (Exception e){}
 
         //System.out.println("is sum "+isSummer);
 
@@ -200,10 +229,23 @@ public class WeatherAnim extends View {
         path2.reset();
         path3.reset();
         path4.reset();
+        Timber.i("fff 111");
 
+        //invalidate(); // i commented this one
+    }
+//
+    public static Bitmap drawableToBitmap (Drawable drawable) {
 
-        invalidate();
-        //System.out.println("reloadfast! " +WIDTH+" // "+ HEIGHT+" bx ex "+Bx+" ex "+Ex);
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable)drawable).getBitmap();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 
 
@@ -238,11 +280,7 @@ public class WeatherAnim extends View {
 
         //.out.println("current time UTC: "+hour +":"+ min);
 
-        if (monthOfYear<=3 || monthOfYear>=9){
-            isSummer = false;
-        }else {
-            isSummer = true;
-        }
+        isSummer = monthOfYear > 3 && monthOfYear < 9;
         //System.out.println("leto is "+isSummer+" month of year = "+monthOfYear);
 
         //hour=13;

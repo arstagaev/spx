@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
+    tools:context=".feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager_calc_tilt"

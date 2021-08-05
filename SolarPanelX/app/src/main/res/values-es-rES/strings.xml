@@ -43,14 +43,14 @@
     <string name="My_PV_Station">Mi estación fotovoltaica</string>
     <string name="Optimal_Tilt">Inclinación óptima</string>
     <string name="Calibrating">Calibrando</string>
-    <string name="Bad_Weather_Alerts">Alertas de mal tiempo</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">Alertas de mal tiempo</string>
     <string name="mainscreen_tools">🛠Instrumentos</string>
     <string name="maintools_screen_title_ight_sensor">Sensor de luz beta</string>
     <string name="main_screen_tip_label_forecast">1️⃣Potencia de pronóstico ahora 2️⃣% de generación máxima</string>
     <string name="sunrise">amanecer</string>
     <string name="sunset">atardecer</string>
     <string name="sunshine_time">duración del sol</string>
-    <string name="main_screen_last_upd">última actualización</string>
+    <string name="main_screen_last_upd">última actualización: </string>
     <string name="optimal_orientation_for_city">Orientación óptima para la ciudad:</string>
     <string name="optimal_direction">Dirección óptima</string>
     <string name="actual_direction">Dirección real</string>
@@ -65,4 +65,8 @@
     <string name="actual_tilt">Inclinación real</string>
     <string name="close">Cerrar</string>
     <string name="azimuth">azimut =</string>
+    <string name="new_feature_coming_soon">¡Próximamente, en breve, pronto! [Finales del 21 de septiembre`]</string>
+    <string name="new_feature_coming_soon2">¡Próximamente, en breve, pronto! [Finales del 21 de octubre`]</string>
+    <string name="maintools_screen_title_nn">neural network</string>
+    <string name="compass_doesn_t_work_on_your_phone">La brújula no funciona en tu teléfono😕</string>
 </resources>

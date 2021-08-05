@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature_modules.optimaltilt_machine.OptimalTiltHelperActivity">
+    android:background="@color/white"
+    tools:context=".feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity">
 
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="150dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/optimal_tilt"
         android:textColor="#959595"
@@ -22,29 +23,29 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="150dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/actual_tilt"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/optimal_tilt_view"
         android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="45"
         android:textColor="#959595"
         android:textSize="35sp"
+        app:layout_constraintEnd_toStartOf="@+id/actual_tilt_view"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -53,15 +54,14 @@
     <TextView
         android:id="@+id/actual_tilt_view"
         android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
         android:gravity="center"
         android:text="45"
         android:textColor="@color/black"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toEndOf="@+id/optimal_tilt_view"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
     </TextView>
@@ -83,23 +83,34 @@
         android:id="@+id/pitch_tilt_solar_panel"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="56dp"
         android:src="@drawable/sp4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/optimal_tilt_view" />
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="goOrNotTilt, closefragment_tilt"
+        app:flow_horizontalGap="20dp"
+        app:flow_verticalGap="20dp"
+        app:flow_verticalStyle="spread"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_solar_pan_warning2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.5">
+
+    </androidx.constraintlayout.helper.widget.Flow>
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/goOrNotTilt"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:layout_marginTop="56dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:cardCornerRadius="20dp">
 
         <TextView
             android:id="@+id/suggest_tilt_viewer"
@@ -107,24 +118,20 @@
             android:layout_height="match_parent"
             android:background="#007300"
             android:gravity="center"
-            android:textSize="30sp"
             android:text="🤩👍"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:textSize="30sp">
 
         </TextView>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/closefragment_tilt"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:elevation="22dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:cardCornerRadius="20dp">
 
         <TextView
             android:id="@+id/btn_close_calc_tilt"
@@ -138,6 +145,21 @@
         </TextView>
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/bottom_solar_pan_warning2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F80000"
+        android:gravity="center"
+        android:text="@string/bottom_of_your_solar_panel"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
