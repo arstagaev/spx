@@ -70,5 +70,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="compass_doesn_t_work_on_your_phone">Compass doesn\'t work on your phone😕</string>
-
+    <string name="twitter_of_author">🐦twitter of author</string>
 </resources>

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="10dp"
     app:cardCornerRadius="12dp"
     app:cardBackgroundColor="@color/black_night"
     android:layout_marginVertical="2dp"
@@ -29,7 +28,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center|left"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_solar_panel"
+            android:src="@drawable/ic_arrow_to_right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

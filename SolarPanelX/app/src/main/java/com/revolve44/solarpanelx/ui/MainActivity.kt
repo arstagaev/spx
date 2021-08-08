@@ -2,6 +2,7 @@ package com.revolve44.solarpanelx.ui
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ import com.revolve44.solarpanelx.ui.viewmodels.MassiveViewModelProviderFactory
 
 
 class MainActivity : AppCompatActivity() {
+
     //private lateinit var navController: NavController
     private lateinit var iconMainScreenBottomNavigation : ImageView
     private lateinit var iconToolsBottomNavigation      : ImageView
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         firstLaunch()
 
         // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         setContentView(R.layout.activity_main)
 
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         // get from addstation request to update forecast (below)
         val intent = intent
-        if (intent.getBooleanExtra("changingdata",false)){
+        if (intent.getBooleanExtra("changingdata",false)) {
 
             PreferenceMaestro.timeOfLastDataUpdateLong = 0
             viewModelMain?.manualRequest()
@@ -66,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
         initNavigation()
         manageBottomNavBar()
-
     }
 
     private fun initNavigation() {
@@ -80,6 +81,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun firstLaunch() {
+        // will set low animation preferences if is old device. I think old device is API with version under 10 API
+        // API 28 = Android 9
+        if (Build.VERSION.SDK_INT <= 28){
+            PreferenceMaestro.isLightMode = true
+        }
+
         if (PreferenceMaestro.isFirstStart) {
 
             val intent = Intent(this, AddSolarStationActivity::class.java)

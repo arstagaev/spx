@@ -22,9 +22,9 @@ import java.io.IOException
 
 class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewModel(app) {
 
-    var eightForecastingPointsForFirstChart = MutableLiveData<ArrayList<Int>>()
+    var eightForecastingPointsForFirstChart  = MutableLiveData<ArrayList<Int>>()
     var eightForecastingPointsForSecondChart = MutableLiveData<ArrayList<Int>>()
-    var eightForecastingPointsForThirdChart = MutableLiveData<ArrayList<Int>>()
+    var eightForecastingPointsForThirdChart  = MutableLiveData<ArrayList<Int>>()
 
     // for parsing
     val fiveDaysRequestRes : MutableLiveData<Resource<FiveDaysForecastModelParser>> = MutableLiveData()
@@ -51,26 +51,35 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
     init {
 
         // generate DUMMY DATA
-        var arr = arrayListOf<FirstChartDataTransitor>(
-            FirstChartDataTransitor(arrayListOf("1","1","1","1","1","1","1","1"),
-                arrayListOf(1,2,3,4,6,10,2,9)),
-        FirstChartDataTransitor(arrayListOf("1","1","1","1","1","1","1","1"),
-            arrayListOf(1,2,3,4,6,10,2,9)),
-        FirstChartDataTransitor(arrayListOf("1","1","1","1","1","1","1","1"),
-            arrayListOf(1,2,3,4,6,10,2,9)))
-        allDataForCharts.postValue(arr)
+//        var arr = arrayListOf<FirstChartDataTransitor>(
+//            FirstChartDataTransitor(arrayListOf("1","1","1","1","1","1","1","1"),
+//                arrayListOf(1,2,3,4,6,10,2,9)),
+//        FirstChartDataTransitor(arrayListOf("1","1","1","1","1","1","1","1"),
+//            arrayListOf(1,2,3,4,6,10,2,9)),
+//        FirstChartDataTransitor(arrayListOf("1","1","1","1","1","1","1","1"),
+//            arrayListOf(1,2,3,4,6,10,2,9)))
+//        allDataForCharts.postValue(arr)
 
+        checkConnection()
 
         if (ensureNeedUpdateOrNot()){
             startRequestFor5days()
         }
-        fiveDaysRequestRes.postValue(Resource.Init())
+
+        Timber.i(">>> ${ensureNeedUpdateOrNot()}")
+        fiveDaysRequestRes.postValue(Resource.Init()) //
     }
 
     private fun ensureNeedUpdateOrNot() : Boolean {
         Timber.i("~~~~~~~~ init VW  current:${(getCurrentTimestampSec()-3600*3)}  last:${PreferenceMaestro.timeOfLastDataUpdateLong}")
-        Timber.i("ensure to upd ${getCurrentTimestampSec()-3600*3} ? ${PreferenceMaestro.timeOfLastDataUpdateLong}")
-        return PreferenceMaestro.timeOfLastDataUpdateLong == 1234L || (getCurrentTimestampSec()-3600*3)>PreferenceMaestro.timeOfLastDataUpdateLong
+        Timber.i("ensure to upd ${getCurrentTimestampSec()-3600*3} ? ${PreferenceMaestro.timeOfLastDataUpdateLong}  ~~  ${(getCurrentTimestampSec()-3600*3)>PreferenceMaestro.timeOfLastDataUpdateLong}")
+        if (PreferenceMaestro.timeOfLastDataUpdateLong == 1234L){
+            return true
+        }
+        if ((getCurrentTimestampSec()-3600*3)>PreferenceMaestro.timeOfLastDataUpdateLong){
+            return true
+        }
+        return false
     }
 
 
@@ -90,6 +99,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
 
     private suspend fun safe5daysRequest() {
         fiveDaysRequestRes.postValue(Resource.Loading())
+        Timber.i(" xxx safe5daysRequest()")
         try {
             if (isConnected){
                 //checkInternetConnection.postValue()
@@ -97,8 +107,9 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
                 Timber.d("start API request")
                 val response =  repoSpx.get5daysRequest()
                 fiveDaysRequestRes.postValue(handle5daysResponse(response))
-                PreferenceMaestro.timeOfLastDataUpdate =  generateTimestampLastUpdate()
-                PreferenceMaestro.timeOfLastDataUpdateLong = getCurrentTimestampSec()
+
+                PreferenceMaestro.timeOfLastDataUpdate =  generateTimestampLastUpdate() // for UI sign
+                PreferenceMaestro.timeOfLastDataUpdateLong = getCurrentTimestampSec()   // for frequency of update
                 //be.postValue(handleBetaResponse(response))
 
             }else{

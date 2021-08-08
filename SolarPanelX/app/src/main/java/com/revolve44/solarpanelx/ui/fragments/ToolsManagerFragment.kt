@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapterCallback
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_LIGHT_MODE
 import com.revolve44.solarpanelx.ui.AddSolarStationActivity
 import com.revolve44.solarpanelx.ui.adapters.ToolsMainscreenAdapter
 import com.revolve44.solarpanelx.ui.models.StoriesLikeCardsInformation
@@ -28,6 +30,7 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
     private lateinit var recyclerViewTools: RecyclerView
     private lateinit var settingsMain : ImageView
+    private lateinit var mode_indicator_in_tool_manager : TextView
 
     private val mAdapter =  ToolsMainscreenAdapter()
 
@@ -36,6 +39,8 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
         recyclerViewTools = view.findViewById(R.id.tools_screen_recycler_view)
         settingsMain = view.findViewById(R.id.settings_main_tools_screen)
+        mode_indicator_in_tool_manager = view.findViewById(R.id.mode_indicator_in_tool_manager)
+
         settingsMain.setOnClickListener {
               findNavController().navigate(R.id.action_toolsManagerFragment_to_settings_mainscreen)
         }
@@ -43,43 +48,69 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
             initRecyclerViewWithMapAndNums()
         }
 
+        when(is_LIGHT_MODE){
+            false ->{mode_indicator_in_tool_manager.text = "Standard Mode"}
+            true ->{ mode_indicator_in_tool_manager.text = "Light UI Mode - Enabled"}
+        }
+
+
 
     }
 
     private fun initRecyclerViewWithMapAndNums() {
-        var forRecyclerviewAdapter = arrayListOf(
-            ToolsRecyclerviewModel(0,getString(R.string.My_PV_Station),"",0,ContextCompat.getDrawable(requireActivity(), R.drawable.pvst)),
-            ToolsRecyclerviewModel(1,getString(R.string.Optimal_Tilt),"Status",1, ContextCompat.getDrawable(requireActivity(), R.drawable.optimal_tilt)),
-            ToolsRecyclerviewModel(3,getString(R.string.Calibrating),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.calibr_aim)),
-            ToolsRecyclerviewModel(2,getString(R.string.maintools_screen_title_ight_sensor),"Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
+        var forRecyclerviewAdapter = arrayListOf<ToolsRecyclerviewModel>()
 
-            // ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
-            ToolsRecyclerviewModel(4,getString(R.string.maintools_screen_title_Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
-            ToolsRecyclerviewModel(5,getString(R.string.maintools_screen_title_nn),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.nn2))
+        when(is_LIGHT_MODE){
+           true -> {
+               forRecyclerviewAdapter = arrayListOf(
+                   ToolsRecyclerviewModel(0,getString(R.string.My_PV_Station),"",0,null),
+                   ToolsRecyclerviewModel(1,getString(R.string.Optimal_Tilt),"Status",1, null),
+                   ToolsRecyclerviewModel(3,getString(R.string.Calibrating),"Status3",12,null),
+                   ToolsRecyclerviewModel(2,getString(R.string.maintools_screen_title_ight_sensor),"Status",1,null),
 
-        )
+                   // ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
+                   ToolsRecyclerviewModel(4,getString(R.string.maintools_screen_title_Bad_Weather_Alerts),"Status3",12,null),
+                   ToolsRecyclerviewModel(5,getString(R.string.maintools_screen_title_nn),"Status3",12,null)
 
-        mAdapter.attachCallback(object : BaseAdapterCallback<ToolsRecyclerviewModel> {
-            override fun onItemClick(model: ToolsRecyclerviewModel, view: View) {
-                Timber.i("clickeddd is ${model.toString()}")
-               // if (model.idOfCard == 0){
-               //     DialogFragmentMap().show(childFragmentManager,"open_map_more_detail")
-               // }
-//                when(model.name.toString()){
-//                    "My PV Station" -> {}
-//                    "Optimal Tilt" -> {
-//                        val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
-//                        startActivity(intent)
-//                    }
-//                }
+               )
+           }
+           false -> {
+               forRecyclerviewAdapter = arrayListOf(
+                   ToolsRecyclerviewModel(0,getString(R.string.My_PV_Station),"",0,ContextCompat.getDrawable(requireActivity(), R.drawable.pvst)),
+                   ToolsRecyclerviewModel(1,getString(R.string.Optimal_Tilt),"Status",1, ContextCompat.getDrawable(requireActivity(), R.drawable.optimal_tilt)),
+                   ToolsRecyclerviewModel(3,getString(R.string.Calibrating),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.calibr_aim)),
+                   ToolsRecyclerviewModel(2,getString(R.string.maintools_screen_title_ight_sensor),"Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
 
-            }
+                   // ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
+                   ToolsRecyclerviewModel(4,getString(R.string.maintools_screen_title_Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
+                   ToolsRecyclerviewModel(5,getString(R.string.maintools_screen_title_nn),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.nn2))
 
-            override fun onLongClick(model: ToolsRecyclerviewModel, view: View): Boolean {
-                return false
-            }
+               )
+           }
+        }
 
-        })
+
+//        mAdapter.attachCallback(object : BaseAdapterCallback<ToolsRecyclerviewModel> {
+//            override fun onItemClick(model: ToolsRecyclerviewModel, view: View) {
+//                Timber.i("clickeddd is ${model.toString()}")
+//               // if (model.idOfCard == 0){
+//               //     DialogFragmentMap().show(childFragmentManager,"open_map_more_detail")
+//               // }
+////                when(model.name.toString()){
+////                    "My PV Station" -> {}
+////                    "Optimal Tilt" -> {
+////                        val intent = Intent(requireActivity(),OptimalTiltHelperActivity::class.java)
+////                        startActivity(intent)
+////                    }
+////                }
+//
+//            }
+//
+//            override fun onLongClick(model: ToolsRecyclerviewModel, view: View): Boolean {
+//                return false
+//            }
+//
+//        })
         mAdapter.attachDelegate(object : ItemElementsDelegate<ToolsRecyclerviewModel> {
             override fun onElementClick(model: ToolsRecyclerviewModel, view: View, clickedPosition: Int) {
                 Timber.i("clickeddd is $clickedPosition")

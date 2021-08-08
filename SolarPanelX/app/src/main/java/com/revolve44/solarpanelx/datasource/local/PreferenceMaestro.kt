@@ -235,12 +235,17 @@ object PreferenceMaestro {
             it.putInt("currentGMTinDefineLocation", value)
         }
 
-
-
     var isFirstStart: Boolean
         get() = preferences.getBoolean("firstStart_spx", true)
         set(value) = preferences.edit {
             it.putBoolean("firstStart_spx", value)
+        }
+
+    // will set low animation preferences
+    var isLightMode: Boolean
+        get() = preferences.getBoolean("is_light_mode_spx", false)
+        set(value) = preferences.edit {
+            it.putBoolean("is_light_mode_spx", value)
         }
 
     var forceHelperMainScreen: Boolean

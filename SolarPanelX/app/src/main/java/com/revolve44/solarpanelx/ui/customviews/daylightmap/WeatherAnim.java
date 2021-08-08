@@ -111,27 +111,27 @@ public class WeatherAnim extends View {
         path4 = new Path();
 
        // bm= BitmapFactory.decodeResource(context.getResources(), R.drawable.bright_map);
-        Drawable d = null;
-        try {
-            d = AppCompatResources.getDrawable(context,R.drawable.bright_map);
-
-        }catch (Exception e){
-            try {
-                d = ContextCompat.getDrawable(context,R.drawable.bright_map);
-            }catch (Exception e2){
-                try {
-                    d = context.getResources().getDrawable(R.drawable.bright_map);
-                }catch (Exception e3){}
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        //Drawable d = null;
+//        try {
+//            d = AppCompatResources.getDrawable(context,R.drawable.bright_map);
+//
+//        }catch (Exception e){
+//            try {
+//                d = ContextCompat.getDrawable(context,R.drawable.bright_map);
+//            }catch (Exception e2){
+//                try {
 //                    d = context.getResources().getDrawable(R.drawable.bright_map);
-//                }
-            }
+//                }catch (Exception e3){}
+////                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+////                    d = context.getResources().getDrawable(R.drawable.bright_map);
+////                }
+//            }
+//
+//        }
 
-        }
-
-        try {
-            bm = drawableToBitmap(d);
-        }catch (Exception e){}
+       //try {
+       //    bm = drawableToBitmap(d);
+       //}catch (Exception e){}
 
     }
 
@@ -195,7 +195,7 @@ public class WeatherAnim extends View {
 
 
         try {
-            mBitmapCanvas.drawBitmap(bm,null,rectagleF,paint3);
+            //mBitmapCanvas.drawBitmap(bm,null,rectagleF,paint3);
 
         }catch (Exception e){}
 

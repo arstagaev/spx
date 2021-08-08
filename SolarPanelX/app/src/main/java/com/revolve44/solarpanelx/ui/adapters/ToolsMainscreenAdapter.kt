@@ -12,6 +12,7 @@ import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapter
 import com.revolve44.solarpanelx.domain.base.recyclerview.BaseViewHolder
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_LIGHT_MODE
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
 
 
@@ -42,7 +43,9 @@ class ToolsMainscreenAdapter: BaseAdapter<ToolsRecyclerviewModel>() {
             txtName.text = model.name
 
             try{
-                iconTool.setImageDrawable(model.iconOfTool)
+                if (!is_LIGHT_MODE || model.iconOfTool != null){
+                    iconTool.setImageDrawable(model.iconOfTool)
+                }
             }catch (e : Exception){
                 //iconTool.setImageResource(model.iconOfTool)
                 throw e

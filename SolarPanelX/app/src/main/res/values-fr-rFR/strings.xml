@@ -69,4 +69,5 @@
     <string name="new_feature_coming_soon2">À venir! [Fin 21 octobre`]</string>
     <string name="maintools_screen_title_nn">réseau neuronal</string>
     <string name="compass_doesn_t_work_on_your_phone">La boussole ne fonctionne pas sur votre téléphone😕</string>
+    <string name="twitter_of_author">🐦twitter de l\'auteur</string>
 </resources>

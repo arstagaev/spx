@@ -7,19 +7,24 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.widget.ImageView
 import androidx.annotation.Nullable
+import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_LIGHT_MODE
 
 
 // for blinked of Text Color
 @SuppressLint("ObjectAnimatorBinding")
 fun blinkATextView(uiElement: Any, color1: Int, color2: Int,color3: Int, duration: Int){
-    val skyAnim: ValueAnimator = ObjectAnimator.ofInt(uiElement, "textColor",
-        (color1),
-        (color2),
-        (color3))
+    if (!is_LIGHT_MODE){
+        val skyAnim: ValueAnimator = ObjectAnimator.ofInt(uiElement, "textColor",
+            (color1),
+            (color2),
+            (color3))
 
-    skyAnim.duration = duration.toLong()
-    skyAnim.setEvaluator(ArgbEvaluator())
-    skyAnim.start()
+        skyAnim.duration = duration.toLong()
+        skyAnim.setEvaluator(ArgbEvaluator())
+        skyAnim.start()
+    }
+
 
 }
 
@@ -28,24 +33,28 @@ fun blinkATextView(uiElement: Any, color1: Int, color2: Int,color3: Int, duratio
 
 @SuppressLint("ObjectAnimatorBinding")
 fun gradientAnimation(uiElement: Any, color1: Int, color2: Int,color3: Int,color4: Int, color5 : Int, duration: Int){
+    if (!is_LIGHT_MODE){
+        val colorAnimation1: ValueAnimator = ObjectAnimator.ofInt(uiElement, "backgroundColor",
+            color1, color2, color3, color4, color5)
 
-    val colorAnimation1: ValueAnimator = ObjectAnimator.ofInt(uiElement, "backgroundColor",
-        color1, color2, color3, color4, color5)
+        colorAnimation1.duration = duration.toLong()
+        colorAnimation1.setEvaluator(ArgbEvaluator())
+        colorAnimation1.start()
+    }
 
-    colorAnimation1.duration = duration.toLong()
-    colorAnimation1.setEvaluator(ArgbEvaluator())
-    colorAnimation1.start()
 }
 
 @SuppressLint("ObjectAnimatorBinding")
 fun gradientAnimationLayout(uiElement: Any, color1: Int, color2: Int, duration: Int){
+    if (!is_LIGHT_MODE){
+        val colorAnimation1: ValueAnimator = ObjectAnimator.ofInt(uiElement, "backgroundColor",
+            color1, color2)
 
-    val colorAnimation1: ValueAnimator = ObjectAnimator.ofInt(uiElement, "backgroundColor",
-        color1, color2)
+        colorAnimation1.duration = duration.toLong()
+        colorAnimation1.setEvaluator(ArgbEvaluator())
+        colorAnimation1.start()
+    }
 
-    colorAnimation1.duration = duration.toLong()
-    colorAnimation1.setEvaluator(ArgbEvaluator())
-    colorAnimation1.start()
 }
 
 @SuppressLint("ObjectAnimatorBinding")
