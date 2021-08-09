@@ -43,7 +43,7 @@
     <string name="My_PV_Station">Mi estación fotovoltaica</string>
     <string name="Optimal_Tilt">Inclinación óptima</string>
     <string name="Calibrating">Calibrando</string>
-    <string name="maintools_screen_title_Bad_Weather_Alerts">Alertas de mal tiempo</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">Alertas de mal tiempo beta</string>
     <string name="mainscreen_tools">🛠Instrumentos</string>
     <string name="maintools_screen_title_ight_sensor">Sensor de luz beta</string>
     <string name="main_screen_tip_label_forecast">1️⃣Potencia de pronóstico ahora 2️⃣% de generación máxima</string>

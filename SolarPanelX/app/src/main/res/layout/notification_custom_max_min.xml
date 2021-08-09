@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        <TextView
+            android:id="@+id/notification_alert_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:text="🌤️">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+        <TextView
+            android:id="@+id/notif_today_forecast_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:gravity="center|bottom"
+                android:layout_weight="1"
+                android:text="1.5 kW">
+        </TextView>
+        <TextView
+            android:id="@+id/notif_today_forecast_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:gravity="top|center"
+                android:text="forecast today">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/notif_max_forecast_value"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:textColor="#FF0000"
+            android:gravity="center|bottom"
+            android:layout_weight="1"
+            android:text="2.8 kW">
+        </TextView>
+        <TextView
+            android:id="@+id/notif_max_forecast_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:gravity="center|top"
+            android:text="15 jul📈">
+        </TextView>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+        <TextView
+            android:id="@+id/notif_min_forecast_value"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:textColor="#121DE3"
+            android:gravity="center|bottom"
+            android:layout_weight="1"
+            android:text="1.1 kW">
+        </TextView>
+        <TextView
+            android:id="@+id/notif_min_forecast_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:gravity="center|top"
+                android:text="8 jul📉">
+        </TextView>
+
+    </LinearLayout>
+
+
+<!--    <TextView-->
+<!--       android:id="@+id/tv_notif_title"-->
+<!--       android:layout_width="match_parent"-->
+<!--       android:layout_height="match_parent"-->
+
+<!--       android:textSize="40sp"-->
+<!--       android:textStyle="bold"-->
+<!--       android:text="☀️" />-->
+
+
+
+
+</LinearLayout>

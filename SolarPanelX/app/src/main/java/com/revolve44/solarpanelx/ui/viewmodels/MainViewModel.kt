@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.lifecycle.*
-import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.model.api.FiveDaysForecastModelParser
@@ -62,15 +61,15 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
 
         checkConnection()
 
-        if (ensureNeedUpdateOrNot()){
+        if (ensureNeedUpdateOrNot_PeriodThreeHr()){
             startRequestFor5days()
         }
 
-        Timber.i(">>> ${ensureNeedUpdateOrNot()}")
+        Timber.i(">>> ${ensureNeedUpdateOrNot_PeriodThreeHr()}")
         fiveDaysRequestRes.postValue(Resource.Init()) //
     }
 
-    private fun ensureNeedUpdateOrNot() : Boolean {
+    private fun ensureNeedUpdateOrNot_PeriodThreeHr() : Boolean {
         Timber.i("~~~~~~~~ init VW  current:${(getCurrentTimestampSec()-3600*3)}  last:${PreferenceMaestro.timeOfLastDataUpdateLong}")
         Timber.i("ensure to upd ${getCurrentTimestampSec()-3600*3} ? ${PreferenceMaestro.timeOfLastDataUpdateLong}  ~~  ${(getCurrentTimestampSec()-3600*3)>PreferenceMaestro.timeOfLastDataUpdateLong}")
         if (PreferenceMaestro.timeOfLastDataUpdateLong == 1234L){

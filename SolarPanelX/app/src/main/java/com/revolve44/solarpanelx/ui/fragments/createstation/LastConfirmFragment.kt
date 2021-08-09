@@ -152,7 +152,7 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
 
             }
         }
-        var isExpandAdvance = false
+        var isExpandAdvance = true
         advanced_expander.setOnClickListener {
             when(isExpandAdvance){
                 true -> expandable_layout.setExpanded(true,true)

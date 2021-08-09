@@ -1,8 +1,13 @@
 package com.revolve44.solarpanelx
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
+import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.Utils
+import com.revolve44.solarpanelx.global_utils.Constants
 import timber.log.Timber
 
 class SPXApp : Application() {
@@ -31,11 +36,31 @@ class SPXApp : Application() {
             //.errorActivity( CrashActivity::class.java) //default: null (default error activity)
             //.eventListener(null) //default: null
             .apply()
+        createNotificationChannel()
 
         //!!!
 //        PreferenceMaestro.chosenStationNOMINALPOWER = 100000
 //        PreferenceMaestro.lat = 55.7558F
 //        PreferenceMaestro.lon = 37.6173F
 
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val serviceChannel = NotificationChannel(
+                Constants.CHANNEL_ID,
+                "Important notifications",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            val serviceChannel2 = NotificationChannel(
+                Constants.CHANNEL_ID2,
+                "Regular notifications",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            val manager = getSystemService(NotificationManager::class.java)
+
+            manager.createNotificationChannel(serviceChannel)
+            manager.createNotificationChannel(serviceChannel2)
+        }
     }
 }

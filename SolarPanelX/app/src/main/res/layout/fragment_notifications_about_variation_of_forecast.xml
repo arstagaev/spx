@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.fragments.features.NotificationsAboutVariationOfForecastFragment">
+
+
+
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/AppTheme.Button"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:text="This is Beta version \n may be some lags"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="299dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/black_spoke"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+    </View>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="331dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:text="Standart Notifications"
+        android:textColor="@color/greenx"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="299dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/black_spoke"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+    </View>
+
+    <Button
+        android:id="@+id/start_worker"
+        style="@style/AppTheme.Button"
+        android:layout_width="169dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#FFFFFF"
+        android:elevation="20dp"
+        android:text="start"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.929"
+        app:layout_constraintStart_toStartOf="@+id/view">
+
+    </Button>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:text="Change frequency of notifications, they will show sum of power generation for now. Also max and min per current week  "
+        android:textColor="@color/hint_white2"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+    <TextView
+        android:layout_width="331dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:text="Super Cloudy Notifications [coming soon]"
+        android:textColor="#4479E4"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <Button
+        android:id="@+id/start_worker3"
+        style="@style/AppTheme.Button"
+        android:layout_width="169dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#4479E4"
+        android:elevation="20dp"
+        android:enabled="false"
+        android:text="start"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="@+id/view2">
+
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

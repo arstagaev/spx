@@ -12,7 +12,9 @@ import java.util.*
 //////////////////////////////////////
 //        Mars Core ver. 1.4        //
 //////////////////////////////////////
-
+/**
+ *               CLOUDNESS            SUNRISE           SUNSET        Time Zone      time of current portion forecast
+ */
 fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Long, unixTime : Long) : Int {
 
     var nominalPower : Int = PreferenceMaestro.chosenStationNOMINALPOWER
@@ -32,6 +34,7 @@ fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Lon
 
     Timber.i("yyy sunrise: $snrs - frcst.time: $currentTime -  sunset: $snst  TimeZone: $timeZone" )
 
+    // is Night or not?
     if (currentTime in snrs..snst){
 
         var diff : Int = (currentTime-snrs).toInt()

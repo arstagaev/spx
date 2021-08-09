@@ -42,7 +42,7 @@
     <string name="My_PV_Station">My PV Station</string>
     <string name="Optimal_Tilt">Optimal Tilt</string>
     <string name="Calibrating">Calibrating</string>
-    <string name="maintools_screen_title_Bad_Weather_Alerts">Bad Weather Alerts</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">Bad Weather Alerts beta</string>
     <string name="mainscreen_tools">🛠️Tools</string>
     <string name="maintools_screen_title_ight_sensor">Light Sensor beta</string>
     <string name="main_screen_tip_label_forecast">1️⃣Forecast power now  2️⃣ % of max generation</string>

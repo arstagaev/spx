@@ -23,7 +23,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.gson.Gson
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
@@ -32,6 +32,7 @@ import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
 import com.revolve44.solarpanelx.domain.enums.TypeOfSky
 import com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
+import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
 import com.revolve44.solarpanelx.global_utils.Constants.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
@@ -162,7 +163,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                         if(it.isNotEmpty() && it.size == 40){
                             Timber.i("ccc input size:${it.size}")
 
-                            firstStepToCharts(it)
+                            sortingDataForDifferentCharts(it)
 
                             lastUpdate.text = getString(R.string.main_screen_last_upd)+ " "+PreferenceMaestro.timeOfLastDataUpdate
                         }
@@ -297,7 +298,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         }
     }
 
-    fun firstStepToCharts(data : List<ForecastCell>){
+    fun sortingDataForDifferentCharts(data : List<ForecastCell>){
         var forecastForNow:ArrayList<Int> = ArrayList()
 
         var forecastArray :ArrayList<Float> = ArrayList()
@@ -305,6 +306,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         var allDataForChartsX :ArrayList<FirstChartDataTransitor> = ArrayList()
 
+        // for one number - current forecast - we solving problem when forecast show zero but sun is no goes down
+        // (its happen from openweathermap API, coz they send data with periodic interval of 3 hours )
         for (i in 0 until data.size) {
 
             if (forecastForNow.size <= 8) {
@@ -315,14 +318,19 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             forecastDateArray.add(data.get(i).unixTime)
 
         }
-
+        /**
+         * First 20 hr of forecast:
+         */
         var firstChart = chartDatasortforFirstChart(forecastDateArray, forecastArray)
-
-
-
         allDataForChartsX.add(0, firstChart)
-        allDataForChartsX.add(1, chartDatasort(forecastDateArray, forecastArray, 0))
-        allDataForChartsX.add(2, chartDatasort(forecastDateArray, forecastArray, 1))
+
+        /**
+         * Another 4 charts from 0:00 to 21:00 with forecast
+         */
+        allDataForChartsX.add(1, chartDatasort(forecastDateArray, forecastArray, 0)) // tomorrow
+        allDataForChartsX.add(2, chartDatasort(forecastDateArray, forecastArray, 1)) // after tomorrow
+        allDataForChartsX.add(3, chartDatasort(forecastDateArray, forecastArray, 2)) // after after tomorrow
+        allDataForChartsX.add(4, chartDatasort(forecastDateArray, forecastArray, 3)) // after after after tomorrow
 
         fillAllCharts(allDataForChartsX)
 
@@ -386,13 +394,69 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         val legend2 = lineChart2.legend
         val legend3 = lineChart3.legend
 
+        // main chart
         topLineChartSetup(lineChart1,legend,arrayList.get(0))
+
         secondChartInit(lineChart2,legend2,arrayList.get(1).forecasts)
         thirdChartInit(lineChart3,legend3,arrayList.get(2).forecasts)
+
+        GlobalScope.launch {
+            saveForNotification(arrayList)
+        }
+
 
         mSwipeRefreshLayout.isRefreshing = false
 
         Timber.i("xxx ${arrayList.joinToString()}")
+    }
+
+    val gson = Gson()
+    var forecastTodayMaxMinShow = arrayListOf<NotificationWarningModel>()
+
+    fun saveForNotification(arrayList: ArrayList<FirstChartDataTransitor>) {
+        var todaySum          = arrayList.get(0).forecasts.sum()
+        var tomorrow          = arrayList.get(1).forecasts.sum()
+        var twoDaysFromNow    = arrayList.get(2).forecasts.sum()
+        var threeDaysFromNow  = arrayList.get(3).forecasts.sum()
+        var fourthDaysFromNow = arrayList.get(4).forecasts.sum()
+
+        var mainArray = arrayListOf<NotificationWarningModel>(
+            NotificationWarningModel("${todaySum}",         "today",todaySum),
+            NotificationWarningModel("${tomorrow}",         PreferenceMaestro.leftChartMonthandDay,tomorrow),
+            NotificationWarningModel("${twoDaysFromNow}",   PreferenceMaestro.rightChartMonthandDay,twoDaysFromNow),
+            NotificationWarningModel("${threeDaysFromNow}", PreferenceMaestro.fourChartMonthandDay,threeDaysFromNow),
+            NotificationWarningModel("${fourthDaysFromNow}",PreferenceMaestro.fiveChartMonthandDay,fourthDaysFromNow)
+        )
+
+        var maxIndex = 0
+        var minIndex = 0
+
+        var maxValue = 0
+        var minValue = 0
+
+        for (i in 1 until mainArray.size){ // for no today coz 20 hr~
+            if (mainArray[i].sumOfDay > maxValue){
+                maxValue = mainArray[i].sumOfDay
+                maxIndex = i
+
+            }else if(mainArray[i].sumOfDay < minValue){
+                minValue = mainArray[i].sumOfDay
+                minIndex = i //mainArray[i].sumOfDay
+
+            }
+        }
+
+
+        PreferenceMaestro.notificationJSON = gson.toJson(arrayListOf(
+            NotificationWarningModel("~","*",0),
+            NotificationWarningModel(mainArray[0].power,mainArray[0].description,mainArray[0].sumOfDay),
+            NotificationWarningModel(mainArray[maxIndex].power,mainArray[maxIndex].description,mainArray[maxIndex].sumOfDay),
+            NotificationWarningModel(mainArray[minIndex].power,mainArray[minIndex].description,mainArray[minIndex].sumOfDay)
+        ))
+        Timber.i("fff ${PreferenceMaestro.notificationJSON}")
+
+
+
     }
 
     private fun topLineChartSetup(

@@ -82,7 +82,7 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                    ToolsRecyclerviewModel(2,getString(R.string.maintools_screen_title_ight_sensor),"Status",1,ContextCompat.getDrawable(requireActivity(), R.drawable.solar_sensor)),
 
                    // ToolsRecyclerviewModel(4,getString(R.string.Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
-                   ToolsRecyclerviewModel(4,getString(R.string.maintools_screen_title_Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.alert_ic)),
+                   ToolsRecyclerviewModel(4,getString(R.string.maintools_screen_title_Bad_Weather_Alerts),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.toolmanager_cloudy)),
                    ToolsRecyclerviewModel(5,getString(R.string.maintools_screen_title_nn),"Status3",12,ContextCompat.getDrawable(requireActivity(), R.drawable.nn2))
 
                )
@@ -131,7 +131,8 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                         findNavController().navigate(R.id.action_toolsManagerFragment_to_forecast_calibrating_main)
                     }
                     4 -> {
-                        Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon), Snackbar.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_tlMng_to_notification_manage)
+                        //Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon), Snackbar.LENGTH_SHORT).show()
                     }
                     5 -> {
                         Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon2), Snackbar.LENGTH_SHORT).show()

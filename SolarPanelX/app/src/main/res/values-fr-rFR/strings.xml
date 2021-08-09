@@ -42,7 +42,7 @@
     <string name="My_PV_Station">Ma station photovoltaïque</string>
     <string name="Optimal_Tilt">Inclinaison optimale</string>
     <string name="Calibrating">Étalonnage</string>
-    <string name="maintools_screen_title_Bad_Weather_Alerts">Alertes de mauvais temps</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">Alertes de mauvais temps beta</string>
     <string name="mainscreen_tools">🛠️Outils</string>
     <string name="maintools_screen_title_ight_sensor">Capteur de lumière bêta</string>
     <string name="main_screen_last_upd"> dernière mise à jour: </string>

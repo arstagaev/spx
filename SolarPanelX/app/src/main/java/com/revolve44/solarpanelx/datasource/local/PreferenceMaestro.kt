@@ -31,6 +31,14 @@ object PreferenceMaestro {
         editor.apply()
     }
 
+    // for notif alert
+    var notificationJSON: String
+
+        get() = preferences.getString("notif_main", "").toString()
+        set(value) = preferences.edit {
+            it.putString("notif_main", value)
+        }
+
     var timeOfLastDataUpdate: String
         
         get() = preferences.getString("lastupd", "no data").toString()

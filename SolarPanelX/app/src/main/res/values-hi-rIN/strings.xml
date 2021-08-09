@@ -49,11 +49,11 @@
     <string name="My_PV_Station">मेरा पीवी स्टेशन</string>
     <string name="Optimal_Tilt">इष्टतम झुकाव</string>
     <string name="Calibrating">औजार</string>
-    <string name="maintools_screen_title_Bad_Weather_Alerts">खराब मौसम अलर्ट</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">खराब मौसम अलर्ट beta</string>
     <string name="mainscreen_tools">🛠उपकरण</string>
     <string name="maintools_screen_title_ight_sensor">प्रकाश संवेदक beta</string>
     <string name="main_screen_last_upd">आखरी अपडेट: </string>
-    <string name="main_screen_tip_label_forecast">1️⃣पूर्वानुमान शक्ति अब अधिकतम उत्पादन का 2️⃣%</string>
+    <string name="main_screen_tip_label_forecast">1️⃣पूर्वानुमान शक्ति अब  2️⃣अधिकतम पीढ़ी का%</string>
     <string name="sunrise">सूर्योदय</string>
     <string name="sunshine_time">धूप का समय</string>
     <string name="sunset">सूर्य का अस्त होना</string>

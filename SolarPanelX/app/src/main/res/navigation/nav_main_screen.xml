@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_toolsManagerFragment_to_forecast_calibrating_main"
             app:destination="@id/forecast_calibrating_main" />
+        <action
+            android:id="@+id/action_tlMng_to_notification_manage"
+            app:destination="@id/notification_manage" />
     </fragment>
 
     <fragment
@@ -45,6 +48,15 @@
         <action
             android:id="@+id/action_settings_mainscreen_to_about_fragment"
             app:destination="@id/about_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notification_manage"
+        android:name="com.revolve44.solarpanelx.ui.fragments.features.NotificationsAboutVariationOfForecastFragment"
+        android:label="NotifFargment"
+        tools:layout="@layout/fragment_notifications_about_variation_of_forecast" >
+
+
     </fragment>
 
     <fragment

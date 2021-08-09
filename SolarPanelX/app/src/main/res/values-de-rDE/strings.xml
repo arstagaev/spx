@@ -62,7 +62,7 @@
     <string name="My_PV_Station">Meine PV-Station</string>
     <string name="Optimal_Tilt">Optimale Neigung</string>
     <string name="Calibrating">Kalibrieren</string>
-    <string name="maintools_screen_title_Bad_Weather_Alerts">Schlechtwetterwarnungen</string>
+    <string name="maintools_screen_title_Bad_Weather_Alerts">Schlechtwetterwarnungen beta</string>
     <string name="mainscreen_tools">🛠️Werkzeuge</string>
     <string name="maintools_screen_title_ight_sensor">Lichtsensor Beta</string>
     <string name="main_screen_last_upd"> zuletzt aktualisiert: </string>

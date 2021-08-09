@@ -10,6 +10,8 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+def work_version = '2.4.0'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -120,6 +122,8 @@ dependencies {
 
     // attention i am not sure
     compile 'cat.ereza:customactivityoncrash:2.3.0'
+
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,15 +14,19 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.setLocale
+import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragment
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragmentDirections
 import com.revolve44.solarpanelx.ui.fragments.ToolsManagerFragment
 import com.revolve44.solarpanelx.ui.viewmodels.MainViewModel
 import com.revolve44.solarpanelx.ui.viewmodels.MassiveViewModelProviderFactory
+import java.lang.reflect.Type
 
 
 class MainActivity : AppCompatActivity() {
@@ -122,6 +127,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
 
 
