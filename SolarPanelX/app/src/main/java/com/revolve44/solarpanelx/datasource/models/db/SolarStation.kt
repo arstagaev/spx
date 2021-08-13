@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.datasource.model.db
+package com.revolve44.solarpanelx.datasource.models.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

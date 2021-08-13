@@ -91,12 +91,14 @@
         app:layout_constraintTop_toBottomOf="@+id/optimal_tilt_view" />
 
     <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="goOrNotTilt, closefragment_tilt"
+        app:constraint_referenced_ids="goOrNotTilt, closefragment_tilt,orientation_wrong_correct"
         app:flow_horizontalGap="20dp"
         app:flow_verticalGap="20dp"
         app:flow_verticalStyle="spread"
+        app:flow_wrapMode="chain"
         app:layout_constraintBottom_toTopOf="@+id/bottom_solar_pan_warning2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -140,6 +142,28 @@
             android:background="#F9FAF9"
             android:gravity="center"
             android:text="@string/close"
+            android:textColor="@color/black">
+
+        </TextView>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/orientation_wrong_correct"
+        android:layout_width="200dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="112dp"
+        android:onClick="openDialogForChangeTiltSensor"
+        app:cardCornerRadius="20dp">
+
+        <TextView
+            android:id="@+id/btn_close_calc_tilt2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9FAF9"
+            android:gravity="center"
+            android:text="Is the orientation wrong?"
             android:textColor="@color/black">
 
         </TextView>

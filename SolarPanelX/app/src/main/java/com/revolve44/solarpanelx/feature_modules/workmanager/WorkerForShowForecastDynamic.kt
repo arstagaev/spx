@@ -3,10 +3,13 @@ package com.revolve44.solarpanelx.feature_modules.workmanager
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import android.widget.RemoteViews
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.*
 import androidx.work.*
@@ -18,16 +21,22 @@ import com.revolve44.solarpanelx.datasource.local.SolarDao
 import com.revolve44.solarpanelx.datasource.local.SolarDatabase
 import com.revolve44.solarpanelx.domain.core.defineTimeOfDay
 import com.revolve44.solarpanelx.domain.core.ensureNeedUpdateOrNot_PeriodTwoDays
+import com.revolve44.solarpanelx.domain.core.getCurrentDayOfYear
 import com.revolve44.solarpanelx.domain.enums.TypeOfSky
 import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
 import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_ID
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_ID2
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_ID2Num
 import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_IDNum
+import com.revolve44.solarpanelx.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.reflect.Type
 import java.time.Duration
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * ITS BETA
@@ -79,7 +88,13 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
             lifecycleRegistry.currentState = Lifecycle.State.STARTED
             //workoutDAO!!.getAllForecastCells()
 
-            startCalculate()
+            try{
+                startCalculate()
+            }
+            catch (e : Exception){
+                Toast.makeText(mContext,"Please update data from server in main screen",
+                    Toast.LENGTH_LONG).show()
+            }
 
 
             //RetrofitInstance.api5daysRequest.get5daysRequest()
@@ -113,9 +128,19 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
 
 
 
+        Timber.i("wwww ${defineTimeOfDay()} need upd or not:${ensureNeedShowNotificationOrNot()} need upd or not API:${ensureNeedUpdateOrNot_PeriodTwoDays()}")
         when (defineTimeOfDay()){
-            TypeOfSky.DAY, TypeOfSky.MORNING,TypeOfSky.EVENING ->{
-                displayNotification(forecastTodayMaxMinShow)
+            TypeOfSky.MORNING, TypeOfSky.DAY, TypeOfSky.EVENING ->{
+                if (ensureNeedShowNotificationOrNot()){
+
+                    displayNotification(forecastTodayMaxMinShow)
+
+                }
+
+            }
+            else -> {
+                Timber.w("fff current time of day ${defineTimeOfDay()}")
+                displayNotificationWarning()
             }
         }
 
@@ -124,27 +149,16 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
         workoutDAO = database!!.solarDao
         Timber.i("fff ${workoutDAO}")
 
-        //workoutDAO!!.getAllForecastCells().observe(this, Observer {
+
+//        if (ensureNeedUpdateOrNot_PeriodTwoDays()){
 //
-        //    Timber.i("fff ${it[0].HumanTime}")
-        //    if (it != null){
 //
-        //        displayNotification(it[0].HumanTime)
 //
-        //    }
-//
-        //})
-
-
-        if (ensureNeedUpdateOrNot_PeriodTwoDays()){
-
-
-
-        }else{
-            Timber.i("fff Need to update")
-            //Toast.makeText(this,"Need to update",Toast.LENGTH_SHORT).
-            //please refresh
-        }
+//        }else{
+//            Timber.i("fff Need to update")
+//            //Toast.makeText(this,"Need to update",Toast.LENGTH_SHORT).
+//            //please refresh
+//        }
     }
 
 //    @SuppressLint("CheckResult")
@@ -183,6 +197,7 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
     }
 
     private fun displayNotification(str: ArrayList<NotificationWarningModel>) {
+
 //        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 //            val channel = NotificationChannel(
 //                CHANNEL_ID,
@@ -191,7 +206,14 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
 //            )
 //            channel.enableVibration(false)
 //            notificationManager.createNotificationChannel(channel)
-//        }
+//      //  }
+        //val pendingIntent: PendingIntent = Intent(mContext, MainActivity::class.java).let { notificationIntent ->
+        //    PendingIntent.getActivity(mContext, 0, notificationIntent, 0)
+        //}
+        val pendingIntentTODO = PendingIntent.getActivity(mContext, 0,
+            Intent(mContext, MainActivity::class.java), 0)
+        //val resultIntent : Intent = Intent(mContext,MainActivity::class.java)
+        //val resultPendingIntent : PendingIntent = PendingIntent.getActivity(mContext,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notificationBuilder =
             NotificationCompat.Builder(applicationContext, CHANNEL_ID)
@@ -209,18 +231,75 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
 
         remoteView.setTextViewText(R.id.notif_min_forecast_value,        "${str[3].sumOfDay}W")
         remoteView.setTextViewText(R.id.notif_min_forecast_description,  "${str[3].description}\uD83D\uDCC9")
+        remoteView.setOnClickPendingIntent(R.id.notification_alert_weather, pendingIntentTODO)
         //remoteView.setProgressBar(R.id.pb_notif, prog.total, prog.progress, false)
 
         notificationBuilder
             .setContent(remoteView)
             .setSmallIcon(R.drawable.ic_for_notification_sol)
+            .setPriority(Notification.PRIORITY_HIGH) // for under android 26 compatibility
+            .setContentIntent(pendingIntentTODO)
 
         notificationManager.notify(CHANNEL_IDNum, notificationBuilder.build())
+
+        PreferenceMaestro.dayOfLastShowedNotification = getCurrentDayOfYear()
     }
+
+    private fun displayNotificationWarning() {
+
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            val channel = NotificationChannel(
+//                CHANNEL_ID,
+//                CHANNEL_ID,
+//                NotificationManager.IMPORTANCE_DEFAULT
+//            )
+//            channel.enableVibration(false)
+//            notificationManager.createNotificationChannel(channel)
+//      //  }
+        //val pendingIntent: PendingIntent = Intent(mContext, MainActivity::class.java).let { notificationIntent ->
+        //    PendingIntent.getActivity(mContext, 0, notificationIntent, 0)
+        //}
+        val pendingIntentTODO = PendingIntent.getActivity(mContext, 0,
+            Intent(mContext, MainActivity::class.java), 0)
+        //val resultIntent : Intent = Intent(mContext,MainActivity::class.java)
+        //val resultPendingIntent : PendingIntent = PendingIntent.getActivity(mContext,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val notificationBuilder =
+            NotificationCompat.Builder(applicationContext, CHANNEL_ID2)
+
+//        val remoteView = RemoteViews(applicationContext.packageName, R.layout.notification_custom_max_min)
+//        //remoteView.setImageViewResource(R.id.iv_notif, R.drawable.eminem)
+//        //remoteView.setTextViewText(R.id.tv_notif_progress, "complete))) ${PreferenceMaestro.counnnter}")
+//        //remoteView.setTextViewText(R.id.notification_alert_weather,      "${str[0].description}")
+//        remoteView.setTextViewText(R.id.notification_alert_weather,      "${defineTimeOfDay()}")
+//        remoteView.setTextViewText(R.id.notif_today_forecast_value,      "${str[1].sumOfDay}W")
+//        remoteView.setTextViewText(R.id.notif_today_forecast_description,"${str[1].description}")
+//
+//        remoteView.setTextViewText(R.id.notif_max_forecast_value,        "${str[2].sumOfDay}W")
+//        remoteView.setTextViewText(R.id.notif_max_forecast_description,  "${str[2].description}📈")
+//
+//        remoteView.setTextViewText(R.id.notif_min_forecast_value,        "${str[3].sumOfDay}W")
+//        remoteView.setTextViewText(R.id.notif_min_forecast_description,  "${str[3].description}\uD83D\uDCC9")
+//        remoteView.setOnClickPendingIntent(R.id.notification_alert_weather, pendingIntentTODO)
+
+
+
+        notificationBuilder
+            //.setContent(remoteView)
+            .setContentText("Its not perfect time to notification!!!")
+            .setSmallIcon(R.drawable.ic_for_notification_sol)
+            .setPriority(Notification.PRIORITY_HIGH) // for under android 26 compatibility
+            .setContentIntent(pendingIntentTODO)
+
+        notificationManager.notify(CHANNEL_ID2Num, notificationBuilder.build())
+
+        PreferenceMaestro.dayOfLastShowedNotification = getCurrentDayOfYear()
+    }
+
 
     override fun onStopped() {
         super.onStopped()
-        notificationManager.cancel(CHANNEL_IDNum)
+        //notificationManager.cancel(CHANNEL_IDNum)
     }
 
 

@@ -27,7 +27,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="299dp"
+        android:layout_height="195dp"
         android:layout_marginTop="24dp"
         android:background="@color/black_spoke"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="299dp"
         android:layout_marginTop="24dp"
+        android:visibility="gone"
         android:background="@color/black_spoke"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -63,26 +64,75 @@
 
     </View>
 
-    <Button
+    <RadioGroup
+        android:id="@+id/radiogroup_notification_manager"
+        android:layout_width="368dp"
+        android:layout_height="77dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/start_worker"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+        <RadioButton
+            android:id="@+id/set_daily_notification"
+            style="@style/AppTheme.Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="Daily"
+            android:textSize="20sp">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/set_threedays_notification"
+            style="@style/AppTheme.Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="every 3 days"
+            android:textSize="20sp">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/set_weekly_notification"
+            style="@style/AppTheme.Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:textColor="@color/white"
+            android:text="Weekly"
+            android:textSize="20sp">
+        </RadioButton>
+
+    </RadioGroup>
+
+    <ToggleButton
         android:id="@+id/start_worker"
-        style="@style/AppTheme.Button"
         android:layout_width="169dp"
         android:layout_height="41dp"
         android:layout_marginBottom="12dp"
-        android:backgroundTint="#FFFFFF"
         android:elevation="20dp"
         android:text="start"
+        android:textColor="@color/black"
+        style="@style/AppTheme.Button"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="@+id/view">
 
-    </Button>
+    </ToggleButton>
+
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="379dp"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:gravity="center|left"
         android:text="Change frequency of notifications, they will show sum of power generation for now. Also max and min per current week  "
         android:textColor="@color/hint_white2"
@@ -91,7 +141,6 @@
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-
     <TextView
         android:layout_width="331dp"
         android:layout_height="42dp"
@@ -99,6 +148,7 @@
         android:text="Super Cloudy Notifications [coming soon]"
         android:textColor="#4479E4"
         android:textSize="15sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="@+id/view2"
@@ -114,6 +164,7 @@
         android:elevation="20dp"
         android:enabled="false"
         android:text="start"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.93"

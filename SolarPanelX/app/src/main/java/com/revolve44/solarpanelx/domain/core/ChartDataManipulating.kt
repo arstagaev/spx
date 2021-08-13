@@ -4,9 +4,8 @@ import android.util.Log
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
-import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
+import com.revolve44.solarpanelx.datasource.models.db.FirstChartDataTransitor
 import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 

@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
-import com.revolve44.solarpanelx.datasource.model.db.HistoryOfForecast
-import com.revolve44.solarpanelx.datasource.model.db.SolarStation
+import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
+import com.revolve44.solarpanelx.datasource.models.db.HistoryOfForecast
+import com.revolve44.solarpanelx.datasource.models.db.SolarStation
 
 
 @Database(

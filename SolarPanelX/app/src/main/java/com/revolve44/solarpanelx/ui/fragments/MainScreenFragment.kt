@@ -26,8 +26,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
-import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
-import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
+import com.revolve44.solarpanelx.datasource.models.db.FirstChartDataTransitor
+import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
 import com.revolve44.solarpanelx.domain.enums.TypeOfSky

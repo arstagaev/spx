@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 
 class OrientationSolarPanelViewModel(app : Application) : AndroidViewModel(app) {
 
-    var pitch = MutableLiveData<Float>()
+    var pitchRotationVector = MutableLiveData<Float>()
+    var pitchAccelerometer = MutableLiveData<Float>()
+
     var azimuthDirectionOfSolarPanel = MutableLiveData<Float>()
 
     var isPanelOrientationViewMode = MutableLiveData<Boolean>()

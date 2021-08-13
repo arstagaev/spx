@@ -19,7 +19,7 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_COMPASS_WORKING_FINE
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATION_VECTOR_WORKING
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATION_VECTOR_SELECTED
 import com.revolve44.solarpanelx.ui.MainActivity
 import timber.log.Timber
 
@@ -29,7 +29,8 @@ class OptimalOrientationHelperActivity : AppCompatActivity(), SensorEventListene
     private lateinit var navController: NavController
 
     private var mSensorManager:  SensorManager? = null
-    private var mRotationSensor: Sensor? = null
+    private var rotationVectorSensor: Sensor? = null
+    private var accelerometerSensor: Sensor? = null
     private var magneticSensor:  Sensor? = null
 
     private val SENSOR_DELAY = 950 * 1000 // 500ms
@@ -49,36 +50,17 @@ class OptimalOrientationHelperActivity : AppCompatActivity(), SensorEventListene
         initNavigation()
 
         val viewModelProviderFactory = TiltCalcMachine(application)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(
-            OrientationSolarPanelViewModel::class.java)
-        sotwFormatter =
-            SOTWFormatter(this@OptimalOrientationHelperActivity)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(OrientationSolarPanelViewModel::class.java)
+        sotwFormatter = SOTWFormatter(this@OptimalOrientationHelperActivity)
         mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
 
-        try {
+        enableTiltSensor() // 11
+        enableCompassSensor()
 
-            mRotationSensor = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-            is_TYPE_ROTATION_VECTOR_WORKING = true
+    }
 
-            if (mRotationSensor == null) {
-                //Toast.makeText(this, "ACCELEROMETER work fine", Toast.LENGTH_LONG).show()
-                mRotationSensor = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-
-                if (mRotationSensor != null){
-                    is_TYPE_ROTATION_VECTOR_WORKING = false
-
-                }
-
-            }
-
-            mSensorManager!!.registerListener(this, mRotationSensor, SENSOR_DELAY)
-            Timber.i("type rotation is ${mRotationSensor!!.type}")
-
-        } catch (e: Exception) {
-            Toast.makeText(this, "Hardware compatibility issue. Rotation sensor", Toast.LENGTH_LONG).show()
-        }
-
+    private fun enableCompassSensor() {
         try {
             magneticSensor = mSensorManager!!.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
             mSensorManager!!.registerListener(this, magneticSensor, SENSOR_DELAY)
@@ -87,6 +69,54 @@ class OptimalOrientationHelperActivity : AppCompatActivity(), SensorEventListene
             is_COMPASS_WORKING_FINE = false
             //Toast.makeText(this, "Compass don`t work on your device!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun enableTiltSensor() {
+//        if (mRotationSensor!!.type == null ){
+//
+//        }else if( typeRotationVector ==  ){
+//
+//        }
+//
+//
+//        when(typeRotationVector){
+//
+//        }
+       // try {
+
+            rotationVectorSensor = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+            accelerometerSensor =  mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) // 1
+            //is_TYPE_ROTATION_VECTOR_SELECTED = true
+
+//            if (rotationVectorSensor == null) {
+//                //Toast.makeText(this, "ACCELEROMETER work fine", Toast.LENGTH_LONG).show()
+//
+//
+//                if (rotationVectorSensor != null){
+//                   // is_TYPE_ROTATION_VECTOR_SELECTED = false
+//
+//                }
+//
+//            }
+            if (rotationVectorSensor != null){
+                mSensorManager!!.registerListener(this, rotationVectorSensor, SENSOR_DELAY)
+            }else{
+                //Toast.makeText(this, "", Toast.LENGTH_LONG).show()
+            }
+
+            if (accelerometerSensor != null){
+                mSensorManager!!.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_GAME)
+            }else{
+                Toast.makeText(this, "Accelerometer don`t work", Toast.LENGTH_LONG).show()
+            }
+
+
+            // mSensorManager!!.unregisterListener(this,mRotationSensor) accelerometerSensor
+            //Timber.i("type rotation is ${rotationVectorSensor!!.type}")
+
+        //} catch (e: Exception) {
+        //    Toast.makeText(this, "Hardware compatibility issue. Rotation sensor", Toast.LENGTH_LONG).show()
+        //}
     }
 
     private fun adjustSotwLabel(azimuth: Float) {
@@ -158,23 +188,26 @@ class OptimalOrientationHelperActivity : AppCompatActivity(), SensorEventListene
 
     override fun onSensorChanged(event: SensorEvent?) {
         //Timber.i("vvv onSensorChanged")
-        if (event?.sensor?.type == Sensor.TYPE_ROTATION_VECTOR) {
+        if (event?.sensor?.type == Sensor.TYPE_ROTATION_VECTOR && is_TYPE_ROTATION_VECTOR_SELECTED) {
             if (event?.values?.size!! > 4) {
                 var truncatedRotationVector = FloatArray(4)
                 System.arraycopy(event.values, 0, truncatedRotationVector, 0, 4);
-                update(truncatedRotationVector);
+                updateVectorType(truncatedRotationVector);
             } else {
-                update(event.values);
+                updateVectorType(event.values);
             }
         }
-        if (event!!.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+        if (event!!.sensor.type == Sensor.TYPE_ACCELEROMETER && !is_TYPE_ROTATION_VECTOR_SELECTED) {
             getAccelerometer(event)
         }
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        Timber.i("ooo ${sensor?.type.toString()} . accuracy: ${accuracy}")
 
-    private fun update(vectors: FloatArray) {
+    }
+
+    private fun updateVectorType(vectors: FloatArray) {
         val rotationMatrix = FloatArray(9)
         SensorManager.getRotationMatrixFromVector(rotationMatrix, vectors)
         //Timber.i("vvv start Work gravi")
@@ -195,7 +228,7 @@ class OptimalOrientationHelperActivity : AppCompatActivity(), SensorEventListene
         val pitch = orientation[1] * FROM_RADS_TO_DEGS
         //PITCH = pitch
         try {
-            viewModel.pitch.value = pitch.toFloat()
+            viewModel.pitchRotationVector.value = pitch.toFloat()
         }catch (e :Exception){
             Timber.e("pizdec ccc")
         }
@@ -223,7 +256,7 @@ class OptimalOrientationHelperActivity : AppCompatActivity(), SensorEventListene
         ) / Math.PI * 2.0).toFloat()
 
         try {
-            viewModel.pitch.value = pitch.toFloat()*100f
+            viewModel.pitchAccelerometer.value = pitch.toFloat()*100f
         }catch (e :Exception){
             Timber.e("pizdec ccc")
         }
@@ -240,5 +273,10 @@ class OptimalOrientationHelperActivity : AppCompatActivity(), SensorEventListene
         val intent = Intent(this@OptimalOrientationHelperActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    fun openDialogForChangeTiltSensor(view: View) {
+        DialogFragmentForChangeTypeTiltSensor().show(supportFragmentManager,"dialog_change_tilt_sensor")
+
     }
 }

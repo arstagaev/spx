@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.ui.fragments.dialog
+package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine
 
 import android.os.Bundle
 import android.util.Log
@@ -8,18 +8,22 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.base.materialdialog.BaseMaterialDialogFragment
 import com.revolve44.solarpanelx.domain.core.setLocale
 import com.revolve44.solarpanelx.domain.enums.LanguagesOfApp
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATION_VECTOR_SELECTED
 import kotlin.collections.ArrayList
 
 
-class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment(R.layout.dialog_fragment_change_language) {
+class DialogFragmentForChangeTypeTiltSensor : BaseMaterialDialogFragment(R.id.title_of_dialog_fragment) {
+
     private lateinit var mListView: ListView
 
     private lateinit var okay_confirm_language : Button
+    private lateinit var title_of_dialog_fragment : TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,15 +31,13 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment(R.layout.dial
         var array: ArrayList<String> = ArrayList()
         //arrayOf("PV Stations Characteristics", "Check Updates","Pro Version","About Us")
         //array.add("Future Updates")
-        array.add("English              ")
-        array.add("Hindi  (हिन्दी)          ")
-        //array.add(getString(R.string.settingsscreen_menu_proversion))
-        array.add("German (Deutsch)     ")
-        array.add("French (Français)    ")
-        array.add("Spanish (Español)    ")
+        array.add("Rotation Vector              ")
+        array.add("Accelerometer          ")
+
         // access the listView from xml file
         mListView = view.findViewById<ListView>(R.id.dialog_change_language_list_view)
         okay_confirm_language = view.findViewById(R.id.okay_confirm_language)
+        title_of_dialog_fragment = view.findViewById(R.id.title_of_dialog_fragment)
 
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         val arrayAdapter = ArrayAdapter(
@@ -45,53 +47,37 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment(R.layout.dial
         )
 
         mListView.adapter = arrayAdapter
-        when(PreferenceMaestro.languageOfApp){
-            LanguagesOfApp.ENGLISH.id -> mListView.setItemChecked(0,true)
-            LanguagesOfApp.HINDI.id   -> mListView.setItemChecked(1,true)
-            LanguagesOfApp.GERMAN.id  -> mListView.setItemChecked(2,true)
-            LanguagesOfApp.FRANCE.id  -> mListView.setItemChecked(3,true)
-            LanguagesOfApp.SPANISH.id -> mListView.setItemChecked(4,true)
-            //LanguagesOfApp.RUSSIAN.id -> mListView.setItemChecked(3,true)
+        if (PreferenceMaestro.isTypeRotationSensor){
+            mListView.setItemChecked(0,true)
+        }else{
+            mListView.setItemChecked(1,true)
         }
+
 
         mListView.setOnItemClickListener { parent, view, position, id ->
             //Toast.makeText(activity,"pos $position",Toast.LENGTH_SHORT).show()
             when(position){
                 0 -> {
-                    Log.d("ttt","hey0")
-                    setLocale(requireActivity(),LanguagesOfApp.ENGLISH.id)
-                    PreferenceMaestro.languageOfApp = LanguagesOfApp.ENGLISH.id
-
+                    PreferenceMaestro.isTypeRotationSensor = true
+                    is_TYPE_ROTATION_VECTOR_SELECTED = true
                 }
                 1 -> {
-                    setLocale(requireActivity(),LanguagesOfApp.HINDI.id)
-                    PreferenceMaestro.languageOfApp = LanguagesOfApp.HINDI.id
+                    PreferenceMaestro.isTypeRotationSensor = false
+                    is_TYPE_ROTATION_VECTOR_SELECTED = false
                 }
-                2 -> {
-                    setLocale(requireActivity(),LanguagesOfApp.GERMAN.id)
-                    PreferenceMaestro.languageOfApp = LanguagesOfApp.GERMAN.id
-                }
-                3 -> {
-                    setLocale(requireActivity(),LanguagesOfApp.FRANCE.id)
-                    PreferenceMaestro.languageOfApp = LanguagesOfApp.FRANCE.id
-                }
-                4 -> {
-                    setLocale(requireActivity(),LanguagesOfApp.SPANISH.id)
-                    PreferenceMaestro.languageOfApp = LanguagesOfApp.SPANISH.id
-                }
-
             }
-            // refresh app for change language
-            requireActivity().finish();
-            requireActivity().startActivity(requireActivity().getIntent());
 
         }
         okay_confirm_language.setOnClickListener {
             dismiss()
         }
 
+        title_of_dialog_fragment.text = "Choose Type of Sensor"
+
 
     }
+
+
 
 
 
@@ -100,7 +86,10 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment(R.layout.dial
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         return inflater.inflate(R.layout.dialog_fragment_change_language, container, false)
+
     }
 
 }

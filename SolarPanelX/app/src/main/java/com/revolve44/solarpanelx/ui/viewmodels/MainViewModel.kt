@@ -7,9 +7,9 @@ import android.net.NetworkInfo
 import androidx.lifecycle.*
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
-import com.revolve44.solarpanelx.datasource.model.api.FiveDaysForecastModelParser
-import com.revolve44.solarpanelx.datasource.model.db.FirstChartDataTransitor
-import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
+import com.revolve44.solarpanelx.datasource.models.api.FiveDaysForecastModelParser
+import com.revolve44.solarpanelx.datasource.models.db.FirstChartDataTransitor
+import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
 import com.revolve44.solarpanelx.domain.enums.MeasurementSystem

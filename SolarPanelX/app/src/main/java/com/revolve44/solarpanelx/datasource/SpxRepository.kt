@@ -2,8 +2,8 @@ package com.revolve44.solarpanelx.datasource
 
 import android.app.Application
 import com.revolve44.solarpanelx.datasource.local.SolarDatabase
-import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
-import com.revolve44.solarpanelx.datasource.model.db.SolarStation
+import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
+import com.revolve44.solarpanelx.datasource.models.db.SolarStation
 import com.revolve44.solarpanelx.datasource.remote.RetrofitInstance
 
 class SpxRepository( app : Application) {

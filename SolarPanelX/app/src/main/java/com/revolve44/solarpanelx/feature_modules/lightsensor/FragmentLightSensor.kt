@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.BuildConfig
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
@@ -247,7 +248,17 @@ class FragmentLightSensor : Fragment(R.layout.lightsensor_fragment_mainscreen) {
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if(inputNominalPower.text.toString() != ""){
-                        PreferenceMaestro.nominalPowerForLightSensor = s.toString().toInt()
+                        try{
+                            if (inputNominalPower.text.length <= 7){
+                                PreferenceMaestro.nominalPowerForLightSensor = s.toString().toInt()
+                            }else{
+                                Toast.makeText(requireActivity(),getString(R.string.lightsensor_warning1),Toast.LENGTH_LONG).show()
+                            }
+
+                        }catch (e: Exception){
+
+                        }
+
                     }
                 }
 

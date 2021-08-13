@@ -298,16 +298,17 @@ fun defineTimeOfDay() : TypeOfSky {
     //var currentTime = generateCurrentHour().toFloat()
     var a = getCurrentTimestampSec()
     var currentTime = unxtoHrAndMinutesByDecimial(a,true)
-    var duration = (sunset - sunrise) / 5
+    var duration = (sunset - sunrise) / 5  // sunshine duration ~ 5-13 hr. just duration is min 1, max 3
 
     when(currentTime){
-        in 0f                 .. sunrise            -> { typeOfSky = TypeOfSky.NIGHT        }
-        in sunrise            .. sunrise+duration*1 -> { typeOfSky = TypeOfSky.EARLY_MORNING}
-        in sunrise+duration   .. sunrise+duration*2 -> { typeOfSky = TypeOfSky.MORNING      }
-        in sunrise+duration*2 .. sunrise+duration*3 -> { typeOfSky = TypeOfSky.DAY          }
-        in sunrise+duration*3 .. sunrise+duration*4 -> { typeOfSky = TypeOfSky.EVENING      }
-        in sunrise+duration*4 .. sunset             -> { typeOfSky = TypeOfSky.LATE_EVENING }
-        in sunset             .. 24f                -> { typeOfSky = TypeOfSky.NIGHT        }
+         //    from           ->  to                                                          approximate hours  , and sunshine duration 14 hr for example
+        in 0f                 .. sunrise            -> { typeOfSky = TypeOfSky.NIGHT        } //  0-6   hr |  0:00
+        in sunrise            .. sunrise+duration*1 -> { typeOfSky = TypeOfSky.EARLY_MORNING} //  6-8   hr |  from sunrise
+        in sunrise+duration   .. sunrise+duration*2 -> { typeOfSky = TypeOfSky.MORNING      } //  8-10  hr |
+        in sunrise+duration*2 .. sunrise+duration*3 -> { typeOfSky = TypeOfSky.DAY          } //  12-14 hr |
+        in sunrise+duration*3 .. sunrise+duration*4 -> { typeOfSky = TypeOfSky.EVENING      } //  14-16 hr |
+        in sunrise+duration*4 .. sunset             -> { typeOfSky = TypeOfSky.LATE_EVENING } //  16-20 hr |  to sunset
+        in sunset             .. 24f                -> { typeOfSky = TypeOfSky.NIGHT        } //  20-24 hr |  0:00
     }
 
     Timber.i("time of day current =${currentTime} sunrise=$sunrise and $sunset , timezone ${PreferenceMaestro.chosenTimeZone} | cur timestamp ${getCurrentTimestampSec()} type:${typeOfSky}")

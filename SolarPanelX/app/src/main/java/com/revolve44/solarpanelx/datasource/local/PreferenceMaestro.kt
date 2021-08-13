@@ -31,6 +31,12 @@ object PreferenceMaestro {
         editor.apply()
     }
 
+    var isTypeRotationSensor: Boolean
+        get() = preferences.getBoolean("is_rotation_vector_type", true)
+        set(value) = preferences.edit {
+            it.putBoolean("is_rotation_vector_type", value)
+        }
+
     // for notif alert
     var notificationJSON: String
 
@@ -38,6 +44,20 @@ object PreferenceMaestro {
         set(value) = preferences.edit {
             it.putString("notif_main", value)
         }
+
+    var choosenDurationOfShowNotification: Int // 0 => no show
+        get() = preferences.getInt("choosenDurationOfShowNotification", 2)
+        set(value) = preferences.edit {
+            it.putInt("choosenDurationOfShowNotification", value)
+        }
+
+    var dayOfLastShowedNotification: Int //
+        get() = preferences.getInt("dayOfLastShowedNotification", 1)
+        set(value) = preferences.edit {
+            it.putInt("dayOfLastShowedNotification", value)
+        }
+    //
+
 
     var timeOfLastDataUpdate: String
         

@@ -15,7 +15,7 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.roundTo1decimials
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATION_VECTOR_WORKING
+import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATION_VECTOR_SELECTED
 import kotlin.math.abs
 
 
@@ -45,9 +45,9 @@ class Fifth_TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel
 
     override fun onResume() {
         super.onResume()
-        when(is_TYPE_ROTATION_VECTOR_WORKING){
+        when(is_TYPE_ROTATION_VECTOR_SELECTED){
             true  -> {
-                initOrientationModule()
+                initVectorRotate()
             }
             false -> {
                 initAccelerometer()
@@ -59,7 +59,7 @@ class Fifth_TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel
     private fun initAccelerometer() {
         orientationSolarPanelViewModel = (activity as OptimalOrientationHelperActivity).viewModel
 
-        orientationSolarPanelViewModel.pitch.observe(viewLifecycleOwner, Observer {
+        orientationSolarPanelViewModel.pitchAccelerometer.observe(viewLifecycleOwner, Observer {
             rotateSolarPanelAzimuth(it)
             txtActualTiltView!!.setText("${roundTo1decimials(it)}°")
 
@@ -98,11 +98,11 @@ class Fifth_TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel
         }
     }
 
-    private fun initOrientationModule() {
+    private fun initVectorRotate() {
         orientationSolarPanelViewModel = (activity as OptimalOrientationHelperActivity).viewModel
 
-        orientationSolarPanelViewModel.pitch.observe(viewLifecycleOwner, Observer {
-            rotateSolarPanel(it)
+        orientationSolarPanelViewModel.pitchRotationVector.observe(viewLifecycleOwner, Observer {
+            rotateSolarPanelVector(it)
             txtActualTiltView!!.setText("${roundTo1decimials(90F+it)}°")
 
             var SUGGESTED_TILT = TiltSuggester().defineOptimalTilt(PreferenceMaestro.lat.toDouble(), TiltSuggester.Season.SUMMER)
@@ -142,7 +142,7 @@ class Fifth_TiltOfSolarPanel : Fragment(R.layout.sm_fragment_tilt_of_solar_panel
 
 
 
-    private fun rotateSolarPanel(tiltPitch : Float) {
+    private fun rotateSolarPanelVector(tiltPitch : Float) {
         val an: Animation = RotateAnimation(
             tiltPitch, -tiltPitch,
             Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,

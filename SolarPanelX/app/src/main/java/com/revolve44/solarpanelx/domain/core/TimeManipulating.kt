@@ -23,6 +23,10 @@ fun getCurrentTimestampSec(): Long {
 
 }
 
+fun getCurrentDayOfYear(): Int {
+    return Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+}
+
 fun ensureNeedUpdateOrNot_PeriodTwoDays() : Boolean {
     Timber.i("~~~~~~~~ init VW  current:${(getCurrentTimestampSec()-86400*2)}  last:${PreferenceMaestro.timeOfLastDataUpdateLong}")
     Timber.i("ensure to upd ${getCurrentTimestampSec()-86400*2} ? ${PreferenceMaestro.timeOfLastDataUpdateLong}  ~~  ${(getCurrentTimestampSec()-86400*2)> PreferenceMaestro.timeOfLastDataUpdateLong}")

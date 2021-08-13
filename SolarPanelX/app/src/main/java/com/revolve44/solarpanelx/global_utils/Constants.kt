@@ -28,7 +28,7 @@ class Constants {
         val WIDTH_CUSTOM_VIEW: Float by lazy { WeatherAnim.WIDTH }
         val HEIGHT_CUSTOM_VIEW: Float by lazy { WeatherAnim.HEIGHT }
 
-        var is_TYPE_ROTATION_VECTOR_WORKING = true
+        var is_TYPE_ROTATION_VECTOR_SELECTED = PreferenceMaestro.isTypeRotationSensor
         var is_COMPASS_WORKING_FINE = false
         val is_LIGHT_MODE = PreferenceMaestro.isLightMode
 

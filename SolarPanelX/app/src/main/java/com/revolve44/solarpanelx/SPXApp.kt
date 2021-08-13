@@ -25,7 +25,7 @@ class SPXApp : Application() {
 
         CaocConfig.Builder.create()
             .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
-            //.enabled(false) //default: true
+            .enabled(false) //default: true
             //.showErrorDetails(false) //default: true
             //.showRestartButton(false) //default: true
             //.logErrorOnRestart(false) //default: true
@@ -50,7 +50,7 @@ class SPXApp : Application() {
             val serviceChannel = NotificationChannel(
                 Constants.CHANNEL_ID,
                 "Important notifications",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             val serviceChannel2 = NotificationChannel(
                 Constants.CHANNEL_ID2,

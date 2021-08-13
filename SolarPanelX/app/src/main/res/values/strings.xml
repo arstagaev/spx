@@ -10,7 +10,7 @@
     <string name="screenaddstation_confirm_efficiency_description">Average efficiency of your solar panels [%]</string>
     <string name="screenaddstation_confirm_install_date_description">Installation date of PV system     [years]</string>
     <string name="screenaddstation_confirm_button">Confirm Changes</string>
-    <string name="settingsscreen_menu_checkupdates">Check Updates</string>
+    <string name="settingsscreen_menu_checkupdates">Rate us 5-Stars</string>
     <string name="settingsscreen_menu_aboutus">About App</string>
     <string name="settingsscreen_menu_aboutus_message">"Features:           > forecasting of solar panels generation on Hour, Week, Month           > detailed charts of forecast           > the ability to calibrate the forecast                     Future features:           > Coming soon we will add Explorer mode with angle and light sensors. It may help you to choose the more sunny place for solar panels "</string>
     <string name="calibrationscreen_description">Calibrate forecasting power output of your current Solar Panel, if needed</string>
@@ -71,4 +71,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="compass_doesn_t_work_on_your_phone">Compass doesn\'t work on your phone😕</string>
     <string name="twitter_of_author">🐦twitter of author</string>
+    <string name="lightsensor_warning1">specify a number less than</string>
 </resources>

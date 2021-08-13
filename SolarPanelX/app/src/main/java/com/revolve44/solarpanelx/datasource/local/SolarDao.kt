@@ -2,8 +2,8 @@ package com.revolve44.solarpanelx.datasource.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.revolve44.solarpanelx.datasource.model.db.ForecastCell
-import com.revolve44.solarpanelx.datasource.model.db.SolarStation
+import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
+import com.revolve44.solarpanelx.datasource.models.db.SolarStation
 
 
 @Dao

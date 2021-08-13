@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.datasource.model.api
+package com.revolve44.solarpanelx.datasource.models.api
 
 
 import com.google.gson.annotations.SerializedName

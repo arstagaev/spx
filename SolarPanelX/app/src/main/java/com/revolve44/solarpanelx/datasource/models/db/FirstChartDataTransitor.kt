@@ -1,4 +1,4 @@
-package com.revolve44.solarpanelx.datasource.model.db
+package com.revolve44.solarpanelx.datasource.models.db
 
 
 
