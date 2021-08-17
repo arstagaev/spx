@@ -347,3 +347,26 @@ fun getAverageNumOfArray(array: ArrayList<Float>) : Float {
     return  (array.sum()/array.size).toFloat()
 
 }
+
+fun checkPercent(watts : Int) : String{
+    Timber.i("nnn wats:"+watts+" pref nominal: "+PreferenceMaestro.chosenStationNOMINALPOWER)
+    return when((watts.toFloat() / (PreferenceMaestro.chosenStationNOMINALPOWER).toFloat() )*100f){
+        in 50f..100f ->{
+            "☀️"
+        }
+        in 14f..50f -> {
+            "⛅"
+        }
+        in 1f..13f ->  {
+            "☁️"
+        }
+        0f ->          {
+            "\uD83C\uDF19" // night
+        }
+        else -> {
+            "\uD83C\uDF0D" // earth
+        }
+    }
+
+
+}

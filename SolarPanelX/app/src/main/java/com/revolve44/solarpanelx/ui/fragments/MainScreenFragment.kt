@@ -15,9 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -39,6 +37,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import kotlin.math.roundToInt
 
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
@@ -53,6 +52,12 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var lineChart1 : LineChart
     private lateinit var lineChart2 : LineChart
     private lateinit var lineChart3 : LineChart
+
+    private lateinit var lineChart4 : LineChart
+    private lateinit var lineChart5 : LineChart
+    private lateinit var cardview_chart4 : CardView
+    private lateinit var cardview_chart5 : CardView
+
     private lateinit var textSwitcher_main_screen : TextSwitcher
     private lateinit var lastUpdate : TextView
     private var mainLabelOfMainScreenInsideTxtSwitcher: TextView? = null
@@ -71,10 +76,15 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var second_chart_description : VerticalTextView
     private lateinit var third_chart_description  : VerticalTextView
 
+    private lateinit var to_chart_forecastdescription4 : VerticalTextView
+    private lateinit var to_chart_forecastdescription5  : VerticalTextView
+
     private lateinit var sunshine_duration_sigh : CardView
 
     private lateinit var cardview_forecastnow_mainscreen : CardView
     private lateinit var main_screen_background : ConstraintLayout
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,21 +96,31 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         lineChart2 = view.findViewById<LineChart>(R.id.lineChart2)
         lineChart3 = view.findViewById<LineChart>(R.id.lineChart3)
 
+        /** for Premium                           */
+        lineChart4 = view.findViewById<LineChart>(R.id.lineChart4)
+        lineChart5 = view.findViewById<LineChart>(R.id.lineChart5)
+        /** for Premium                           */
+        cardview_chart4 = view.findViewById(R.id.cardview_chart4)
+        cardview_chart5 = view.findViewById(R.id.cardview_chart5)
+        ///////////////
         forecastNowAbsol   = view.findViewById(R.id.forecast_now_absolute)
         forecastNowRelativ = view.findViewById(R.id.forecast_now_relatively)
-        sunriseTime = view.findViewById(R.id.sunshineIndicatorBlockSUNRISE)
-        timeOfSunShine = view.findViewById(R.id.sunshineIndicatorBlockDURATION)
-        sunsetTime = view.findViewById(R.id.sunshineIndicatorBlockSUNSET)
+        sunriseTime =        view.findViewById(R.id.sunshineIndicatorBlockSUNRISE)
+        timeOfSunShine =     view.findViewById(R.id.sunshineIndicatorBlockDURATION)
+        sunsetTime =         view.findViewById(R.id.sunshineIndicatorBlockSUNSET)
 
-        frcnowCardview = view.findViewById(R.id.linearlayout_frcst_now)
+        frcnowCardview =     view.findViewById(R.id.linearlayout_frcst_now)
 
         sunshine_duration_sigh = view.findViewById(R.id.sunshine_duration_sigh)
 
         lastUpdate = view.findViewById(R.id.last_upd_date)
 
-        first_chart_description  = view.findViewById(R.id.first_chart_description)
-        second_chart_description = view.findViewById(R.id.to_tomorrow_chart_forecast)
-        third_chart_description  = view.findViewById(R.id.to_after_tomorrow_chart_forecast)
+        first_chart_description       = view.findViewById(R.id.first_chart_description)
+        second_chart_description      = view.findViewById(R.id.to_tomorrow_chart_forecast)
+        third_chart_description       = view.findViewById(R.id.to_after_tomorrow_chart_forecast)
+        to_chart_forecastdescription4 = view.findViewById(R.id.to_chart_forecast4)
+        to_chart_forecastdescription5 = view.findViewById(R.id.to_chart_forecast5)
+
         //textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
         cardview_forecastnow_mainscreen = view.findViewById(R.id.cardview_forecastnow_mainscreen)
         main_screen_background = view.findViewById(R.id.main_screen_background)
@@ -137,6 +157,27 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             Snackbar.make(requireActivity().findViewById(android.R.id.content),"\uD83C\uDF05"+getString(
                             R.string.sunrise)+" ~ \uD83C\uDF1E "+getString(R.string.sunshine_time) +"~ \uD83C\uDF07"+getString(
                                             R.string.sunset),Snackbar.LENGTH_LONG).show()
+        }
+
+
+        switchPremium(PreferenceMaestro.isPremiumStatus)
+
+    }
+
+    private fun switchPremium(isPremium : Boolean){
+        if (isPremium){
+
+            cardview_chart4.visibility = View.VISIBLE
+            cardview_chart5.visibility = View.VISIBLE
+            to_chart_forecastdescription4.visibility = View.VISIBLE
+            to_chart_forecastdescription5.visibility = View.VISIBLE
+
+        }else{
+
+            cardview_chart4.visibility = View.GONE
+            cardview_chart5.visibility = View.GONE
+            to_chart_forecastdescription4.visibility = View.GONE
+            to_chart_forecastdescription5.visibility = View.GONE
         }
 
     }
@@ -239,6 +280,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                     second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                     third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
 
                     lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                     gradientAnimationLayout(main_screen_background,ContextCompat.getColor(requireActivity(), R.color.white),ContextCompat.getColor(requireActivity(), R.color.black_night),2000)
@@ -251,6 +294,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
                     second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
                     third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
                     lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
                     gradientAnimationLayout(main_screen_background,ContextCompat.getColor(requireActivity(), R.color.black_night),ContextCompat.getColor(requireActivity(), R.color.white),2000)
@@ -269,6 +314,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                     second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
                     third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
 
                     lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
 
@@ -282,6 +329,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
                     second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
                     third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
                     lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
                     main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
@@ -329,8 +378,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
          */
         allDataForChartsX.add(1, chartDatasort(forecastDateArray, forecastArray, 0)) // tomorrow
         allDataForChartsX.add(2, chartDatasort(forecastDateArray, forecastArray, 1)) // after tomorrow
-        allDataForChartsX.add(3, chartDatasort(forecastDateArray, forecastArray, 2)) // after after tomorrow
-        allDataForChartsX.add(4, chartDatasort(forecastDateArray, forecastArray, 3)) // after after after tomorrow
+        allDataForChartsX.add(3, chartDatasort(forecastDateArray, forecastArray, 2)) // PRO v. //after after tomorrow
+        allDataForChartsX.add(4, chartDatasort(forecastDateArray, forecastArray, 3)) // PRO v. //after after after tomorrow
 
         fillAllCharts(allDataForChartsX)
 
@@ -389,16 +438,27 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         //val lineChart2 = view.findViewById<LineChart>(R.id.lineChart2)
         //val lineChart3 = view.findViewById<LineChart>(R.id.lineChart3)
-        var description: Description = lineChart1.description
+        //var description: Description = lineChart1.description
         val legend = lineChart1.legend
         val legend2 = lineChart2.legend
         val legend3 = lineChart3.legend
+        val legend4 = lineChart4.legend
+        val legend5 = lineChart5.legend
 
         // main chart
         topLineChartSetup(lineChart1,legend,arrayList.get(0))
 
         secondChartInit(lineChart2,legend2,arrayList.get(1).forecasts)
         thirdChartInit(lineChart3,legend3,arrayList.get(2).forecasts)
+
+        /**
+         * PRO version below
+         */
+        /**init chart 4  */
+        fourthLineChartSetup(lineChart4, legend4, arrayList.get(3).forecasts)
+        /**init chart 5 */
+        fiveLineChartSetup(lineChart5, legend5,   arrayList.get(4).forecasts)
+
 
         GlobalScope.launch {
             saveForNotification(arrayList)
@@ -459,33 +519,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
     }
 
+    //nominal power of your PV system
+
     private fun topLineChartSetup(
         lineChart: LineChart,
         legend: Legend,
         frcstData: FirstChartDataTransitor
     ){
-        lineChart.isDragEnabled = true
-        lineChart.setScaleEnabled(false)
-        lineChart.description.isEnabled = false
-        lineChart.legend.isEnabled = false // description of define line
-
-
-        //lineChart.legend.textColor = Color.GREEN
-
-        //lineChart.axisLeft.axisLineColor = Color.CYAN
-
-        legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
-
-        //Disable right axis
-        val yAxisRight = lineChart.axisRight
-        yAxisRight.isEnabled = false
-
-        val leftAxis = lineChart.axisLeft
-        leftAxis.removeAllLimitLines()
-
-        //leftAxis.enableGridDashedLine(30F, 30F, 0F)
-        leftAxis.setDrawLimitLinesBehindData(true)
-        leftAxis.disableGridDashedLine()
 
         // Transit
         val arrayData : ArrayList<Int> = frcstData.forecasts
@@ -503,45 +543,85 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         }
 
         var set1 = LineDataSet(yValues, "")
-
-
-        Legend.LegendPosition.RIGHT_OF_CHART
-
-        set1.fillAlpha = 110
-        set1.setDrawHorizontalHighlightIndicator(false)
-        //set1.disableDashedLine()
-        set1.isHighlightEnabled = false
+        set1.apply {
+            fillAlpha = 110
+            setDrawHorizontalHighlightIndicator(false)
+            disableDashedLine()
+            isHighlightEnabled = false
+        }
 
         val dataSet = ArrayList<ILineDataSet>()
         dataSet.add(set1)
 
-        val data = LineData(dataSet)
-        lineChart.data = data
+        val dataX = LineData(dataSet)
 
-        //   X
-        val xAxis = lineChart.xAxis
-        xAxis.valueFormatter = MyXAxisValuesFormatter(firstChartSpecialValues)
-        xAxis.granularity = 1F
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        // add goal line to chart
+        val goalLine =  // line
+            LimitLine(
+                PreferenceMaestro.chosenStationNOMINALPOWER.toFloat(), String.format(
+                    getString(R.string.mainscreen_chart_nominal_power_is_here),
+                    "goal"
+                )
+            )
+
+        lineChart.apply {
+
+            goalLine.lineColor = Color.rgb(255, 87, 34)
+            goalLine.textColor = ContextCompat.getColor(requireActivity(), R.color.greenTight)
+            goalLine.lineWidth = 1f
+            //goalLine.isDashedLineEnabled
+            isDragEnabled = true
+            setScaleEnabled(true)
+            description.isEnabled = false
+            legend.isEnabled = false // description of define line
+            legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
 
 
 
-        set1.mode = LineDataSet.Mode.CUBIC_BEZIER
-        set1.setDrawFilled(true)
-        set1.fillAlpha = 100
-        set1.cubicIntensity = 0.2f
+            //Disable right axis
+            axisRight.isEnabled = false
 
-        lineChart.axisLeft.textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
-        xAxis.textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
-        set1.valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
-        set1.color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
-        set1.setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
-        set1.fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
+            axisLeft.apply {
+
+                axisMaximum = PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() * 1.2F
+                axisMinimum = 0f
+                removeAllLimitLines()
+                addLimitLine(goalLine)
 
 
-        /** Refresh all chart, i use this when i again setup new dataset*/
-        lineChart.notifyDataSetChanged()
-        lineChart.invalidate()
+                setDrawLimitLinesBehindData(true)
+                disableGridDashedLine()
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            xAxis.apply {
+                valueFormatter = MyXAxisValuesFormatter(firstChartSpecialValues)
+                granularity    = 1F
+                position       = XAxis.XAxisPosition.BOTTOM
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            data = dataX
+
+
+            set1.apply {
+                mode = LineDataSet.Mode.CUBIC_BEZIER
+                setDrawFilled(true)
+                fillAlpha = 100
+                cubicIntensity = 0.2f
+
+                valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+                color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
+                fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
+            }
+            notifyDataSetChanged()
+            invalidate()
+
+        }
+        Legend.LegendPosition.RIGHT_OF_CHART
+
+
         first_chart_description.text = getString(R.string.mainscreen_chart_title_forecast20hr)+""
 //        first_chart_description.text = getString(R.string.mainscreen_chart_title_forecast20hr)+" (Σ= ${scaleOfkWh(
 //            sumOfCharts(arrayData),
@@ -555,26 +635,6 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         legend: Legend,
         arrayData: ArrayList<Int>
     ){
-        lineChart.isDragEnabled = true
-        lineChart.setScaleEnabled(false)
-        lineChart.description.isEnabled = false
-        lineChart.legend.isEnabled = false // description of define line
-
-
-        legend.position= Legend.LegendPosition.BELOW_CHART_CENTER
-
-        val leftAxis = lineChart.axisLeft
-        leftAxis.removeAllLimitLines()
-
-        //leftAxis.enableGridDashedLine(30F, 30F, 0F)
-
-        leftAxis.setDrawLimitLinesBehindData(true)
-
-        //Disable right axis
-        val yAxisRight = lineChart.axisRight
-        yAxisRight.isEnabled = false
-
-
         val yValues = ArrayList<Entry>()
         Timber.i("vvv4 $arrayData")
         try {
@@ -596,41 +656,77 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         val dataSet = ArrayList<ILineDataSet>()
         dataSet.add(set1)
 
-        val data = LineData(dataSet)
+        //val data = LineData(dataSet)
 
-        lineChart.data = data
-        //   X
-        val xAxis = lineChart.xAxis
-        try {
-            xAxis.valueFormatter = MyXAxisValuesFormatter(values)
-        }catch (e: Exception){}
+        val dataX = LineData(dataSet)
 
-        xAxis.granularity = 1F
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        // add goal line to chart
+        val goalLine =  // line
+            LimitLine(
+                PreferenceMaestro.chosenStationNOMINALPOWER.toFloat(), String.format(
+                    getString(R.string.mainscreen_chart_nominal_power_is_here),
+                    "goal"
+                )
+            )
 
-        set1.mode = LineDataSet.Mode.CUBIC_BEZIER
+        lineChart.apply {
 
-        set1.setDrawFilled(true)
-//        set1.color = ContextCompat.getColor(requireActivity(),R.color.chart_stroke)
-//        set1.fillColor = ContextCompat.getColor(requireActivity(),R.color.chart_fill_otherchart)
-        set1.fillAlpha = 100
+            goalLine.lineColor = Color.rgb(255, 87, 34)
+            goalLine.textColor = ContextCompat.getColor(requireActivity(), R.color.greenTight)
+            goalLine.lineWidth = 1f
+            //goalLine.isDashedLineEnabled
+            isDragEnabled = true
+            setScaleEnabled(false)
+            description.isEnabled = false
+            legend.isEnabled = false // description of define line
+            legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
 
-        set1.cubicIntensity = 0.2f
 
-        lineChart.axisLeft.textColor = ContextCompat.getColor(
-            requireActivity(),
-            R.color.hint_white2
-        )
-        xAxis.textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
-        set1.valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
-        set1.color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
-        set1.setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
-        set1.fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
 
-        /** Refresh all chart, i use this when i again setup a new dataset*/
-        lineChart.notifyDataSetChanged()
-        lineChart.invalidate()
-        second_chart_description.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +": ${PreferenceMaestro.leftChartMonthandDay}"
+            //Disable right axis
+            axisRight.isEnabled = false
+
+            axisLeft.apply {
+
+                axisMaximum = PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() * 1.2F
+                axisMinimum = 0f
+                removeAllLimitLines()
+                addLimitLine(goalLine)
+
+                setDrawLimitLinesBehindData(true)
+                disableGridDashedLine()
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            xAxis.apply {
+                valueFormatter = MyXAxisValuesFormatter(values)
+                granularity    = 1F
+                position       = XAxis.XAxisPosition.BOTTOM
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            data = dataX
+
+
+            set1.apply {
+                mode = LineDataSet.Mode.CUBIC_BEZIER
+                setDrawFilled(true)
+                fillAlpha = 100
+                cubicIntensity = 0.2f
+
+                valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+                color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
+                fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
+            }
+            notifyDataSetChanged()
+            invalidate()
+
+        }
+        Legend.LegendPosition.RIGHT_OF_CHART
+
+
+        second_chart_description.text = "${PreferenceMaestro.leftChartMonthandDay} (Σ= ${scaleOfkWh(arrayData.sum(), true)})"
 //        second_chart_description.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +"\n(Σ= ${scaleOfkWh(
 //            sumOfCharts(arrayData),
 //            true
@@ -644,26 +740,107 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         legend: Legend,
         arrayData: ArrayList<Int>
     ){
-        lineChart.isDragEnabled = true
-        lineChart.setScaleEnabled(false)
-        lineChart.description.isEnabled = false
-        lineChart.legend.isEnabled = false // description of define line
+
+        val yValues = ArrayList<Entry>()
+        Timber.i("vvv4 $arrayData")
+        try {
+            for (i in 0..arrayData.size-1){
+                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+            }
+        }catch (e: Exception){
+            Timber.i("vvv4 ${e.message}")
+        }
+
+        var set1 = LineDataSet(yValues, "")
+        Legend.LegendPosition.RIGHT_OF_CHART
+
+        set1.fillAlpha = 110
+        set1.setDrawHorizontalHighlightIndicator(false)
+        //set1.disableDashedLine()
+        set1.isHighlightEnabled = false
+        val dataSet = ArrayList<ILineDataSet>()
+        dataSet.add(set1)
+
+        val dataX = LineData(dataSet)
+
+        // add goal line to chart
+        val goalLine =  // line
+            LimitLine(
+                PreferenceMaestro.chosenStationNOMINALPOWER.toFloat(), String.format(
+                    getString(R.string.mainscreen_chart_nominal_power_is_here),
+                    "goal"
+                )
+            )
+
+        lineChart.apply {
+
+            goalLine.lineColor = Color.rgb(255, 87, 34)
+            goalLine.textColor = ContextCompat.getColor(requireActivity(), R.color.greenTight)
+            goalLine.lineWidth = 1f
+            //goalLine.isDashedLineEnabled
+            isDragEnabled = true
+            setScaleEnabled(false)
+
+            description.isEnabled = false
+            legend.isEnabled      = false // description of define line
+            //legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
 
 
-        legend.position= Legend.LegendPosition.BELOW_CHART_CENTER
 
-        val leftAxis = lineChart.axisLeft
-        leftAxis.removeAllLimitLines()
+            //Disable right axis
+            axisRight.isEnabled = false
 
-        //leftAxis.enableGridDashedLine(30F, 30F, 0F)
+            axisLeft.apply {
 
-        leftAxis.setDrawLimitLinesBehindData(true)
+                axisMaximum = PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() * 1.2F
+                axisMinimum = 0f
+                removeAllLimitLines()
+                addLimitLine(goalLine)
 
-        //Disable right axis
-        val yAxisRight = lineChart.axisRight
-        yAxisRight.isEnabled = false
+                setDrawLimitLinesBehindData(true)
+                disableGridDashedLine()
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            xAxis.apply {
+                valueFormatter = MyXAxisValuesFormatter(values)
+                granularity    = 1F
+                position       = XAxis.XAxisPosition.BOTTOM
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            data = dataX
 
 
+            set1.apply {
+                mode = LineDataSet.Mode.CUBIC_BEZIER
+                setDrawFilled(true)
+                fillAlpha = 100
+                cubicIntensity = 0.2f
+
+                valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+                color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
+                fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
+            }
+            notifyDataSetChanged()
+            invalidate()
+
+        }
+        Legend.LegendPosition.RIGHT_OF_CHART
+
+
+        third_chart_description.text = "${PreferenceMaestro.rightChartMonthandDay} (Σ= ${scaleOfkWh(arrayData.sum(), true)})"
+
+//        third_chart_description.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +
+//        "\n(Σ= ${scaleOfkWh(sumOfCharts(arrayData), true)}): ${PreferenceMaestro.leftChartMonthandDay}"
+    }
+
+    private fun fourthLineChartSetup(
+        lineChart: LineChart,
+        legend: Legend,
+        arrayData: ArrayList<Int>
+    ){
         val yValues = ArrayList<Entry>()
         Timber.i("vvv4 $arrayData")
         try {
@@ -685,48 +862,177 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         val dataSet = ArrayList<ILineDataSet>()
         dataSet.add(set1)
 
-        val data = LineData(dataSet)
+        //val data = LineData(dataSet)
 
-        lineChart.data = data
+        val dataX = LineData(dataSet)
+
+        // add goal line to chart
+        val goalLine =  // line
+            LimitLine(
+                PreferenceMaestro.chosenStationNOMINALPOWER.toFloat(), String.format(
+                    getString(R.string.mainscreen_chart_nominal_power_is_here),
+                    "goal"
+                )
+            )
+
+        lineChart.apply {
+
+            goalLine.lineColor = Color.rgb(255, 87, 34)
+            goalLine.textColor = ContextCompat.getColor(requireActivity(), R.color.greenTight)
+            goalLine.lineWidth = 1f
+            //goalLine.isDashedLineEnabled
+            isDragEnabled = true
+            setScaleEnabled(false)
+            description.isEnabled = false
+            legend.isEnabled = false // description of define line
+            legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
 
 
 
-        //   X
-        val xAxis = lineChart.xAxis
+            //Disable right axis
+            axisRight.isEnabled = false
+
+            axisLeft.apply {
+
+                axisMaximum = PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() * 1.2F
+                axisMinimum = 0f
+                removeAllLimitLines()
+                addLimitLine(goalLine)
+
+                setDrawLimitLinesBehindData(true)
+                disableGridDashedLine()
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            xAxis.apply {
+                valueFormatter = MyXAxisValuesFormatter(values)
+                granularity    = 1F
+                position       = XAxis.XAxisPosition.BOTTOM
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            data = dataX
+
+
+            set1.apply {
+                mode = LineDataSet.Mode.CUBIC_BEZIER
+                setDrawFilled(true)
+                fillAlpha = 100
+                cubicIntensity = 0.2f
+
+                valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+                color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
+                fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
+            }
+
+            notifyDataSetChanged()
+            invalidate()
+
+        }
+        //Legend.LegendPosition.RIGHT_OF_CHART
+
+        to_chart_forecastdescription4.text = "${PreferenceMaestro.fourChartMonthandDay} (Σ= ${scaleOfkWh(arrayData.sum(), true)})"
+
+    }
+
+    private fun fiveLineChartSetup(
+        lineChart: LineChart,
+        legend: Legend,
+        arrayData: ArrayList<Int>
+    ){
+        val yValues = ArrayList<Entry>()
+        Timber.i("vvv4 $arrayData")
         try {
-            xAxis.valueFormatter = MyXAxisValuesFormatter(values)
-        }catch (e: Exception){}
 
-        xAxis.granularity = 1F
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
+            for (i in 0..arrayData.size-1){
+                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+            }
+        }catch (e: Exception){
+            Timber.i("vvv4 ${e.message}")
+        }
 
-        set1.mode = LineDataSet.Mode.CUBIC_BEZIER
+        var set1 = LineDataSet(yValues, "")
+        Legend.LegendPosition.RIGHT_OF_CHART
 
-        set1.setDrawFilled(true)
-//        set1.color = ContextCompat.getColor(requireActivity(),R.color.chart_stroke)
-//        set1.fillColor = ContextCompat.getColor(requireActivity(),R.color.chart_fill_otherchart)
-        set1.fillAlpha = 100
+        set1.fillAlpha = 110
+        set1.setDrawHorizontalHighlightIndicator(false)
+        //set1.disableDashedLine()
+        set1.isHighlightEnabled = false
+        val dataSet = ArrayList<ILineDataSet>()
+        dataSet.add(set1)
 
-        set1.cubicIntensity = 0.2f
+        //val data = LineData(dataSet)
 
-        lineChart.axisLeft.textColor = ContextCompat.getColor(
-            requireActivity(),
-            R.color.hint_white2
-        )
-        xAxis.textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
-        set1.valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
-        set1.color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
-        set1.setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
-        set1.fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
+        val dataX = LineData(dataSet)
 
-        /** Refresh all chart, i use this when i again setup a new dataset*/
-        lineChart.notifyDataSetChanged()
-        lineChart.invalidate()
-        third_chart_description.text = getString(R.string.mainscreen_chart_title_forecast_aftertomorrow) +
-                ": ${PreferenceMaestro.rightChartMonthandDay}"
+        // add goal line to chart
+        val goalLine =  // line
+            LimitLine(
+                PreferenceMaestro.chosenStationNOMINALPOWER.toFloat(), String.format(
+                    getString(R.string.mainscreen_chart_nominal_power_is_here),
+                    "goal"
+                )
+            )
 
-//        third_chart_description.text = getString(R.string.mainscreen_chart_title_forecasttomorrow) +
-//        "\n(Σ= ${scaleOfkWh(sumOfCharts(arrayData), true)}): ${PreferenceMaestro.leftChartMonthandDay}"
+        lineChart.apply {
+
+            goalLine.lineColor = Color.rgb(255, 87, 34)
+            goalLine.textColor = ContextCompat.getColor(requireActivity(), R.color.greenTight)
+            goalLine.lineWidth = 1f
+            //goalLine.isDashedLineEnabled
+            isDragEnabled = true
+            setScaleEnabled(false)
+            description.isEnabled = false
+            legend.isEnabled = false // description of define line
+            legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
+
+
+
+            //Disable right axis
+            axisRight.isEnabled = false
+
+            axisLeft.apply {
+
+                axisMaximum = PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() * 1.2F
+                axisMinimum = 0f
+                removeAllLimitLines()
+                addLimitLine(goalLine)
+
+                setDrawLimitLinesBehindData(true)
+                disableGridDashedLine()
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            xAxis.apply {
+                valueFormatter = MyXAxisValuesFormatter(values)
+                granularity    = 1F
+                position       = XAxis.XAxisPosition.BOTTOM
+                textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+            }
+
+            data = dataX
+
+
+            set1.apply {
+                mode = LineDataSet.Mode.CUBIC_BEZIER
+                setDrawFilled(true)
+                fillAlpha = 100
+                cubicIntensity = 0.2f
+
+                valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
+                color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
+                fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
+            }
+            notifyDataSetChanged()
+            invalidate()
+
+        }
+        //Legend.LegendPosition.RIGHT_OF_CHART
+
+        to_chart_forecastdescription5.text = "${PreferenceMaestro.fiveChartMonthandDay} (Σ= ${scaleOfkWh(arrayData.sum(), true)})"
+
     }
 
     override fun onRefresh() {

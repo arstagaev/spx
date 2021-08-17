@@ -70,4 +70,24 @@
     <string name="maintools_screen_title_nn">réseau neuronal</string>
     <string name="compass_doesn_t_work_on_your_phone">La boussole ne fonctionne pas sur votre téléphone😕</string>
     <string name="twitter_of_author">🐦twitter de l\'auteur</string>
+    <string name="lightsensor_warning1">spécifier un nombre inférieur à</string>
+    <string name="notification_screen_daily">du quotidien</string>
+    <string name="notification_screen_every_3day">tous les 3 jours</string>
+    <string name="notification_screen_weekly">Hebdomadaire</string>
+    <string name="notification_screen_standart_notif_decription">Changez la fréquence des notifications, ils afficheront la somme de la production d\'électricité pour le moment. Aussi max et min par semaine en cours</string>
+    <string name="notification_screen_standart_notif_title">Notifications standard</string>
+    <string name="notification_screen_title">Ceci est la version bêta peut être quelques bugs</string>
+    <string name="tool_manager_screen_do_you_like_app">Aimez-vous l\'application?</string>
+    <string name="purchase_why">
+       \n ✔️Prévision de la production d\'électricité à 5 jours
+       \n ✔️Pas de publicité. Pour toujours
+       \n ✔️Annuler le plan annuel en ligne à chaque fois</string>
+    <string name="why_premium_title">Pourquoi Premium ?</string>
+    <string name="g_e_t_p_r_e_m_i_u_m_button">Obtenez la prime</string>
+    <string name="price_of_premium_1_99_per_year">1.99$ par année</string>
+    <string name="hint_recurring_billing_cancel_anytime_on_google_play_store">Paiement régulier. Annulez à tout moment sur Google Play Store</string>
+    <string name="current_plan_premium">Votre forfait actuel : Premium</string>
+    <string name="current_plan_free">Votre forfait actuel : Gratuit</string>
+    <string name="mainscreen_chart_nominal_power_is_here">Puissance nominale de votre système PV</string>
+    <string name="watts_sign">watts</string>
 </resources>

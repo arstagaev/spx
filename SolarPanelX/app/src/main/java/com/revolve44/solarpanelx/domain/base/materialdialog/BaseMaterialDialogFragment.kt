@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-open class BaseMaterialDialogFragment(viewID : Int) : DialogFragment(viewID) {
+open class BaseMaterialDialogFragment() : DialogFragment() {
 
     private var dialogView: View? = null
 

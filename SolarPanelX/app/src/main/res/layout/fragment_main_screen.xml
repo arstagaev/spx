@@ -15,7 +15,7 @@
             android:id="@+id/main_screen_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black_night">
+            android:background="@color/white">
 
             <TextSwitcher
                 android:id="@+id/textSwitcher_main_screen"
@@ -120,16 +120,15 @@
                 android:id="@+id/flow"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="5dp"
                 android:orientation="vertical"
                 app:barrierMargin="20dp"
-                app:constraint_referenced_ids="cardview_chart1,cardView_chart2,cardview_chart3"
+                app:constraint_referenced_ids="cardview_chart1,cardView_chart2,cardview_chart3,cardview_chart4,cardview_chart5"
                 app:flow_verticalGap="10dp"
-                app:flow_verticalStyle="spread"
+                app:flow_verticalStyle="packed"
 
-                app:flow_wrapMode="chain"
+                app:flow_wrapMode="none"
                 app:layout_constraintEnd_toEndOf="@+id/cardview_forecastnow_mainscreen"
                 app:layout_constraintStart_toStartOf="@+id/cardview_forecastnow_mainscreen"
                 app:layout_constraintTop_toBottomOf="@+id/card_item_with_map">
@@ -142,10 +141,21 @@
                 android:layout_width="0dp"
                 android:layout_height="166dp"
                 app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/black_spoke"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/flow"
                 app:layout_constraintTop_toTopOf="@+id/flow">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/hint_white2"
+                    android:text="@string/watts_sign"
+                    android:textSize="8sp">
+
+                </TextView>
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart1"
@@ -166,7 +176,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/flow"
                 app:layout_constraintStart_toStartOf="@+id/flow"
                 app:layout_constraintTop_toBottomOf="@+id/cardview_chart1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/hint_white2"
+                    android:text="@string/watts_sign"
+                    android:textSize="8sp">
 
+                </TextView>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart2"
                     android:layout_width="match_parent"
@@ -203,7 +222,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/flow"
                 app:layout_constraintStart_toStartOf="@+id/flow"
                 app:layout_constraintTop_toBottomOf="@+id/cardView_chart2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/hint_white2"
+                    android:text="@string/watts_sign"
+                    android:textSize="8sp">
 
+                </TextView>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart3"
                     android:layout_width="match_parent"
@@ -213,8 +241,62 @@
                     tools:ignore="NotSibling">
 
                 </com.github.mikephil.charting.charts.LineChart>
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_chart4"
+                android:layout_width="0dp"
+                android:layout_height="164dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/flow"
+                app:layout_constraintStart_toStartOf="@+id/flow">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/hint_white2"
+                    android:text="@string/watts_sign"
+                    android:textSize="8sp">
 
+                </TextView>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:layout_constraintVertical_chainStyle="spread"
+                    tools:ignore="NotSibling">
+
+                </com.github.mikephil.charting.charts.LineChart>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_chart5"
+                android:layout_width="0dp"
+                android:layout_height="164dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/flow"
+                app:layout_constraintStart_toStartOf="@+id/flow">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/hint_white2"
+                    android:text="@string/watts_sign"
+                    android:textSize="8sp">
+
+                </TextView>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:layout_constraintVertical_chainStyle="spread"
+                    tools:ignore="NotSibling">
+
+                </com.github.mikephil.charting.charts.LineChart>
             </androidx.cardview.widget.CardView>
 
             <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
@@ -246,6 +328,36 @@
                 app:layout_constraintVertical_bias="0.5">
 
             </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
+
+            <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
+                android:id="@+id/to_chart_forecast4"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:gravity="center|bottom"
+                android:text="after tomorrow"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="@+id/cardview_chart4"
+                app:layout_constraintEnd_toStartOf=    "@+id/cardview_chart4"
+                app:layout_constraintTop_toTopOf=      "@+id/cardview_chart4">
+            </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
+
+            <com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
+                android:id="@+id/to_chart_forecast5"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:gravity="center|bottom"
+                android:text="after tomorrow"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="@+id/cardview_chart5"
+                app:layout_constraintEnd_toStartOf=    "@+id/cardview_chart5"
+                app:layout_constraintTop_toTopOf=      "@+id/cardview_chart5">
+            </com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView>
+
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/sunshine_duration_sigh"
                 android:layout_width="0dp"
@@ -255,7 +367,7 @@
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
                 app:layout_constraintStart_toStartOf="@+id/flow"
-                app:layout_constraintTop_toBottomOf="@+id/cardview_chart3">
+                app:layout_constraintTop_toBottomOf="@+id/flow">
 
                 <LinearLayout
                     android:layout_width="match_parent"

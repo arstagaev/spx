@@ -72,6 +72,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         array.add(getString(R.string.settingsscreen_menu_solarpanels_change_language))
         //array.add(getString(R.string.settingsscreen_menu_proversion))
         array.add(getString(R.string.settingsscreen_menu_aboutus))
+        array.add("Terminal")
         // access the listView from xml file
         mListView = view.findViewById<ListView>(R.id.settings_list)
 
@@ -93,6 +94,13 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 2 ->{
                      Snackbar.make(requireActivity().findViewById(android.R.id.content), "SPX v.${BuildConfig.VERSION_NAME} App for solar panels #1", Snackbar.LENGTH_SHORT).show()
                      findNavController().navigate(R.id.action_settings_mainscreen_to_about_fragment)
+                }
+                3 ->{
+
+                    //ERROR NEED FIX залепил ошибку временно
+                    Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon2), Snackbar.LENGTH_SHORT).show()
+                    //findNavController().navigate(R.id.action_tlMng_to_terminal)
+                    //FragmentTerminal().show(childFragmentManager,"dialog_commands")
                 }
             }
         }

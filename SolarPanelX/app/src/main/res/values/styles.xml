@@ -36,6 +36,10 @@
 
 
     </style>
+    <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/chart_stroke</item>
+        <item name="android:colorForeground">@color/redx</item>
+    </style>
 
     <style name="spinnerTheme">
         <item name="android:textColor">@color/hint_white</item>

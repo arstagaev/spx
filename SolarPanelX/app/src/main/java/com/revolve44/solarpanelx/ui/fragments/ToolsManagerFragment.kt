@@ -1,10 +1,15 @@
 package com.revolve44.solarpanelx.ui.fragments
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -12,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.R
-import com.revolve44.solarpanelx.domain.base.recyclerview.BaseAdapterCallback
+import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
@@ -26,11 +31,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+
 class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
     private lateinit var recyclerViewTools: RecyclerView
     private lateinit var settingsMain : ImageView
     private lateinit var mode_indicator_in_tool_manager : TextView
+    private lateinit var rateAppSign          : CardView
+    private lateinit var rateAppSignCloseButt : ImageView
+
+    private lateinit var rate_app_signLikeIt     : Button
+    private lateinit var rate_app_signDontLikeIt : Button
+
 
     private val mAdapter =  ToolsMainscreenAdapter()
 
@@ -41,6 +53,12 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         settingsMain = view.findViewById(R.id.settings_main_tools_screen)
         mode_indicator_in_tool_manager = view.findViewById(R.id.mode_indicator_in_tool_manager)
 
+        rateAppSign           = view.findViewById(R.id.rate_app_sign)
+        rateAppSignCloseButt  = view.findViewById(R.id.rate_app_sign_button)
+
+        rate_app_signLikeIt = view.findViewById(R.id.rate_app_sign_like_it)
+        rate_app_signDontLikeIt = view.findViewById(R.id.rate_app_sign_dont_like)
+
         settingsMain.setOnClickListener {
               findNavController().navigate(R.id.action_toolsManagerFragment_to_settings_mainscreen)
         }
@@ -49,10 +67,51 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         }
 
         when(is_LIGHT_MODE){
-            false ->{mode_indicator_in_tool_manager.text = "Standard Mode"}
-            true ->{ mode_indicator_in_tool_manager.text = "Light UI Mode - Enabled"}
+            false ->{  mode_indicator_in_tool_manager.text = "Standard Mode"            }
+            true  ->{  mode_indicator_in_tool_manager.text = "Light UI Mode - Enabled"  }
         }
 
+        if (PreferenceMaestro.isInvisibleFeedbackSign){
+            rateAppSign.visibility = View.GONE
+        }else{
+            rateAppSign.visibility = View.VISIBLE
+        }
+        rateAppSignCloseButt.setOnClickListener {
+            rateAppSign.visibility = View.GONE
+            PreferenceMaestro.isInvisibleFeedbackSign = true
+        }
+
+        // like or not
+        rate_app_signLikeIt.setOnClickListener { //https://play.google.com/store/apps/details?id=com.revolve44.solarpanelx
+            goToUrl("https://play.google.com/store/apps/details?id=com.revolve44.solarpanelx")
+            Toast.makeText(
+                requireActivity(),
+                "Please, write a  5⭐ review \uD83D\uDE0E",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        rate_app_signDontLikeIt.setOnClickListener {
+            val i = Intent(Intent.ACTION_SEND)
+            i.type = "message/rfc822"
+            i.putExtra(Intent.EXTRA_EMAIL, arrayOf("info@revolna.com"))
+            i.putExtra(Intent.EXTRA_SUBJECT, "Suggestion for improving the application")
+            i.putExtra(Intent.EXTRA_TEXT, " Write some \uD83D\uDCE7 \uD83D\uDCE8")
+            Toast.makeText(
+                requireActivity(),
+                "Please write some suggestions for improving the application",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            try {
+                startActivity(Intent.createChooser(i, "Send mail..."))
+            } catch (ex: ActivityNotFoundException) {
+                Toast.makeText(
+                    requireActivity(),
+                    "There are no email clients installed.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
 
     }
@@ -175,5 +234,11 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
 
 
+    }
+
+    private fun goToUrl(url: String) {
+        val uriUrl: Uri = Uri.parse(url)
+        val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
+        startActivity(launchBrowser)
     }
 }

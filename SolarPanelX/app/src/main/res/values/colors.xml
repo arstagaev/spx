@@ -7,6 +7,7 @@
     <color name="hint_white2">#727681</color>
     <color name="redx">#F80000</color>
     <color name="greenx">#7AD32C</color>
+    <color name="greenTight">#49801A</color>
 
     <color name="black_spoke">#20242B</color>
 
@@ -20,5 +21,7 @@
     <color name="light_sensor_green_raw">#618542</color>
     <color name="light_sensor_red_finished_data">#F80000</color>
     <color name="light_sensor_green_finished_data">#7AD32C</color>
+
+
 
 </resources>

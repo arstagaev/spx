@@ -32,6 +32,7 @@ class Constants {
         var is_COMPASS_WORKING_FINE = false
         val is_LIGHT_MODE = PreferenceMaestro.isLightMode
 
+        var is_PREMIUM = PreferenceMaestro.isPremiumStatus
         // for Notifications
         const val CHANNEL_ID = "SPXNotifChannel_IMPORTANT"
         const val CHANNEL_ID2 = "SPXNotifChannel2_REGULAR"

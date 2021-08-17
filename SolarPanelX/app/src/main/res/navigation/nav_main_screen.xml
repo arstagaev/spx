@@ -16,6 +16,19 @@
         <action
             android:id="@+id/action_mainFragment_to_toolsManagerFragment"
             app:destination="@id/tlMng" />
+        <action
+            android:id="@+id/action_mainFragmentOfApp_to_purchaseFragment"
+            app:destination="@id/purchaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.revolve44.solarpanelx.ui.fragments.features.PurchaseFragment"
+        android:label="Purchase"
+        tools:layout="@layout/fragment_purchace" >
+
+        <action
+            android:id="@+id/action_purchaseFragment_to_mainFragmentOfApp"
+            app:destination="@id/mainFragmentOfApp" />
     </fragment>
 
     <fragment
@@ -36,6 +49,9 @@
         <action
             android:id="@+id/action_tlMng_to_notification_manage"
             app:destination="@id/notification_manage" />
+        <action
+            android:id="@+id/action_tlMng_to_terminal"
+            app:destination="@id/terminal" />
     </fragment>
 
     <fragment
@@ -55,6 +71,15 @@
         android:name="com.revolve44.solarpanelx.ui.fragments.features.NotificationsAboutVariationOfForecastFragment"
         android:label="NotifFargment"
         tools:layout="@layout/fragment_notifications_about_variation_of_forecast" >
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/terminal"
+        android:name="com.revolve44.solarpanelx.ui.fragments.features.FragmentTerminal"
+        android:label="terminalFragment"
+        tools:layout="@layout/dialog_fragment_terminal_for_commands" >
 
 
     </fragment>

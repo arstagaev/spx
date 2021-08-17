@@ -15,10 +15,12 @@ import androidx.lifecycle.*
 import androidx.work.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.revolve44.solarpanelx.BuildConfig
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.local.SolarDao
 import com.revolve44.solarpanelx.datasource.local.SolarDatabase
+import com.revolve44.solarpanelx.domain.core.checkPercent
 import com.revolve44.solarpanelx.domain.core.defineTimeOfDay
 import com.revolve44.solarpanelx.domain.core.ensureNeedUpdateOrNot_PeriodTwoDays
 import com.revolve44.solarpanelx.domain.core.getCurrentDayOfYear
@@ -140,7 +142,9 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
             }
             else -> {
                 Timber.w("fff current time of day ${defineTimeOfDay()}")
-                displayNotificationWarning()
+                if (BuildConfig.DEBUG){
+                    displayNotificationWarning()
+                }
             }
         }
 
@@ -222,7 +226,8 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
         //remoteView.setImageViewResource(R.id.iv_notif, R.drawable.eminem)
         //remoteView.setTextViewText(R.id.tv_notif_progress, "complete))) ${PreferenceMaestro.counnnter}")
         //remoteView.setTextViewText(R.id.notification_alert_weather,      "${str[0].description}")
-        remoteView.setTextViewText(R.id.notification_alert_weather,      "${defineTimeOfDay()}")
+        //remoteView.setTextViewText(R.id.notification_alert_weather,      "${defineTimeOfDay()}")
+        remoteView.setTextViewText(R.id.notification_alert_weather,      "${checkPercent((str[1].sumOfDay)/PreferenceMaestro.solarDayDuration)}")
         remoteView.setTextViewText(R.id.notif_today_forecast_value,      "${str[1].sumOfDay}W")
         remoteView.setTextViewText(R.id.notif_today_forecast_description,"${str[1].description}")
 

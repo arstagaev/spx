@@ -20,6 +20,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
+import com.revolve44.solarpanelx.domain.core.checkPercent
 import com.revolve44.solarpanelx.domain.core.defineTimeOfDay
 import com.revolve44.solarpanelx.domain.core.ensureNeedUpdateOrNot_PeriodTwoDays
 import com.revolve44.solarpanelx.domain.core.getCurrentDayOfYear
@@ -69,9 +70,6 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
         }
 
         buttonStart.setOnCheckedChangeListener { _, isChecked ->
-
-
-
             //changerMainRawData(isChecked)
 
             if (isChecked){
@@ -79,11 +77,9 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
                 buttonStart.highlightColor = Color.GREEN
                 buttonStart.setBackgroundColor(Color.GREEN)
 
-
             }else{
                 buttonStart.highlightColor = Color.RED
                 buttonStart.setBackgroundColor(Color.RED)
-
 
             }
             //Log.d("toggle",""+isChecked+" rounder "+(roundTo2decimials(PreferenceMaestro.coeffForLightSensor)))
@@ -133,9 +129,6 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
         }
         displayNotification(forecastTodayMaxMinShow)
 
-
-
-
     }
 
     private fun displayNotification(str: ArrayList<NotificationWarningModel>) {
@@ -161,7 +154,15 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
         //remoteView.setImageViewResource(R.id.iv_notif, R.drawable.eminem)
         //remoteView.setTextViewText(R.id.tv_notif_progress, "complete))) ${PreferenceMaestro.counnnter}")
         //remoteView.setTextViewText(R.id.notification_alert_weather,      "${str[0].description}")
-        remoteView.setTextViewText(R.id.notification_alert_weather,      "${defineTimeOfDay()}")
+        var asd = ""
+        try {
+            asd = (activity as MainActivity).viewModelMain?.forecastNow?.value?.let { checkPercent(it) }!!
+            if (asd == null){
+                asd = checkPercent(str[1].sumOfDay)
+            }
+            remoteView.setTextViewText(R.id.notification_alert_weather,      "${asd}")
+        }catch (e: Exception){}
+
         remoteView.setTextViewText(R.id.notif_today_forecast_value,      "${str[1].sumOfDay}W")
         remoteView.setTextViewText(R.id.notif_today_forecast_description,"${str[1].description}")
 

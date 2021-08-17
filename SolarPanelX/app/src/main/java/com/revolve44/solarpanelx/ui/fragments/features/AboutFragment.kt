@@ -12,6 +12,7 @@ import com.revolve44.solarpanelx.BuildConfig
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.domain.core.gradientAnimation
 
+//source of inspiration: https://en.wikipedia.org/wiki/List_of_rivers_by_length
 class AboutFragment : Fragment(R.layout.fragment_about) {
 
     private lateinit var shieldik : TextView

@@ -89,4 +89,25 @@
     <string name="maintools_screen_title_nn">neurales Netzwerk</string>
     <string name="compass_doesn_t_work_on_your_phone">Kompass funktioniert nicht auf deinem Handy😕</string>
     <string name="twitter_of_author">🐦Twitter des Autors</string>
+    <string name="lightsensor_warning1">Geben Sie eine Zahl an, die kleiner ist als</string>
+    <string name="notification_screen_daily">Täglich</string>
+    <string name="notification_screen_every_3day">alle 3 Tage</string>
+    <string name="notification_screen_weekly">Wöchentlich</string>
+    <string name="notification_screen_standart_notif_decription">Ändern Sie die Häufigkeit der Benachrichtigungen, sie zeigen vorerst die Summe der Stromerzeugung an. Auch max und min pro laufende Woche</string>
+    <string name="notification_screen_standart_notif_title">Standardbenachrichtigungen</string>
+    <string name="notification_screen_title">Dies ist die Beta-Version, möglicherweise gibt es einige Fehler</string>
+    <string name="tool_manager_screen_do_you_like_app">Mögen Sie app?</string>
+    <string name="purchase_why">
+      \n ✔️Prognose der Stromerzeugung bis 5 Tage
+      \n ✔️Keine Werbung. Für immer
+      \n ✔️Jahresplan jedes Mal online kündigen
+    </string>
+    <string name="why_premium_title">Warum Premium?</string>
+    <string name="g_e_t_p_r_e_m_i_u_m_button">Premium bekommen</string>
+    <string name="price_of_premium_1_99_per_year">1,99$ pro Jahr</string>
+    <string name="hint_recurring_billing_cancel_anytime_on_google_play_store">Wiederkehrende Abrechnung. Jederzeit im Google Play Store kündbar</string>
+    <string name="current_plan_premium">Ihr aktueller Plan: Premium</string>
+    <string name="current_plan_free">Ihr aktueller Plan: Kostenlos</string>
+    <string name="mainscreen_chart_nominal_power_is_here">Nennleistung Ihrer PV-Anlage</string>
+    <string name="watts_sign">Watt</string>
 </resources>

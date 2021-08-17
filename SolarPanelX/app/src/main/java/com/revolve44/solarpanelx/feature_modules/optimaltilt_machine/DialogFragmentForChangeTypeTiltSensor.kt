@@ -18,7 +18,7 @@ import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATI
 import kotlin.collections.ArrayList
 
 
-class DialogFragmentForChangeTypeTiltSensor : BaseMaterialDialogFragment(R.id.title_of_dialog_fragment) {
+class DialogFragmentForChangeTypeTiltSensor : BaseMaterialDialogFragment() {
 
     private lateinit var mListView: ListView
 

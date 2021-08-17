@@ -70,4 +70,25 @@
     <string name="maintools_screen_title_nn">neural network</string>
     <string name="compass_doesn_t_work_on_your_phone">La brújula no funciona en tu teléfono😕</string>
     <string name="twitter_of_author">🐦Twitter del autor</string>
+    <string name="lightsensor_warning1">especificar un número menor que</string>
+    <string name="notification_screen_daily">A diario</string>
+    <string name="notification_screen_every_3day">cada 3 dias</string>
+    <string name="notification_screen_weekly">Semanal</string>
+    <string name="notification_screen_standart_notif_decription">Cambie la frecuencia de las notificaciones, mostrarán la suma de la generación de energía por ahora. También máximo y mínimo por semana actual</string>
+    <string name="notification_screen_standart_notif_title">Notificaciones estándar</string>
+    <string name="notification_screen_title">Esta es la versión Beta puede tener algunos errores</string>
+    <string name="tool_manager_screen_do_you_like_app">¿Te gusta la aplicación?</string>
+    <string name="purchase_why">
+       \n ✔️Pronóstico de generación de energía a 5 días
+       \n ✔️ Sin anuncios. Para siempre
+       \n ✔️Cancelar el plan anual en línea cada vez
+    </string>
+    <string name="why_premium_title">¿Por qué Premium?</string>
+    <string name="g_e_t_p_r_e_m_i_u_m_button">Hazte premium</string>
+    <string name="price_of_premium_1_99_per_year">1,99 $ por año</string>
+    <string name="hint_recurring_billing_cancel_anytime_on_google_play_store">Facturación recurrente. Cancelar en cualquier momento en Google Play Store</string>
+    <string name="current_plan_premium">Tu plan actual: Premium</string>
+    <string name="current_plan_free">Tu plan actual: Gratis</string>
+    <string name="mainscreen_chart_nominal_power_is_here">Potencia nominal de su sistema fotovoltaico</string>
+    <string name="watts_sign">vatios</string>
 </resources>

@@ -282,6 +282,18 @@ object PreferenceMaestro {
             it.putBoolean("forceHelper_mainscreen", value)
         }
 
+    var isInvisibleFeedbackSign: Boolean
+        get() = preferences.getBoolean("isInvisibleFeedbackSign", false)
+        set(value) = preferences.edit {
+            it.putBoolean("isInvisibleFeedbackSign", value)
+        }
+    /**                           PRO VERSION MANAGER                                 */
+    var isPremiumStatus : Boolean
+        get() = preferences.getBoolean("is_premium", false)
+        set(value) = preferences.edit {
+            it.putBoolean("is_premium", value)
+        }
+
 //    var forecastForNow: Float
 //        get() = preferences.getFloat("forecastForNow", 0.0f)
 //        set(value) = preferences.edit {

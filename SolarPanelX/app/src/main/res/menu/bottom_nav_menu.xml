@@ -11,4 +11,10 @@
         android:title="Tools"
         android:icon="@drawable/ic_baseline_three_lines">
     </item>
+
+    <item
+        android:id="@+id/PurchaseScreen"
+        android:title="Purchase"
+        android:icon="@drawable/ic_crown1">
+    </item>
 </menu>

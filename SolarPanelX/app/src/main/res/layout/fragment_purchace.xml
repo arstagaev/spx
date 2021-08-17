@@ -1,0 +1,130 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <TextView-->
+<!--        android:id="@+id/textView14"-->
+<!--        style="@style/AppTheme.TextView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:gravity="start|bottom"-->
+<!--        android:text="Get Premium. Annual subscription "-->
+<!--        android:textColor="@color/black_night"-->
+<!--        android:textSize="30sp"-->
+
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--    </TextView>-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/why_premium_sign"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/AppTheme.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/why_premium_title"
+            android:textSize="30sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            style="@style/AppTheme.TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center|left"
+            android:text="@string/purchase_why"
+            android:textSize="18sp"></TextView>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/purchase_screen_button_make_purchase"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        style="@style/AppTheme.TextView"
+        android:text="@string/g_e_t_p_r_e_m_i_u_m_button"
+        app:backgroundTint="@color/chart_stroke"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/why_premium_sign">
+
+        <!--            <TextView-->
+        <!--                style="@style/AppTheme.TextView"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:gravity="center"-->
+        <!--                android:text="G E T  P R E M I U M">-->
+        <!--            </TextView>-->
+
+    </com.google.android.material.button.MaterialButton>
+
+    <TextView
+        android:id="@+id/textView15"
+        style="@style/AppTheme.TextView"
+        android:layout_width="172dp"
+        android:layout_height="28dp"
+        android:gravity="center"
+        android:text="@string/price_of_premium_1_99_per_year"
+        android:textColor="@color/black_night"
+        app:layout_constraintEnd_toEndOf="@+id/purchase_screen_button_make_purchase"
+        app:layout_constraintStart_toStartOf="@+id/purchase_screen_button_make_purchase"
+        app:layout_constraintTop_toBottomOf="@+id/purchase_screen_button_make_purchase">
+    </TextView>
+
+    <TextView
+        android:id="@+id/purchase_screen_current_plan_viewer"
+        style="@style/AppTheme.TextView"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Your current plan: Free"
+        android:textColor="@color/hint_white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15">
+    </TextView>
+
+    <TextView
+        style="@style/AppTheme.TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/hint_recurring_billing_cancel_anytime_on_google_play_store"
+        android:textColor="@color/hint_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/purchase_screen_current_plan_viewer"
+        app:layout_constraintVertical_bias="0.956">
+    </TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

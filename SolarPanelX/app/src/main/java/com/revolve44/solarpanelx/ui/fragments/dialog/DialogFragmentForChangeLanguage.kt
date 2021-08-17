@@ -16,7 +16,7 @@ import com.revolve44.solarpanelx.domain.enums.LanguagesOfApp
 import kotlin.collections.ArrayList
 
 
-class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment(R.layout.dialog_fragment_change_language) {
+class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment() {
     private lateinit var mListView: ListView
 
     private lateinit var okay_confirm_language : Button
@@ -27,12 +27,12 @@ class DialogFragmentForChangeLanguage : BaseMaterialDialogFragment(R.layout.dial
         var array: ArrayList<String> = ArrayList()
         //arrayOf("PV Stations Characteristics", "Check Updates","Pro Version","About Us")
         //array.add("Future Updates")
-        array.add("English              ")
-        array.add("Hindi  (हिन्दी)          ")
+        array.add("\uD83C\uDDEC\uD83C\uDDE7English              ")
+        array.add("\uD83C\uDDEE\uD83C\uDDF3Hindi  (हिन्दी)         ")
         //array.add(getString(R.string.settingsscreen_menu_proversion))
-        array.add("German (Deutsch)     ")
-        array.add("French (Français)    ")
-        array.add("Spanish (Español)    ")
+        array.add("\uD83C\uDDE9\uD83C\uDDEAGerman (Deutsch)     ")
+        array.add("\uD83C\uDDEB\uD83C\uDDF7French (Français)    ")
+        array.add("\uD83C\uDDEA\uD83C\uDDF8Spanish (Español)    ")
         // access the listView from xml file
         mListView = view.findViewById<ListView>(R.id.dialog_change_language_list_view)
         okay_confirm_language = view.findViewById(R.id.okay_confirm_language)

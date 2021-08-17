@@ -12,35 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="21">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/map_screen_set_new_language"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_set_language"
+            android:layout_weight="8">
 
-            <ImageView
-                android:id="@+id/map_screen_set_new_language"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="4dp"
-                android:src="@drawable/ic_set_language"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        </ImageView>
 
-            </ImageView>
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="364dp"
-                android:layout_height="63dp"
-                android:background="#000000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/map_screen_set_new_language"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tabIndicatorColor="#EFCF00"
-                app:tabTextColor="#00BEF8" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:layout_weight="1"
+            app:tabIndicatorColor="#EFCF00"
+            app:tabTextColor="#00BEF8" />
 
     </LinearLayout>
     <LinearLayout

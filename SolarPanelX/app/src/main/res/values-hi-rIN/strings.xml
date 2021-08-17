@@ -76,4 +76,24 @@
     <string name="maintools_screen_title_nn">तंत्रिका नेटवर्क</string>
     <string name="compass_doesn_t_work_on_your_phone">कम्पास आपके फ़ोन पर काम नहीं करता😕</string>
     <string name="twitter_of_author">🐦लेखक का चहचहाना</string>
+    <string name="lightsensor_warning1">से कम संख्या निर्दिष्ट करें</string>
+    <string name="notification_screen_daily">दैनिक</string>
+    <string name="notification_screen_every_3day">हर 3 दिन</string>
+    <string name="notification_screen_weekly">साप्ताहिक</string>
+    <string name="notification_screen_standart_notif_decription">सूचनाओं की आवृत्ति बदलें, वे अभी के लिए बिजली उत्पादन का योग दिखाएंगे। साथ ही अधिकतम और न्यूनतम प्रति वर्तमान सप्ताह</string>
+    <string name="notification_screen_standart_notif_title">मानक सूचनाएं</string>
+    <string name="notification_screen_title">यह बीटा संस्करण है कुछ बग हो सकते हैं</string>
+    <string name="tool_manager_screen_do_you_like_app">क्या आपको ऐप पसंद है?</string>
+    <string name="purchase_why">
+       \n ✔️ 5 दिनों तक बिजली उत्पादन का पूर्वानुमान
+       \n ✔️कोई विज्ञापन नहीं। हमेशा के लिए
+       \n ✔️वार्षिक योजना हर बार ऑनलाइन रद्द करें</string>
+    <string name="why_premium_title">प्रीमियम क्यों?</string>
+    <string name="g_e_t_p_r_e_m_i_u_m_button">प्रीमियम प्राप्त करना</string>
+    <string name="price_of_premium_1_99_per_year">1.99$ प्रति वर्ष</string>
+    <string name="hint_recurring_billing_cancel_anytime_on_google_play_store">आवर्ती बिलिंग। Google Play Store पर कभी भी रद्द करें</string>
+    <string name="current_plan_premium">आपकी वर्तमान योजना: प्रीमियम</string>
+    <string name="current_plan_free">आपकी वर्तमान योजना: मुफ़्त</string>
+    <string name="mainscreen_chart_nominal_power_is_here">आपके पीवी सिस्टम की नाममात्र शक्ति</string>
+    <string name="watts_sign">वाट</string>
 </resources>

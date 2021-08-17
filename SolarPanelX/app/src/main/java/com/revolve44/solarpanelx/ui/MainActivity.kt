@@ -79,7 +79,20 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.main_screen_container_fragment)
         val navGraph = navController!!.navInflater.inflate(R.navigation.nav_main_screen)
         //navController!!.setGraph(R.navigation.)
-        navGraph.startDestination = R.id.mainFragmentOfApp;
+
+        if (!PreferenceMaestro.isPremiumStatus){
+            when((0..10).random()){
+                0,1 -> {
+                    navGraph.startDestination = R.id.purchaseFragment;
+                }
+                else ->{
+                    navGraph.startDestination = R.id.mainFragmentOfApp;
+                }
+            }
+
+
+        }
+
         navController!!.graph = navGraph;
 
         bottomNavView.setupWithNavController(navController!!)
@@ -119,6 +132,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.ToolsScreen -> {
                     navController?.navigate(R.id.tlMng)
+                    //findNavController(R.id.main_screen_container_fragment).navigate(ToolsManagerFragmentDirections.actionToolsManagerFragmentToMainFragment())
+
+                }
+
+                R.id.PurchaseScreen -> {
+                    navController?.navigate(R.id.purchaseFragment)
                     //findNavController(R.id.main_screen_container_fragment).navigate(ToolsManagerFragmentDirections.actionToolsManagerFragmentToMainFragment())
 
                 }

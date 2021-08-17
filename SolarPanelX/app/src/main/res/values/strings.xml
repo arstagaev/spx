@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Solar Panel X</string>
+
+    <string name="play_console_license" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhUBIj3nwe9VN8oQAbfUwJwlbvEAbub/cFQvi2p6Atjyu/Wzgnq6b9ZI6igzw6hRTUjuXUaa8Wn6H8zNSFKcBHIJudAjDXNCG+vvr0FmPJ9LSgDDn3bFALQluw2+TVUIiseEnVw/aUSY4Ha473K81CNa1fUu13+sneox22Zc0RnG6okXFe0TdAbnHj03S3PU3qztGwCjRK5pWT6AkOx5j96Zfi2h5ywAdHvl+q1rkALbZVvvVT4YKQAdUNFIjIVGYYwT9CThR5C3HkAaBu/Jv5y/UyN1Z2V6MZboZpqsqdz6f8P2B0Z6JBV6qLNOAueLweSSTVaiLHWsMWG5/+oBwuQIDAQAB</string>
+    <string name="premium" translatable="false">annually_subscription1</string>
+
+
+
     <string name="mainscreen_chart_title_forecast20hr">"Forecast for ~20 hours: "</string>
     <string name="mainscreen_chart_title_forecasttomorrow">"for tomorrow "</string>
     <string name="screenaddstation_map_title">Please set location  of your Solar Panels</string>
@@ -67,9 +73,28 @@
     <string name="new_feature_coming_soon">Coming Soon! [Late September 21`]</string>
     <string name="new_feature_coming_soon2">Coming Soon! [Late October 21`]</string>
     <string name="maintools_screen_title_nn">Neural Network</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="compass_doesn_t_work_on_your_phone">Compass doesn\'t work on your phone😕</string>
     <string name="twitter_of_author">🐦twitter of author</string>
     <string name="lightsensor_warning1">specify a number less than</string>
+    <string name="notification_screen_daily">Daily</string>
+    <string name="notification_screen_every_3day">every 3 days</string>
+    <string name="notification_screen_weekly">Weekly</string>
+    <string name="notification_screen_standart_notif_decription">Change frequency of notifications, they will show sum of power generation for now. Also max and min per current week</string>
+    <string name="notification_screen_standart_notif_title">Standard Notifications</string>
+    <string name="notification_screen_title">This is Beta version may be some bugs</string>
+    <string name="tool_manager_screen_do_you_like_app">Do you like app?</string>
+    <string name="purchase_why">
+\n ✔️Forecast of power generation to 5 days
+\n ✔️No ads. Forever
+\n ✔️Cancel annually plan online everytime
+    </string>
+    <string name="why_premium_title">Why Premium?</string>
+    <string name="g_e_t_p_r_e_m_i_u_m_button">G E T \u0020 P R E M I U M</string>
+    <string name="price_of_premium_1_99_per_year">1.99$ per year</string>
+    <string name="hint_recurring_billing_cancel_anytime_on_google_play_store">Recurring billing. Cancel anytime on Google Play Store</string>
+    <string name="current_plan_premium">Your current plan: Premium</string>
+    <string name="current_plan_free">Your current plan: Free</string>
+    <string name="mainscreen_chart_nominal_power_is_here">Nominal Power of your PV system</string>
+    <string name="watts_sign">watts</string>
 </resources>
