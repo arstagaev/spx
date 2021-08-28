@@ -105,9 +105,6 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
     //private lateinit var builder: Notification.Builder
     //private lateinit var notificationManager : NotificationManager
 
-
-
-
     val gson = Gson()
     var forecastTodayMaxMinShow = arrayListOf<NotificationWarningModel>()
 
@@ -216,9 +213,6 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
     }
 
     private fun startWorker() {
-//        val data = Data.Builder()
-//            .putString("images", jsonString)
-//            .build()
 
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.NOT_REQUIRED)

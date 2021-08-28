@@ -163,7 +163,7 @@
             android:layout_height="match_parent"
             android:background="#F9FAF9"
             android:gravity="center"
-            android:text="Is the orientation wrong?"
+            android:text="@string/optimal_tilt_is_the_orientation_wrong"
             android:textColor="@color/black">
 
         </TextView>

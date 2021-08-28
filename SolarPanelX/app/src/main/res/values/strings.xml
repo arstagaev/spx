@@ -97,4 +97,8 @@
     <string name="current_plan_free">Your current plan: Free</string>
     <string name="mainscreen_chart_nominal_power_is_here">Nominal Power of your PV system</string>
     <string name="watts_sign">watts</string>
+    <string name="optimal_tilt_is_the_orientation_wrong">Is the orientation wrong?</string>
+    <string name="tilt_sensor_rot_vector">"Rotation Vector      "</string>
+    <string name="tilt_sensor_accelerometer">"Accelerometer        "</string>
+    <string name="choose_type_of_sensor_solar_pan">Choose Type of Sensor</string>
 </resources>

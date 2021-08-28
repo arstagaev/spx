@@ -17,6 +17,8 @@
     <color name="chart_stroke">#FDA000</color>
     <color name="chart_fill_mainchart">#C59507</color>
 
+    <color name="map_fill">#C59507</color>
+
     <color name="light_sensor_red_raw">#6A2323</color>
     <color name="light_sensor_green_raw">#618542</color>
     <color name="light_sensor_red_finished_data">#F80000</color>

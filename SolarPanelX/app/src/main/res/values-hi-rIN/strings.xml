@@ -96,4 +96,8 @@
     <string name="current_plan_free">आपकी वर्तमान योजना: मुफ़्त</string>
     <string name="mainscreen_chart_nominal_power_is_here">आपके पीवी सिस्टम की नाममात्र शक्ति</string>
     <string name="watts_sign">वाट</string>
+    <string name="optimal_tilt_is_the_orientation_wrong">क्या अभिविन्यास गलत है?</string>
+    <string name="choose_type_of_sensor_solar_pan">सेंसर का प्रकार चुनें</string>
+    <string name="tilt_sensor_rot_vector">रोटेशन वेक्टर</string>
+    <string name="tilt_sensor_accelerometer">"Accelerometer       "</string>
 </resources>

@@ -110,4 +110,8 @@
     <string name="current_plan_free">Ihr aktueller Plan: Kostenlos</string>
     <string name="mainscreen_chart_nominal_power_is_here">Nennleistung Ihrer PV-Anlage</string>
     <string name="watts_sign">Watt</string>
+    <string name="optimal_tilt_is_the_orientation_wrong">Ist die Ausrichtung falsch?</string>
+    <string name="choose_type_of_sensor_solar_pan">Wählen Sie den Sensortyp</string>
+    <string name="tilt_sensor_accelerometer">Beschleunigungsmesser</string>
+    <string name="tilt_sensor_rot_vector">Rotationsvektor</string>
 </resources>

@@ -291,7 +291,7 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
 
         notificationBuilder
             //.setContent(remoteView)
-            .setContentText("Its not perfect time to notification!!!")
+            .setContentText("Its not perfect time to notification!!! isDebug =${BuildConfig.DEBUG}")
             .setSmallIcon(R.drawable.ic_for_notification_sol)
             .setPriority(Notification.PRIORITY_HIGH) // for under android 26 compatibility
             .setContentIntent(pendingIntentTODO)

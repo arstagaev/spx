@@ -31,8 +31,8 @@ class DialogFragmentForChangeTypeTiltSensor : BaseMaterialDialogFragment() {
         var array: ArrayList<String> = ArrayList()
         //arrayOf("PV Stations Characteristics", "Check Updates","Pro Version","About Us")
         //array.add("Future Updates")
-        array.add("Rotation Vector              ")
-        array.add("Accelerometer          ")
+        array.add(getString(R.string.tilt_sensor_rot_vector))
+        array.add(getString(R.string.tilt_sensor_accelerometer))
 
         // access the listView from xml file
         mListView = view.findViewById<ListView>(R.id.dialog_change_language_list_view)
@@ -72,7 +72,7 @@ class DialogFragmentForChangeTypeTiltSensor : BaseMaterialDialogFragment() {
             dismiss()
         }
 
-        title_of_dialog_fragment.text = "Choose Type of Sensor"
+        title_of_dialog_fragment.text = getString(R.string.choose_type_of_sensor_solar_pan)
 
 
     }

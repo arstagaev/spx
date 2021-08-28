@@ -90,4 +90,8 @@
     <string name="current_plan_free">Votre forfait actuel : Gratuit</string>
     <string name="mainscreen_chart_nominal_power_is_here">Puissance nominale de votre système PV</string>
     <string name="watts_sign">watts</string>
+    <string name="optimal_tilt_is_the_orientation_wrong">L\'orientation est-elle erronée ?</string>
+    <string name="tilt_sensor_rot_vector">Vecteur de rotation</string>
+    <string name="tilt_sensor_accelerometer">Accéléromètre</string>
+    <string name="choose_type_of_sensor_solar_pan">Choisissez le type de capteur</string>
 </resources>

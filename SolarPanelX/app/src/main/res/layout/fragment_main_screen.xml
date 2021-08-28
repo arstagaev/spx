@@ -93,10 +93,9 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/bright_map">
+                    android:src="@drawable/ic_simple_map_world">
 
                 </ImageView>
-
 
                 <com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherAnim
                     android:id="@+id/daylightmap"
