@@ -10,8 +10,8 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 29,
-      "versionName": "0.9.29 (Tagus Edition)",
+      "versionCode": 30,
+      "versionName": "0.9.30 (Tagus Edition)",
       "outputFile": "app-release.apk"
     }
   ]

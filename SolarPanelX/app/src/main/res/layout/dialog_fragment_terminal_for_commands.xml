@@ -2,30 +2,36 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/hint_white"
-    android:padding="32dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
-<!--    <TextView-->
-<!--        android:id="@+id/title_of_dialog_fragment"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:gravity="center"-->
-<!--        android:text="Terminal"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
-
-<!--    </TextView>-->
-
-    <EditText
-        android:id="@+id/input_commands_stroke"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/terminal_send_command"
+    <TextView
+        android:id="@+id/terminal_body_of_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:gravity="left|bottom"
+        android:text="Terminal v.0.1 [revolna.com]"
+        android:textColor="@color/greenx"
+        android:fontFamily="@font/montserrat"
+        android:textSize="24sp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_commands_stroke"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
+    <EditText
+        android:id="@+id/input_commands_stroke"
+        android:layout_width="229dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:hint="your command"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
     </EditText>
 
@@ -36,10 +42,11 @@
         android:layout_marginBottom="4dp"
         android:backgroundTint="#FFFFFF"
         android:elevation="20dp"
-        android:text="OK"
+        android:text="Go>"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintStart_toEndOf="@+id/input_commands_stroke" />
 </androidx.constraintlayout.widget.ConstraintLayout>

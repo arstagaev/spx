@@ -96,11 +96,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                      findNavController().navigate(R.id.action_settings_mainscreen_to_about_fragment)
                 }
                 3 ->{
+                    findNavController().navigate(R.id.action_settings_mainscreen_to_terminal)
+                    //Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon2), Snackbar.LENGTH_SHORT).show()
 
-                    //ERROR NEED FIX залепил ошибку временно
-                    Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon2), Snackbar.LENGTH_SHORT).show()
-                    //findNavController().navigate(R.id.action_tlMng_to_terminal)
-                    //FragmentTerminal().show(childFragmentManager,"dialog_commands")
                 }
             }
         }

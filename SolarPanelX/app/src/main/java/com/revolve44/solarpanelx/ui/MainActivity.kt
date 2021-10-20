@@ -144,49 +144,5 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
     }
-
-
-
-
-
-    private var isOpeniconMainScreenBottomNavigation = true
-    private fun initBottomNav() {
-        if (isOpeniconMainScreenBottomNavigation){
-            iconMainScreenBottomNavigation.clearColorFilter()
-            iconToolsBottomNavigation.setColorFilter(Color.GRAY);
-        }else{
-            iconMainScreenBottomNavigation.setColorFilter(Color.GRAY);
-            iconToolsBottomNavigation.clearColorFilter()
-        }
-        // Main Screen
-        iconMainScreenBottomNavigation.setOnClickListener {
-            isOpeniconMainScreenBottomNavigation = true
-            iconMainScreenBottomNavigation.clearColorFilter()
-            iconToolsBottomNavigation.setColorFilter(Color.GRAY);
-
-        }
-        // Tools Screen
-        iconToolsBottomNavigation.setOnClickListener {
-            isOpeniconMainScreenBottomNavigation = false
-            iconMainScreenBottomNavigation.setColorFilter(Color.GRAY);
-            iconToolsBottomNavigation.clearColorFilter()
-
-            findNavController(R.id.main_screen_container_fragment).navigate(MainScreenFragmentDirections.actionMainFragmentToToolsManagerFragment())
-
-        }
-    }
-
-   // I know is stupid but i soon fix this;)
-//    override fun onBackPressed() {
-//        //Timber.i("cccurent frag ${navController?.currentDestination?.label}")
-//        if (navController?.currentDestination?.label == "Home"){
-//            super.onBackPressed()
-//        }else if (navController?.currentDestination?.label == "tlMng"){
-//            navController?.navigate(R.id.mainFragmentOfApp)
-//        }else{
-//            navController?.navigate(R.id.tlMng)
-//        }
-//    }
 }

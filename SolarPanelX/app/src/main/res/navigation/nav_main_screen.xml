@@ -49,9 +49,7 @@
         <action
             android:id="@+id/action_tlMng_to_notification_manage"
             app:destination="@id/notification_manage" />
-        <action
-            android:id="@+id/action_tlMng_to_terminal"
-            app:destination="@id/terminal" />
+
     </fragment>
 
     <fragment
@@ -64,6 +62,9 @@
         <action
             android:id="@+id/action_settings_mainscreen_to_about_fragment"
             app:destination="@id/about_fragment" />
+        <action
+            android:id="@+id/action_settings_mainscreen_to_terminal"
+            app:destination="@id/terminal" />
     </fragment>
 
     <fragment

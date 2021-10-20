@@ -93,7 +93,8 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_simple_map_world">
+                    android:src="@drawable/ic_day_light_map_five">
+<!--                    android:src="@drawable/ic_simple_map_world">-->
 
                 </ImageView>
 
