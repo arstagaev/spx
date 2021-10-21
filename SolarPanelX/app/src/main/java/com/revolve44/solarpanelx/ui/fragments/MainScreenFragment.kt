@@ -143,7 +143,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         initFactoryOfMainLabel()
 
-        changeSkyInMainScreen() // I HARE ADDED fixme
+        changeSkyInMainScreen() // I HARE ADDED FIXME
 
         observersCharts()
 

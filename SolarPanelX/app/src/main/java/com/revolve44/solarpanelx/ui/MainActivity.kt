@@ -134,14 +134,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.MainScreenForecast -> {
-                    openFragment(firstFragment)
-                    //navController?.navigate(R.id.mainFragmentOfApp)
+                    //openFragment(firstFragment)
+                    navController?.navigate(R.id.mainFragmentOfApp)
                     //findNavController(R.id.main_screen_container_fragment).navigate(MainScreenFragmentDirections.actionMainFragmentToToolsManagerFragment())
 
                 }
                 R.id.ToolsScreen -> {
-                    openFragment(secFragment)
-                    //navController?.navigate(R.id.tlMng)
+                    //openFragment(secFragment)
+                    navController?.navigate(R.id.tlMng)
                     //findNavController(R.id.main_screen_container_fragment).navigate(ToolsManagerFragmentDirections.actionToolsManagerFragmentToMainFragment())
 
                 }
