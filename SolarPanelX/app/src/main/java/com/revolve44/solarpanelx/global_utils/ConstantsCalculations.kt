@@ -2,11 +2,11 @@ package com.revolve44.solarpanelx.global_utils
 
 import android.graphics.Bitmap
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
-import com.revolve44.solarpanelx.domain.enums.TypeOfSky
+import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
 import com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherAnim
 
 
-class Constants {
+class ConstantsCalculations {
 
     companion object{
 

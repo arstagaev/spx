@@ -28,16 +28,15 @@ import com.revolve44.solarpanelx.datasource.models.db.FirstChartDataTransitor
 import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
-import com.revolve44.solarpanelx.domain.enums.TypeOfSky
+import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
 import com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
 import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.CURRENT_TIME_OF_DAY
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import kotlin.math.roundToInt
 
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
@@ -144,6 +143,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         initFactoryOfMainLabel()
 
+        changeSkyInMainScreen() // I HARE ADDED fixme
+
+        observersCharts()
 
         textSwitcher_main_screen.setOnClickListener {
             setManuallyMainLabelOnMainScreen()
@@ -179,16 +181,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             to_chart_forecastdescription4.visibility = View.GONE
             to_chart_forecastdescription5.visibility = View.GONE
         }
-
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        //WeatherAnim.quickSetup()
-        //WeatherAnim.geometryL()
-        //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
-        //mainViewmodel = ViewModelProvider(this).get(MainViewModel::class.java)
+    private fun observersCharts() {
         GlobalScope.launch(Dispatchers.Main) {
             refreshSunshineIndicatorBlock()
 
@@ -216,7 +211,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                         Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff}  ${PreferenceMaestro.chosenStationNOMINALPOWER}")
                         forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
 
-                        changeSkyInMainScreen()
+
                         //initFactoryOfMainLabel()
                     }
 
@@ -239,6 +234,17 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 }
             }
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        //WeatherAnim.quickSetup()
+        //WeatherAnim.geometryL()
+        //val viewModelFactory = MassiveViewModelProviderFactory(application,spxRepository)
+        //mainViewmodel = ViewModelProvider(this).get(MainViewModel::class.java)
+
 
     }
 

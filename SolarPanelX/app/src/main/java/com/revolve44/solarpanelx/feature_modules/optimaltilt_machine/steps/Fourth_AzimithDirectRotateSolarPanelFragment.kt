@@ -20,8 +20,7 @@ import com.revolve44.solarpanelx.domain.core.roundTo1decimials
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.Compass
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.SOTWFormatter
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.TiltSuggester
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_COMPASS_WORKING_FINE
-import timber.log.Timber
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_COMPASS_WORKING_FINE
 import kotlin.math.abs
 
 

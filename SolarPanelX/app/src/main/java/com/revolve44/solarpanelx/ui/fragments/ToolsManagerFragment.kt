@@ -21,7 +21,7 @@ import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_LIGHT_MODE
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_LIGHT_MODE
 import com.revolve44.solarpanelx.ui.AddSolarStationActivity
 import com.revolve44.solarpanelx.ui.adapters.ToolsMainscreenAdapter
 import com.revolve44.solarpanelx.ui.models.StoriesLikeCardsInformation

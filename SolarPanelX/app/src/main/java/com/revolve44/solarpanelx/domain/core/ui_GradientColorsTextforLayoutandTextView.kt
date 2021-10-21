@@ -6,9 +6,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.widget.ImageView
-import androidx.annotation.Nullable
-import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_LIGHT_MODE
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_LIGHT_MODE
 
 
 // for blinked of Text Color

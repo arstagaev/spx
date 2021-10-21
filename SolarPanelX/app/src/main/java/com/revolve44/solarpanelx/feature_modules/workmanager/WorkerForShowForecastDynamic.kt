@@ -24,12 +24,12 @@ import com.revolve44.solarpanelx.domain.core.checkPercent
 import com.revolve44.solarpanelx.domain.core.defineTimeOfDay
 import com.revolve44.solarpanelx.domain.core.ensureNeedUpdateOrNot_PeriodTwoDays
 import com.revolve44.solarpanelx.domain.core.getCurrentDayOfYear
-import com.revolve44.solarpanelx.domain.enums.TypeOfSky
+import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
 import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_ID
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_ID2
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_ID2Num
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_IDNum
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CHANNEL_ID
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CHANNEL_ID2
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CHANNEL_ID2Num
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CHANNEL_IDNum
 import com.revolve44.solarpanelx.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

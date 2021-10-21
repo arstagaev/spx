@@ -1,7 +1,6 @@
 package com.revolve44.solarpanelx.feature_modules.optimaltilt_machine
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,7 @@ import android.widget.TextView
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.base.materialdialog.BaseMaterialDialogFragment
-import com.revolve44.solarpanelx.domain.core.setLocale
-import com.revolve44.solarpanelx.domain.enums.LanguagesOfApp
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATION_VECTOR_SELECTED
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_TYPE_ROTATION_VECTOR_SELECTED
 import kotlin.collections.ArrayList
 
 

@@ -6,8 +6,7 @@ import android.app.NotificationManager
 import android.os.Build
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
-import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.tools.Utils
-import com.revolve44.solarpanelx.global_utils.Constants
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations
 import timber.log.Timber
 
 class SPXApp : Application() {
@@ -48,12 +47,12 @@ class SPXApp : Application() {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serviceChannel = NotificationChannel(
-                Constants.CHANNEL_ID,
+                ConstantsCalculations.CHANNEL_ID,
                 "Important notifications",
                 NotificationManager.IMPORTANCE_HIGH
             )
             val serviceChannel2 = NotificationChannel(
-                Constants.CHANNEL_ID2,
+                ConstantsCalculations.CHANNEL_ID2,
                 "Regular notifications",
                 NotificationManager.IMPORTANCE_DEFAULT
             )

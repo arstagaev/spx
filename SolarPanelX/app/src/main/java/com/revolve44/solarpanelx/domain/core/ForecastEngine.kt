@@ -3,9 +3,9 @@ package com.revolve44.solarpanelx.domain.core
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import timber.log.Timber
 import kotlin.collections.ArrayList
-import com.revolve44.solarpanelx.domain.enums.TypeOfSky
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.CURRENT_TIME_OF_DAY
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.SOLAR_PANEL_AREA_FOR_1W
+import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CURRENT_TIME_OF_DAY
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.SOLAR_PANEL_AREA_FOR_1W
 import com.revolve44.solarpanelx.global_utils.DayPeriod
 import java.util.*
 

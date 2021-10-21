@@ -15,7 +15,7 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.roundTo1decimials
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_TYPE_ROTATION_VECTOR_SELECTED
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_TYPE_ROTATION_VECTOR_SELECTED
 import kotlin.math.abs
 
 

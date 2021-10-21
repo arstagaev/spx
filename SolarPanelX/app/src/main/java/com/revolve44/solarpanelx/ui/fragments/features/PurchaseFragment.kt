@@ -10,8 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.billingclient.api.*
-import com.android.billingclient.api.BillingClient.BillingResponseCode.OK
-import com.android.billingclient.api.BillingClient.SkuType.INAPP
 import com.android.billingclient.api.Purchase.PurchasesResult
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
@@ -20,7 +18,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_PREMIUM
 import timber.log.Timber
 import java.util.*
 

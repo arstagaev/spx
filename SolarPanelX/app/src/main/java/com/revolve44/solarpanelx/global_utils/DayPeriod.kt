@@ -1,6 +1,6 @@
 package com.revolve44.solarpanelx.global_utils
 
-import com.revolve44.solarpanelx.domain.enums.TypeOfSky
+import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
 
 data class DayPeriod(
     var typeOfSky: TypeOfSky,

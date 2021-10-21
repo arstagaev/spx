@@ -1,6 +1,6 @@
 package com.revolve44.solarpanelx.datasource.remote
 
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.BASE_URL
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -1,6 +1,5 @@
 package com.revolve44.solarpanelx.ui.fragments.features
 
-import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -21,16 +20,10 @@ import com.google.gson.reflect.TypeToken
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.checkPercent
-import com.revolve44.solarpanelx.domain.core.defineTimeOfDay
-import com.revolve44.solarpanelx.domain.core.ensureNeedUpdateOrNot_PeriodTwoDays
-import com.revolve44.solarpanelx.domain.core.getCurrentDayOfYear
-import com.revolve44.solarpanelx.domain.enums.TypeOfSky
 import com.revolve44.solarpanelx.feature_modules.workmanager.isWorkScheduled
 import com.revolve44.solarpanelx.feature_modules.workmanager.WorkerForShowForecastDynamic
-import com.revolve44.solarpanelx.feature_modules.workmanager.ensureNeedShowNotificationOrNot
 import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
-import com.revolve44.solarpanelx.global_utils.Constants
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.CHANNEL_ID2
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations
 import com.revolve44.solarpanelx.ui.MainActivity
 import timber.log.Timber
 import java.lang.reflect.Type
@@ -143,7 +136,7 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
 //        }
 
         val notificationBuilder =
-            NotificationCompat.Builder(requireActivity(), Constants.CHANNEL_ID)
+            NotificationCompat.Builder(requireActivity(), ConstantsCalculations.CHANNEL_ID)
         val pendingIntentTODO = PendingIntent.getActivity(requireActivity(), 0,
             Intent(requireActivity(), MainActivity::class.java), 0)
 
@@ -176,7 +169,7 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
             .setSmallIcon(R.drawable.ic_for_notification_sol)
             .setContentIntent(pendingIntentTODO)
 
-        notificationManager.notify(Constants.CHANNEL_IDNum, notificationBuilder.build())
+        notificationManager.notify(ConstantsCalculations.CHANNEL_IDNum, notificationBuilder.build())
 
         //PreferenceMaestro.dayOfLastShowedNotification = getCurrentDayOfYear() disable special
     }

@@ -12,7 +12,7 @@ import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrie
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.ZoomOutPageTransformer
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.viewmodels.OrientationSolarPanelViewModel
-import com.revolve44.solarpanelx.global_utils.Constants.Companion.is_LIGHT_MODE
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_LIGHT_MODE
 
 class OptimalTiltMainFragment : Fragment(R.layout.sm_fragment_start_calc_tilt) {
 

@@ -1,18 +1,14 @@
 package com.revolve44.solarpanelx.ui.customviews.daylightmap;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -20,13 +16,8 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
-import com.revolve44.solarpanelx.R;
-import com.revolve44.solarpanelx.global_utils.Constants;
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -156,9 +147,9 @@ public class WeatherAnim extends View {
 //        Fx = (WIDTH*4F)/5F; // ><
 //        Ex = WIDTH;
 //
-        if (Constants.switcherMap){
+        if (ConstantsCalculations.switcherMap){
             quickSetup();
-            Constants.switcherMap = false;
+            ConstantsCalculations.switcherMap = false;
         }
         rectagleF = new RectF(0F,0F,WIDTH,HEIGHT);
 
@@ -222,7 +213,7 @@ public class WeatherAnim extends View {
         //canvas.drawPath(path, paint);
         // draw everything to the screen
         canvas.drawBitmap(mDrawBitmap, 0, 0, drawPaint);
-        Constants.bitmapMain = mDrawBitmap;
+        ConstantsCalculations.bitmapMain = mDrawBitmap;
 
         paint.reset();
         path.reset();
