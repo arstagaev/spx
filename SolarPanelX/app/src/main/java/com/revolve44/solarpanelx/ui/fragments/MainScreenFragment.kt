@@ -75,7 +75,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var second_chart_description : VerticalTextView
     private lateinit var third_chart_description  : VerticalTextView
 
-    private lateinit var to_chart_forecastdescription4 : VerticalTextView
+    private lateinit var to_chart_forecastdescription4  : VerticalTextView
     private lateinit var to_chart_forecastdescription5  : VerticalTextView
 
     private lateinit var sunshine_duration_sigh : CardView
