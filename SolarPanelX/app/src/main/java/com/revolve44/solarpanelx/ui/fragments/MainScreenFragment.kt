@@ -237,6 +237,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen = true
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -275,7 +280,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
     private fun changeSkyInMainScreen() {
 
-        if (CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen){
+        if (!CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen){
 
             when(CURRENT_TIME_OF_DAY.typeOfSky){
                 TypeOfSky.NIGHT ->{
@@ -308,41 +313,41 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
                 }
             }
-        }else{
+        } else {
 
-            when(CURRENT_TIME_OF_DAY.typeOfSky){
-
-                TypeOfSky.NIGHT ->{
-                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-
-                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-
-                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-
-                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
-                }
-                else -> {
-                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-
-                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-
-                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
-
-                }
-            }
+//            when(CURRENT_TIME_OF_DAY.typeOfSky){
+//
+//                TypeOfSky.NIGHT ->{
+//                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//
+//                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//
+//                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//
+//                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
+//                }
+//                else -> {
+//                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//
+//                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//
+//                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+//                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
+//
+//                }
+//            }
         }
     }
 

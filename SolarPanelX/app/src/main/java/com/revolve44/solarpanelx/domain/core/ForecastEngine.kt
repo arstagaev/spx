@@ -109,7 +109,7 @@ fun setForecastForNow(forecastFor20hr: ArrayList<Int>) : Int {
         firstIndex = 0
     }
     var timeOfDay =  defineTimeOfDay()
-    CURRENT_TIME_OF_DAY = DayPeriod(timeOfDay,isWeGetNewTypeOfDay(timeOfDay))
+    CURRENT_TIME_OF_DAY = DayPeriod(timeOfDay,false) // FIXME
 
     when (CURRENT_TIME_OF_DAY.typeOfSky){
         TypeOfSky.NIGHT        -> { return  0}

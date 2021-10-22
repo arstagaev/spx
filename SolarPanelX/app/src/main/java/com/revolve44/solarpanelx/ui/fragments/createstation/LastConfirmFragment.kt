@@ -19,6 +19,7 @@ import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.blinkATextView
 import com.revolve44.solarpanelx.domain.core.getInvestmentsToPVStation
 import com.revolve44.solarpanelx.domain.westcoast_customs.LockableScrollView
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations
 import com.revolve44.solarpanelx.ui.AddSolarStationActivity
 import com.revolve44.solarpanelx.ui.MainActivity
 import io.feeeei.circleseekbar.CircleSeekBar
@@ -354,6 +355,7 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
             PreferenceMaestro.chosenSolarPanelInstallationDate = installationDate
             PreferenceMaestro.pricePerkWh = (pricePerkWh.text).toString().toFloat()
 
+            ConstantsCalculations.CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen = false
 //            try {
 //                firebaseAnalytics.logEvent("df"){
 //                    param("lat_&_lon","lat: "+PreferenceMaestro.lat+" lon: "+PreferenceMaestro.lon)
