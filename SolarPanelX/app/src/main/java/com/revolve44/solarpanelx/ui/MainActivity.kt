@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -23,12 +24,15 @@ import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.setLocale
 import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
+import com.revolve44.solarpanelx.global_utils.toastShow
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragment
 import com.revolve44.solarpanelx.ui.fragments.MainScreenFragmentDirections
 import com.revolve44.solarpanelx.ui.fragments.ToolsManagerFragment
 import com.revolve44.solarpanelx.ui.viewmodels.MainViewModel
 import com.revolve44.solarpanelx.ui.viewmodels.MassiveViewModelProviderFactory
 import java.lang.reflect.Type
+import java.util.*
+import kotlin.concurrent.timerTask
 
 
 class MainActivity : AppCompatActivity() {
@@ -155,4 +159,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
+
 }

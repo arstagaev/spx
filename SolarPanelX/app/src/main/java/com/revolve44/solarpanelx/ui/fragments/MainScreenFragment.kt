@@ -42,6 +42,7 @@ import timber.log.Timber
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
     //private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
     private val values = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    private val newValues = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     //private val mainViewmodelF : MainViewModel by activityViewModels()
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
@@ -204,13 +205,17 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                             lastUpdate.text = getString(R.string.main_screen_last_upd)+ " "+PreferenceMaestro.timeOfLastDataUpdate
                         }
 
+                        //initFactoryOfMainLabel()
+                        changeSkyInMainScreen()
+
+
                     }
 
                     it.viewModelMain!!.forecastNow.observe(viewLifecycleOwner) { fNow ->
                         forecastNowRelativ.text = "${roundTo1decimials((fNow.toFloat() / PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() )*100f)}%"
                         Timber.i("fnow ${fNow} ${PreferenceMaestro.calibrationCoeff}  ${PreferenceMaestro.chosenStationNOMINALPOWER}")
                         forecastNowAbsol.text = displayWattsKiloWattsInSexually( toRealFit(fNow.toFloat() * PreferenceMaestro.calibrationCoeff ) )
-
+                        //                        CURRENT_TIME_OF_DAY.isNeedDisplay = true
 
                         //initFactoryOfMainLabel()
                     }
@@ -239,7 +244,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
     override fun onPause() {
         super.onPause()
-        CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen = true
+        CURRENT_TIME_OF_DAY.isNeedAnimation = false
     }
 
     override fun onResume() {
@@ -254,9 +259,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     }
 
     private fun initFactoryOfMainLabel(){
+
         textSwitcher_main_screen.setFactory(ViewSwitcher.ViewFactory {
             mainLabelOfMainScreenInsideTxtSwitcher = TextView(requireActivity())
-            when(CURRENT_TIME_OF_DAY.typeOfSky){
+            when(CURRENT_TIME_OF_DAY.typeOfSky) {
                 TypeOfSky.NIGHT -> {
                     mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(Color.WHITE)
                 }
@@ -279,40 +285,61 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     }
 
     private fun changeSkyInMainScreen() {
+        Timber.i("aaalready chang ${CURRENT_TIME_OF_DAY.isNeedAnimation} type ${CURRENT_TIME_OF_DAY.typeOfSky}")
 
-        if (!CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen){
 
-            when(CURRENT_TIME_OF_DAY.typeOfSky){
-                TypeOfSky.NIGHT ->{
-                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+        when(CURRENT_TIME_OF_DAY.typeOfSky){
+            TypeOfSky.NIGHT ->{
+                mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
 
-                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(),  R.color.white))
+                second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(),  R.color.white))
+                to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
 
-                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
-                    gradientAnimationLayout(main_screen_background,ContextCompat.getColor(requireActivity(), R.color.white),ContextCompat.getColor(requireActivity(), R.color.black_night),2000)
+                lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white))
+
+
+                if (!CURRENT_TIME_OF_DAY.isNeedAnimation){
+                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
+                }else {
+                    gradientAnimationLayout(main_screen_background,
+                        ContextCompat.getColor(requireActivity(), R.color.white),
+                        ContextCompat.getColor(requireActivity(), R.color.black_night),2000)
                 }
-                else -> {
-                    //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
-                    first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
 
-                    lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
-                    gradientAnimationLayout(main_screen_background,ContextCompat.getColor(requireActivity(), R.color.black_night),ContextCompat.getColor(requireActivity(), R.color.white),2000)
+                //LIGHT_MODE
 
+            }
+            else -> {
+                //forecastNowAbsol.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                //forecastNowRelativ.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                mainLabelOfMainScreenInsideTxtSwitcher?.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+
+                first_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                second_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                third_chart_description.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                to_chart_forecastdescription4.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+                to_chart_forecastdescription5.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+
+                lastUpdate.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black))
+
+                if (!CURRENT_TIME_OF_DAY.isNeedAnimation){
+                    main_screen_background.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                }else {
+                    gradientAnimationLayout(main_screen_background,
+                        ContextCompat.getColor(requireActivity(), R.color.black_night),
+                        ContextCompat.getColor(requireActivity(), R.color.white),2000)
                 }
             }
+        }
+        if (true){
+
+
         } else {
 
 //            when(CURRENT_TIME_OF_DAY.typeOfSky){
@@ -1051,6 +1078,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         (activity as MainActivity).let {
             it.viewModelMain!!.manualRequest()
         }
+
+        CURRENT_TIME_OF_DAY.isNeedAnimation = true
 
     }
 

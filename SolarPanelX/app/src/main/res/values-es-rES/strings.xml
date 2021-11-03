@@ -95,4 +95,5 @@
     <string name="choose_type_of_sensor_solar_pan">Elija el tipo de sensor</string>
     <string name="tilt_sensor_accelerometer">Acelerómetro</string>
     <string name="tilt_sensor_rot_vector">Vector de rotación</string>
+    <string name="new_feature_coming_soon_plump">Próximamente, en breve, pronto. Ahora en desarrollo</string>
 </resources>

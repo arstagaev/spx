@@ -17,7 +17,7 @@ class ConstantsCalculations {
         const val DUAL_INDICATOR_SIZEOFFACTORS = 32
         const val SOLAR_PANEL_AREA_FOR_1W =0.00648F
 
-        var CURRENT_TIME_OF_DAY = DayPeriod(TypeOfSky.DAY,false)
+        var CURRENT_TIME_OF_DAY = DayPeriod(TypeOfSky.DAY,true)
 
         @kotlin.jvm.JvmField
         var switcherMap: Boolean = true
@@ -25,8 +25,8 @@ class ConstantsCalculations {
         @JvmField
         var bitmapMain : Bitmap? = null
         //var switcherMap: Boolean? = true
-        val WIDTH_CUSTOM_VIEW: Float by lazy { WeatherAnim.WIDTH }
-        val HEIGHT_CUSTOM_VIEW: Float by lazy { WeatherAnim.HEIGHT }
+        val WIDTH_CUSTOM_VIEW: Float by lazy  { WeatherAnim.WIDTH   }
+        val HEIGHT_CUSTOM_VIEW: Float by lazy { WeatherAnim.HEIGHT  }
 
         var is_TYPE_ROTATION_VECTOR_SELECTED = PreferenceMaestro.isTypeRotationSensor
         var is_COMPASS_WORKING_FINE = false

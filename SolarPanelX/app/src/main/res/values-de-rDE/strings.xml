@@ -114,4 +114,5 @@
     <string name="choose_type_of_sensor_solar_pan">Wählen Sie den Sensortyp</string>
     <string name="tilt_sensor_accelerometer">Beschleunigungsmesser</string>
     <string name="tilt_sensor_rot_vector">Rotationsvektor</string>
+    <string name="new_feature_coming_soon_plump">"Demnächst! "</string>
 </resources>

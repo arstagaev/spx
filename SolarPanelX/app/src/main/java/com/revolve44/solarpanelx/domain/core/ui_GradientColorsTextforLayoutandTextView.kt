@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.widget.ImageView
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_LIGHT_MODE
+import timber.log.Timber
 
 
 // for blinked of Text Color
@@ -44,7 +45,9 @@ fun gradientAnimation(uiElement: Any, color1: Int, color2: Int,color3: Int,color
 
 @SuppressLint("ObjectAnimatorBinding")
 fun gradientAnimationLayout(uiElement: Any, color1: Int, color2: Int, duration: Int){
+    Timber.w("ui is Ligthmode:${is_LIGHT_MODE}")
     if (!is_LIGHT_MODE){
+
         val colorAnimation1: ValueAnimator = ObjectAnimator.ofInt(uiElement, "backgroundColor",
             color1, color2)
 

@@ -106,9 +106,7 @@ object PreferenceMaestro {
         }
 
     var lon: Float
-        
         get() = preferences.getFloat("lon", 0.0f)
-        
         set(value) = preferences.edit {
             it.putFloat("lon", value)
         }

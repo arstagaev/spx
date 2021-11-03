@@ -25,7 +25,6 @@ import com.revolve44.solarpanelx.ui.MainActivity
 import io.feeeei.circleseekbar.CircleSeekBar
 import net.cachapa.expandablelayout.ExpandableLayout
 import timber.log.Timber
-import java.util.*
 
 
 class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
@@ -355,7 +354,7 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
             PreferenceMaestro.chosenSolarPanelInstallationDate = installationDate
             PreferenceMaestro.pricePerkWh = (pricePerkWh.text).toString().toFloat()
 
-            ConstantsCalculations.CURRENT_TIME_OF_DAY.isChangeColorAlreadyHappen = false
+            ConstantsCalculations.CURRENT_TIME_OF_DAY.isNeedAnimation = true
 //            try {
 //                firebaseAnalytics.logEvent("df"){
 //                    param("lat_&_lon","lat: "+PreferenceMaestro.lat+" lon: "+PreferenceMaestro.lon)

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toast_constr"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="#70000000"
+    app:cardCornerRadius="20dp">
+
+    <TextView
+        android:id="@+id/toast_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:text="Thanks you!!"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:textColor="@color/chart_stroke"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+</androidx.cardview.widget.CardView>

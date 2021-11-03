@@ -432,6 +432,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|top"
+                    android:textColor="@color/hint_white"
                     android:text="last update: 12:49, 04 feb 1997">
                 </TextView>
             </LinearLayout>

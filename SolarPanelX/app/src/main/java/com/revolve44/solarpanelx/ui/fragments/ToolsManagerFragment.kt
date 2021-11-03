@@ -2,6 +2,7 @@ package com.revolve44.solarpanelx.ui.fragments
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -21,8 +23,13 @@ import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
 import com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.is_LIGHT_MODE
+import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
+import com.revolve44.solarpanelx.global_utils.toastShow
 import com.revolve44.solarpanelx.ui.AddSolarStationActivity
+import com.revolve44.solarpanelx.ui.MainActivity
 import com.revolve44.solarpanelx.ui.adapters.ToolsMainscreenAdapter
 import com.revolve44.solarpanelx.ui.models.StoriesLikeCardsInformation
 import com.revolve44.solarpanelx.ui.models.ToolsRecyclerviewModel
@@ -30,6 +37,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.*
+import kotlin.concurrent.fixedRateTimer
+import kotlin.concurrent.timerTask
 
 
 class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
@@ -39,6 +49,8 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
     private lateinit var mode_indicator_in_tool_manager : TextView
     private lateinit var rateAppSign          : CardView
     private lateinit var rateAppSignCloseButt : ImageView
+    private lateinit var tool_manager_layout : ConstraintLayout
+    private lateinit var textSwitcher_main_screen : TextView
 
     private lateinit var rate_app_signLikeIt     : Button
     private lateinit var rate_app_signDontLikeIt : Button
@@ -58,6 +70,9 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
         rate_app_signLikeIt = view.findViewById(R.id.rate_app_sign_like_it)
         rate_app_signDontLikeIt = view.findViewById(R.id.rate_app_sign_dont_like)
+
+        tool_manager_layout = view.findViewById(R.id.tool_manager_layout)
+        textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
 
         settingsMain.setOnClickListener {
               findNavController().navigate(R.id.action_toolsManagerFragment_to_settings_mainscreen)
@@ -83,10 +98,27 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
 
         // like or not
         rate_app_signLikeIt.setOnClickListener { //https://play.google.com/store/apps/details?id=com.revolve44.solarpanelx
+
+            //(activity as MainActivity).specialToast()
+
+            try {
+                toastShow("Please, write a  5⭐ review \uD83D\uDE0E", Color.GREEN,requireActivity())
+//                Timer().schedule(timerTask {
+//                    toastShow("Thank u\uD83D\uDE0A", Color.GREEN,requireActivity())
+//                }, 2000)
+
+            }catch (e: Exception){
+
+                Toast.makeText(
+                    requireActivity(),
+                    "Please, write a  5⭐ review \uD83D\uDE0E",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             goToUrl("https://play.google.com/store/apps/details?id=com.revolve44.solarpanelx")
             Toast.makeText(
                 requireActivity(),
-                "Please, write a  5⭐ review \uD83D\uDE0E",
+                "Thank u \uD83D\uDE0A",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -95,7 +127,7 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
             i.type = "message/rfc822"
             i.putExtra(Intent.EXTRA_EMAIL, arrayOf("info@revolna.com"))
             i.putExtra(Intent.EXTRA_SUBJECT, "Suggestion for improving the application")
-            i.putExtra(Intent.EXTRA_TEXT, " Write some \uD83D\uDCE7 \uD83D\uDCE8")
+            i.putExtra(Intent.EXTRA_TEXT, " Write E-MAIl\uD83D\uDCE7 \uD83D\uDCE8")
             Toast.makeText(
                 requireActivity(),
                 "Please write some suggestions for improving the application",
@@ -194,7 +226,8 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                         //Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon), Snackbar.LENGTH_SHORT).show()
                     }
                     5 -> {
-                        Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon2), Snackbar.LENGTH_SHORT).show()
+                        //Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon2), Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.new_feature_coming_soon_plump), Snackbar.LENGTH_SHORT).show()
                     }
 
                 }
@@ -233,6 +266,25 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         recyclerViewTools.setHasFixedSize(false)
 
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        changeSkyEntourage()
+    }
+
+    private fun changeSkyEntourage() {
+        when(CURRENT_TIME_OF_DAY.typeOfSky){
+            TypeOfSky.NIGHT -> {
+                tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
+                textSwitcher_main_screen.setTextColor(Color.WHITE)
+            }
+            else ->{
+                tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
+                textSwitcher_main_screen.setTextColor(Color.BLACK)
+            }
+        }
 
     }
 
