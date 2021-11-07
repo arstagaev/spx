@@ -19,6 +19,7 @@ import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -28,10 +29,10 @@ import com.revolve44.solarpanelx.datasource.models.db.FirstChartDataTransitor
 import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
-import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
 import com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
 import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CURRENT_TIME_OF_DAY
+import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
 import com.revolve44.solarpanelx.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -43,6 +44,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     //private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
     private val values = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     private val newValues = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    val firstChartSpecialValues : ArrayList<String>
+            = arrayListOf("0:00","1:00","2:00", "3:00","4:00","5:00", "6:00","7:00","8:00", "9:00","10:00","11:00", "12:00",
+        "13:00","14:00", "15:00","16:00","17:00", "18:00","19:00","20:00", "21:00","22:00","23:00")
     //private val mainViewmodelF : MainViewModel by activityViewModels()
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
@@ -675,14 +679,50 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     ){
         val yValues = ArrayList<Entry>()
         Timber.i("vvv4 $arrayData")
+
+        var counter = 0
+        var differ = 0f
+        for (i in 0 until arrayData.size){
+
+            if ( (i+1) < arrayData.size) {
+                differ =  (arrayData[i+1].toFloat() - arrayData[i].toFloat())/3f
+
+
+            }else {
+                differ =  (arrayData[i].toFloat() - arrayData[i].toFloat())/3f
+
+            }
+            counter++
+            yValues.add(Entry( counter.toFloat(), (arrayData.get(i)).toFloat() ))
+            counter++
+            // hereneed custom make
+            if (differ>0) {
+                yValues.add(Entry(counter.toFloat()-0.5f, (arrayData.get(i)).toFloat() + differ))
+            }else {
+                yValues.add(Entry(counter.toFloat(), (arrayData.get(i)).toFloat() + differ))
+            }
+            counter++
+            yValues.add(Entry( counter.toFloat(), (arrayData.get(i)).toFloat()+2f*differ ))
+
+
+        }
         try {
 
-            for (i in 0..arrayData.size-1){
-                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
-            }
+
         }catch (e: Exception){
-            Timber.i("vvv4 ${e.message}")
+            Timber.i("ccc vvv4 XXXX ${e.message}")
+
+            try {
+
+                for (i in 0..arrayData.size-1){
+                    yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+                }
+            }catch (e: Exception){
+                Timber.i("vvv4 ${e.message}")
+            }
+
         }
+
 
         var set1 = LineDataSet(yValues, "")
         Legend.LegendPosition.RIGHT_OF_CHART
@@ -706,6 +746,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     "goal"
                 )
             )
+//        val yAxis: YAxis = lineChart.getAxisLeft()
+//        yAxis.isGranularityEnabled = true
+//        yAxis.granularity = 0.1f
 
         lineChart.apply {
 
@@ -714,7 +757,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             goalLine.lineWidth = 1f
             //goalLine.isDashedLineEnabled
             isDragEnabled = true
-            setScaleEnabled(false)
+            setScaleEnabled(true)
             description.isEnabled = false
             legend.isEnabled = false // description of define line
             legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
@@ -737,7 +780,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(values)
+                valueFormatter = IndexAxisValueFormatter(firstChartSpecialValues)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -750,10 +793,15 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 mode = LineDataSet.Mode.CUBIC_BEZIER
                 setDrawFilled(true)
                 fillAlpha = 100
-                cubicIntensity = 0.2f
+                cubicIntensity = 0.07f
+                setDrawCircles(false)
+                setDrawValues(true)
+                setMaxVisibleValueCount(5)
+
 
                 valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
                 color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColorHole(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
             }
