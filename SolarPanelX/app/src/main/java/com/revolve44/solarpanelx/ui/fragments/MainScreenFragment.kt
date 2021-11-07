@@ -678,7 +678,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         arrayData: ArrayList<Int>
     ){
         val yValues = ArrayList<Entry>()
-        Timber.i("vvv4 $arrayData")
+        Timber.i("vvv4 $arrayData  sunriseH ${PreferenceMaestro.sunriseHour}")
 
         var counter = 0
         var differ = 0f
@@ -687,21 +687,23 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             if ( (i+1) < arrayData.size) {
                 differ =  (arrayData[i+1].toFloat() - arrayData[i].toFloat())/3f
 
-
             }else {
                 differ =  (arrayData[i].toFloat() - arrayData[i].toFloat())/3f
 
             }
+            ///////////
+
             counter++
             yValues.add(Entry( counter.toFloat(), (arrayData.get(i)).toFloat() ))
             counter++
-            // hereneed custom make
+            // here need custom make
             if (differ>0) {
-                yValues.add(Entry(counter.toFloat()-0.5f, (arrayData.get(i)).toFloat() + differ))
+                yValues.add(Entry(counter.toFloat(), (arrayData.get(i)).toFloat() + differ))
             }else {
                 yValues.add(Entry(counter.toFloat(), (arrayData.get(i)).toFloat() + differ))
             }
             counter++
+            
             yValues.add(Entry( counter.toFloat(), (arrayData.get(i)).toFloat()+2f*differ ))
 
 
@@ -713,9 +715,19 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             Timber.i("ccc vvv4 XXXX ${e.message}")
 
             try {
+                var lastPower = 0f
+                var CURRENT_TIME = ""
 
                 for (i in 0..arrayData.size-1){
+                    if (lastPower == 0f && lastPower < arrayData.get(i).toFloat()){
+
+                    }
+                    //6:00 <-> 9:00
+
+
                     yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+                    lastPower = arrayData.get(i).toFloat()
+
                 }
             }catch (e: Exception){
                 Timber.i("vvv4 ${e.message}")
