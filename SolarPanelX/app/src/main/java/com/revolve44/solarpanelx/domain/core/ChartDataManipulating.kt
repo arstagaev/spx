@@ -2,6 +2,7 @@ package com.revolve44.solarpanelx.domain.core
 
 import android.util.Log
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.datasource.models.db.FirstChartDataTransitor
@@ -220,5 +221,59 @@ fun sumOfCharts(inputArray: ArrayList<Int>) : Int{
         Timber.e("Inside chart error: "+e.message)
         return -1
     }
+}
+// make compare with sunset and sunrise
+fun makeChartLineSmoothAndCompare(arrayData: ArrayList<Int>): ArrayList<Entry> {
+    Timber.i("arrayData input>>> ${arrayData.joinToString()}")
+    var yValues = ArrayList<Entry>()
+    var alreadyNotZeroSUNRISE = false
+    var alreadyNotZeroSUNSET = true
+    try {
+
+        for (i in 0..arrayData.size-1){
+            // (number of order, number of value  )
+            if (!alreadyNotZeroSUNRISE) {
+
+                if (!alreadyNotZeroSUNRISE && arrayData.get(i) == 0 && arrayData.get(i+1) > 0 ) {
+
+                    yValues.add( Entry(PreferenceMaestro.sunriseHour / 3f, arrayData.get(i).toFloat()) )
+
+                    alreadyNotZeroSUNRISE = true
+                }else {
+
+                    yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+
+                }
+
+            }else {
+
+                if (alreadyNotZeroSUNSET && arrayData.get(i) == 0 && arrayData.get(i+1) == 0 ) {
+
+                    yValues.add( Entry(PreferenceMaestro.sunsetHour / 3f, arrayData.get(i).toFloat()) )
+
+                    alreadyNotZeroSUNSET = false
+                }else {
+
+                    yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+
+                }
+
+            }
+        }
+
+    }catch (e: Exception) {
+        Timber.e("ERROR in charts on MainScreen  !!!vvv : ${e.message}")
+        Timber.e("ERROR in charts on MainScreen  !!!vvv : ${e.message}")
+        Timber.e("ERROR in charts on MainScreen  !!!vvv : ${e.message}")
+
+        yValues.clear()
+
+        for (i in 0..arrayData.size-1){
+            yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+        }
+
+    }
+
+    return yValues
 }
 

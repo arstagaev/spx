@@ -12,29 +12,28 @@ import java.util.*
 //////////////////////////////////////
 //        Mars Core ver. 1.4        //
 //////////////////////////////////////
-/**
+/**                                  [seconds]         [seconds]      [seconds]           [seconds?]
  *               CLOUDNESS            SUNRISE           SUNSET        Time Zone      time of current portion forecast
  */
 fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Long, unixTime : Long) : Int {
 
     var nominalPower : Int = PreferenceMaestro.chosenStationNOMINALPOWER
-    var currentTime = unxtoHr(unixTime)
-
+    var currentTime = unxtoHrAndMinutesByDecimial(unixTime,true)
     var solarPositionFactor : Double = 1.0
 
-    var snrs = unxtoHr(sunrise)
-    var snst = unxtoHr(sunset)
+    var snrs = PreferenceMaestro.sunriseHour
+    var snst = PreferenceMaestro.sunsetHour
 
 //    PreferenceMaestro.sunriseHour = snrs.toFloat()
 //    PreferenceMaestro.sunsetHour = snst.toFloat()
 
     PreferenceMaestro.sunrise = unxtoHoursAndMinutes(sunrise)
-    PreferenceMaestro.sunset = unxtoHoursAndMinutes(sunset)
+    PreferenceMaestro.sunset  = unxtoHoursAndMinutes(sunset)
+
+    //                 for example: sunrise: 8 - frcst.time: 6 -  sunset: 16  TimeZone: 10800
 
 
-    Timber.i("yyy sunrise: $snrs - frcst.time: $currentTime -  sunset: $snst  TimeZone: $timeZone" )
-
-    // is Night or not?
+    // is Night or not (Global of method if/else construction)?
     if (currentTime in snrs..snst){
 
         var diff : Int = (currentTime-snrs).toInt()
@@ -48,18 +47,18 @@ fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Lon
          */
 
         when(diff2){
-            0.1 -> solarPositionFactor = 0.2
-            0.2 -> solarPositionFactor = 0.3
-            0.3 -> solarPositionFactor = 0.6
-            0.4 -> solarPositionFactor = 0.9
+            in 0.1..0.2 -> solarPositionFactor = 0.2
+            in 0.2..0.3 -> solarPositionFactor = 0.3
+            in 0.3..0.4 -> solarPositionFactor = 0.6
+            in 0.4..0.5 -> solarPositionFactor = 0.9
 
-            0.5 -> solarPositionFactor = 1.0
-            0.6 -> solarPositionFactor = 1.0
+            in 0.5..0.6 -> solarPositionFactor = 1.0
+            in 0.6..0.7 -> solarPositionFactor = 1.0
 
-            0.7 -> solarPositionFactor = 0.9
-            0.8 -> solarPositionFactor = 0.6
-            0.9 -> solarPositionFactor = 0.3
-            1.0 -> solarPositionFactor = 0.2
+            in 0.7..0.8 -> solarPositionFactor = 0.9
+            in 0.8..0.9 -> solarPositionFactor = 0.6
+            in 0.9..9.5 -> solarPositionFactor = 0.3
+            in 9.5..1.0 -> solarPositionFactor = 0.2
             else ->{ solarPositionFactor = 0.1 }
         }
 
@@ -72,6 +71,7 @@ fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Lon
          *
          * 3rd module. Efficiency coefficient
          */
+        Timber.i("yyy sunrise: $snrs - frcst.time: $currentTime -  sunset: $snst  TimeZone: $timeZone  isDay: ${currentTime in snrs..snst}" )
 
         return ((nominalPower
                 - nominalPower * 0.5f*(cloudiness/100)
@@ -80,7 +80,10 @@ fun getForecast(cloudiness: Double, sunrise : Long, sunset : Long, timeZone: Lon
                 ).toInt())
 
 
-    }else { return 0 }
+    }else {
+        Timber.i("yyy sunrise: $snrs - frcst.time: $currentTime -  sunset: $snst  TimeZone: $timeZone  isDay: ${currentTime in snrs..snst}" )
+        return 0
+    }
 }
 
 fun setForecastForNow(forecastFor20hr: ArrayList<Int>) : Int {

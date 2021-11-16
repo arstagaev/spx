@@ -19,7 +19,6 @@ import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -581,7 +580,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 yValues.add(Entry(i.toFloat(), (arrayData.get(i)).toFloat()))
             }
         }catch (e: Exception){
-            Timber.i("vvv4 ${e.message}")
+            Timber.i("vvv4top ${e.message}")
         }
 
         var set1 = LineDataSet(yValues, "")
@@ -677,65 +676,27 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         legend: Legend,
         arrayData: ArrayList<Int>
     ){
-        val yValues = ArrayList<Entry>()
-        Timber.i("vvv4 $arrayData  sunriseH ${PreferenceMaestro.sunriseHour}")
+        // "0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00"
+        //  4.30
+        /**
+         * "0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00"
+         * 4.50
+         * 9.0 (9:00) - 8.01 (8:04) = 0.99
+         *
+         *  8.01 / 3 = 2.6666..
+         *
+         *
+         *
+         *
+         */
+        var yValues = ArrayList<Entry>()
+        Timber.i("vvv4 $arrayData")
 
-        var counter = 0
-        var differ = 0f
-        for (i in 0 until arrayData.size){
-
-            if ( (i+1) < arrayData.size) {
-                differ =  (arrayData[i+1].toFloat() - arrayData[i].toFloat())/3f
-
-            }else {
-                differ =  (arrayData[i].toFloat() - arrayData[i].toFloat())/3f
-
-            }
-            ///////////
-
-            counter++
-            yValues.add(Entry( counter.toFloat(), (arrayData.get(i)).toFloat() ))
-            counter++
-            // here need custom make
-            if (differ>0) {
-                yValues.add(Entry(counter.toFloat(), (arrayData.get(i)).toFloat() + differ))
-            }else {
-                yValues.add(Entry(counter.toFloat(), (arrayData.get(i)).toFloat() + differ))
-            }
-            counter++
-            
-            yValues.add(Entry( counter.toFloat(), (arrayData.get(i)).toFloat()+2f*differ ))
+        yValues = makeChartLineSmoothAndCompare(arrayData)
 
 
-        }
-        try {
-
-
-        }catch (e: Exception){
-            Timber.i("ccc vvv4 XXXX ${e.message}")
-
-            try {
-                var lastPower = 0f
-                var CURRENT_TIME = ""
-
-                for (i in 0..arrayData.size-1){
-                    if (lastPower == 0f && lastPower < arrayData.get(i).toFloat()){
-
-                    }
-                    //6:00 <-> 9:00
-
-
-                    yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
-                    lastPower = arrayData.get(i).toFloat()
-
-                }
-            }catch (e: Exception){
-                Timber.i("vvv4 ${e.message}")
-            }
-
-        }
-
-
+        Timber.i("vvvv >>>> ${yValues.joinToString()}")
+        ///////////////////////////////////////////
         var set1 = LineDataSet(yValues, "")
         Legend.LegendPosition.RIGHT_OF_CHART
 
@@ -792,7 +753,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = IndexAxisValueFormatter(firstChartSpecialValues)
+                valueFormatter = MyXAxisValuesFormatter(values)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -806,7 +767,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 setDrawFilled(true)
                 fillAlpha = 100
                 cubicIntensity = 0.07f
-                setDrawCircles(false)
+                setDrawCircles(true)
                 setDrawValues(true)
                 setMaxVisibleValueCount(5)
 
@@ -839,15 +800,18 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         arrayData: ArrayList<Int>
     ){
 
-        val yValues = ArrayList<Entry>()
+        var yValues = ArrayList<Entry>()
         Timber.i("vvv4 $arrayData")
-        try {
-            for (i in 0..arrayData.size-1){
-                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
-            }
-        }catch (e: Exception){
-            Timber.i("vvv4 ${e.message}")
+        for (i in 0..arrayData.size-1){
+            yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
         }
+//        try {
+//            for (i in 0..arrayData.size-1){
+//                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+//            }
+//        }catch (e: Exception){
+//            Timber.i("vvv4 ${e.message}")
+//        }
 
         var set1 = LineDataSet(yValues, "")
         Legend.LegendPosition.RIGHT_OF_CHART
