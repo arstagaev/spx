@@ -42,7 +42,11 @@ import timber.log.Timber
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
     //private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
     private val xAxisTimes = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    private val xAxisTimes_TOP = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     private val xAxisTimes_1 = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    private val xAxisTimes_2 = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    private val xAxisTimes_3 = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    private val xAxisTimes_4 = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
 
     private val newValues = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     val firstChartSpecialValues : ArrayList<String>
@@ -576,14 +580,16 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         //var yValues = smoothLineOfChart(arrayData)
         //for (i in ) // commented in 29/12/2021
-        val yValues = ArrayList<Entry>()
-        try {
-            for (i in 0..arrayData.size-1){
-                yValues.add(Entry(i.toFloat(), (arrayData.get(i)).toFloat()))
-            }
-        }catch (e: Exception){
-            Timber.i("vvv4top ${e.message}")
-        }
+        var yValues = ArrayList<Entry>()
+        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_TOP)
+        yValues = REMBO.arrEnt
+//        try {
+//            for (i in 0..arrayData.size-1){
+//                yValues.add(Entry(i.toFloat(), (arrayData.get(i)).toFloat()))
+//            }
+//        }catch (e: Exception){
+//            Timber.i("vvv4top ${e.message}")
+//        }
 
         var set1 = LineDataSet(yValues, "")
         set1.apply {
@@ -599,8 +605,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         val dataX = LineData(dataSet)
 
         // add goal line to chart
-        val goalLine =  // line
-            LimitLine(
+        val goalLine = LimitLine(
                 PreferenceMaestro.chosenStationNOMINALPOWER.toFloat(), String.format(
                     getString(R.string.mainscreen_chart_nominal_power_is_here),
                     "goal"
@@ -625,7 +630,6 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             axisRight.isEnabled = false
 
             axisLeft.apply {
-
                 axisMaximum = PreferenceMaestro.chosenStationNOMINALPOWER.toFloat() * 1.2F
                 axisMinimum = 0f
                 removeAllLimitLines()
@@ -637,7 +641,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
+                valueFormatter = MyXAxisValuesFormatter(REMBO.xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -759,7 +763,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(REMBO.xAxisTimes)
+                valueFormatter = MyXAxisValuesFormatter_1(REMBO.xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -808,8 +812,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         var yValues = ArrayList<Entry>()
         Timber.i("vvv4 ->chart 3:  $arrayData")
-
-        yValues = makeChartLineSmoothAndCompare(arrayData)
+        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        yValues = REMBO.arrEnt
+        //yValues = makeChartLineSmoothAndCompare(arrayData)
 
 //        for (i in 0..arrayData.size-1){
 //            yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
@@ -873,7 +878,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
+                valueFormatter = MyXAxisValuesFormatter(REMBO.xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -918,7 +923,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     ){
         var yValues = ArrayList<Entry>()
         Timber.i("vvv4 ->chart 4:  $arrayData")
-        yValues = makeChartLineSmoothAndCompare(arrayData)
+        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        yValues = REMBO.arrEnt
 //        try {
 //
 //            for (i in 0..arrayData.size-1){
@@ -981,7 +987,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
+                valueFormatter = MyXAxisValuesFormatter(REMBO.xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -1023,7 +1029,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     ){
         var yValues = ArrayList<Entry>()
         Timber.i("vvv4 ->chart 5: $arrayData")
-        yValues = makeChartLineSmoothAndCompare(arrayData)
+        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        yValues = REMBO.arrEnt
 //        try {
 //
 //            for (i in 0..arrayData.size-1){
@@ -1086,7 +1093,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
+                valueFormatter = MyXAxisValuesFormatter(REMBO.xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)

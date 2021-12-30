@@ -101,4 +101,5 @@
     <string name="tilt_sensor_accelerometer">"Accelerometer        "</string>
     <string name="choose_type_of_sensor_solar_pan">Choose Type of Sensor</string>
     <string name="new_feature_coming_soon_plump">"Coming Soon. Now in development "</string>
+    <string name="about_special_thanks">🤩Special Thanks to: \n Rémi \n JIPPY63</string>
 </resources>

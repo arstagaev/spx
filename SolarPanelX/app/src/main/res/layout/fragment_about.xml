@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backof_aboutscreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/backof_aboutscreen"
     android:background="@color/white"
     tools:context=".ui.fragments.features.AboutFragment">
 
@@ -45,19 +45,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:flow_verticalGap="10dp"
+        app:flow_verticalStyle="packed"
+        app:barrierMargin="20dp"
+        app:constraint_referenced_ids="textView12,twi_go_site,about_special_thanks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shieldik" />
+
     <TextView
         android:id="@+id/textView12"
         android:layout_width="344dp"
         android:layout_height="68dp"
-        android:layout_marginTop="44dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:text="🌐our site: revolna.com"
         android:textColor="@color/hint_white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shieldik" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/twi_go_site"
@@ -67,12 +76,17 @@
         android:gravity="center"
         android:text="@string/twitter_of_author"
         android:textColor="@color/hint_white"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.194" />
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/about_special_thanks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/about_special_thanks"
+        android:textColor="@color/black_night"
+        android:textSize="25sp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

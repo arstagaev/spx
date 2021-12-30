@@ -173,13 +173,35 @@ fun unxtoHoursAndMinutes(timestamp: Long): String {
     //return "${hours}:${minutes}"
 }
 
-class MyXAxisValuesFormatter : IAxisValueFormatter {
+class MyXAxisValuesFormatter_1 : IAxisValueFormatter {
     private var values : ArrayList<String>
+
     constructor(values: ArrayList<String>){
         this.values = values
     }
     override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-        return values[value.toInt()]
+        if (value < values.size) {
+            return values[value.toInt()]
+        }else {
+            return values[values.size-1]
+        }
+
+    }
+}
+
+
+class MyXAxisValuesFormatter : IAxisValueFormatter {
+    private var values : ArrayList<String>
+
+    constructor(values: ArrayList<String>){
+        this.values = values
+    }
+    override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+        if (value < values.size) {
+            return values[value.toInt()]
+        }else {
+            return values[values.size-1]
+        }
     }
 }
 
@@ -266,8 +288,6 @@ fun smoothLineOfChart(
     }
     FINAL_Energy.add(Entry(FINAL_Energy.size.toFloat(), 0f))
     FINALxAxisTimes_1.add(PreferenceMaestro.sunset)
-
-
 
 
     Timber.i("~~~~!!!pizdec "+FINALxAxisTimes_1.joinToString() +"FINALxAxisTimes_1: ${FINALxAxisTimes_1.size} ")

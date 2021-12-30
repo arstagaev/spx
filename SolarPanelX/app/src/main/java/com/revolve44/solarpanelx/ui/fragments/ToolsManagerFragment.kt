@@ -6,10 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -50,6 +47,7 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
     private lateinit var rateAppSign          : CardView
     private lateinit var rateAppSignCloseButt : ImageView
     private lateinit var tool_manager_layout : ConstraintLayout
+    private lateinit var scroll_view_tools : ScrollView
     private lateinit var textSwitcher_main_screen : TextView
 
     private lateinit var rate_app_signLikeIt     : Button
@@ -71,6 +69,7 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
         rate_app_signLikeIt = view.findViewById(R.id.rate_app_sign_like_it)
         rate_app_signDontLikeIt = view.findViewById(R.id.rate_app_sign_dont_like)
 
+        scroll_view_tools = view.findViewById(R.id.scroll_view_tools)
         tool_manager_layout = view.findViewById(R.id.tool_manager_layout)
         textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
 
@@ -277,10 +276,12 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
     private fun changeSkyEntourage() {
         when(CURRENT_TIME_OF_DAY.typeOfSky){
             TypeOfSky.NIGHT -> {
+                scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
                 tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
                 textSwitcher_main_screen.setTextColor(Color.WHITE)
             }
             else ->{
+                scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
                 tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
                 textSwitcher_main_screen.setTextColor(Color.BLACK)
             }

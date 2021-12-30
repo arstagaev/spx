@@ -266,11 +266,17 @@ fun getInvestmentsToPVStation(c: CharSequence?, chosenCurrency: String) : String
         }
         else-> pricePer1WattInDefineCurrency = 1.8F // by default dollar
     }
-    if (c.toString().isNotEmpty()){
-        return (c.toString().toInt() * pricePer1WattInDefineCurrency).toInt().toString()
-    }else{
-        return (0 * pricePer1WattInDefineCurrency).toInt().toString()
+
+    if (PreferenceMaestro.investmentsToSolarStation == 0) { // added in dec 21`
+        if (c.toString().isNotEmpty()){
+            return (c.toString().toInt() * pricePer1WattInDefineCurrency).toInt().toString()
+        }else{
+            return (0 * pricePer1WattInDefineCurrency).toInt().toString()
+        }
+    } else {
+        return PreferenceMaestro.investmentsToSolarStation.toString() // i added in dec 21`
     }
+
 
 
 }
