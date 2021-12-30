@@ -84,10 +84,7 @@
     <string name="notification_screen_standart_notif_title">मानक सूचनाएं</string>
     <string name="notification_screen_title">यह बीटा संस्करण है कुछ बग हो सकते हैं</string>
     <string name="tool_manager_screen_do_you_like_app">क्या आपको ऐप पसंद है?</string>
-    <string name="purchase_why">
-       \n ✔️ 5 दिनों तक बिजली उत्पादन का पूर्वानुमान
-       \n ✔️कोई विज्ञापन नहीं। हमेशा के लिए
-       \n ✔️वार्षिक योजना हर बार ऑनलाइन रद्द करें</string>
+    <string name="purchase_why">\n       \n ✔️ 5 दिनों तक बिजली उत्पादन का पूर्वानुमान\n       \n ✔️कोई विज्ञापन नहीं। हमेशा के लिए\n</string>
     <string name="why_premium_title">प्रीमियम क्यों?</string>
     <string name="g_e_t_p_r_e_m_i_u_m_button">प्रीमियम प्राप्त करना</string>
     <string name="price_of_premium_1_99_per_year">1.99$ प्रति वर्ष</string>

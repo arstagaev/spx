@@ -78,11 +78,7 @@
     <string name="notification_screen_standart_notif_title">Notificaciones estándar</string>
     <string name="notification_screen_title">Esta es la versión Beta puede tener algunos errores</string>
     <string name="tool_manager_screen_do_you_like_app">¿Te gusta la aplicación?</string>
-    <string name="purchase_why">
-       \n ✔️Pronóstico de generación de energía a 5 días
-       \n ✔️ Sin anuncios. Para siempre
-       \n ✔️Cancelar el plan anual en línea cada vez
-    </string>
+    <string name="purchase_why">"\n       \n ✔️Pronóstico de generación de energía a 5 días\n       \n ✔️ Sin anuncios. Para siempre\n       \n    "</string>
     <string name="why_premium_title">¿Por qué Premium?</string>
     <string name="g_e_t_p_r_e_m_i_u_m_button">Hazte premium</string>
     <string name="price_of_premium_1_99_per_year">1,99 $ por año</string>

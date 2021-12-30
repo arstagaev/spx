@@ -97,11 +97,7 @@
     <string name="notification_screen_standart_notif_title">Standardbenachrichtigungen</string>
     <string name="notification_screen_title">Dies ist die Beta-Version, möglicherweise gibt es einige Fehler</string>
     <string name="tool_manager_screen_do_you_like_app">Mögen Sie app?</string>
-    <string name="purchase_why">
-      \n ✔️Prognose der Stromerzeugung bis 5 Tage
-      \n ✔️Keine Werbung. Für immer
-      \n ✔️Jahresplan jedes Mal online kündigen
-    </string>
+    <string name="purchase_why">"\n      \n ✔️Prognose der Stromerzeugung bis 5 Tage\n      \n ✔️Keine Werbung. Für immer\n      \n    "</string>
     <string name="why_premium_title">Warum Premium?</string>
     <string name="g_e_t_p_r_e_m_i_u_m_button">Premium bekommen</string>
     <string name="price_of_premium_1_99_per_year">1,99$ pro Jahr</string>

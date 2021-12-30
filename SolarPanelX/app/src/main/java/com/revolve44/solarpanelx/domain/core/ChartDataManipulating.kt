@@ -222,21 +222,90 @@ fun sumOfCharts(inputArray: ArrayList<Int>) : Int{
         return -1
     }
 }
+data class ChartParser (var arrEnt :ArrayList<Entry>, var xAxisTimes : ArrayList<String>)
+fun smoothLineOfChart(
+    //firstHr : Int,
+    yPointsEnergy: ArrayList<Int>,
+    xAxisTimes_1: ArrayList<String>
+) : ChartParser {
+
+    var pairsTimeEnergy = ArrayList<Entry>()
+    var pairsTimes= ArrayList<String>()
+
+    var FINAL_Energy = ArrayList<Entry>()
+    var FINALxAxisTimes_1 = ArrayList<String>()
+
+    FINAL_Energy.add(Entry(0f, 0f)) //////!!!!!!!!!!!!!!!!!!
+    FINALxAxisTimes_1.add(PreferenceMaestro.sunrise)
+
+
+    var interMed     = 0.3333f // need multiply by hour
+    var asdf = (PreferenceMaestro.solarDayDuration / 3f) //* interMed
+
+//    var sunriseCoeff      =  roundTo2decimials(PreferenceMaestro.sunriseHour / 3f).toString().takeLast(2).toFloat()/ 100f
+//    var sunsetCoeff       =  roundTo2decimials(PreferenceMaestro.sunsetHour / 3f).toString() .takeLast(2).toFloat()/ 100f
+
+       // sunsetCoeff       =
+    Timber.i("~~~~ yPointsEnergySize: ${yPointsEnergy.joinToString()} ")
+    Timber.i("~~~~ yPointsEnergySize: ${yPointsEnergy.size} xAxisTimes_1S:${pairsTimes.size}")
+    for ( i in 0 until yPointsEnergy.size) {
+
+        if (yPointsEnergy[i].toFloat() != 0f) {
+            pairsTimeEnergy.add(Entry(i.toFloat(), yPointsEnergy[i].toFloat()))
+            pairsTimes.add(xAxisTimes_1[i])
+        }
+
+    }
+    Timber.i("~~~~ pairstimeenergy: ${pairsTimeEnergy.joinToString()} ")
+    for (i in 0 until pairsTimeEnergy.size) {
+
+        //Timber.i(">>>> sunrise ${sunriseCoeff} |  sunset${sunsetCoeff}")
+        FINAL_Energy.add(Entry(i.toFloat()+1f, pairsTimeEnergy[i].y))
+        FINALxAxisTimes_1.add(pairsTimes[i])
+
+    }
+    FINAL_Energy.add(Entry(FINAL_Energy.size.toFloat(), 0f))
+    FINALxAxisTimes_1.add(PreferenceMaestro.sunset)
+
+
+
+
+    Timber.i("~~~~!!!pizdec "+FINALxAxisTimes_1.joinToString() +"FINALxAxisTimes_1: ${FINALxAxisTimes_1.size} ")
+    Timber.i("SMOOTH ~~~>>>> output>>> ${FINAL_Energy.joinToString()}  FINALpairsTimeEnergy: ${FINAL_Energy.size}")
+    return ChartParser(FINAL_Energy,FINALxAxisTimes_1)
+}
+//if (pairsTimeEnergy[i].y == 0f && pairsTimeEnergy[i+1].y > 0f) {
+//
+//                pairsTimeEnergy[i]  .x  = pairsTimeEnergy[i].x + (1f-sunriseCoeff)
+//                pairsTimeEnergy[i+1].x = pairsTimeEnergy[i+1].x + 0.5f
+//                //asd = pairsTimeEnergy[i+1].x + PreferenceMaestro.solarDayDuration / 3f
+//
+//            }
+//            else if (pairsTimeEnergy[i].y > 0f && pairsTimeEnergy[i+1].y == 0f) {
+//
+//                pairsTimeEnergy[i+1].x = pairsTimeEnergy[i+1].x - (1f - sunsetCoeff)
+//                //pairsTimeEnergy[i].x = pairsTimeEnergy[i].x - 0.5f
+//            }
+//            else if (pairsTimeEnergy[i].y > 0f && pairsTimeEnergy[i+1].y > 0f) {
+//
+//                //pairsTimeEnergy[i].y = pairsTimeEnergy[i].y + asdf
+//                //asd = pairsTimeEnergy[i].y
+//            }
 // make compare with sunset and sunrise
 fun makeChartLineSmoothAndCompare(arrayData: ArrayList<Int>): ArrayList<Entry> {
-    Timber.i("arrayData input>>> ${arrayData.joinToString()}")
+    Timber.i("SMOOTH arrayData input>>> ${arrayData.joinToString()}")
     var yValues = ArrayList<Entry>()
     var alreadyNotZeroSUNRISE = false
     var alreadyNotZeroSUNSET = true
     try {
 
-        for (i in 0..arrayData.size-1){
+        for (i in 0 until arrayData.size){
             // (number of order, number of value  )
             if (!alreadyNotZeroSUNRISE) {
 
                 if (!alreadyNotZeroSUNRISE && arrayData.get(i) == 0 && arrayData.get(i+1) > 0 ) {
 
-                    yValues.add( Entry(PreferenceMaestro.sunriseHour / 3f, arrayData.get(i).toFloat()) )
+                    yValues.add( Entry(PreferenceMaestro.solarDayDuration / 3f, arrayData.get(i).toFloat()) )
 
                     alreadyNotZeroSUNRISE = true
                 }else {
@@ -269,10 +338,12 @@ fun makeChartLineSmoothAndCompare(arrayData: ArrayList<Int>): ArrayList<Entry> {
         yValues.clear()
 
         for (i in 0..arrayData.size-1){
+            ///////////////   scale                energy
             yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
         }
 
     }
+    Timber.i("SMOOTH arrayData output<<< ${yValues.joinToString()}")
 
     return yValues
 }

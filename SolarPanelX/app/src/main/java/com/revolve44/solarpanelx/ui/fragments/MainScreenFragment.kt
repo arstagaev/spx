@@ -41,7 +41,9 @@ import timber.log.Timber
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
     //private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
-    private val values = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    private val xAxisTimes = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    private val xAxisTimes_1 = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+
     private val newValues = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     val firstChartSpecialValues : ArrayList<String>
             = arrayListOf("0:00","1:00","2:00", "3:00","4:00","5:00", "6:00","7:00","8:00", "9:00","10:00","11:00", "12:00",
@@ -165,7 +167,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                                             R.string.sunset),Snackbar.LENGTH_LONG).show()
         }
 
-
+        // checker when premium -> set premium
         switchPremium(PreferenceMaestro.isPremiumStatus)
 
     }
@@ -261,7 +263,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
     }
 
-    private fun initFactoryOfMainLabel(){
+    private fun initFactoryOfMainLabel() {
 
         textSwitcher_main_screen.setFactory(ViewSwitcher.ViewFactory {
             mainLabelOfMainScreenInsideTxtSwitcher = TextView(requireActivity())
@@ -572,9 +574,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         val arrayData : ArrayList<Int> = frcstData.forecasts
         val firstChartSpecialValues : ArrayList<String> = frcstData.dates
 
+        //var yValues = smoothLineOfChart(arrayData)
+        //for (i in ) // commented in 29/12/2021
         val yValues = ArrayList<Entry>()
-
-        //for (i in )
         try {
             for (i in 0..arrayData.size-1){
                 yValues.add(Entry(i.toFloat(), (arrayData.get(i)).toFloat()))
@@ -629,14 +631,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 removeAllLimitLines()
                 addLimitLine(goalLine)
 
-
                 setDrawLimitLinesBehindData(true)
                 disableGridDashedLine()
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(firstChartSpecialValues)
+                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -649,10 +650,15 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 mode = LineDataSet.Mode.CUBIC_BEZIER
                 setDrawFilled(true)
                 fillAlpha = 100
-                cubicIntensity = 0.2f
+                cubicIntensity = 0.07f
+                setDrawCircles(true)
+                setDrawValues(true)
+                setMaxVisibleValueCount(5)
+
 
                 valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
                 color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColorHole(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
             }
@@ -690,9 +696,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
          *
          */
         var yValues = ArrayList<Entry>()
-        Timber.i("vvv4 $arrayData")
-
-        yValues = makeChartLineSmoothAndCompare(arrayData)
+        Timber.i("vvv4 ->chart 2:  $arrayData")
+        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        yValues = REMBO.arrEnt
 
 
         Timber.i("vvvv >>>> ${yValues.joinToString()}")
@@ -753,7 +759,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(values)
+                valueFormatter = MyXAxisValuesFormatter(REMBO.xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -801,10 +807,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     ){
 
         var yValues = ArrayList<Entry>()
-        Timber.i("vvv4 $arrayData")
-        for (i in 0..arrayData.size-1){
-            yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
-        }
+        Timber.i("vvv4 ->chart 3:  $arrayData")
+
+        yValues = makeChartLineSmoothAndCompare(arrayData)
+
+//        for (i in 0..arrayData.size-1){
+//            yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+//        }
 //        try {
 //            for (i in 0..arrayData.size-1){
 //                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
@@ -841,11 +850,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             goalLine.lineWidth = 1f
             //goalLine.isDashedLineEnabled
             isDragEnabled = true
-            setScaleEnabled(false)
-
+            setScaleEnabled(true)
             description.isEnabled = false
-            legend.isEnabled      = false // description of define line
-            //legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
+            legend.isEnabled = false // description of define line
+            legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
 
 
 
@@ -865,7 +873,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(values)
+                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -878,10 +886,15 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 mode = LineDataSet.Mode.CUBIC_BEZIER
                 setDrawFilled(true)
                 fillAlpha = 100
-                cubicIntensity = 0.2f
+                cubicIntensity = 0.07f
+                setDrawCircles(true)
+                setDrawValues(true)
+                setMaxVisibleValueCount(5)
+
 
                 valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
                 color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColorHole(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
             }
@@ -903,16 +916,17 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         legend: Legend,
         arrayData: ArrayList<Int>
     ){
-        val yValues = ArrayList<Entry>()
-        Timber.i("vvv4 $arrayData")
-        try {
-
-            for (i in 0..arrayData.size-1){
-                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
-            }
-        }catch (e: Exception){
-            Timber.i("vvv4 ${e.message}")
-        }
+        var yValues = ArrayList<Entry>()
+        Timber.i("vvv4 ->chart 4:  $arrayData")
+        yValues = makeChartLineSmoothAndCompare(arrayData)
+//        try {
+//
+//            for (i in 0..arrayData.size-1){
+//                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+//            }
+//        }catch (e: Exception){
+//            Timber.i("vvv4 ${e.message}")
+//        }
 
         var set1 = LineDataSet(yValues, "")
         Legend.LegendPosition.RIGHT_OF_CHART
@@ -944,7 +958,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             goalLine.lineWidth = 1f
             //goalLine.isDashedLineEnabled
             isDragEnabled = true
-            setScaleEnabled(false)
+            setScaleEnabled(true)
             description.isEnabled = false
             legend.isEnabled = false // description of define line
             legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
@@ -967,7 +981,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(values)
+                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -980,14 +994,18 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 mode = LineDataSet.Mode.CUBIC_BEZIER
                 setDrawFilled(true)
                 fillAlpha = 100
-                cubicIntensity = 0.2f
+                cubicIntensity = 0.07f
+                setDrawCircles(true)
+                setDrawValues(true)
+                setMaxVisibleValueCount(5)
+
 
                 valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
                 color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColorHole(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
             }
-
             notifyDataSetChanged()
             invalidate()
 
@@ -1003,16 +1021,17 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         legend: Legend,
         arrayData: ArrayList<Int>
     ){
-        val yValues = ArrayList<Entry>()
-        Timber.i("vvv4 $arrayData")
-        try {
-
-            for (i in 0..arrayData.size-1){
-                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
-            }
-        }catch (e: Exception){
-            Timber.i("vvv4 ${e.message}")
-        }
+        var yValues = ArrayList<Entry>()
+        Timber.i("vvv4 ->chart 5: $arrayData")
+        yValues = makeChartLineSmoothAndCompare(arrayData)
+//        try {
+//
+//            for (i in 0..arrayData.size-1){
+//                yValues.add(Entry(i.toFloat(), arrayData.get(i).toFloat()))
+//            }
+//        }catch (e: Exception){
+//            Timber.i("vvv4 ${e.message}")
+//        }
 
         var set1 = LineDataSet(yValues, "")
         Legend.LegendPosition.RIGHT_OF_CHART
@@ -1044,7 +1063,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             goalLine.lineWidth = 1f
             //goalLine.isDashedLineEnabled
             isDragEnabled = true
-            setScaleEnabled(false)
+            setScaleEnabled(true)
             description.isEnabled = false
             legend.isEnabled = false // description of define line
             legend.position = Legend.LegendPosition.BELOW_CHART_CENTER
@@ -1067,7 +1086,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
             }
 
             xAxis.apply {
-                valueFormatter = MyXAxisValuesFormatter(values)
+                valueFormatter = MyXAxisValuesFormatter(xAxisTimes)
                 granularity    = 1F
                 position       = XAxis.XAxisPosition.BOTTOM
                 textColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
@@ -1080,10 +1099,15 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 mode = LineDataSet.Mode.CUBIC_BEZIER
                 setDrawFilled(true)
                 fillAlpha = 100
-                cubicIntensity = 0.2f
+                cubicIntensity = 0.07f
+                setDrawCircles(true)
+                setDrawValues(true)
+                setMaxVisibleValueCount(5)
+
 
                 valueTextColor = ContextCompat.getColor(requireActivity(), R.color.hint_white2)
                 color = ContextCompat.getColor(requireActivity(), R.color.chart_stroke)
+                setCircleColorHole(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 setCircleColor(ContextCompat.getColor(requireActivity(), R.color.chart_stroke))
                 fillColor= ContextCompat.getColor(requireActivity(), R.color.chart_fill_mainchart)
             }

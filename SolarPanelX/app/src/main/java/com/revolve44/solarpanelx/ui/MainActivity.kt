@@ -86,18 +86,13 @@ class MainActivity : AppCompatActivity() {
         val navGraph = navController!!.navInflater.inflate(R.navigation.nav_main_screen)
         //navController!!.setGraph(R.navigation.)
 
-        if (!PreferenceMaestro.isPremiumStatus){
-            when((0..10).random()){
-                0,1 -> {
-                    navGraph.startDestination = R.id.purchaseFragment;
-                }
-                else ->{
-                    navGraph.startDestination = R.id.mainFragmentOfApp;
-                }
-            }
-
-
-        }
+        // suggester to buy: send to premium screen
+//        if (!PreferenceMaestro.isPremiumStatus){
+//            when((0..10).random()){
+//                0,1 -> { navGraph.startDestination = R.id.purchaseFragment; }
+//                else ->{ navGraph.startDestination = R.id.mainFragmentOfApp; }
+//            }
+//        }
 
         navController!!.graph = navGraph;
 
