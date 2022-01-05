@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.CountDownTimer
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
@@ -31,6 +33,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
     var allDataForCharts : MutableLiveData<ArrayList<FirstChartDataTransitor>> = MutableLiveData()
     // for display current 3hour forecast
     var forecastNow : MutableLiveData<Int> = MutableLiveData()
+    var timeNow : MutableLiveData<String> = MutableLiveData()
 
     private var allForecastforChart : LiveData<List<ForecastCell>> = repoSpx.getAllForecastCells()
 
@@ -58,6 +61,16 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
 //        FirstChartDataTransitor(arrayListOf("1","1","1","1","1","1","1","1"),
 //            arrayListOf(1,2,3,4,6,10,2,9)))
 //        allDataForCharts.postValue(arr)
+        val TIME_OF_WORK_LOOPER = 100*60*60*1000L
+        var looperTime = object : CountDownTimer(TIME_OF_WORK_LOOPER,1000){
+            override fun onTick(millisUntilFinished: Long) {
+                timeNow.value = "Current Time: ${getTimeHuman(PreferenceMaestro.chosenTimeZone)}, City: ${PreferenceMaestro.chosenStationCITY}"
+
+            }
+
+            override fun onFinish() {}
+
+        }.start()
 
         checkConnection()
 

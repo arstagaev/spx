@@ -294,6 +294,147 @@ fun smoothLineOfChart(
     Timber.i("SMOOTH ~~~>>>> output>>> ${FINAL_Energy.joinToString()}  FINALpairsTimeEnergy: ${FINAL_Energy.size}")
     return ChartParser(FINAL_Energy,FINALxAxisTimes_1)
 }
+
+
+fun smoothLineOfChartTOP(
+    //firstHr : Int,
+    yPointsEnergy: ArrayList<Int>,
+    xAxisTimes_1: ArrayList<String>
+) : ChartParser {
+
+    var pairsTimeEnergy = ArrayList<Entry>()
+    var pairsTimes= ArrayList<String>()
+
+    var FINAL_Energy = ArrayList<Entry>()
+    var FINALxAxisTimes_1 = ArrayList<String>()
+
+    //FINAL_Energy.add(Entry(0f, 0f)) //////!!!!!!!!!!!!!!!!!!
+    //FINALxAxisTimes_1.add(PreferenceMaestro.sunrise)
+    FINALxAxisTimes_1 = xAxisTimes_1
+
+    var catcha = -1
+    var step = 0f
+    for (i in xAxisTimes_1) {
+        if ( i == "0:00" || i.takeLast(2) == "00" && i.take(2).toInt()%3==0 ) {
+
+            if ( catcha in -1..6) { // coz arra
+                catcha++
+
+            }else {
+                Timber.i("cccc Pizdec ${i}")
+            }
+
+        }
+
+        FINAL_Energy.add(Entry( step, yPointsEnergy[catcha].toFloat() ))
+        step++
+    }
+
+
+
+    Timber.i("~~~~ yPointsEnergySize: ${yPointsEnergy.joinToString()} ")
+    Timber.i("~~~~ yPointsEnergySize: ${yPointsEnergy.size} xAxisTimes_1S:${pairsTimes.size}")
+
+    Timber.i("SMOOTH ~~~>>>> final ENERGY>>> ${FINAL_Energy.joinToString()}  FINALpairsTimeEnergy: ${FINAL_Energy.size}")
+    Timber.i("SMOOTH ~~~>>>> final yPoints>>> ${yPointsEnergy.joinToString()}  FINALpairsTimeEnergy: ${yPointsEnergy.size}")
+
+    return ChartParser(FINAL_Energy,FINALxAxisTimes_1)
+}
+
+
+fun smoothLineOfChartGOGOGO(
+    //firstHr : Int,
+    yPointsEnergy: ArrayList<Int>,
+    xAxisTimes_1: ArrayList<String>
+) : ChartParser {
+
+    var pairsTimeEnergy = ArrayList<Entry>()
+    var pairsTimes= ArrayList<String>()
+
+    var FINAL_Energy = ArrayList<Entry>()
+    var FINALxAxisTimes_1 = ArrayList<String>()
+
+    //FINAL_Energy.add(Entry(0f, 0f)) //////!!!!!!!!!!!!!!!!!!
+    //FINALxAxisTimes_1.add(PreferenceMaestro.sunrise)
+    PreferenceMaestro.sunriseHour
+    var sunRiseElement = 0
+    var sunSetElement  = 0
+    for (i in 0..yPointsEnergy.size-1) {
+        try {
+            if (yPointsEnergy[i] == 0 && yPointsEnergy[i - 1] > 0) {
+                sunSetElement = i
+            }
+
+
+            if (yPointsEnergy[i] == 0 && yPointsEnergy[i + 1] > 0) {
+                sunRiseElement = i
+            }
+        }catch (e :Exception) {
+
+        }
+
+
+
+    }
+    FINALxAxisTimes_1 = xAxisTimes_1
+
+    try {
+        for (i in 0..yPointsEnergy.size-1){
+            FINAL_Energy.add(Entry(i.toFloat(), (yPointsEnergy.get(i)).toFloat()))
+        }
+    }catch (e: Exception){
+        Timber.i("vvv4 ${e.message}")
+    }
+
+    for (i  in 0 until xAxisTimes_1.size) {
+
+        if (i == sunRiseElement) {
+            FINALxAxisTimes_1.set(i,PreferenceMaestro.sunrise)
+        }
+        if (i == sunSetElement) {
+            FINALxAxisTimes_1.set(i,PreferenceMaestro.sunset)
+        }
+
+    }
+
+//    var delta = 0f
+//    var fundamentTime = 0f
+//    for (i in 0..yPointsEnergy.size-1) {
+//
+//        if (i == sunSetElement) {
+//
+//            if (xAxisTimes_1[i].dropLast(2).toInt() > PreferenceMaestro.sunsetHour.toInt()) {
+//                delta = ("0"+(PreferenceMaestro.sunsetHour / 3f).toString().drop(1)).toFloat()
+//            }else {
+//                delta = - ("0"+(PreferenceMaestro.sunsetHour / 3f).toString().drop(1)).toFloat()
+//            }
+//
+//
+//
+//        } else if (i == sunRiseElement) {
+//            if (xAxisTimes_1[i].dropLast(2).toInt() > PreferenceMaestro.sunriseHour.toInt()) {
+//                delta = ("0"+(PreferenceMaestro.sunriseHour / 3f).toString().drop(1)).toFloat()
+//            } else {
+//                delta = - ("0"+(PreferenceMaestro.sunriseHour / 3f).toString().drop(1)).toFloat()
+//            }
+//
+//
+//        } else {
+//
+//        }
+//
+//
+//        Timber.i("fundamentTime: ${fundamentTime} delta: ${delta}")
+//        FINAL_Energy.add( Entry(fundamentTime+delta, yPointsEnergy[i].toFloat()) )
+//        delta = 0f
+//        fundamentTime++
+//    }
+
+
+
+
+    return ChartParser(FINAL_Energy,FINALxAxisTimes_1)
+}
 //if (pairsTimeEnergy[i].y == 0f && pairsTimeEnergy[i+1].y > 0f) {
 //
 //                pairsTimeEnergy[i]  .x  = pairsTimeEnergy[i].x + (1f-sunriseCoeff)

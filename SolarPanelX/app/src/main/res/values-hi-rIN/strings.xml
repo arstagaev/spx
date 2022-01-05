@@ -98,4 +98,5 @@
     <string name="tilt_sensor_rot_vector">रोटेशन वेक्टर</string>
     <string name="tilt_sensor_accelerometer">"Accelerometer       "</string>
     <string name="new_feature_coming_soon_plump">जल्द आ रहा है!</string>
+    <string name="mainscreen_map_info">मानचित्र पर लाल बिंदु - आपके सौर स्टेशन का स्थान है</string>
 </resources>

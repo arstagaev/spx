@@ -38,3 +38,9 @@ fun ensureNeedUpdateOrNot_PeriodTwoDays() : Boolean {
     }
     return false
 }
+
+fun getTimeHuman(GMT : String): String {
+    val dateFormatGmt = SimpleDateFormat("HH:mm:ss  dd/MM/yyyy")
+    dateFormatGmt.timeZone = TimeZone.getTimeZone(GMT)
+    return dateFormatGmt.format(Date())
+}

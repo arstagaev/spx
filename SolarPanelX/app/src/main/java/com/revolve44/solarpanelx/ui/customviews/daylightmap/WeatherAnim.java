@@ -17,6 +17,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro;
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +34,7 @@ import static com.revolve44.solarpanelx.ui.customviews.daylightmap.BaseFigure.Dx
 import static com.revolve44.solarpanelx.ui.customviews.daylightmap.BaseFigure.Ex;
 import static com.revolve44.solarpanelx.ui.customviews.daylightmap.BaseFigure.Fx;
 import static com.revolve44.solarpanelx.ui.customviews.daylightmap.BaseFigure.isSummer;
+import static com.revolve44.solarpanelx.ui.customviews.daylightmap.WeatherViewToolsKt.gpsToCoordOnMap;
 
 
 /**
@@ -44,6 +46,8 @@ public class WeatherAnim extends View {
     private Paint paint;
     private Paint paint2;
     private Paint paint3;
+    private Paint paintCircle;
+    private Paint paintCircleIntro;
 
     private Path path;
     private Path path2;
@@ -59,7 +63,8 @@ public class WeatherAnim extends View {
     public static float WIDTH  =  600;
     public static float HEIGHT =  300;
 
-
+    private static float xCirclePoint = 0f;
+    private static float yCirclePoint = 0f;
 
 
     public static void geometryL(){
@@ -96,6 +101,17 @@ public class WeatherAnim extends View {
         paint3 = new Paint();
         paint3.setAntiAlias(true);
         paint3.setStyle(Paint.Style.FILL_AND_STROKE);
+
+        //path3  = new Path();
+        paintCircle = new Paint();
+        paintCircle.setAntiAlias(true);
+        paintCircle.setStyle(Paint.Style.FILL_AND_STROKE);
+        paintCircle.setColor(Color.parseColor("#D5544F"));
+
+        paintCircleIntro = new Paint();
+        paintCircleIntro.setAntiAlias(true);
+        paintCircleIntro.setStyle(Paint.Style.FILL_AND_STROKE);
+        paintCircleIntro.setColor(Color.RED);
 
         path3 = new Path();
 
@@ -152,6 +168,10 @@ public class WeatherAnim extends View {
             ConstantsCalculations.switcherMap = false;
         }
         rectagleF = new RectF(0F,0F,WIDTH,HEIGHT);
+        latLonXY ltlnXY = gpsToCoordOnMap(PreferenceMaestro.INSTANCE.getChosenStationLAT(),
+                PreferenceMaestro.INSTANCE.getChosenStationLON(),WIDTH,HEIGHT );
+        xCirclePoint= ltlnXY.getX();
+        yCirclePoint= ltlnXY.getY();
 
 
         //Log.d("width: "," is "+WIDTH+" ][ "+HEIGHT);
@@ -194,8 +214,8 @@ public class WeatherAnim extends View {
 
         if (isSummer) {
 
-            Curve.curveSummer(      mBitmapCanvas,path,paint, WIDTH*1.005F,HEIGHT,WIDTH);
-            Curve.curveSummerShadow(mBitmapCanvas,path2,paint,WIDTH*1.005F,HEIGHT,WIDTH);
+            Curve.curveSummer(      mBitmapCanvas,path,paint, WIDTH*1.005F,HEIGHT,WIDTH); // has been 1.005
+            Curve.curveSummerShadow(mBitmapCanvas,path2,paint,WIDTH*1.005F,HEIGHT,WIDTH); // has been 1.005
 
 
             Curve.curveSummer(      mBitmapCanvas,path3,paint2,0,HEIGHT,WIDTH);
@@ -206,15 +226,18 @@ public class WeatherAnim extends View {
             Curve.curveFirst(       mBitmapCanvas,path,paint,0F,HEIGHT,WIDTH);
             Curve.curveFirstShadow(mBitmapCanvas,path2,paint,0F,HEIGHT,WIDTH);
 
-            Curve.curveFirst(      mBitmapCanvas,path3,paint,WIDTH*1.1F,HEIGHT,WIDTH);
-            Curve.curveFirstShadow(mBitmapCanvas,path4,paint,WIDTH*1.1F,HEIGHT,WIDTH);
+            Curve.curveFirst(      mBitmapCanvas,path3,paint,WIDTH*1F,HEIGHT,WIDTH);
+            Curve.curveFirstShadow(mBitmapCanvas,path4,paint,WIDTH*1F,HEIGHT,WIDTH);
         }
         // Curve.curveFirstShadow(path2,paint3,width,height,width);
         //canvas.drawPath(path, paint);
         // draw everything to the screen
         canvas.drawBitmap(mDrawBitmap, 0, 0, drawPaint);
         ConstantsCalculations.bitmapMain = mDrawBitmap;
+        //location of solar panel
 
+        canvas.drawCircle(xCirclePoint, yCirclePoint,21f,paintCircle);
+        canvas.drawCircle(xCirclePoint, yCirclePoint,11f,paintCircleIntro);
         paint.reset();
         path.reset();
         path2.reset();

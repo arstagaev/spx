@@ -20,8 +20,8 @@ android {
         applicationId "com.revolve44.solarpanelx"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 32
-        versionName "0.9.391 (The Rhône edition)"
+        versionCode 33
+        versionName "0.9.40 (The Rhône edition)"
 
         multiDexEnabled true //(# methods: 68662 > 65536)
 

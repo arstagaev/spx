@@ -23,7 +23,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/why_premium_sign"
         android:layout_width="0dp"
-        android:layout_height="170dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         app:cardBackgroundColor="@color/white"
@@ -52,6 +52,7 @@
             android:layout_gravity="bottom|start"
             android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="16dp"
+            android:paddingTop="38dp"
             android:gravity="center|left"
             android:text="@string/purchase_why"
             android:textSize="18sp"></TextView>

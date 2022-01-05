@@ -139,7 +139,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_chart1"
                 android:layout_width="0dp"
-                android:layout_height="166dp"
+                android:layout_height="182dp"
                 app:cardCornerRadius="20dp"
                 app:cardBackgroundColor="@color/black_spoke"
                 app:layout_constraintEnd_toEndOf="@+id/flow"
@@ -149,7 +149,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="9dp"
                     android:layout_marginStart="5dp"
                     android:textColor="@color/hint_white2"
                     android:text="@string/watts_sign"
@@ -157,11 +157,25 @@
 
                 </TextView>
 
+                <TextView
+                    android:id="@+id/mainscreen_current_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="top|center"
+                    android:textColor="@color/hint_white2"
+                    android:text="Current Time: 12:00, City: NY"
+                    android:textSize="10sp">
+
+                </TextView>
+
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="166dp"
                     android:layout_weight="1"
+                    android:layout_gravity="bottom"
                     app:layout_constraintVertical_chainStyle="spread"
                     tools:ignore="NotSibling" />
 

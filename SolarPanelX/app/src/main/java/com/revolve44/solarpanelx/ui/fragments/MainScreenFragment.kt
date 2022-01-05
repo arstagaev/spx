@@ -40,8 +40,8 @@ import timber.log.Timber
 
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefreshLayout.OnRefreshListener{
-    //private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr")
-    private val xAxisTimes = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
+    //private val values = arrayListOf<String>("0hr", "3hr", "6hr", "9hr", "12hr", "15hr", "18hr", "21hr") private val xAxisTimes_X = arrayListOf<String>("00:00","00:30","01:00","01:30","02:00","02:30", "03:00","3:30","4:00","4:30","5:00","5:30","6:00","6:30", "7:00","7:30","8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:00","21:30","22:00","22:30","23:00", "23:30")
+    private val xAxisTimes_X = arrayListOf<String>("00:00","00:30","01:00","01:30","02:00","02:30", "03:00","03:30","04:00","04:30","05:00","05:30","06:00","06:30", "07:00","07:30","08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:00","21:30","22:00","22:30","23:00", "23:30")
     private val xAxisTimes_TOP = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     private val xAxisTimes_1 = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
     private val xAxisTimes_2 = arrayListOf<String>("0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00")
@@ -56,6 +56,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     // Use the 'by activityViewModels()' Kotlin property delegate
     // from the fragment-ktx artifact
    // private val mainViewmodel : MainViewModel by viewModels()
+    private var mainscreen_current_time : TextView? = null
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
 
     private lateinit var lineChart1 : LineChart
@@ -93,12 +94,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var cardview_forecastnow_mainscreen : CardView
     private lateinit var main_screen_background : ConstraintLayout
 
-
+    private var card_item_with_map : CardView? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mainscreen_current_time = view.findViewById(R.id.mainscreen_current_time)
 
         textSwitcher_main_screen = view.findViewById(R.id.textSwitcher_main_screen)
         lineChart1 = view.findViewById<LineChart>(R.id.lineChart1)
@@ -123,6 +125,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         sunshine_duration_sigh = view.findViewById(R.id.sunshine_duration_sigh)
 
         lastUpdate = view.findViewById(R.id.last_upd_date)
+
+        card_item_with_map = view.findViewById(R.id.card_item_with_map)
 
         first_chart_description       = view.findViewById(R.id.first_chart_description)
         second_chart_description      = view.findViewById(R.id.to_tomorrow_chart_forecast)
@@ -163,6 +167,13 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         cardview_forecastnow_mainscreen.setOnClickListener {
             Snackbar.make(requireActivity().findViewById(android.R.id.content),getString(R.string.main_screen_tip_label_forecast),Snackbar.LENGTH_LONG).show()
+        }
+
+        card_item_with_map?.setOnClickListener {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),"\uD83D\uDD34"+getString(
+                R.string.mainscreen_map_info
+            ),Snackbar.LENGTH_LONG).show()
+
         }
 
         sunshine_duration_sigh.setOnClickListener {
@@ -245,10 +256,12 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                             }
                         }
                     }
+                    it.viewModelMain!!.timeNow.observe(viewLifecycleOwner) {
+                        mainscreen_current_time?.text = it
+                    }
                 }
             }
         }
-
     }
 
     override fun onPause() {
@@ -581,8 +594,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         //var yValues = smoothLineOfChart(arrayData)
         //for (i in ) // commented in 29/12/2021
         var yValues = ArrayList<Entry>()
-        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_TOP)
+        var REMBO = smoothLineOfChartGOGOGO(arrayData,firstChartSpecialValues)
         yValues = REMBO.arrEnt
+        Timber.i("toppp ppp ${REMBO.arrEnt.toString()}")
+        Timber.i("toppp ppp ${REMBO.xAxisTimes.toString()}")
 //        try {
 //            for (i in 0..arrayData.size-1){
 //                yValues.add(Entry(i.toFloat(), (arrayData.get(i)).toFloat()))
@@ -610,7 +625,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                     getString(R.string.mainscreen_chart_nominal_power_is_here),
                     "goal"
                 )
-            )
+        )
 
         lineChart.apply {
 
@@ -701,7 +716,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
          */
         var yValues = ArrayList<Entry>()
         Timber.i("vvv4 ->chart 2:  $arrayData")
-        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        var REMBO = smoothLineOfChartGOGOGO(arrayData,xAxisTimes_1)
         yValues = REMBO.arrEnt
 
 
@@ -812,7 +827,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
         var yValues = ArrayList<Entry>()
         Timber.i("vvv4 ->chart 3:  $arrayData")
-        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        var REMBO = smoothLineOfChartGOGOGO(arrayData,xAxisTimes_1)
         yValues = REMBO.arrEnt
         //yValues = makeChartLineSmoothAndCompare(arrayData)
 
@@ -923,7 +938,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     ){
         var yValues = ArrayList<Entry>()
         Timber.i("vvv4 ->chart 4:  $arrayData")
-        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        var REMBO = smoothLineOfChartGOGOGO(arrayData,xAxisTimes_1)
         yValues = REMBO.arrEnt
 //        try {
 //
@@ -1029,7 +1044,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     ){
         var yValues = ArrayList<Entry>()
         Timber.i("vvv4 ->chart 5: $arrayData")
-        var REMBO = smoothLineOfChart(arrayData,xAxisTimes_1)
+        var REMBO = smoothLineOfChartGOGOGO(arrayData,xAxisTimes_1)
         yValues = REMBO.arrEnt
 //        try {
 //
