@@ -116,9 +116,12 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
             if (isConnected){
                 //checkInternetConnection.postValue()
 
-                Timber.d("start API request")
+
                 val response =  repoSpx.get5daysRequest()
                 fiveDaysRequestRes.postValue(handle5daysResponse(response))
+                Timber.d("start API request, code:${response.code()}")
+                response.code() // code new
+                // if invalid key- {"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}
 
                 PreferenceMaestro.timeOfLastDataUpdate =  generateTimestampLastUpdate() // for UI sign
                 PreferenceMaestro.timeOfLastDataUpdateLong = getCurrentTimestampSec()   // for frequency of update

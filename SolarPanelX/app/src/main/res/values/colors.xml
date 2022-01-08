@@ -23,6 +23,20 @@
     <color name="light_sensor_green_raw">#618542</color>
     <color name="light_sensor_red_finished_data">#F80000</color>
     <color name="light_sensor_green_finished_data">#7AD32C</color>
+<!--
+    /**                                       12             18
+     *   |__________|_____________|___________|______________|___________|_____________|_______|
+     *   |Night      Early Morning   Morning       Day          Evening   Late Evening   Night
+     *
+     */
+-->
+
+    <color name="night">#303030</color>
+    <color name="early_morning">#444D4E</color>
+    <color name="morning">#899A9C</color>
+    <color name="day">#ADC4C7</color>
+    <color name="evening">#A55E28</color>
+    <color name="late_evening">#703C11</color>
 
 
 

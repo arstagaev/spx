@@ -13,6 +13,7 @@ class ConstantsCalculations {
         const val BASE_URL = "https://api.openweathermap.org/"
         const val API_KEY = "ac79fea59e9d15377b787a610a29b784"
         const val API_KEY_RESERVE1 = "1ae4e8cac37ab81430d67c851f915a1e"
+        const val TEST_WRONG_API_KEY = "ac79fea59e9d15377b787a610a29b784"
 
         const val DUAL_INDICATOR_SIZEOFFACTORS = 32
         const val SOLAR_PANEL_AREA_FOR_1W =0.00648F

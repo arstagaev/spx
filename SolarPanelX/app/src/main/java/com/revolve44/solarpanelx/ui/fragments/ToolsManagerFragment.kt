@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.base.recyclerview.ItemElementsDelegate
+import com.revolve44.solarpanelx.domain.core.gradientAnimationLayout
 import com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity
 import com.revolve44.solarpanelx.feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations
@@ -279,6 +280,38 @@ class ToolsManagerFragment : Fragment(R.layout.fragment_tools_manager) {
                 scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
                 tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.black_night))
                 textSwitcher_main_screen.setTextColor(Color.WHITE)
+            }
+            TypeOfSky.EARLY_MORNING ->{
+                scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(),   R.color.early_morning))
+                tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.early_morning))
+                textSwitcher_main_screen.setTextColor(Color.BLACK)
+
+            }
+            TypeOfSky.MORNING ->{
+                scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.morning))
+                tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.morning))
+                textSwitcher_main_screen.setTextColor(Color.BLACK)
+
+            }
+            TypeOfSky.DAY ->{
+                scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.day))
+                tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.day))
+                textSwitcher_main_screen.setTextColor(Color.BLACK)
+            }
+            TypeOfSky.EVENING ->{
+                scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.evening))
+                tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.evening))
+                textSwitcher_main_screen.setTextColor(Color.BLACK)
+
+            }
+            TypeOfSky.LATE_EVENING ->{
+                scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.late_evening))
+                tool_manager_layout.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.late_evening))
+                textSwitcher_main_screen.setTextColor(Color.BLACK)
+
+
+                //LIGHT_MODE
+
             }
             else ->{
                 scroll_view_tools.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
