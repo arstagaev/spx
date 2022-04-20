@@ -1,1 +1,1 @@
-V
+Solar Panel X app [7K Installs]
