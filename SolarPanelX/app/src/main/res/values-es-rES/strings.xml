@@ -93,4 +93,5 @@
     <string name="tilt_sensor_rot_vector">Vector de rotación</string>
     <string name="new_feature_coming_soon_plump">Próximamente, en breve, pronto. Ahora en desarrollo</string>
     <string name="mainscreen_map_info">Punto rojo en el mapa: es la ubicación de su estación solar</string>
+    <string name="mainscreen_now_time">Tiempo actual:</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.revolve44.solarpanelx.domain.core
 
-import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.core.extensions.plusString
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import timber.log.Timber
@@ -47,11 +46,11 @@ fun scaleOfkWh(watts : Int, roundedNumbers : Boolean) : String{
 
         var newFormattedWatts = 0F
         if (watts in 1000..999999){
-            newFormattedWatts = roundTo2decimials(watts.toFloat()/1000)
+            newFormattedWatts = roundTo2decimals(watts.toFloat()/1000)
             return newFormattedWatts.plusString("kWh")
 
         }else if (watts>1000000){
-            newFormattedWatts = roundTo2decimials(watts.toFloat()/1000000)
+            newFormattedWatts = roundTo2decimals(watts.toFloat()/1000000)
             return newFormattedWatts.plusString("MWh")
         }else{
 //        newFormattedWatts = roundTo2decimials(watts.toFloat()/1000)
@@ -94,8 +93,16 @@ fun lastUpdateDate(month : Int, day : Int, hourOfday : Int, minute :Int) : Strin
 
     return HumanUnderstandingDate
 }
+fun roundTo7decimals(num : Float) : Float{
+    val df = DecimalFormat("#.#######")
+    df.roundingMode = RoundingMode.CEILING
 
-fun roundTo2decimials(num : Float) : Float{
+    return (df.format(num)).replace(",",".").toFloat()
+
+}
+
+
+fun roundTo2decimals(num : Float) : Float{
     val df = DecimalFormat("#.##")
     df.roundingMode = RoundingMode.CEILING
 

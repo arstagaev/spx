@@ -1,13 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.5.0"
+    ext.kotlin_version = "1.6"
+    ext {
+        comp_comp = "1.6"
+        compose_version = '1.0.5'
+    }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:7.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31' //1.5.31 for compose 1.0.5
 
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0-alpha04" // for navigation
 

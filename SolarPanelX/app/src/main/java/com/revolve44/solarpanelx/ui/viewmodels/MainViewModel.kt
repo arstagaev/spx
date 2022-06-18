@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.CountDownTimer
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.revolve44.solarpanelx.datasource.SpxRepository
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
@@ -15,6 +14,12 @@ import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
 import com.revolve44.solarpanelx.domain.enums.MeasurementSystem
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.API_KEY
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.API_KEY_RESERVE1
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.API_KEY_RESERVE2
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.API_KEY_RESERVE3
+import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.API_KEY_RESERVE4
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import timber.log.Timber
@@ -34,6 +39,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
     // for display current 3hour forecast
     var forecastNow : MutableLiveData<Int> = MutableLiveData()
     var timeNow : MutableLiveData<String> = MutableLiveData()
+    var financeM1Now : MutableLiveData<String> = MutableLiveData()
 
     private var allForecastforChart : LiveData<List<ForecastCell>> = repoSpx.getAllForecastCells()
 
@@ -62,14 +68,16 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
 //            arrayListOf(1,2,3,4,6,10,2,9)))
 //        allDataForCharts.postValue(arr)
         val TIME_OF_WORK_LOOPER = 100*60*60*1000L
-        var looperTime = object : CountDownTimer(TIME_OF_WORK_LOOPER,1000){
+        var SUM = 1200.0
+        var looperTime = object : CountDownTimer(TIME_OF_WORK_LOOPER,1000) {
             override fun onTick(millisUntilFinished: Long) {
-                timeNow.value = "Current Time: ${getTimeHuman(PreferenceMaestro.chosenTimeZone)}, City: ${PreferenceMaestro.chosenStationCITY}"
+                timeNow.value      = "${getTimeHuman(PreferenceMaestro.chosenTimeZone)}"
+                financeM1Now.value = "${roundTo7decimals(SUM.toFloat())}"
+
+                SUM *= 1.012
 
             }
-
             override fun onFinish() {}
-
         }.start()
 
         checkConnection()
@@ -88,7 +96,7 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
         if (PreferenceMaestro.timeOfLastDataUpdateLong == 1234L){
             return true
         }
-        if ((getCurrentTimestampSec()-3600*3)>PreferenceMaestro.timeOfLastDataUpdateLong){
+        if ((getCurrentTimestampSec()-3600*3)>PreferenceMaestro.timeOfLastDataUpdateLong) {
             return true
         }
         return false
@@ -111,16 +119,28 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
 
     private suspend fun safe5daysRequest() {
         fiveDaysRequestRes.postValue(Resource.Loading())
-        Timber.i(" xxx safe5daysRequest()")
+
         try {
+            Timber.i(" xxx safe5daysRequest() isConnected:${isConnected}")
             if (isConnected){
                 //checkInternetConnection.postValue()
 
 
-                val response =  repoSpx.get5daysRequest()
-                fiveDaysRequestRes.postValue(handle5daysResponse(response))
+                var response =  repoSpx.get5daysRequest(input_API_KEY = API_KEY)
+                when (response.code()){
+                    401 -> {
+
+                        fiveDaysRequestRes.postValue(Resource.Error("Error 401. Try Later", null,401))
+
+                        response =  keySwitcherResponser()
+
+                    }
+                }
+
+
+                fiveDaysRequestRes.postValue( handle5daysResponse(response)  )
                 Timber.d("start API request, code:${response.code()}")
-                response.code() // code new
+
                 // if invalid key- {"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}
 
                 PreferenceMaestro.timeOfLastDataUpdate =  generateTimestampLastUpdate() // for UI sign
@@ -128,17 +148,40 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
                 //be.postValue(handleBetaResponse(response))
 
             }else{
-                fiveDaysRequestRes.postValue(Resource.Error("NO INTERNET", null))
+                fiveDaysRequestRes.postValue(Resource.Error("NO INTERNET", null,0))
                 Timber.e("NO INTERNET")
                 //checkInternetConnection.postValue("NO INTERNET") // i will delete this
             }
         }catch (t: Throwable){
             when(t) {
-                is IOException -> fiveDaysRequestRes.postValue(Resource.Error("Network Failure"))
-                else -> fiveDaysRequestRes.postValue(Resource.Error("Conversion Error"))
+                is IOException -> fiveDaysRequestRes.postValue(Resource.Error("Network Failure",null,0))
+                else -> fiveDaysRequestRes.postValue(Resource.Error("Conversion Error",null,0))
             }
             Timber.e("safeBetaRequest() error: " + t)
         }
+    }
+
+    private suspend fun keySwitcherResponser(): Response<FiveDaysForecastModelParser> {
+        var response = repoSpx.get5daysRequest(input_API_KEY = API_KEY_RESERVE1)
+        Timber.w("used API_KEY_RESERVE1")
+        if (response.code() == 401) {
+            response = repoSpx.get5daysRequest(input_API_KEY = API_KEY_RESERVE2)
+            delay(100)
+            Timber.w("used API_KEY_RESERVE2")
+            if (response.code() == 401) {
+                response = repoSpx.get5daysRequest(input_API_KEY = API_KEY_RESERVE3)
+                delay(100)
+                Timber.w("used API_KEY_RESERVE3")
+                if (response.code() == 401) {
+                    response = repoSpx.get5daysRequest(input_API_KEY = API_KEY_RESERVE4)
+                    delay(100)
+                    Timber.w("used API_KEY_RESERVE4")
+
+                }
+            }
+        }
+
+        return response
     }
 
     private fun handle5daysResponse(response: Response<FiveDaysForecastModelParser>): Resource<FiveDaysForecastModelParser>? {
@@ -222,7 +265,13 @@ class MainViewModel(app: Application, var repoSpx: SpxRepository) : AndroidViewM
         }else{
             Timber.e("not successful " + response.message())
         }
-        return Resource.Error(response.message())
+        response.code()
+        //fiveDaysRequestRes.postValue(Resource.Error("Error 401. Try Later", null))
+        when(response.code()) {
+            401 -> return Resource.Error("Error 401. Try Later",null,401)
+            else -> return Resource.Error(response.message(),null,0)
+        }
+
     }
 
     //val repo: LiveData<Repo> = Transformations.switchMap<Any, Repo>(repoIdLiveData,

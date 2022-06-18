@@ -15,8 +15,8 @@ class SpxRepository( app : Application) {
     //suspend fun getAlpha() =
     //    RetrofitInstance.apiAlpha.getAlfaRequest()
 
-    suspend fun get5daysRequest() =
-        RetrofitInstance.api5daysRequest.get5daysRequest()
+    suspend fun get5daysRequest(input_API_KEY : String) =
+        RetrofitInstance.api5daysRequest.get5daysRequest(apiKey = input_API_KEY)
 
     ///////////////////////////////////Database///////////////////////////////////
     // put

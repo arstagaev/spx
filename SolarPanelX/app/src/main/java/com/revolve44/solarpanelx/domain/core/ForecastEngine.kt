@@ -6,7 +6,6 @@ import kotlin.collections.ArrayList
 import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.SOLAR_PANEL_AREA_FOR_1W
-import com.revolve44.solarpanelx.global_utils.DayPeriod
 import java.util.*
 
 //////////////////////////////////////
@@ -232,7 +231,7 @@ fun getPaybackPeriod() : Float{
         PreferenceMaestro.investmentsToSolarStation/ ((PreferenceMaestro.chosenStationNOMINALPOWER/1000) * (PreferenceMaestro.pricePerkWh) * 5 * 365)
     Timber.i("fun getPaybackPeriod "+paybackPeriod +" = "+" invest is ${PreferenceMaestro.investmentsToSolarStation}"+" chosenStationNOMINALPOWER is "+PreferenceMaestro.chosenStationNOMINALPOWER/1000F+" * "+(PreferenceMaestro.pricePerkWh))
     if (paybackPeriod<60.0F){
-        return roundTo2decimials(paybackPeriod)
+        return roundTo2decimals(paybackPeriod)
     }else{
         return -1.0F
     }
@@ -312,16 +311,16 @@ fun defineTimeOfDay() : TypeOfSky {
 
     when(currentTime){
          //    from           ->  to                                                          approximate hours  , and sunshine duration 14 hr for example
-        in 0f                 .. sunrise            -> { typeOfSky = TypeOfSky.NIGHT        } //  0-6   hr |  0:00
-        in sunrise            .. sunrise+duration*1 -> { typeOfSky = TypeOfSky.EARLY_MORNING} //  6-8   hr |  from sunrise
-        in sunrise+duration   .. sunrise+duration*2 -> { typeOfSky = TypeOfSky.MORNING      } //  8-10  hr |
-        in sunrise+duration*2 .. sunrise+duration*3 -> { typeOfSky = TypeOfSky.DAY          } //  12-14 hr |
-        in sunrise+duration*3 .. sunrise+duration*4 -> { typeOfSky = TypeOfSky.EVENING      } //  14-16 hr |
-        in sunrise+duration*4 .. sunset             -> { typeOfSky = TypeOfSky.LATE_EVENING } //  16-20 hr |  to sunset
-        in sunset             .. 24f                -> { typeOfSky = TypeOfSky.NIGHT        } //  20-24 hr |  0:00
+        in 0f                    .. sunrise            ->    { typeOfSky = TypeOfSky.NIGHT        } //  0-6   hr |  0:00
+        in sunrise               .. sunrise+duration*1f ->   { typeOfSky = TypeOfSky.EARLY_MORNING} //  6-8   hr |  from sunrise
+        in sunrise+duration      .. sunrise+duration*2f ->   { typeOfSky = TypeOfSky.MORNING      } //  8-10  hr |
+        in sunrise+duration*2f   .. sunrise+duration *3f ->   { typeOfSky = TypeOfSky.DAY          } //  12-14 hr |
+        in sunrise+duration*3.6f .. sunrise+duration *4f -> { typeOfSky = TypeOfSky.EVENING      } //  14-16 hr |
+        in sunrise+duration*4f   .. sunset             ->    { typeOfSky = TypeOfSky.LATE_EVENING } //  16-20 hr |  to sunset
+        in sunset                .. 24f                ->     { typeOfSky = TypeOfSky.NIGHT        } //  20-24 hr |  0:00
     }
 
-    Timber.i("time of day current =${currentTime} sunrise=$sunrise and $sunset , timezone ${PreferenceMaestro.chosenTimeZone} | cur timestamp ${getCurrentTimestampSec()} type:${typeOfSky}")
+    Timber.i("time of day current =${currentTime} sunrise=$sunrise and $sunset , timezone ${PreferenceMaestro.chosenTimeZone} | cur timestamp ${getCurrentTimestampSec()} type:${typeOfSky} // duration:${duration}")
 
     /**                                       12             18
      *   |__________|_____________|___________|______________|___________|_____________|_______|

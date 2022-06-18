@@ -96,4 +96,5 @@
     <string name="new_feature_coming_soon_plump">"À venir! "</string>
     <string name="about_special_thanks">🤩Remerciements \n particuliers à : \n Rémi \n JIPPY63</string>
     <string name="mainscreen_map_info">Point rouge sur la carte - est l\'emplacement de votre station solaire</string>
+    <string name="mainscreen_now_time">"Heure actuelle: "</string>
 </resources>

@@ -3,15 +3,13 @@ package com.revolve44.solarpanelx.ui.fragments.features
 
 import android.graphics.Color
 import android.os.Bundle
-import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.TextView
-import com.google.android.material.snackbar.Snackbar
 import com.revolve44.solarpanelx.R
 import com.revolve44.solarpanelx.datasource.local.PreferenceMaestro
 import com.revolve44.solarpanelx.domain.core.blinkATextView
-import com.revolve44.solarpanelx.domain.core.roundTo2decimials
+import com.revolve44.solarpanelx.domain.core.roundTo2decimals
 import com.revolve44.solarpanelx.domain.core.scaleOfkWh
 import com.revolve44.solarpanelx.ui.MainActivity
 import com.revolve44.solarpanelx.ui.viewmodels.MainViewModel
@@ -94,7 +92,7 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
 
         //remind data of indicators
         if (viewmodel.forecastNow.value != null){
-            calibratedOutputPower.text = "${roundTo2decimials(viewmodel.forecastNow.value!!*PreferenceMaestro.calibrationCoeff)}Wh"
+            calibratedOutputPower.text = "${roundTo2decimals(viewmodel.forecastNow.value!!*PreferenceMaestro.calibrationCoeff)}Wh"
 
         }
         calibrate_indicator.text = "${PreferenceMaestro.calibrationCoeff * 100.0f}%"

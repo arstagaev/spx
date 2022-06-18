@@ -1,5 +1,6 @@
 package com.revolve44.solarpanelx.ui.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -13,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.*
@@ -29,6 +31,7 @@ import com.revolve44.solarpanelx.datasource.models.db.ForecastCell
 import com.revolve44.solarpanelx.domain.Resource
 import com.revolve44.solarpanelx.domain.core.*
 import com.revolve44.solarpanelx.domain.westcoast_customs.VerticalTextView
+import com.revolve44.solarpanelx.feature_modules.finance.FinanceActivity
 import com.revolve44.solarpanelx.feature_modules.workmanager.model.NotificationWarningModel
 import com.revolve44.solarpanelx.global_utils.ConstantsCalculations.Companion.CURRENT_TIME_OF_DAY
 import com.revolve44.solarpanelx.global_utils.enums.TypeOfSky
@@ -164,6 +167,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
         textSwitcher_main_screen.setOnClickListener {
             setManuallyMainLabelOnMainScreen()
         }
+        forecastNowRelativ.setOnClickListener {
+            //findNavController()?.navigate(R.id.financeFragment)
+            val intent = Intent(requireActivity(),FinanceActivity::class.java)
+            startActivity(intent)
+        }
 
         cardview_forecastnow_mainscreen.setOnClickListener {
             Snackbar.make(requireActivity().findViewById(android.R.id.content),getString(R.string.main_screen_tip_label_forecast),Snackbar.LENGTH_LONG).show()
@@ -257,7 +265,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                         }
                     }
                     it.viewModelMain!!.timeNow.observe(viewLifecycleOwner) {
-                        mainscreen_current_time?.text = it
+                        mainscreen_current_time?.text = getString(R.string.mainscreen_now_time)+it+" "+getString(R.string.mainscreen_fr_city)+" "+PreferenceMaestro.chosenStationCITY
+
+                    }
+                    it.viewModelMain!!.financeM1Now.observe(viewLifecycleOwner) {
+                        forecastNowRelativ?.text = "+${it}$"
                     }
                 }
             }
@@ -590,6 +602,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                                                         R.string.mainscreen_fr_temp)+"${PreferenceMaestro.temp}°C")
                 mSwipeRefreshLayout.isRefreshing = false
 
+                //carousel of text in mainscreen
                 var timer = object : CountDownTimer(6000,2000){
                     override fun onTick(millisUntilFinished: Long) {
                         if (stringIndex == dataForMainLabelOnMainscreen.size - 1) {
@@ -611,7 +624,15 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
                 mSwipeRefreshLayout.isRefreshing = true
             }
             is Resource.Error<*> -> {
-                textSwitcher_main_screen.setText(getString(R.string.mainscreen_fr_errornointernet));
+                when(res.code) {
+                    0  -> {
+                        textSwitcher_main_screen.setText(getString(R.string.mainscreen_fr_errornointernet));
+                    }
+                    401 -> textSwitcher_main_screen.setText("Error 401, try later");
+                    else -> textSwitcher_main_screen.setText(res.message)
+                }
+                //
+
                 stringIndex = 0
                 mSwipeRefreshLayout.isRefreshing = false
             }

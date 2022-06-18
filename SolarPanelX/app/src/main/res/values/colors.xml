@@ -32,12 +32,9 @@
 -->
 
     <color name="night">#303030</color>
-    <color name="early_morning">#444D4E</color>
-    <color name="morning">#899A9C</color>
+    <color name="early_morning">#859698</color>
+    <color name="morning">#8CB3B8</color>
     <color name="day">#ADC4C7</color>
-    <color name="evening">#A55E28</color>
-    <color name="late_evening">#703C11</color>
-
-
-
+    <color name="evening">#B4E6D983</color>
+    <color name="late_evening">#B4E6AD67</color>
 </resources>

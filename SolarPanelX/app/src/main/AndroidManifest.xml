@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <uses-feature
@@ -21,17 +20,20 @@
         android:name="android.hardware.sensor.gyroscope"
         android:required="true" />
 
-
-
     <application
         android:name=".SPXApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.splashScreenTheme">
+        <activity
+            android:name=".feature_modules.finance.FinanceActivity"
+            android:exported="true"
+            android:label="@string/title_activity_finance"
+            android:theme="@style/Theme.splashScreenTheme" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -43,7 +45,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,12 +55,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name="com.revolve44.solarpanelx.feature_modules.lightsensor.LightSensorActivity"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".ui.AddSolarStationActivity"
-            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".feature_modules.optimaltilt_machine.OptimalOrientationHelperActivity"
+            android:screenOrientation="sensorPortrait"
+            android:exported="true"/>
+        <activity
+            android:name=".feature_modules.lightsensor.LightSensorActivity"
+            android:exported="false"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.AddSolarStationActivity"
+            android:exported="false"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>

@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.main_screen_container_fragment)
         val navGraph = navController!!.navInflater.inflate(R.navigation.nav_main_screen)
         //navController!!.setGraph(R.navigation.)
+
         // suggester to buy: send to premium screen
 //        if (!PreferenceMaestro.isPremiumStatus){
 //            when((0..10).random()){

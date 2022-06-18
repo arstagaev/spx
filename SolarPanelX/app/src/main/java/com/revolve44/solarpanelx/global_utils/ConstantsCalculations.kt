@@ -11,9 +11,12 @@ class ConstantsCalculations {
     companion object{
 
         const val BASE_URL = "https://api.openweathermap.org/"
-        const val API_KEY = "ac79fea59e9d15377b787a610a29b784"
-        const val API_KEY_RESERVE1 = "1ae4e8cac37ab81430d67c851f915a1e"
-        const val TEST_WRONG_API_KEY = "ac79fea59e9d15377b787a610a29b784"
+        const val API_KEY = "ac79fea59e9d15377b787a610a29b784" // main
+        const val API_KEY_RESERVE1 = "1ae4e8cac37ab81430d67c851f915a1e" // info@revolna
+        const val API_KEY_RESERVE2 = "7b001046a51938cf04e2105d740e93e0" // info@revolna
+        const val API_KEY_RESERVE3 = "d43809644aaea9768c1f34941a08f363" // by US atev777
+        const val API_KEY_RESERVE4 = "a361206cc1aa27aae898618eb3dc8f0e" // by US atev777
+        const val TEST_WRONG_API_KEY = "WRONGac79fea59e9d15377b787a610a29b784"
 
         const val DUAL_INDICATOR_SIZEOFFACTORS = 32
         const val SOLAR_PANEL_AREA_FOR_1W =0.00648F

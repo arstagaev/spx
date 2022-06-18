@@ -9,7 +9,6 @@ import retrofit2.http.Query
 
 interface SolarApi {
 
-
     // for 5 days
     @GET("data/2.5/forecast")
     suspend fun get5daysRequest(
@@ -20,7 +19,7 @@ interface SolarApi {
         @Query("cnt")
         cnt: Int = 40,
         @Query("appid")
-        apiKey: String = API_KEY
+        apiKey: String //= API_KEY
     ) : Response<FiveDaysForecastModelParser>
 
 }

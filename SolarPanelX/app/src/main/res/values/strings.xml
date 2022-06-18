@@ -5,7 +5,6 @@
     <string name="premium" translatable="false">annually_subscription1</string>
 
 
-
     <string name="mainscreen_chart_title_forecast20hr">"Forecast for ~20 hours: "</string>
     <string name="mainscreen_chart_title_forecasttomorrow">"for tomorrow "</string>
     <string name="screenaddstation_map_title">Please set location  of your Solar Panels</string>
@@ -103,4 +102,8 @@
     <string name="new_feature_coming_soon_plump">"Coming Soon. Now in development "</string>
     <string name="about_special_thanks">🤩Special Thanks to: \n Rémi \n JIPPY63</string>
     <string name="mainscreen_map_info">Red point on map - is location of your solar station</string>
+    <string name="mainscreen_now_time">Current Time: </string>
+    <string name="title_activity_finance">FinanceActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
