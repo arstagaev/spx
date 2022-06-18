@@ -79,6 +79,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
     private lateinit var forecastNowAbsol   : TextView
     private lateinit var forecastNowRelativ : TextView
 
+
     private lateinit var sunriseTime :    TextView
     private lateinit var timeOfSunShine : TextView
     private lateinit var sunsetTime :     TextView
@@ -269,7 +270,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) , SwipeRefres
 
                     }
                     it.viewModelMain!!.financeM1Now.observe(viewLifecycleOwner) {
-                        forecastNowRelativ?.text = "+${it}$"
+                        //forecastNowRelativ?.text = "+${it}$"
                     }
                 }
             }

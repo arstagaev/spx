@@ -9,7 +9,7 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
-def work_version = '2.4.0'
+def work_version = '2.7.0'
 
 android {
     compileSdkVersion 31
@@ -19,8 +19,8 @@ android {
         applicationId "com.revolve44.solarpanelx"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 35
-        versionName "0.9.41B (The Rhône edition)"
+        versionCode 36
+        versionName "0.9.42B (The Rhône edition)"
 
         multiDexEnabled true //(# methods: 68662 > 65536)
 

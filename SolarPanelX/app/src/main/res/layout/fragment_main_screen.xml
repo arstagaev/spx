@@ -67,9 +67,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:orientation="vertical">
                         <TextView
-                            android:id="@+id/forecast_now_relatively"
+                            android:id="@+id/forecast_now_relatively2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat"
@@ -97,19 +98,19 @@
                     </FrameLayout>
 
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/forecast_now_relatively"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:fontFamily="@font/montserrat"-->
-<!--                        android:gravity="center"-->
-<!--                        android:text="&#45;&#45;%"-->
-<!--                        android:textColor="@color/greenTight"-->
-<!--                        android:textSize="20sp"-->
-<!--                        android:textStyle="bold">-->
+                    <TextView
+                        android:id="@+id/forecast_now_relatively"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="--%"
+                        android:textColor="@color/purple_700"
+                        android:textSize="35sp"
+                        android:textStyle="bold">
 
-<!--                    </TextView>-->
+                    </TextView>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

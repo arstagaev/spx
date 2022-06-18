@@ -200,6 +200,7 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
 
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private fun displayNotification(str: ArrayList<NotificationWarningModel>) {
 
 //        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -214,8 +215,22 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
         //val pendingIntent: PendingIntent = Intent(mContext, MainActivity::class.java).let { notificationIntent ->
         //    PendingIntent.getActivity(mContext, 0, notificationIntent, 0)
         //}
-        val pendingIntentTODO = PendingIntent.getActivity(mContext, 0,
-            Intent(mContext, MainActivity::class.java), 0)
+//        val pendingIntentTODO = PendingIntent.getActivity(mContext, 0,
+//            Intent(mContext, MainActivity::class.java), 0)
+
+        var pendingIntentTODO: PendingIntent? = null
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // FLAG_MUTABLE
+//            //restartServicePendingIntent = PendingIntent.getService(this, 1, restartServiceIntent, PendingIntent.FLAG_IMMUTABLE);
+//            pendingIntentTODO = PendingIntent.getActivity(mContext, 1,
+//                Intent(mContext, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
+//
+//        }else {
+//            pendingIntentTODO = PendingIntent.getActivity(mContext, 1,
+//                Intent(mContext, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+//            //restartServicePendingIntent = PendingIntent.getService(this, 1, restartServiceIntent, PendingIntent.FLAG_ONE_SHOT);
+//
+//        }
+
         //val resultIntent : Intent = Intent(mContext,MainActivity::class.java)
         //val resultPendingIntent : PendingIntent = PendingIntent.getActivity(mContext,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT)
 
@@ -236,14 +251,14 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
 
         remoteView.setTextViewText(R.id.notif_min_forecast_value,        "${str[3].sumOfDay}W")
         remoteView.setTextViewText(R.id.notif_min_forecast_description,  "${str[3].description}\uD83D\uDCC9")
-        remoteView.setOnClickPendingIntent(R.id.notification_alert_weather, pendingIntentTODO)
+        //remoteView.setOnClickPendingIntent(R.id.notification_alert_weather, pendingIntentTODO)
         //remoteView.setProgressBar(R.id.pb_notif, prog.total, prog.progress, false)
 
         notificationBuilder
             .setContent(remoteView)
             .setSmallIcon(R.drawable.ic_for_notification_sol)
             .setPriority(Notification.PRIORITY_HIGH) // for under android 26 compatibility
-            .setContentIntent(pendingIntentTODO)
+            //.setContentIntent(pendingIntentTODO)
 
         notificationManager.notify(CHANNEL_IDNum, notificationBuilder.build())
 
@@ -260,32 +275,30 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
 //            )
 //            channel.enableVibration(false)
 //            notificationManager.createNotificationChannel(channel)
-//      //  }
+//         }
         //val pendingIntent: PendingIntent = Intent(mContext, MainActivity::class.java).let { notificationIntent ->
         //    PendingIntent.getActivity(mContext, 0, notificationIntent, 0)
         //}
-        val pendingIntentTODO = PendingIntent.getActivity(mContext, 0,
-            Intent(mContext, MainActivity::class.java), 0)
+//        val pendingIntentTODO = PendingIntent.getActivity(mContext, 0,
+//            Intent(mContext, MainActivity::class.java), 0)
+
+        var pendingIntentTODO: PendingIntent? = null
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // FLAG_MUTABLE
+//            //restartServicePendingIntent = PendingIntent.getService(this, 1, restartServiceIntent, PendingIntent.FLAG_IMMUTABLE);
+//            pendingIntentTODO = PendingIntent.getActivity(mContext, 1,
+//                Intent(mContext, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
+//
+//        }else {
+//            pendingIntentTODO = PendingIntent.getActivity(mContext, 1,
+//                Intent(mContext, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+//            //restartServicePendingIntent = PendingIntent.getService(this, 1, restartServiceIntent, PendingIntent.FLAG_ONE_SHOT);
+//
+//        }
         //val resultIntent : Intent = Intent(mContext,MainActivity::class.java)
         //val resultPendingIntent : PendingIntent = PendingIntent.getActivity(mContext,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notificationBuilder =
             NotificationCompat.Builder(applicationContext, CHANNEL_ID2)
-
-//        val remoteView = RemoteViews(applicationContext.packageName, R.layout.notification_custom_max_min)
-//        //remoteView.setImageViewResource(R.id.iv_notif, R.drawable.eminem)
-//        //remoteView.setTextViewText(R.id.tv_notif_progress, "complete))) ${PreferenceMaestro.counnnter}")
-//        //remoteView.setTextViewText(R.id.notification_alert_weather,      "${str[0].description}")
-//        remoteView.setTextViewText(R.id.notification_alert_weather,      "${defineTimeOfDay()}")
-//        remoteView.setTextViewText(R.id.notif_today_forecast_value,      "${str[1].sumOfDay}W")
-//        remoteView.setTextViewText(R.id.notif_today_forecast_description,"${str[1].description}")
-//
-//        remoteView.setTextViewText(R.id.notif_max_forecast_value,        "${str[2].sumOfDay}W")
-//        remoteView.setTextViewText(R.id.notif_max_forecast_description,  "${str[2].description}📈")
-//
-//        remoteView.setTextViewText(R.id.notif_min_forecast_value,        "${str[3].sumOfDay}W")
-//        remoteView.setTextViewText(R.id.notif_min_forecast_description,  "${str[3].description}\uD83D\uDCC9")
-//        remoteView.setOnClickPendingIntent(R.id.notification_alert_weather, pendingIntentTODO)
 
 
 
@@ -294,7 +307,7 @@ class WorkerForShowForecastDynamic(private val mContext: Context, workerParamete
             .setContentText("Its not perfect time to notification!!! isDebug =${BuildConfig.DEBUG}")
             .setSmallIcon(R.drawable.ic_for_notification_sol)
             .setPriority(Notification.PRIORITY_HIGH) // for under android 26 compatibility
-            .setContentIntent(pendingIntentTODO)
+            //.setContentIntent(pendingIntentTODO)
 
         notificationManager.notify(CHANNEL_ID2Num, notificationBuilder.build())
 

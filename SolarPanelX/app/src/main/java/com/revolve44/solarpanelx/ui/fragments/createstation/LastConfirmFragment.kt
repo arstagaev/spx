@@ -197,32 +197,45 @@ class LastConfirmFragment : Fragment(R.layout.fragment_confirm_station) {
                 id: Long
             ) {
                 PreferenceMaestro.chosenCurrency = adapterView.getItemAtPosition(pos).toString()
+                var cost = ""
+                if (PreferenceMaestro.pricePerkWh == 1F) {
+                    when(PreferenceMaestro.chosenCurrency){
+                        "$"->{
+                            cost = "0.13"
+                            currencyInvestments.text = "$"
+                        }
+                        "€"->{
+                            cost = "0.21"
+                            currencyInvestments.text = "€"
+                        }
+                        "₹"->{
+                            cost = "6"
+                            currencyInvestments.text = "₹"
+                        }
+                        "₽"->{
+                            cost = "4.4"
+                            currencyInvestments.text = "₽"
+                        }
+                        "SAR"->{
+                            cost = "0.18"
+                            currencyInvestments.text = "SAR"
+                        }
+                        "£"->{
+                            cost = "0.16"
+                            currencyInvestments.text = "£"
+                        }
+                        "¥"->{
+                            cost = "25"
+                            currencyInvestments.text = "¥"
+                        }
 
-                when(PreferenceMaestro.chosenCurrency){
-                    "$"->{
-                        (pricePerkWh.setText("0.13"))
-                        currencyInvestments.text = "$"
                     }
-                    "€"->{(pricePerkWh.setText("0.21"))
-                        currencyInvestments.text = "€"
-                    }
-                    "₹"->{(pricePerkWh.setText("6"))
-                        currencyInvestments.text = "₹"
-                    }
-                    "₽"->{(pricePerkWh.setText("4.4"))
-                        currencyInvestments.text = "₽"
-                    }
-                    "SAR"->{(pricePerkWh.setText("0.18"))
-                        currencyInvestments.text = "SAR"
-                    }
-                    "£"->{(pricePerkWh.setText("0.16"))
-                        currencyInvestments.text = "£"
-                    }
-                    "¥"->{(pricePerkWh.setText("25"))
-                        currencyInvestments.text = "¥"
-                    }
-
+                } else {
+                    cost = PreferenceMaestro.pricePerkWh.toString()
                 }
+
+                pricePerkWh.setText(cost)
+
                 investmentsToPVStation.setText(""+getInvestmentsToPVStation(nominalPowerOfStation.text,currencyInvestments.text.toString()))
 
 //                Toast.makeText(

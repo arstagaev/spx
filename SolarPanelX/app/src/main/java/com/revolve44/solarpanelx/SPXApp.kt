@@ -35,7 +35,8 @@ class SPXApp : Application() {
             //.errorActivity( CrashActivity::class.java) //default: null (default error activity)
             //.eventListener(null) //default: null
             .apply()
-        createNotificationChannel()
+        //TODO
+        //createNotificationChannel()
 
         //!!!
 //        PreferenceMaestro.chosenStationNOMINALPOWER = 100000

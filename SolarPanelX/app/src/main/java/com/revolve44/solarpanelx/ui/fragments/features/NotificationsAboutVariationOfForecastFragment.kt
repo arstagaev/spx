@@ -1,10 +1,12 @@
 package com.revolve44.solarpanelx.ui.fragments.features
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -54,9 +56,9 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
 
         buttonStart.setOnClickListener {
             if (isWorkScheduled("spx_tag_max_min")){
-                stopWorker()
+                //stopWorker()
             }else {
-                startWorker()
+                //startWorker()
             }
 
             Timber.i("wwww work manager: ${isWorkScheduled("spx_tag_max_min")}")
@@ -121,6 +123,7 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
 
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private fun displayNotification(str: ArrayList<NotificationWarningModel>) {
         val notificationManager =
             requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -137,8 +140,20 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
 
         val notificationBuilder =
             NotificationCompat.Builder(requireActivity(), ConstantsCalculations.CHANNEL_ID)
-        val pendingIntentTODO = PendingIntent.getActivity(requireActivity(), 0,
-            Intent(requireActivity(), MainActivity::class.java), 0)
+
+        var pendingIntentTODO: PendingIntent? = null
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // FLAG_MUTABLE
+//            //restartServicePendingIntent = PendingIntent.getService(this, 1, restartServiceIntent, PendingIntent.FLAG_IMMUTABLE);
+//
+//            pendingIntentTODO = PendingIntent.getActivity(requireActivity(), 1,
+//                Intent(requireActivity(), MainActivity::class.java), PendingIntent.FLAG_MUTABLE)
+//
+//        }else {
+//            pendingIntentTODO = PendingIntent.getActivity(requireActivity(), 1,
+//                Intent(requireActivity(), MainActivity::class.java), PendingIntent.FLAG_ONE_SHOT)
+//            //restartServicePendingIntent = PendingIntent.getService(this, 1, restartServiceIntent, PendingIntent.FLAG_ONE_SHOT);
+//
+//        }
 
         val remoteView = RemoteViews(requireActivity().packageName, R.layout.notification_custom_max_min)
         //remoteView.setImageViewResource(R.id.iv_notif, R.drawable.eminem)
@@ -167,7 +182,7 @@ class NotificationsAboutVariationOfForecastFragment : Fragment(R.layout.fragment
         notificationBuilder
             .setContent(remoteView)
             .setSmallIcon(R.drawable.ic_for_notification_sol)
-            .setContentIntent(pendingIntentTODO)
+            //.setContentIntent(pendingIntentTODO)
 
         notificationManager.notify(ConstantsCalculations.CHANNEL_IDNum, notificationBuilder.build())
 
